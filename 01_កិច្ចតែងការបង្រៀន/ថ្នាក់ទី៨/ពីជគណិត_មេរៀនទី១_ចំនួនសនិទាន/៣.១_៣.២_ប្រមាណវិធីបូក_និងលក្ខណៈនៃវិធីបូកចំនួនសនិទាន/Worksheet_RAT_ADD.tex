@@ -1,0 +1,271 @@
+% !TeX program = xelatex
+\documentclass[a4paper,10pt]{article}
+
+% ============================================================================
+% សន្លឹកកិច្ចការសិស្ស ស-ខ្មៅ (Student Worksheet - Grade 8 Lesson 1: 3.1 & 3.2 RAT_ADD)
+% បរិបទ៖ គ្មានស្លាយ LCD និងគ្មានម៉ាស៊ីនគិតលេខ — សិស្សបំពេញផ្ទាល់លើសន្លឹកកិច្ចការ ២ ទំព័រ A4
+% ============================================================================
+\usepackage[a4paper, left=0.85cm, right=0.85cm, top=0.70cm, bottom=0.95cm, footskip=0.48cm]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{unicode-math}
+\usepackage{fontspec}
+\usepackage{array, colortbl}
+\usepackage[table]{xcolor}
+\usepackage{enumitem}
+\usepackage{pifont}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{tikz}
+\usepackage[most]{tcolorbox}
+\usetikzlibrary{calc, arrows.meta, decorations.pathreplacing, positioning, babel}
+
+\makeatletter
+\let\@expl@@@mark@update@singlecol@structures@@\relax
+\makeatother
+
+\providecommand{\NGSFindFonts}{%
+  \IfFileExists{C:/Windows/Fonts/cambria.ttc}{%
+    \def\NGSSysPath{C:/Windows/Fonts/}%
+    \def\NGSUserPath{C:/Users/KIT/AppData/Local/Microsoft/Windows/Fonts/}%
+  }{%
+    \IfFileExists{./fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{./fonts/}\def\NGSUserPath{./fonts/}}{%
+    \IfFileExists{../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../fonts/}\def\NGSUserPath{../fonts/}}{%
+    \IfFileExists{../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../fonts/}\def\NGSUserPath{../../fonts/}}{%
+    \IfFileExists{../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../fonts/}\def\NGSUserPath{../../../fonts/}}{%
+    \IfFileExists{../../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../../fonts/}\def\NGSUserPath{../../../../fonts/}}{%
+    \IfFileExists{../../../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../../../fonts/}\def\NGSUserPath{../../../../../fonts/}}{%
+    \IfFileExists{../../../../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../../../../fonts/}\def\NGSUserPath{../../../../../../fonts/}}{%
+      \def\NGSSysPath{../../../../../../../fonts/}\def\NGSUserPath{../../../../../../../fonts/}%
+    }}}}}}}%
+  }%
+}
+\NGSFindFonts
+
+\setmathfont[Path={\NGSSysPath}, FontIndex=1, Scale=1.02]{cambria.ttc}
+\defaultfontfeatures{Ligatures=TeX}
+
+\setmainfont[
+  Path={\NGSUserPath}, Extension=.ttf, Script=Khmer,
+  BoldFont={KhmerOSsiemreap}, BoldFeatures={FakeBold=1.8},
+  ItalicFont={KhmerOSsiemreap}, ItalicFeatures={FakeSlant=0.22}
+]{KhmerOSsiemreap}
+
+\newfontfamily\muol[Path={\NGSUserPath}, Extension=.ttf, Script=Khmer]{KhmerOSmuollight}
+\newfontfamily\TimesEn[Path={\NGSSysPath}, Extension=.ttf, BoldFont={timesbd}, ItalicFont={timesi}]{times}
+
+\XeTeXlinebreaklocale "km"
+\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
+
+\definecolor{panelgray}{gray}{0.93}
+\definecolor{headgray}{gray}{0.85}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\fontsize{7.5pt}{9.5pt}\selectfont អនុវិទ្យាល័យព្រះក្រសាំង \en{|} គណិតវិទ្យាថ្នាក់ទី៨ \en{|} មេរៀនទី១៖ ៣.១–៣.២ ប្រមាណវិធីបូកចំនួនសនិទាន និងលក្ខណៈ (គ្រូ៖ ហុក ប៊ុនថែន)}
+\fancyfoot[R]{\fontsize{7.8pt}{9.5pt}\selectfont ទំព័រ \en{\thepage/\pageref{LastPage}}}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\tabcolsep}{3.8pt}
+
+\newcommand{\en}[1]{{\TimesEn #1}}
+\newcommand{\enbf}[1]{{\TimesEn\bfseries #1}}
+\newcommand{\unit}[1]{\,\text{\en{#1}}}
+\newcommand{\cnum}[1]{\mbox{\fontsize{10pt}{12pt}\selectfont\ding{\numexpr181+#1\relax}}}
+\newcommand{\chkbox}{\tikz[baseline=-0.12ex]\draw[black, line width=0.8pt] (0,0) rectangle (0.24cm,0.24cm);}
+\newcommand{\blank}[1][1.5cm]{\makebox[#1]{\dotfill}}
+\newcommand{\secbar}[2]{%
+  \begin{tcolorbox}[enhanced, sharp corners, colback=headgray, colframe=black, boxrule=0.9pt, boxsep=1pt, top=2pt, bottom=2pt, left=5pt, right=5pt, before skip=4pt, after skip=3pt]
+    {\muol\fontsize{9.2pt}{13pt}\selectfont #1}\hfill{\fontsize{8pt}{11pt}\selectfont\textbf{#2}}
+  \end{tcolorbox}%
+}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
+\begin{document}
+\fontsize{9.6pt}{14.4pt}\selectfont
+
+% ============================================================================
+% ទំព័រទី ១៖ E1 + E2 (POE 1 & POE 2) + E3 សំយោគបញ្ញត្តិ និងធនាគារហេតុផល
+% ============================================================================
+\begin{tcolorbox}[enhanced, sharp corners, colback=white, colframe=black, boxrule=1.0pt, boxsep=2pt, top=3pt, bottom=3pt, left=6pt, right=6pt]
+  \begin{center}
+    {\muol\fontsize{10.0pt}{15pt}\selectfont អនុវិទ្យាល័យព្រះក្រសាំង \enbf{--} សន្លឹកកិច្ចការសិស្ស \enbf{(}មេរៀនទី១៖ ៣\enbf{.}១\enbf{--}៣\enbf{.}២ ប្រមាណវិធីបូកចំនួនសនិទាន\enbf{)}}\\[3pt]
+    {\fontsize{8.8pt}{12pt}\selectfont
+    ឈ្មោះសិស្ស / ដៃគូ៖ \blank[5.2cm] \hspace{0.25cm}
+    ថ្នាក់ទី៨៖ \blank[1.1cm] \hspace{0.25cm}
+    ក្រុមទី៖ \blank[1.0cm] \hspace{0.25cm}
+    កាលបរិច្ឆេទ៖ ១៨/១១/២០២៦}
+  \end{center}
+\end{tcolorbox}
+
+% --- E1 + E2 ---
+\secbar{ផ្នែកទី១៖ បេសកកម្មទស្សន៍ទាយ \enbf{(E1)} និងការរុករកជាដៃគូ \enbf{(E2 -- POE 1 \& POE 2)}}{រយៈពេល ១៤ នាទី}
+
+\begin{tcolorbox}[enhanced, sharp corners, colback=panelgray, colframe=black, boxrule=0.75pt, boxsep=1.5pt, top=2.5pt, bottom=2.5pt, left=5pt, right=5pt]
+  \textbf{បេសកកម្ម \en{E1} (គូសធីក \chkbox\ មុនពិសោធន៍)៖} ពូសុខចាក់ទឹកត្នោតផ្អែម $\frac{1}{2}\unit{L}$ បញ្ចូលជាមួយ $\frac{1}{3}\unit{L}$ ។ សិស្សម្នាក់សរសេរ $\frac{1}{2}+\frac{1}{3}=\frac{2}{5}\unit{L}$ ៖\\
+  (១) តើ $\frac{2}{5}\unit{L}$ ធៀបនឹង $\frac{1}{2}\unit{L}$ យ៉ាងដូចម្ដេច? \chkbox\ តូចជាង $\frac{1}{2}\unit{L}$ \quad \chkbox\ ធំជាង $\frac{1}{2}\unit{L}$ \quad\en{|}\quad
+  (២) ចម្លើយត្រឹមត្រូវគឺ៖ \chkbox\ $\frac{2}{5}\unit{L}$ \quad \chkbox\ $\frac{5}{6}\unit{L}$
+\end{tcolorbox}
+
+\vspace{4pt}
+\textbf{ក. សកម្មភាពទី ១ (\en{POE 1})៖ បន្ទះឯកតារួម និងការបូកប្រភាគមានសញ្ញាដក (សៀវភៅពុម្ព ទំ.៥–៦)}
+
+{\renewcommand{\arraystretch}{1.64}
+\begin{tabular}{|L{4.80cm}|L{8.70cm}|C{4.30cm}|}
+  \hline
+  \rowcolor{headgray}
+  \textbf{ប្រភេទលំហាត់} & \textbf{ជំហានបំប្លែង និងគណនាដោយដៃ} & \textbf{ផលបូកសម្រួលរួច} \\
+  \hline
+  ១. ឯកតារួមទឹកត្នោតផ្អែម & $\dfrac{1}{2} + \dfrac{1}{3} = \dfrac{\blank[0.7cm]}{6} + \dfrac{\blank[0.7cm]}{6} = \dfrac{3+2}{6}$ & $\blank[1.8cm]\unit{L}$ \\
+  \hline
+  ២. ភាគបែងដូចគ្នា (ទំ.៥ ក) & $\dfrac{3}{7} + \dfrac{-5}{7} = \dfrac{3 + (-5)}{7}$ & $\blank[1.8cm]$ \\
+  \hline
+  ៣. ដកនៅភាគបែង (ទំ.៥ ខ) & $\dfrac{-3}{8} + \dfrac{5}{-8} = \dfrac{-3}{8} + \dfrac{\blank[0.8cm]}{8} = \dfrac{-8}{8}$ & $\blank[1.8cm]$ \\
+  \hline
+  ៤. ភាគបែងខុសគ្នា (ទំ.៥ ឃ) & $\dfrac{-3}{5} + \dfrac{4}{-7} = \dfrac{-3}{5} + \dfrac{-4}{7} = \dfrac{\blank[0.9cm] + (\blank[0.9cm])}{35}$ & $\blank[1.8cm]$ \\
+  \hline
+\end{tabular}}
+
+\vspace{5pt}
+$\bullet$ \textbf{ពន្យល់ (\en{E})៖} ហេតុអ្វីហាមបូកភាគបែងនឹងភាគបែង? ព្រោះភាគបែងបង្ហាញពី \blank[2.8cm] នៃចំណែកឯកតា!
+
+\vspace{6pt}
+\textbf{ខ. សកម្មភាពទី ២ (\en{POE 2})៖ មេដែកផ្គុំគូចំនួនផ្ទុយ និងភាគបែងដូចគ្នា (សៀវភៅពុម្ព ទំ.៦–៧)}
+
+{\renewcommand{\arraystretch}{1.60}
+\begin{tabular}{|L{5.60cm}|L{8.40cm}|C{3.80cm}|}
+  \hline
+  \rowcolor{headgray}
+  \textbf{កន្សោមផលបូក (ទំ.៦–៧)} & \textbf{ប្ដូរទីតាំង និងផ្គុំគូឆ្លាតវៃ (លក្ខណៈត្រឡប់-ផ្គុំ)} & \textbf{ចម្លើយ} \\
+  \hline
+  ១. $\dfrac{7}{8} + \dfrac{-7}{8}$ (ទំ.៥ គ) & $\dfrac{7 + (-7)}{8} = \dfrac{\blank[0.7cm]}{8}$ (គូចំនួនផ្ទុយ) & $\blank[1.6cm]$ \\
+  \hline
+  ២. $\left(\dfrac{5}{6} + \dfrac{7}{3}\right) + \dfrac{5}{3}$ (ទំ.៧ ក) & $\dfrac{5}{6} + \left(\dfrac{7}{3} + \dfrac{\blank[0.6cm]}{3}\right) = \dfrac{5}{6} + \blank[0.7cm]$ & $\blank[1.6cm]$ \\
+  \hline
+  ៣. $\left(\dfrac{5}{7} + \dfrac{3}{8}\right) + \left(\dfrac{17}{8} + \dfrac{5}{-7}\right)$ (ទំ.៧ គ) & $\left(\dfrac{5}{7} + \dfrac{\blank[0.7cm]}{7}\right) + \left(\dfrac{3}{8} + \dfrac{17}{8}\right) = 0 + \dfrac{\blank[0.7cm]}{8}$ & $\blank[1.6cm]$ \\
+  \hline
+\end{tabular}}
+
+\vspace{5pt}
+$\bullet$ \textbf{ពន្យល់ (\en{E})៖} នៅពេលមានតួប្រភាគច្រើន ការផ្គុំគូចំនួនផ្ទុយឱ្យស្មើ \blank[1.2cm] និងគូភាគបែងដូចគ្នា ជួយកុំឱ្យពិបាករកភាគបែងធំ!
+
+% --- E3 ---
+\secbar{ផ្នែកទី២៖ សំយោគបញ្ញត្តិ \enbf{(E3)} និងធនាគារហេតុផល \enbf{B\&W} \cnum{1}\enbf{--}\cnum{5}}{សៀវភៅពុម្ព ទំ.៥–៦}
+
+\begin{tabular}{|L{9.20cm}|L{9.20cm}|}
+  \hline
+  \textbf{១. រូបមន្តបូក និងលក្ខណៈសំខាន់ៗ៖}\par\vspace{3pt}
+  $\bullet$ \textbf{ភាគបែងដូចគ្នា៖} $\dfrac{a}{b} + \dfrac{c}{b} = \dfrac{\blank[1.2cm]}{b}$ ($b\neq 0$)\par\vspace{3pt}
+  $\bullet$ \textbf{ជាទូទៅ៖} $\dfrac{a}{b} + \dfrac{c}{d} = \dfrac{ad + \blank[0.9cm]}{bd}$ (ឬប្រើ \en{PPCM}$(b,d)$)\par\vspace{3pt}
+  $\bullet$ \textbf{ត្រឡប់ និងផ្គុំ៖} $\frac{a}{b}+\frac{c}{d}=\frac{c}{d}+\frac{a}{b}$ \;;\; $(\frac{a}{b}+\frac{c}{d})+\frac{e}{f}=\frac{a}{b}+(\frac{c}{d}+\frac{e}{f})$\par\vspace{3pt}
+  $\bullet$ \textbf{ចំនួនផ្ទុយ និងដកពីរជាន់៖} $\dfrac{a}{b}+\left(-\dfrac{a}{b}\right)=\blank[0.6cm]$ \;;\; $-\left(-\dfrac{a}{b}\right)=\dfrac{a}{b}$
+  &
+  \textbf{២. ធនាគារហេតុផល \en{B\&W} (\cnum{1}--\cnum{5})៖}\par\vspace{3pt}
+  \cnum{1} តម្រូវភាគបែងរួមជាមុន រួចបូកតែភាគយក (រក្សាភាគបែងទុក) ។\par\vspace{3pt}
+  \cnum{2} បើភាគបែងអវិជ្ជមាន ត្រូវរុញដកឡើងលើសិន ($\frac{a}{-b}=\frac{-a}{b}$) ។\par\vspace{3pt}
+  \cnum{3} ចំនួនចម្រុះអវិជ្ជមាន៖ $-k\frac{r}{b} = -\frac{kb+r}{b}$ (ដកគ្របទាំងមូល) ។\par\vspace{3pt}
+  \cnum{4} គូចំនួនផ្ទុយបូកបញ្ចូលគ្នាស្មើសូន្យ៖ $\frac{a}{b}+\left(-\frac{a}{b}\right)=0$ ។\par\vspace{3pt}
+  \cnum{5} លក្ខណៈត្រឡប់-ផ្គុំ៖ ផ្គុំគូផ្ទុយ ឬគូភាគបែងដូចគ្នាជាមុន ។ \\
+  \hline
+\end{tabular}
+
+\vspace{6pt}
+\begin{tcolorbox}[enhanced, sharp corners, colback=panelgray, colframe=black, boxrule=0.65pt, boxsep=1.5pt, top=2.5pt, bottom=2.5pt, left=5pt, right=5pt]
+  \textbf{ប្រយ័ត្នអន្ទាក់៖} (១) $\dfrac{a}{b}+\dfrac{c}{d} \neq \dfrac{a+c}{b+d}$ ជាដាច់ខាត! \quad (២) $-3\dfrac{3}{5} = -\dfrac{18}{5}$ មិនមែន $\dfrac{-15+3}{5} = \dfrac{-12}{5}$ ឡើយ!
+\end{tcolorbox}
+
+\vspace{6pt}
+\textbf{៣. លំហាត់ត្រួតពិនិត្យរហ័ស៖ គណនាផលបូកចំនួនសនិទានដោយផ្ទាល់មាត់ និងដោយដៃ}
+
+\vspace{4pt}
+{\renewcommand{\arraystretch}{1.74}
+\begin{tabular}{|C{4.40cm}|C{4.40cm}|C{4.40cm}|C{4.40cm}|}
+  \hline
+  \rowcolor{panelgray}
+  $\frac{9}{5} + \frac{7}{5} = \blank[1.1cm]$ & $\frac{-5}{9} + \frac{5}{9} = \blank[1.1cm]$ & $\frac{3}{-4} + \frac{-1}{4} = \blank[1.1cm]$ & $-\left(-\frac{5}{11}\right) = \blank[1.1cm]$ \\
+  \hline
+  $0.5 + \frac{3}{2} = \blank[1.1cm]$ & $-2\frac{1}{3} = -\frac{\blank[0.7cm]}{3}$ & $\frac{1}{4} + \frac{3}{8} = \blank[1.1cm]$ & $\left(\frac{2}{7}+\frac{1}{5}\right)+\frac{-2}{7} = \blank[0.9cm]$ \\
+  \hline
+  $\frac{-2}{5} + \frac{-3}{5} = \blank[1.1cm]$ & $3.5 + \frac{79}{10} = \blank[1.1cm]$ & $\frac{2}{-9} + \frac{5}{9} = \blank[1.1cm]$ & $\frac{4}{13} + 0 = \blank[1.1cm]$ \\
+  \hline
+  $\frac{-7}{12} + \frac{7}{12} = \blank[1.0cm]$ & $-1\frac{3}{4} = -\frac{\blank[0.7cm]}{4}$ & $\frac{3}{10} + 0.7 = \blank[1.0cm]$ & $\left(\frac{-3}{8}+\frac{2}{5}\right)+\frac{3}{8} = \blank[0.9cm]$ \\
+  \hline
+\end{tabular}}
+
+\newpage
+
+% ============================================================================
+% ទំព័រទី ២៖ E4 លំហាត់គំរូ + E5 ប្រតិបត្តិ & វិនិច្ឆ័យ A-D + Exit + កិច្ចការផ្ទះ
+% ============================================================================
+\secbar{ផ្នែកទី៣៖ ពង្រីកចំណេះដឹងលើចំនួនចម្រុះ ទសភាគ និងលក្ខណៈផ្គុំ \enbf{(E4 --} គំរូ ទំ\enbf{.}៦\enbf{--}៧\enbf{)}}{រយៈពេល ១០ នាទី}
+
+\textbf{លំហាត់គំរូ (សៀវភៅពុម្ព ទំ.៦–៧)៖} ចូរបំពេញជំហានគណនាផលបូកចំនួនសនិទានខាងក្រោម ព្រមទាំងបញ្ជាក់លេខហេតុផល \cnum{1}--\cnum{5}៖
+
+{\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{|L{4.50cm}|L{9.30cm}|C{4.00cm}|}
+  \hline
+  \rowcolor{headgray}
+  \textbf{លំហាត់គំរូ (ទំ.៦–៧)} & \textbf{ដំណើរការគណនាដោយដៃតាមលំដាប់} & \textbf{ចម្លើយ និងហេតុផល} \\
+  \hline
+  \textbf{១. ចំនួនចម្រុះមានសញ្ញា}\par\vspace{2pt}$\left(-3\dfrac{3}{5}\right) + \left(3\dfrac{7}{4}\right)$ & $=\dfrac{-\blank[0.8cm]}{5} + \dfrac{19}{4} = \dfrac{-72 + \blank[0.8cm]}{20}$ & $=\blank[1.4cm]$ (\cnum{3}, \cnum{1}) \\
+  \hline
+  \textbf{២. បូកបីប្រភាគ}\par\vspace{2pt}$\left(\dfrac{-1}{4}\right) + \dfrac{5}{6} + \dfrac{7}{3}$ & $\text{\en{PPCM}}(4,6,3)=12 \implies \dfrac{-3 + \blank[0.7cm] + \blank[0.7cm]}{12}$ & $=\blank[1.4cm]$ (\cnum{1}) \\
+  \hline
+  \textbf{៣. បូកចំនួនទសភាគ}\par\vspace{2pt}$437.56 + 127.95$ & រៀបចំណុចទសភាគឱ្យត្រង់ជួរឈរ៖ $.56 + .95 = 1.51$ & $=\blank[1.6cm]$ \\
+  \hline
+  \textbf{៤. លក្ខណៈផ្គុំជាមួយចំនួនចម្រុះ}\par\vspace{2pt}$\left(\dfrac{5}{6}+\dfrac{7}{3}\right)+\left(-1\dfrac{5}{7}\right)$ & $=\left(\dfrac{5+14}{6}\right) + \dfrac{-12}{7} = \dfrac{19}{6} + \dfrac{-12}{7} = \dfrac{133 - \blank[0.8cm]}{42}$ & $=\blank[1.4cm]$ (\cnum{3}, \cnum{5}) \\
+  \hline
+\end{tabular}}
+
+\vspace{4pt}
+$\bullet$ \textbf{សំណួរឆ្លុះបញ្ចាំង \en{(EIA Looking-Back)}៖} ហេតុអ្វីបានជា $-3\dfrac{3}{5}$ ស្មើនឹង $\dfrac{-18}{5}$ មិនមែន $\dfrac{-12}{5}$? ព្រោះ $-3\dfrac{3}{5} = -\left(3 + \blank[0.8cm]\right)$ ។
+
+% --- E5 ---
+\secbar{ផ្នែកទី៤៖ វាយតម្លៃលទ្ធផលសិក្សា \enbf{(E5 --} ប្រតិបត្តិ ទំ\enbf{.}៦\enbf{--}៧ \enbf{+} វិនិច្ឆ័យ \enbf{A--D +} សំបុត្រចេញ\enbf{)}}{រយៈពេល ១០ នាទី}
+
+\textbf{ក. លំហាត់ប្រតិបត្តិ (សៀវភៅពុម្ព ទំ.៦ និងទំ.៧ — ធ្វើជាដៃគូ រួចប្ដូរសន្លឹកផ្ទៀងផ្ទាត់ \en{Pause-Review})៖}
+
+{\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{|L{8.90cm}|L{8.90cm}|}
+  \hline
+  \textbf{១) ប្រតិបត្តិ ទំ.៦ (បូកប្រភាគ និងចំនួនចម្រុះ)៖}\par\vspace{2.5pt}
+  $\bullet$ \textbf{ក.} $\left(-\dfrac{21}{4}\right) + \left(-\dfrac{11}{4}\right) = \dfrac{\blank[1.5cm]}{4} = \blank[1.3cm]$\par\vspace{3pt}
+  $\bullet$ \textbf{ខ.} $2\dfrac{1}{4} + 5\dfrac{1}{4} = \dfrac{9}{4} + \dfrac{\blank[0.8cm]}{4} = \blank[1.5cm]$\par\vspace{3pt}
+  $\bullet$ \textbf{គ.} $2\dfrac{5}{8} + \left(-1\dfrac{1}{8}\right) + 3\dfrac{7}{8} = \dfrac{21 - 9 + \blank[0.8cm]}{8} = \blank[1.3cm]$
+  &
+  \textbf{២) ប្រតិបត្តិ ទំ.៧ (ប្រើលក្ខណៈត្រឡប់ និងលក្ខណៈផ្គុំ)៖}\par\vspace{2.5pt}
+  $\bullet$ \textbf{ក.} $\left(\dfrac{7}{4} + \dfrac{8}{3}\right) + \dfrac{10}{3} = \dfrac{7}{4} + \left(\dfrac{8}{3} + \blank[0.8cm]\right) = \blank[1.4cm]$\par\vspace{3pt}
+  $\bullet$ \textbf{ខ.} $\left(\dfrac{5}{4} + \dfrac{3}{8}\right) + \dfrac{15}{4} = \left(\dfrac{5}{4} + \blank[0.8cm]\right) + \dfrac{3}{8} = \blank[1.4cm]$\par\vspace{3pt}
+  $\bullet$ \textbf{បិទ \en{E1}៖} ទឹកត្នោតផ្អែមសរុប $\dfrac{1}{2}+\dfrac{1}{3} = \blank[1.4cm]\unit{L}$ (\cnum{1}) \\
+  \hline
+\end{tabular}}
+
+\vspace{5pt}
+\textbf{ខ. គូសវង់ជុំវិញជម្រើសត្រឹមត្រូវតែ ១ គត់ ក្នុងចំណោម \en{A, B, C, D} រួចសរសេរលេខហេតុផល \cnum{1}--\cnum{5}៖}
+
+{\renewcommand{\arraystretch}{1.44}
+\begin{tabular}{|L{8.90cm}|L{8.90cm}|}
+  \hline
+  \textbf{ជម្រើស \en{A}៖} $\dfrac{-3}{5} + \dfrac{4}{-7} = \dfrac{-21 - 20}{35} = \dfrac{-41}{35}$ &
+  \textbf{ជម្រើស \en{B}៖} $\dfrac{-3}{5} + \dfrac{4}{-7} = \dfrac{-3 + 4}{5 + (-7)} = \dfrac{1}{-2}$ \\
+  \hline
+  \textbf{ជម្រើស \en{C}៖} $-2\dfrac{1}{4} = \dfrac{-8 + 1}{4} = \dfrac{-7}{4}$ &
+  \textbf{ជម្រើស \en{D}៖} $\dfrac{7}{8} + \dfrac{-7}{8} = \dfrac{14}{8} = \dfrac{7}{4}$ \\
+  \hline
+\end{tabular}}
+
+\vspace{4pt}
+\begin{tcolorbox}[enhanced, sharp corners, colback=panelgray, colframe=black, boxrule=0.75pt, boxsep=1.5pt, top=2.5pt, bottom=2.5pt, left=5pt, right=5pt]
+  \textbf{សំបុត្រចេញពីថ្នាក់ (\en{Exit Ticket} — ៦០ វិនាទី)៖} គណនារហ័សដោយប្រើលក្ខណៈត្រឡប់ និងលក្ខណៈផ្គុំ៖\\
+  $\left(\dfrac{-4}{9} + \dfrac{5}{6}\right) + \left(\dfrac{4}{9} + \dfrac{7}{6}\right) = \left(\blank[1.8cm]\right) + \left(\blank[1.8cm]\right) = 0 + \blank[1.0cm] = \blank[1.2cm]$ \quad (ហេតុផល៖ \blank[1.2cm])
+\end{tcolorbox}
+
+% --- កិច្ចការផ្ទះ ---
+\secbar{ផ្នែកទី៥៖ កិច្ចការផ្ទះ \enbf{(}សៀវភៅពុម្ព ទំ\enbf{.}៧ និងទំ\enbf{.}១២ \#9\enbf{)} និងបណ្ដាំផ្ញើ}{ធ្វើក្នុងសៀវភៅកិច្ចការផ្ទះ}
+$\bullet$ \textbf{លំហាត់ ១៖} គណនា រួចសម្រួល៖ ក) $\left(-\dfrac{1}{8}\right)+\left(2\dfrac{5}{9}\right)$ \quad ខ) $\dfrac{12}{25}+\left(-2\dfrac{5}{7}\right)$ \quad គ) $\left(-1\dfrac{3}{4}\right)+\dfrac{5}{-6}+\dfrac{7}{12}$\\
+$\bullet$ \textbf{លំហាត់ ២៖} គណនាដោយប្រើលក្ខណៈផ្គុំ៖ $\left(\dfrac{-3}{11}+\dfrac{5}{12}\right)+\left(\dfrac{7}{12}+\dfrac{3}{11}\right)$ \;\en{|}\; \textbf{អានមុន៖} ចំណុច \textbf{៣.៣. ប្រមាណវិធីដក} (ទំ.៧–៨) ។
+
+\end{document}
