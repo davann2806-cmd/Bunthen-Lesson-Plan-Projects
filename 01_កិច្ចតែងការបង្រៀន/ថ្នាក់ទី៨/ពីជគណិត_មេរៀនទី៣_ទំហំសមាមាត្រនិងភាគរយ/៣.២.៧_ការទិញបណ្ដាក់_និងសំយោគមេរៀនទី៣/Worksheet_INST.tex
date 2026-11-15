@@ -1,0 +1,274 @@
+% !TeX program = xelatex
+\documentclass[a4paper,10pt]{article}
+
+% ============================================================================
+% សន្លឹកកិច្ចការសិស្ស ស-ខ្មៅ (Student Worksheet - Grade 8 3.2.7 INST)
+% បរិបទ៖ គ្មានស្លាយ LCD និងគ្មានម៉ាស៊ីនគិតលេខ — សិស្សបំពេញផ្ទាល់លើសន្លឹកកិច្ចការ ២ ទំព័រ A4
+% ============================================================================
+\usepackage[a4paper, left=0.85cm, right=0.85cm, top=0.70cm, bottom=0.95cm, footskip=0.48cm]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{unicode-math}
+\usepackage{fontspec}
+\usepackage{array, colortbl}
+\usepackage[table]{xcolor}
+\usepackage{enumitem}
+\usepackage{pifont}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{tikz}
+\usepackage[most]{tcolorbox}
+\usetikzlibrary{calc, arrows.meta, decorations.pathreplacing, positioning, babel}
+
+\makeatletter
+\let\@expl@@@mark@update@singlecol@structures@@\relax
+\makeatother
+
+\providecommand{\NGSFindFonts}{%
+  \IfFileExists{C:/Windows/Fonts/cambria.ttc}{%
+    \def\NGSSysPath{C:/Windows/Fonts/}%
+    \def\NGSUserPath{C:/Users/KIT/AppData/Local/Microsoft/Windows/Fonts/}%
+  }{%
+    \IfFileExists{./fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{./fonts/}\def\NGSUserPath{./fonts/}}{%
+    \IfFileExists{../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../fonts/}\def\NGSUserPath{../fonts/}}{%
+    \IfFileExists{../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../fonts/}\def\NGSUserPath{../../fonts/}}{%
+    \IfFileExists{../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../fonts/}\def\NGSUserPath{../../../fonts/}}{%
+    \IfFileExists{../../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../../fonts/}\def\NGSUserPath{../../../../fonts/}}{%
+    \IfFileExists{../../../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../../../fonts/}\def\NGSUserPath{../../../../../fonts/}}{%
+    \IfFileExists{../../../../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../../../../fonts/}\def\NGSUserPath{../../../../../../fonts/}}{%
+      \def\NGSSysPath{../../../../../../../fonts/}\def\NGSUserPath{../../../../../../../fonts/}%
+    }}}}}}}%
+  }%
+}
+\NGSFindFonts
+
+\setmathfont[Path={\NGSSysPath}, FontIndex=1, Scale=1.02]{cambria.ttc}
+\defaultfontfeatures{Ligatures=TeX}
+
+\setmainfont[
+  Path={\NGSUserPath}, Extension=.ttf, Script=Khmer,
+  BoldFont={KhmerOSsiemreap}, BoldFeatures={FakeBold=1.8},
+  ItalicFont={KhmerOSsiemreap}, ItalicFeatures={FakeSlant=0.22}
+]{KhmerOSsiemreap}
+
+\newfontfamily\muol[Path={\NGSUserPath}, Extension=.ttf, Script=Khmer]{KhmerOSmuollight}
+\newfontfamily\TimesEn[Path={\NGSSysPath}, Extension=.ttf, BoldFont={timesbd}, ItalicFont={timesi}]{times}
+
+\XeTeXlinebreaklocale "km"
+\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
+
+\definecolor{panelgray}{gray}{0.93}
+\definecolor{headgray}{gray}{0.85}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\fontsize{7.5pt}{9.5pt}\selectfont អនុវិទ្យាល័យព្រះក្រសាំង \en{|} គណិតវិទ្យាថ្នាក់ទី៨ \en{|} មេរៀនទី៣៖ ២.៧ ការទិញបណ្ដាក់ និងសំយោគមេរៀនទី៣ (គ្រូ៖ ហុក ប៊ុនថែន)}
+\fancyfoot[R]{\fontsize{7.8pt}{9.5pt}\selectfont ទំព័រ \en{\thepage/\pageref{LastPage}}}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\tabcolsep}{3.8pt}
+
+\newcommand{\en}[1]{{\TimesEn #1}}
+\newcommand{\enbf}[1]{{\TimesEn\bfseries #1}}
+\newcommand{\unit}[1]{\,\text{\en{#1}}}
+\newcommand{\cnum}[1]{\mbox{\fontsize{10pt}{12pt}\selectfont\ding{\numexpr181+#1\relax}}}
+\newcommand{\chkbox}{\tikz[baseline=-0.12ex]\draw[black, line width=0.8pt] (0,0) rectangle (0.24cm,0.24cm);}
+\newcommand{\blank}[1][1.5cm]{\makebox[#1]{\dotfill}}
+\newcommand{\ansbox}[1][0.85cm]{\,\tikz[baseline=-0.5ex]\draw[black, line width=0.65pt, fill=white] (0,0) rectangle (#1, 0.42cm);\,}
+\newcommand{\secbar}[2]{%
+  \begin{tcolorbox}[enhanced, sharp corners, colback=headgray, colframe=black, boxrule=0.9pt, boxsep=1pt, top=2pt, bottom=2pt, left=5pt, right=5pt, before skip=4pt, after skip=3pt]
+    {\muol\fontsize{9.2pt}{13pt}\selectfont #1}\hfill{\fontsize{8pt}{11pt}\selectfont\textbf{#2}}
+  \end{tcolorbox}%
+}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
+\begin{document}
+\fontsize{9.6pt}{14.4pt}\selectfont
+
+% ============================================================================
+% ទំព័រទី ១៖ E1 + E2 (POE 1 & POE 2) + E3 សំយោគលំហូរ ៤ ជំហាន និងធនាគារហេតុផល
+% ============================================================================
+\begin{tcolorbox}[enhanced, sharp corners, colback=white, colframe=black, boxrule=1.0pt, boxsep=2pt, top=3pt, bottom=3pt, left=6pt, right=6pt]
+  \begin{center}
+    {\muol\fontsize{10.0pt}{15pt}\selectfont អនុវិទ្យាល័យព្រះក្រសាំង \enbf{--} សន្លឹកកិច្ចការសិស្ស \enbf{(}មេរៀនទី៣៖ ២\enbf{.}៧ ការទិញបណ្ដាក់ និងសំយោគមេរៀន\enbf{)}}\\[3pt]
+    {\fontsize{8.8pt}{12pt}\selectfont
+    ឈ្មោះសិស្ស / ដៃគូ៖ \blank[5.2cm] \hspace{0.25cm}
+    ថ្នាក់ទី៨៖ \blank[1.1cm] \hspace{0.25cm}
+    ក្រុមទី៖ \blank[1.0cm] \hspace{0.25cm}
+    កាលបរិច្ឆេទ៖ ០៣/១២/២០២៦}
+  \end{center}
+\end{tcolorbox}
+
+% --- E1 + E2 ---
+\secbar{ផ្នែកទី១៖ បេសកកម្មទស្សន៍ទាយ \enbf{(E1)} និងការរុករកជាដៃគូ \enbf{(E2 -- POE 1 \& POE 2)}}{រយៈពេល ១៤ នាទី}
+
+\begin{tcolorbox}[enhanced, sharp corners, colback=panelgray, colframe=black, boxrule=0.75pt, boxsep=1.5pt, top=2.5pt, bottom=2.5pt, left=5pt, right=5pt]
+  \textbf{បេសកកម្ម \en{E1} (គូសធីក \chkbox\ មុនពិសោធន៍)៖} កុំព្យូទ័រថ្លៃទិញដាច់ $9\,000\,000\text{៛}$ ត្រូវគេទិញបណ្ដាក់ដោយកក់មុន $2\,000\,000\text{៛}$ ($R=14\%, 2$ ឆ្នាំ)៖\\
+  (១) ហាងគិតការប្រាក់ $14\%$ លើ៖ \chkbox\ $9\,000\,000\text{៛}$ \quad \chkbox\ $7\,000\,000\text{៛}$ \quad\en{|}\quad
+  (២) ថ្លៃទិញបណ្ដាក់សរុបស្មើ៖ \chkbox\ $8\,960\,000\text{៛}$ \quad \chkbox\ $10\,960\,000\text{៛}$
+\end{tcolorbox}
+
+\vspace{3pt}
+\textbf{ក. សកម្មភាពទី ១ (\en{POE 1})៖ ខ្សែសង្វាក់ ៤ ជំហាននៃការទិញកុំព្យូទ័របណ្ដាក់ (សៀវភៅពុម្ព ទំ.៣៨–៣៩)}
+
+{\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{|L{4.80cm}|L{8.40cm}|C{4.60cm}|}
+  \hline
+  \rowcolor{headgray}
+  \textbf{ជំហានគណនា} & \textbf{ប្រមាណវិធីគណនាដោយដៃ} & \textbf{ចម្លើយ} \\
+  \hline
+  ១. ប្រាក់នៅសល់ត្រូវបង់រំលស់ ($B$) & $B = 9\,000\,000 - 2\,000\,000$ & $\blank[2.2cm]\text{៛}$ \\
+  \hline
+  ២. ប្រាក់ការរយៈពេល $2$ ឆ្នាំ ($I$) & $I = \dfrac{\blank[1.8cm] \times 14 \times 2}{100}$ & $\blank[2.2cm]\text{៛}$ \\
+  \hline
+  ៣. ប្រាក់បង់ប្រចាំខែ ($24$ ខែ) & $M = \dfrac{7\,000\,000 + \blank[1.7cm]}{24} = \dfrac{8\,960\,000}{24}$ & $\approx \blank[2.0cm]\text{៛}$ \\
+  \hline
+  ៤. ថ្លៃទិញបណ្ដាក់សរុប ($H$) & $H = \text{ប្រាក់កក់ } 2\,000\,000 + 8\,960\,000$ & $\blank[2.2cm]\text{៛}$ \\
+  \hline
+\end{tabular}}
+
+\vspace{4pt}
+$\bullet$ \textbf{ពន្យល់ (\en{E})៖} ហេតុអ្វីមិនគិតការប្រាក់លើ $9\,000\,000\text{៛}$? ព្រោះប្រាក់កក់ $2\,000\,000\text{៛}$ បាន \blank[3.2cm] រួចហើយ!
+
+\vspace{5pt}
+\textbf{ខ. សកម្មភាពទី ២ (\en{POE 2})៖ តារាងប្រៀបធៀបថ្លៃទិញដាច់ ទល់នឹង ថ្លៃទិញបណ្ដាក់ (ប្រតិបត្តិទំ.៤០ ក, ខ និងពង្រឹង គ)}
+
+{\renewcommand{\arraystretch}{1.44}
+\begin{tabular}{|C{0.90cm}|C{2.70cm}|L{5.50cm}|C{3.00cm}|C{2.60cm}|C{2.70cm}|}
+  \hline
+  \rowcolor{headgray}
+  \textbf{ល.រ} & \textbf{ថ្លៃទិញដាច់ ($C$)} & \textbf{លក្ខខណ្ឌបង់បណ្ដាក់} & \textbf{ថ្លៃបណ្ដាក់សរុប ($H$)} & \textbf{ប្រាក់លើសដាច់} & \textbf{ភាគរយលើសដាច់} \\
+  \hline
+  ក & $1\,080\,000\text{៛}$ & កក់ $150\,000\text{៛}$ + បង់ $10$ ខែ $\times 120\,000\text{៛}$ & $\blank[1.9cm]\text{៛}$ & $\blank[1.7cm]\text{៛}$ & $\blank[1.4cm]\%$ \\
+  \hline
+  ខ & $2\,700\,000\text{៛}$ & កក់ $450\,000\text{៛}$ + បង់ $12$ ខែ $\times 225\,000\text{៛}$ & $\blank[1.9cm]\text{៛}$ & $\blank[1.7cm]\text{៛}$ & $\blank[1.4cm]\%$ \\
+  \hline
+  គ & $1\,500\,000\text{៛}$ & កក់ $300\,000\text{៛}$ + បង់ $10$ ខែ $\times 150\,000\text{៛}$ & $\blank[1.9cm]\text{៛}$ & $\blank[1.7cm]\text{៛}$ & $\blank[1.4cm]\%$ \\
+  \hline
+\end{tabular}}
+
+\vspace{4pt}
+$\bullet$ \textbf{ពន្យល់ (\en{E})៖} ដើម្បីរកភាគរយថ្លៃលើស គេត្រូវយកប្រាក់លើសទៅចែកនឹង \blank[2.8cm] ($100\%$) ជានិច្ច!
+
+% --- E3 ---
+\secbar{ផ្នែកទី២៖ សំយោគលំហូរ ៤ ជំហាន \enbf{(E3)} និងធនាគារហេតុផល \enbf{B\&W} \cnum{1}\enbf{--}\cnum{5}}{សៀវភៅពុម្ព ទំ.៣៨–៤០}
+
+\begin{tabular}{|L{9.20cm}|L{9.20cm}|}
+  \hline
+  \textbf{១. រូបមន្តគណនាការទិញបណ្ដាក់៖}\par\vspace{2.5pt}
+  $\bullet$ \textbf{ប្រាក់នៅសល់៖} $B = \text{ថ្លៃទិញដាច់ } C - \text{ប្រាក់កក់ } \blank[0.8cm]$\par\vspace{2.5pt}
+  $\bullet$ \textbf{ប្រាក់ការបណ្ដាក់៖} $I = \dfrac{B \cdot R \cdot T}{100}$ (គិតតែលើប្រាក់នៅសល់)\par\vspace{2.5pt}
+  $\bullet$ \textbf{ប្រាក់បង់ប្រចាំខែ ($n$ ខែ)៖} $M = \dfrac{B + \blank[0.7cm]}{n}$\par\vspace{2.5pt}
+  $\bullet$ \textbf{ថ្លៃបណ្ដាក់សរុប៖} $H = D + nM$ \;;\; $\%\text{លើស} = \dfrac{H - C}{\blank[0.7cm]}\times 100\%$
+  &
+  \textbf{២. ធនាគារហេតុផល \en{B\&W} (\cnum{1}--\cnum{5})៖}\par\vspace{2.5pt}
+  \cnum{1} ប្រាក់នៅសល់៖ $B = \text{ថ្លៃទិញដាច់} - \text{ប្រាក់កក់}$ ។\par\vspace{2.5pt}
+  \cnum{2} ការប្រាក់បណ្ដាក់៖ គិតតែលើប្រាក់នៅសល់ $B$ (មិនគិតលើប្រាក់កក់ទេ) ។\par\vspace{2.5pt}
+  \cnum{3} ប្រាក់បង់ប្រចាំខែ៖ $M = \frac{\text{ប្រាក់នៅសល់ } B + \text{ប្រាក់ការ } I}{\text{ចំនួនខែ } n}$ ។\par\vspace{2.5pt}
+  \cnum{4} ថ្លៃបណ្ដាក់សរុប៖ $H = \text{ប្រាក់កក់} + (\text{ប្រចាំខែ} \times n) = \text{ថ្លៃដាច់} + I$ ។\par\vspace{2.5pt}
+  \cnum{5} ភាគរយលើសដាច់៖ យកប្រាក់លើសចែកនឹង \textbf{ថ្លៃទិញដាច់} $\times 100\%$ ។ \\
+  \hline
+\end{tabular}
+
+\vspace{4pt}
+\begin{tcolorbox}[enhanced, sharp corners, colback=panelgray, colframe=black, boxrule=0.65pt, boxsep=1.5pt, top=2pt, bottom=2pt, left=5pt, right=5pt]
+  \textbf{ប្រយ័ត្នអន្ទាក់៖} ហាមគិតការប្រាក់លើថ្លៃទិញដាច់ទាំងមូល និងហាមភ្លេចបូកប្រាក់កក់ចូលពេលគណនាថ្លៃទិញបណ្ដាក់សរុប!
+\end{tcolorbox}
+
+\vspace{4pt}
+\textbf{៣. លំហាត់ត្រួតពិនិត្យរហ័ស៖ គណនាប្រាក់នៅសល់ ប្រាក់ប្រចាំខែ និងថ្លៃបណ្ដាក់សរុប}
+
+\vspace{2pt}
+{\renewcommand{\arraystretch}{1.54}
+\begin{tabular}{|C{4.40cm}|C{4.40cm}|C{4.40cm}|C{4.40cm}|}
+  \hline
+  \rowcolor{panelgray}
+  ដាច់ $500\$$, កក់ $100\$\to B=\blank[0.6cm]$ & កក់ $20\%$ នៃ $1\,000\$ = \blank[0.7cm]\$$ & $B=400\$, I=80\$, 12\text{ខែ}\to M=\blank[0.5cm]$ & កក់ $100\$ + 10\times 45\$ = \blank[0.7cm]\$$ \\
+  \hline
+  ដាច់ $500\$$, បណ្ដាក់ $550\$$ $\to$ លើស $\blank[0.5cm]\%$ & ដាច់ $800\$$, កក់ $25\%\to B=\blank[0.6cm]$ & $B=600\$, 10\%, 1\text{ឆ្នាំ}\to I=\blank[0.6cm]$ & ដាច់ $200\$$, បណ្ដាក់ $250\$$ $\to$ លើស $\blank[0.5cm]\%$ \\
+  \hline
+  ដាច់ $1\,200\$$, កក់ $300\$\to B=\blank[0.6cm]$ & $B=900\$, 10\%, 2\text{ឆ្នាំ}\to I=\blank[0.5cm]$ & $B=500\$, I=100\$, 10\text{ខែ}\to M=\blank[0.5cm]$ & កក់ $200\$ + 12\times 50\$ = \blank[0.6cm]\$$ \\
+  \hline
+  ដាច់ $1\,000\$$, បណ្ដាក់ $1\,150\$$ $\to$ លើស $\blank[0.4cm]\%$ & កក់ $15\%$ នៃ $2\,000\$ = \blank[0.6cm]\$$ & $B=1\,200\$, I=240\$, 24\text{ខែ}\to M=\blank[0.4cm]$ & ដាច់ $400\$$, បណ្ដាក់ $480\$$ $\to$ លើស $\blank[0.4cm]\%$ \\
+  \hline
+\end{tabular}}
+
+\newpage
+
+% ============================================================================
+% ទំព័រទី ២៖ E4 លំហាត់គំរូ + E5 អនុវត្ត & សំយោគមេរៀនទី៣ + វិនិច្ឆ័យ A-D + Exit + កិច្ចការផ្ទះ
+% ============================================================================
+\secbar{ផ្នែកទី៣៖ ពង្រីកចំណេះដឹងលើការទិញម៉ាស៊ីនបោកខោអាវបណ្ដាក់ \enbf{(E4 --} គំរូ ទំ\enbf{.}៣៩\enbf{)}}{រយៈពេល ១០ នាទី}
+
+\textbf{លំហាត់គំរូ (សៀវភៅពុម្ព ទំ.៣៩ — ម៉ាស៊ីនបោកខោអាវ)៖} ម៉ាស៊ីនបោកខោអាវមួយគ្រឿងមានថ្លៃទិញដាច់ $\mathbf{1\,350\,000\text{៛}}$ ។ គេអាចទិញបណ្ដាក់ដោយកក់មុន $\mathbf{15\%}$ នៃថ្លៃទិញដាច់ ហើយប្រាក់នៅសល់ត្រូវបង់រំលស់ក្នុងរយៈពេល $\mathbf{2}$ \textbf{ឆ្នាំ ($24$ ខែ)} តាមអត្រាការប្រាក់សាមញ្ញ $\mathbf{10\frac{2}{3}\%}$ ក្នុងមួយឆ្នាំ ។ គណនាប្រាក់បង់ប្រចាំខែ ថ្លៃបណ្ដាក់សរុប និងភាគរយលើសថ្លៃទិញដាច់៖
+
+{\renewcommand{\arraystretch}{1.54}
+\begin{tabular}{|L{4.50cm}|L{9.10cm}|C{4.20cm}|}
+  \hline
+  \rowcolor{headgray}
+  \textbf{ជំហានវិភាគ ៤ ដំណាក់} & \textbf{ការគណនាដោយដៃតាមលំដាប់} & \textbf{លទ្ធផល និងហេតុផល} \\
+  \hline
+  \textbf{១. ប្រាក់កក់ និងប្រាក់នៅសល់} & $D = 1\,350\,000 \times \frac{15}{100} = \blank[1.5cm]\text{៛} \implies B = \blank[1.8cm]\text{៛}$ & ប្រាក់នៅសល់ (\cnum{1}) \\
+  \hline
+  \textbf{២. ការប្រាក់ ($10\frac{2}{3}\% = \frac{32}{3}\%$)} & $I = \dfrac{\blank[1.6cm] \times \frac{32}{3} \times 2}{100} = 3\,825 \times 64 = \blank[1.5cm]\text{៛}$ & ការប្រាក់លើ $B$ (\cnum{2}) \\
+  \hline
+  \textbf{៣. ប្រាក់បង់ប្រចាំខែ ($24$ ខែ)} & $M = \dfrac{1\,147\,500 + \blank[1.5cm]}{24} = \dfrac{1\,392\,300}{24} = \blank[1.5cm]\text{៛}$ & ក្នុង ១ ខែ (\cnum{3}) \\
+  \hline
+  \textbf{៤. ថ្លៃសរុប និងភាគរយលើស} & $H = 202\,500 + 1\,392\,300 = \blank[1.6cm]\text{៛}$ \;;\; $\% = \blank[1.3cm]\%$ & ធៀបថ្លៃដាច់ (\cnum{4}, \cnum{5}) \\
+  \hline
+\end{tabular}}
+
+\vspace{4pt}
+$\bullet$ \textbf{សំណួរឆ្លុះបញ្ចាំង \en{(EIA Looking-Back)}៖} បើអ្នកបង្កើនប្រាក់កក់ដំបូងឱ្យកាន់តែច្រើន តើប្រាក់ការដែលត្រូវបង់នឹង \blank[2.0cm] ព្រោះប្រាក់នៅសល់ $B$ កាន់តែ \blank[1.8cm] ។
+
+% --- E5 ---
+\secbar{ផ្នែកទី៤៖ វាយតម្លៃលទ្ធផលសិក្សា \enbf{(E5 --} សំយោគមេរៀនទី៣ \enbf{+} វិនិច្ឆ័យ \enbf{A--D +} សំបុត្រចេញ\enbf{)}}{រយៈពេល ១០ នាទី}
+
+\textbf{ក. លំហាត់អនុវត្ត និងសំយោគមេរៀនទី៣ទាំងមូល (ទំ.៤០ — ធ្វើជាដៃគូ រួចប្ដូរសន្លឹកផ្ទៀង \en{Pause-Review})៖}
+
+{\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{|L{8.90cm}|L{8.90cm}|}
+  \hline
+  \textbf{១) អនុវត្តការទិញបណ្ដាក់ (កង់អគ្គិសនី)៖}\par\vspace{2pt}
+  កង់អគ្គិសនីមួយគ្រឿងថ្លៃទិញដាច់ $\mathbf{2\,000\,000\text{៛}}$ ។ គេទិញបណ្ដាក់ដោយកក់មុន $\mathbf{25\%}$ ហើយប្រាក់នៅសល់គិតការប្រាក់សាមញ្ញ $\mathbf{12\%}$/ឆ្នាំ រយៈពេល $\mathbf{1}$ \textbf{ឆ្នាំ ($12$ ខែ)} ៖\par\vspace{2pt}
+  $\bullet$ ប្រាក់កក់ $D = \blank[1.5cm]\text{៛} \implies B = \blank[1.6cm]\text{៛}$ (\cnum{1})\par\vspace{2pt}
+  $\bullet$ ការប្រាក់ $I = \blank[1.5cm]\text{៛} \implies M = \blank[1.5cm]\text{៛}$/ខែ (\cnum{3})\par\vspace{2pt}
+  $\bullet$ ថ្លៃទិញបណ្ដាក់សរុប $H = \blank[2.0cm]\text{៛}$ (\cnum{4})
+  &
+  \textbf{២) ផែនទីសំយោគរូបមន្តមេរៀនទី៣ (សង្ខេបទំ.៤០)៖}\par\vspace{2pt}
+  បំពេញរូបមន្តគោលទាំង ៤ ក្រុមនៃមេរៀនទី៣ឱ្យបានត្រឹមត្រូវ៖\par\vspace{2pt}
+  $\bullet$ \textbf{សមាមាត្រស្រប៖} $\dfrac{y}{x} = \blank[0.7cm]$ \;\en{|}\; \textbf{ច្រាស៖} $x \cdot y = \blank[0.7cm]$\par\vspace{2pt}
+  $\bullet$ \textbf{ថ្លៃលក់ចំណេញ $r\%$៖} $\text{ថ្លៃលក់} = \text{ថ្លៃដើម} \times \dfrac{100 + \blank[0.6cm]}{100}$\par\vspace{2pt}
+  $\bullet$ \textbf{ការប្រាក់សាមញ្ញ៖} $I = \dfrac{\blank[1.1cm]}{100}$ \;\en{|}\; \textbf{សមាស៖} $P_{k+1} = P_k + \blank[0.6cm]$ \\
+  \hline
+\end{tabular}}
+
+\vspace{5pt}
+\textbf{ខ. គូសវង់ជុំវិញជម្រើសត្រឹមត្រូវតែ ១ គត់ ក្នុងចំណោម \en{A, B, C, D} រួចសរសេរលេខហេតុផល \cnum{1}--\cnum{5} នៃជម្រើសខុស៖}
+
+{\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{|C{4.40cm}|C{4.40cm}|C{4.40cm}|C{4.40cm}|}
+  \hline
+  \cellcolor{panelgray}\textbf{ជម្រើស \en{A}} & \cellcolor{panelgray}\textbf{ជម្រើស \en{B}} & \cellcolor{panelgray}\textbf{ជម្រើស \en{C}} & \cellcolor{panelgray}\textbf{ជម្រើស \en{D}} \\
+  \hline
+  ដាច់ $2\text{លាន}$, កក់ $0.5\text{លាន}, 12\%, 12$ខែ $\Rightarrow M = 140\,000\text{៛}$ & គិតការប្រាក់ $12\%$ លើថ្លៃទិញដាច់ $2\,000\,000\text{៛}$ ទាំងមូល & ថ្លៃបណ្ដាក់សរុបគឺស្មើតែ $1\,680\,000\text{៛}$ (មិនបូកប្រាក់កក់) & រកភាគរយលើស យកប្រាក់លើសចែកនឹងថ្លៃបណ្ដាក់ \\[3pt]
+  \chkbox\ ត្រូវ \quad \chkbox\ ខុស (\blank[0.7cm]) & \chkbox\ ត្រូវ \quad \chkbox\ ខុស (\blank[0.7cm]) & \chkbox\ ត្រូវ \quad \chkbox\ ខុស (\blank[0.7cm]) & \chkbox\ ត្រូវ \quad \chkbox\ ខុស (\blank[0.7cm]) \\
+  \hline
+\end{tabular}}
+
+\vspace{5pt}
+\begin{tcolorbox}[enhanced, sharp corners, colback=white, colframe=black, boxrule=0.85pt, boxsep=2.5pt, top=3.5pt, bottom=3.5pt, left=5pt, right=5pt]
+  {\muol\fontsize{8.8pt}{12.5pt}\selectfont សំបុត្រចេញរហ័ស \enbf{(Exit Check --} ៦០ វិនាទី\enbf{)}៖}\\[2pt]
+  ទូរស័ព្ទថ្លៃដាច់ $800\,000\text{៛}$ កក់មុន $200\,000\text{៛}$ និងបង់ $10$ ខែ $\times 72\,000\text{៛}$៖ (១) $H = \blank[1.8cm]\text{៛}$ \;\en{|}\; (២) លើសដាច់ $= \blank[1.2cm]\%$
+\end{tcolorbox}
+
+\vspace{4pt}
+\begin{tcolorbox}[enhanced, sharp corners, colback=panelgray, colframe=black, boxrule=0.75pt, boxsep=2pt, top=2.5pt, bottom=2.5pt, left=5pt, right=5pt]
+  {\muol\fontsize{8.6pt}{12pt}\selectfont កិច្ចការផ្ទះ \enbf{(}ទំ\enbf{.}៤២ លំហាត់ \enbf{\#19} និងរំលឹកសង្ខេបមេរៀនទី៣ ទំ\enbf{.}៤០\enbf{--}៤២\enbf{)}៖}
+  ធ្វើលំហាត់ \textbf{\#19} (ទំ.៤២) រំលឹកសង្ខេបមេរៀនទី៣ទាំងមូល (ទំ.៤០–៤២) និងអានមុន \textbf{មេរៀនទី៤៖ កន្សោមពីជគណិត (ទំ.៤៣)} ។
+\end{tcolorbox}
+
+\end{document}

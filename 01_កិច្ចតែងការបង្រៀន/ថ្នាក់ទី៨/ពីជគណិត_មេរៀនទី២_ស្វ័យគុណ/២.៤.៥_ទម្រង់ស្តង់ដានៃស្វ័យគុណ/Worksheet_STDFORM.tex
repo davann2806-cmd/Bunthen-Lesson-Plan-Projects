@@ -1,0 +1,285 @@
+% !TeX program = xelatex
+\documentclass[a4paper,10pt]{article}
+
+% ============================================================================
+% សន្លឹកកិច្ចការសិស្ស ស-ខ្មៅ (Student Worksheet - Grade 8 2.4.5 STDFORM)
+% បរិបទ៖ គ្មានស្លាយ LCD និងគ្មានម៉ាស៊ីនគិតលេខ — សិស្សបំពេញផ្ទាល់លើសន្លឹកកិច្ចការ ២ ទំព័រ A4
+% ============================================================================
+\usepackage[a4paper, left=0.85cm, right=0.85cm, top=0.70cm, bottom=0.95cm, footskip=0.48cm]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{unicode-math}
+\usepackage{fontspec}
+\usepackage{array, colortbl}
+\usepackage[table]{xcolor}
+\usepackage{enumitem}
+\usepackage{pifont}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{tikz}
+\usepackage[most]{tcolorbox}
+\usetikzlibrary{calc, arrows.meta, decorations.pathreplacing, positioning, babel}
+
+\makeatletter
+\let\@expl@@@mark@update@singlecol@structures@@\relax
+\makeatother
+
+\providecommand{\NGSFindFonts}{%
+  \IfFileExists{C:/Windows/Fonts/cambria.ttc}{%
+    \def\NGSSysPath{C:/Windows/Fonts/}%
+    \def\NGSUserPath{C:/Users/KIT/AppData/Local/Microsoft/Windows/Fonts/}%
+  }{%
+    \IfFileExists{./fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{./fonts/}\def\NGSUserPath{./fonts/}}{%
+    \IfFileExists{../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../fonts/}\def\NGSUserPath{../fonts/}}{%
+    \IfFileExists{../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../fonts/}\def\NGSUserPath{../../fonts/}}{%
+    \IfFileExists{../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../fonts/}\def\NGSUserPath{../../../fonts/}}{%
+    \IfFileExists{../../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../../fonts/}\def\NGSUserPath{../../../../fonts/}}{%
+    \IfFileExists{../../../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../../../fonts/}\def\NGSUserPath{../../../../../fonts/}}{%
+    \IfFileExists{../../../../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../../../../fonts/}\def\NGSUserPath{../../../../../../fonts/}}{%
+      \def\NGSSysPath{../../../../../../../fonts/}\def\NGSUserPath{../../../../../../../fonts/}%
+    }}}}}}}%
+  }%
+}
+\NGSFindFonts
+
+\setmathfont[Path={\NGSSysPath}, FontIndex=1, Scale=1.02]{cambria.ttc}
+\defaultfontfeatures{Ligatures=TeX}
+
+\setmainfont[
+  Path={\NGSUserPath}, Extension=.ttf, Script=Khmer,
+  BoldFont={KhmerOSsiemreap}, BoldFeatures={FakeBold=1.8},
+  ItalicFont={KhmerOSsiemreap}, ItalicFeatures={FakeSlant=0.22}
+]{KhmerOSsiemreap}
+
+\newfontfamily\muol[Path={\NGSUserPath}, Extension=.ttf, Script=Khmer]{KhmerOSmuollight}
+\newfontfamily\TimesEn[Path={\NGSSysPath}, Extension=.ttf, BoldFont={timesbd}, ItalicFont={timesi}]{times}
+
+\XeTeXlinebreaklocale "km"
+\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
+
+\definecolor{panelgray}{gray}{0.93}
+\definecolor{headgray}{gray}{0.85}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\fontsize{7.5pt}{9.5pt}\selectfont អនុវិទ្យាល័យព្រះក្រសាំង \en{|} គណិតវិទ្យាថ្នាក់ទី៨ \en{|} មេរៀនទី២៖ ៤.៥. ទម្រង់ស្តង់ដានៃស្វ័យគុណ (គ្រូ៖ ហុក ប៊ុនថែន)}
+\fancyfoot[R]{\fontsize{7.8pt}{9.5pt}\selectfont ទំព័រ \en{\thepage/\pageref{LastPage}}}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\tabcolsep}{3.8pt}
+
+\newcommand{\en}[1]{{\TimesEn #1}}
+\newcommand{\enbf}[1]{{\TimesEn\bfseries #1}}
+\newcommand{\unit}[1]{\,\text{\en{#1}}}
+\newcommand{\cnum}[1]{\mbox{\fontsize{10pt}{12pt}\selectfont\ding{\numexpr181+#1\relax}}}
+\newcommand{\chkbox}{\tikz[baseline=-0.12ex]\draw[black, line width=0.8pt] (0,0) rectangle (0.24cm,0.24cm);}
+\newcommand{\blank}[1][1.5cm]{\makebox[#1]{\dotfill}}
+\newcommand{\ansbox}[1][0.85cm]{\,\tikz[baseline=-0.5ex]\draw[black, line width=0.65pt, fill=white] (0,0) rectangle (#1, 0.42cm);\,}
+\newcommand{\secbar}[2]{%
+  \begin{tcolorbox}[enhanced, sharp corners, colback=headgray, colframe=black, boxrule=0.9pt, boxsep=1pt, top=2pt, bottom=2pt, left=5pt, right=5pt, before skip=4pt, after skip=3pt]
+    {\muol\fontsize{9.2pt}{13pt}\selectfont #1}\hfill{\fontsize{8pt}{11pt}\selectfont\textbf{#2}}
+  \end{tcolorbox}%
+}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
+\begin{document}
+\fontsize{9.6pt}{14.4pt}\selectfont
+
+% ============================================================================
+% ទំព័រទី ១៖ E1 + E2 (POE 1 & POE 2) + E3 សំយោគនិយមន័យ និងធនាគារហេតុផល
+% ============================================================================
+\begin{tcolorbox}[enhanced, sharp corners, colback=white, colframe=black, boxrule=1.0pt, boxsep=2pt, top=3pt, bottom=3pt, left=6pt, right=6pt]
+  \begin{center}
+    {\muol\fontsize{10.5pt}{15pt}\selectfont អនុវិទ្យាល័យព្រះក្រសាំង \enbf{--} សន្លឹកកិច្ចការសិស្ស \enbf{(}មេរៀនទី២៖ ៤\enbf{.}៥\enbf{.} ទម្រង់ស្តង់ដានៃស្វ័យគុណ\enbf{)}}\\[3pt]
+    {\fontsize{8.8pt}{12pt}\selectfont
+    ឈ្មោះសិស្ស / ដៃគូ៖ \blank[5.2cm] \hspace{0.25cm}
+    ថ្នាក់ទី៨៖ \blank[1.1cm] \hspace{0.25cm}
+    ក្រុមទី៖ \blank[1.0cm] \hspace{0.25cm}
+    កាលបរិច្ឆេទ៖ ១៨/១១/២០២៦}
+  \end{center}
+\end{tcolorbox}
+
+% --- E1 + E2 ---
+\secbar{ផ្នែកទី១៖ បេសកកម្មទស្សន៍ទាយ \enbf{(E1)} និងការរុករកជាដៃគូ \enbf{(E2 -- POE 1 \& POE 2)}}{រយៈពេល ១៤ នាទី}
+
+\begin{tcolorbox}[enhanced, sharp corners, colback=panelgray, colframe=black, boxrule=0.75pt, boxsep=1.5pt, top=2.5pt, bottom=2.5pt, left=5pt, right=5pt]
+  \textbf{បេសកកម្ម \en{E1} (ទំ.២១ — គូសធីក \chkbox\ មុនពិសោធន៍)៖}
+  (១) ល្បឿនពន្លឺ $299\,800\,000\unit{m/s}$ ជាទម្រង់ស្តង់ដា៖ \chkbox\ $29.98\times 10^7$ \quad \chkbox\ $2.998\times 10^8$\\
+  (២) កាំអាតូម $0.000\,000\,000\,003\unit{mm}$ ជាទម្រង់ស្តង់ដា៖ \chkbox\ $3\times 10^{12}\unit{mm}$ \quad \chkbox\ $3\times 10^{-12}\unit{mm}$
+\end{tcolorbox}
+
+\vspace{3pt}
+\textbf{ក. សកម្មភាពទី ១ (\en{POE 1})៖ ច្រកទ្វារមេគុណ $1 \le A < 10$ (ពិនិត្យរបៀបសរសេរផ្សេងៗនៃ $299\,800\,000$)}
+
+{\renewcommand{\arraystretch}{1.44}
+\begin{tabular}{|C{3.40cm}|C{3.30cm}|C{2.45cm}|C{4.15cm}|C{4.30cm}|}
+  \hline
+  \rowcolor{headgray}
+  \textbf{របៀបសរសេរ} & \textbf{តម្លៃពេលគុណវិញ} & \textbf{មេគុណ $A$} & \textbf{តើឆ្លងផុតច្រក $1\le A < 10$ ទេ?} & \textbf{ជាទម្រង់ស្តង់ដាផ្លូវការ?} \\
+  \hline
+  $2998 \times 10^5$ & $299\,800\,000$ & $A = 2998$ & មិនឆ្លងទេ ($2998 \ge 10$) & \chkbox\ មែន \quad \chkbox\ មិនមែន \\
+  \hline
+  $299.8 \times 10^6$ & $299\,800\,000$ & $A = \blank[1.2cm]$ & មិនឆ្លងទេ ($\blank[1.0cm] \ge 10$) & \chkbox\ មែន \quad \chkbox\ មិនមែន \\
+  \hline
+  $29.98 \times 10^7$ & $299\,800\,000$ & $A = \blank[1.2cm]$ & មិនឆ្លងទេ ($\blank[1.0cm] \ge 10$) & \chkbox\ មែន \quad \chkbox\ មិនមែន \\
+  \hline
+  $2.998 \times 10^8$ & $299\,800\,000$ & $A = \blank[1.2cm]$ & ឆ្លងផុត! ($1 \le \blank[1.0cm] < 10$) & \chkbox\ មែន \quad \chkbox\ មិនមែន \\
+  \hline
+  $0.2998 \times 10^9$ & $299\,800\,000$ & $A = \blank[1.2cm]$ & មិនឆ្លងទេ ($\blank[1.0cm] < 1$) & \chkbox\ មែន \quad \chkbox\ មិនមែន \\
+  \hline
+\end{tabular}}
+
+\vspace{3pt}
+$\bullet$ \textbf{ពន្យល់ (\en{E})៖} ដើម្បីឱ្យ $1 \le A < 10$ តើមុខក្បៀសទសភាគរបស់ $A$ ត្រូវមានលេខខុសពីសូន្យប៉ុន្មានខ្ទង់គត់? ចម្លើយ៖ \blank[2.2cm] ខ្ទង់គត់ ។
+
+\vspace{4pt}
+\textbf{ខ. សកម្មភាពទី ២ (\en{POE 2})៖ យុថ្កាទំហំធំ ($\ge 10$) និងតូច ($0<N<1$) សម្រាប់កំណត់សញ្ញានិទស្សន្ត $n$}
+
+{\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{|L{4.35cm}|C{3.20cm}|L{5.85cm}|C{4.20cm}|}
+  \hline
+  \rowcolor{headgray}
+  \textbf{ចំនួនដើម (ទំ.២១ និងវិទ្យាសាស្ត្រ)} & \textbf{ប្រៀបធៀបនឹង $1$} & \textbf{កំណត់មេគុណ $A$ ($1\le A<10$) និងចំនួនខ្ទង់} & \textbf{ទម្រង់ស្តង់ដា $A\times 10^n$} \\
+  \hline
+  $299\,800\,000$ (ល្បឿនពន្លឺ) & ធំ ($\ge 10$) $\to n > 0$ & $A = 2.998$ (ក្បៀសឆ្លង $\blank[0.7cm]$ ខ្ទង់) & $= 2.998 \times 10^{\blank[0.7cm]}$ \\
+  \hline
+  $0.000\,000\,000\,003$ (កាំអាតូម) & តូច ($< 1$) $\to n < 0$ & $A = 3$ (ក្បៀសឆ្លង $\blank[0.7cm]$ ខ្ទង់ដល់ក្រោយ $3$) & $= 3 \times 10^{\blank[0.8cm]}$ \\
+  \hline
+  $150\,000\,000\unit{km}$ & \blank[2.1cm] & $A = \blank[1.2cm]$ (ចំនួនខ្ទង់ $= \blank[0.7cm]$) & $= \blank[2.5cm]$ \\
+  \hline
+  $45\,000$ & \blank[2.1cm] & $A = \blank[1.2cm]$ (ចំនួនខ្ទង់ $= \blank[0.7cm]$) & $= \blank[2.5cm]$ \\
+  \hline
+  $0.000\,68$ & \blank[2.1cm] & $A = \blank[1.2cm]$ (ចំនួនខ្ទង់ $= \blank[0.7cm]$) & $= \blank[2.5cm]$ \\
+  \hline
+  $0.000\,000\,08\unit{m}$ & \blank[2.1cm] & $A = \blank[1.2cm]$ (ចំនួនខ្ទង់ $= \blank[0.7cm]$) & $= \blank[2.5cm]$ \\
+  \hline
+\end{tabular}}
+
+\vspace{3pt}
+$\bullet$ \textbf{ពន្យល់ (\en{E})៖} ចំនួនដើមធំ ($\ge 10$) មាននិទស្សន្ត $n$ សញ្ញា \blank[1.4cm] ចំណែកចំនួនដើមតូច ($0<N<1$) មាននិទស្សន្ត $n$ សញ្ញា \blank[1.4cm] ។
+
+% --- E3 ---
+\secbar{ផ្នែកទី២៖ សំយោគក្បួនទូទៅ \enbf{(E3)} និងធនាគារហេតុផល \enbf{B\&W} \cnum{1}\enbf{--}\cnum{5}}{សៀវភៅពុម្ព ទំ.២១}
+
+\begin{tabular}{|L{9.20cm}|L{9.20cm}|}
+  \hline
+  \textbf{១. ក្បួនជាទូទៅ (ទំ.២១)៖}\par\vspace{3pt}
+  $\bullet$ ចំនួនវិជ្ជមានធំណាស់ ឬតូចណាស់ អាចសរសេរក្នុង\textbf{ទម្រង់ស្តង់ដានៃស្វ័យគុណ}៖\par\vspace{3pt}
+  {\centering $\ansbox[1.0cm]\times 10^n$ \quad ដែល $\blank[0.6cm] \le A < \blank[0.7cm]$ ហើយ $n\in\mathbb{Z}$\par}\vspace{3pt}
+  $\bullet$ មុខក្បៀសរបស់ $A$ ត្រូវមានលេខខុសពីសូន្យ\textbf{តែ $\blank[0.6cm]$ ខ្ទង់គត់} ($1,2,\dots,9$) ។\par\vspace{2pt}
+  $\bullet$ បើ $1\le N < 10$ (ដូចជា $7.5$) នោះ $7.5 = 7.5\times 10^{\blank[0.6cm]}$ ។
+  &
+  \textbf{២. ធនាគារហេតុផល \en{B\&W} (\cnum{1}--\cnum{5})៖}\par\vspace{2pt}
+  \cnum{1} ច្រកទ្វារមេគុណ៖ $1 \le A < 10$ (មុខក្បៀសមានលេខខុសពីសូន្យតែ $1$ ខ្ទង់) ។\par\vspace{2pt}
+  \cnum{2} យុថ្កាចំនួនធំ ($N \ge 10$) $\implies$ និទស្សន្តវិជ្ជមាន $n > 0$ ($+$) ។\par\vspace{2pt}
+  \cnum{3} យុថ្កាចំនួនតូច ($0 < N < 1$) $\implies$ និទស្សន្តអវិជ្ជមាន $n < 0$ ($-$) ។\par\vspace{2pt}
+  \cnum{4} ផលគុណ៖ $(A_1\cdot 10^m)(A_2\cdot 10^n) = (A_1 A_2)\cdot 10^{m+n}$ ។\par\vspace{2pt}
+  \cnum{5} ផលចែក៖ $\frac{A_1\cdot 10^m}{A_2\cdot 10^n} = \left(\frac{A_1}{A_2}\right)\cdot 10^{m-n}$ (រួចសេរ៉េឱ្យ $1\le A<10$) ។ \\
+  \hline
+\end{tabular}
+
+\vspace{4pt}
+{\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{|C{4.40cm}|C{4.40cm}|C{4.40cm}|C{4.40cm}|}
+  \hline
+  \rowcolor{panelgray}
+  $8\,000\,000 = \blank[2.1cm]$ & $0.0005 = \blank[2.1cm]$ & $52\times 10^4 = \blank[2.0cm]$ & $0.6\times 10^{-3} = \blank[2.0cm]$ \\
+  \hline
+  $630\,000 = \blank[2.1cm]$ & $0.000\,092 = \blank[2.0cm]$ & $340\times 10^5 = \blank[1.9cm]$ & $0.04\times 10^{-2} = \blank[1.9cm]$ \\
+  \hline
+  $9 = \blank[2.3cm]$ & $0.075 = \blank[2.1cm]$ & $12.5\times 10^3 = \blank[1.9cm]$ & $0.8\times 10^6 = \blank[1.9cm]$ \\
+  \hline
+\end{tabular}}
+
+\newpage
+
+% ============================================================================
+% ទំព័រទី ២៖ E4 លំហាត់គំរូ ១ & ២ + E5 ប្រតិបត្តិ + វិនិច្ឆ័យ A-D + Exit Check + កិច្ចការផ្ទះ
+% ============================================================================
+\secbar{ផ្នែកទី៣៖ ពង្រីកចំណេះដឹងតាមជំហានស៊ើបអង្កេត \enbf{(E4 --} លំហាត់គំរូ ទំ\enbf{.}២១\enbf{--}២២\enbf{)}}{រយៈពេល ១០ នាទី}
+
+\textbf{១. លំហាត់គំរូទី ១ (ទំ.២១)៖} សរសេរចំនួនខាងក្រោមក្នុងទម្រង់ស្តង់ដា $A\times 10^n$៖
+
+{\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{|L{4.15cm}|L{8.35cm}|C{3.35cm}|C{1.95cm}|}
+  \hline
+  \rowcolor{headgray}
+  \textbf{ចំនួនដើម} & \textbf{ជំហានបំបែកមេគុណ $A$ ($1\le A<10$) និងស្វ័យគុណនៃ $10$} & \textbf{ទម្រង់ស្តង់ដា} & \textbf{ហេតុផល} \\
+  \hline
+  \textbf{ក.} $490\,000\,000$ & $= 4.9 \times 100\,000\,000$ \quad (ចំនួនធំ $\ge 10 \to n$ វិជ្ជមាន $\blank[0.6cm]$ ខ្ទង់) & $= \blank[2.3cm]$ & \cnum{1}, \cnum{2} \\
+  \hline
+  \textbf{ខ.} $0.000\,000\,732$ & $= 7.32 \times 0.000\,000\,1$ \quad (ចំនួនតូច $<1 \to n$ អវិជ្ជមាន $\blank[0.6cm]$ ខ្ទង់) & $= \blank[2.3cm]$ & \cnum{1}, \cnum{3} \\
+  \hline
+\end{tabular}}
+
+\vspace{5pt}
+\textbf{២. លំហាត់គំរូទី ២ (ទំ.២១–២២)៖} អង្កត់ផ្ចិតភពព្រហស្បតិ៍ប្រហែល $1.438\times 10^8\unit{m}$ ហើយអង្កត់ផ្ចិតភពផែនដីប្រហែល $1.27\times 10^7\unit{m}$ ។ ប្រៀបធៀបអង្កត់ផ្ចិតភពទាំងពីរ (ដោយចែកដៃ មិនប្រើម៉ាស៊ីនគិតលេខ)៖
+
+\begin{tabular}{|L{11.60cm}|L{6.80cm}|}
+  \hline
+  $\bullet$ \textbf{ជំហានទី ១ (ផ្ដុំមេគុណ និងស្វ័យគុណនៃ $10$)៖}\par\vspace{3pt}
+  $\dfrac{1.438\times 10^8}{1.27\times 10^7} = \dfrac{1.438}{1.27}\times 10^{8-\blank[0.5cm]} = \dfrac{143.8}{127}\times 10^{\blank[0.5cm]}$\par\vspace{4pt}
+  $\bullet$ \textbf{ជំហានទី ២ (ជំនួសតម្លៃប្រហែលពីប្រអប់ចែកដៃ)៖} $\approx \blank[1.3cm]\times 10 = \blank[1.4cm]$\par\vspace{3pt}
+  $\bullet$ \textbf{ឆ្លើយ៖} អង្កត់ផ្ចិតភពព្រហស្បតិ៍ធំជាងភពផែនដីប្រហែល $\blank[1.4cm]$ ដង ។ (\cnum{5})
+  &
+  \textbf{ប្រអប់ព្រាងចែកដៃ ($143.8 \div 127$)៖}\par\vspace{2pt}
+  $143.8 - 127\times 1 = \blank[1.1cm]$\par\vspace{2pt}
+  $168 - 127\times 1 = \blank[1.1cm]$\par\vspace{2pt}
+  $410 - 127\times 3 = 410 - 381 = \blank[0.9cm]$\par\vspace{2pt}
+  ដូចនេះ $143.8\div 127 \approx \mathbf{1.\blank[0.9cm]}$ \\
+  \hline
+\end{tabular}
+
+\vspace{4pt}
+$\bullet$ \textbf{សំណួរឆ្លុះបញ្ចាំង \en{(EIA Looking-Back)}៖} ហេតុអ្វី $(4\times 10^5)(5\times 10^3) = 20\times 10^8$ មិនទាន់ជាទម្រង់ស្តង់ដា? កែជា៖ \blank[3.2cm]
+
+% --- E5 ---
+\secbar{ផ្នែកទី៤៖ វាយតម្លៃលទ្ធផលសិក្សា \enbf{(E5 --} ប្រតិបត្តិ ទំ\enbf{.}២២ \enbf{+} វិនិច្ឆ័យ \enbf{A--D +} សំបុត្រចេញ\enbf{)}}{រយៈពេល ១០ នាទី}
+
+\textbf{ក. លំហាត់ប្រតិបត្តិ (សៀវភៅពុម្ព ទំ.២២ និងពង្រឹង \#11 ទំ.២៦ — ធ្វើជាដៃគូ រួចប្ដូរសន្លឹកផ្ទៀង \en{Pause-Review})៖}
+
+{\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{|L{8.90cm}|L{8.90cm}|}
+  \hline
+  \textbf{ក.} $37\,000\,000\,000 = \blank[3.2cm]$ \quad (\cnum{1}, \cnum{2}) &
+  \textbf{ខ.} $0.000\,000\,000\,075 = \blank[3.0cm]$ \quad (\cnum{1}, \cnum{3}) \\
+  \hline
+  \textbf{គ. (\#11ក)៖} $(2.5\!\times\! 10^7)(3\!\times\! 10^5) = \blank[3.0cm]$ (\cnum{4}) &
+  \textbf{ឃ. (\#11ខ)៖} $\dfrac{4.5\times 10^7}{3\times 10^5} = \blank[3.2cm]$ (\cnum{5}) \\
+  \hline
+  \multicolumn{2}{|L{18.0cm}|}{\textbf{ង. (ពង្រឹងអន្ទាក់សេរ៉េមេគុណ)៖} $(5\times 10^6)(6\times 10^4) = 30\times 10^{\blank[0.6cm]} = 3\times 10^{\blank[0.7cm]}$ \quad (\cnum{4}, \cnum{1})} \\
+  \hline
+\end{tabular}}
+
+\vspace{5pt}
+\textbf{ខ. គូសវង់ជុំវិញជម្រើសត្រឹមត្រូវតែ ១ គត់ ក្នុងចំណោម \en{A, B, C, D} រួចសរសេរលេខហេតុផល \cnum{1}--\cnum{5} នៃជម្រើសខុស៖}
+
+{\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{|C{4.40cm}|C{4.40cm}|C{4.40cm}|C{4.40cm}|}
+  \hline
+  \cellcolor{panelgray}\textbf{ជម្រើស \en{A}} & \cellcolor{panelgray}\textbf{ជម្រើស \en{B}} & \cellcolor{panelgray}\textbf{ជម្រើស \en{C}} & \cellcolor{panelgray}\textbf{ជម្រើស \en{D}} \\
+  \hline
+  $37\,000\,000\,000 = 3.7\times 10^{10}$ & $490\,000\,000 = 49\times 10^7$ & $0.000\,021 = 2.1\times 10^5$ & $(2.5\!\cdot\! 10^7)(3\!\cdot\! 10^5)=7.5\!\cdot\! 10^{35}$ \\[3pt]
+  \chkbox\ ត្រូវ \quad \chkbox\ ខុស (\blank[0.7cm]) & \chkbox\ ត្រូវ \quad \chkbox\ ខុស (\blank[0.7cm]) & \chkbox\ ត្រូវ \quad \chkbox\ ខុស (\blank[0.7cm]) & \chkbox\ ត្រូវ \quad \chkbox\ ខុស (\blank[0.7cm]) \\
+  \hline
+\end{tabular}}
+
+\vspace{5pt}
+\begin{tcolorbox}[enhanced, sharp corners, colback=white, colframe=black, boxrule=0.85pt, boxsep=2.5pt, top=3.5pt, bottom=3.5pt, left=5pt, right=5pt]
+  {\muol\fontsize{8.8pt}{12.5pt}\selectfont សំបុត្រចេញរហ័ស \enbf{(Exit Check --} ៦០ វិនាទី\enbf{)}៖}\\[2pt]
+  (១) $93\,000\,000 = \blank[2.0cm]$ \quad \en{|} \quad
+  (២) $0.000\,021 = \blank[2.0cm]$ \quad \en{|} \quad
+  (៣) $\dfrac{4.5\times 10^7}{3\times 10^5} = \blank[2.0cm]$
+\end{tcolorbox}
+
+\vspace{5pt}
+\begin{tcolorbox}[enhanced, sharp corners, colback=panelgray, colframe=black, boxrule=0.85pt, boxsep=2.5pt, top=3.5pt, bottom=3.5pt, left=5pt, right=5pt]
+  {\muol\fontsize{8.8pt}{12.5pt}\selectfont កិច្ចការផ្ទះ \enbf{(}សៀវភៅពុម្ព ទំព័រ ២៦ លំហាត់ \enbf{\#9} និង \enbf{\#11)}៖}\\[2pt]
+  $\bullet$ \textbf{លំហាត់ \#9៖} សរសេរជាទម្រង់ស្តង់ដា៖ ក) ចម្ងាយផែនដី-ព្រះអាទិត្យ $93\,000\,000\unit{mi}$ ; ខ) កោសិកាឈាមក្រហម $0.000\,021\unit{m}$ ; គ) អង្កត់ផ្ចិតកាឡាក់ស៊ីជិតបំផុត $130\,000\,000\,000\unit{cm}$ ។\\
+  $\bullet$ \textbf{លំហាត់ \#11៖} គណនាក្នុងទម្រង់ស្តង់ដា៖ ក) $(2.5\times 10^7)(3\times 10^5)$ ; ខ) $\dfrac{4.5\times 10^7}{3\times 10^5}$ ; គ) $\dfrac{(3.3\times 10^{15})(6\times 10^{15})}{(1.1\times 10^8)(3\times 10^8)}$ ។
+\end{tcolorbox}
+
+\end{document}
