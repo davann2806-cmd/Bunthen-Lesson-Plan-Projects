@@ -1,0 +1,21 @@
+{
+  "name": "NGS Khmer XeLaTeX + Antigravity Cloud Workspace",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+  "features": {
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.12"
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "22"
+    }
+  },
+  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y --no-install-recommends texlive-xetex texlive-latex-recommended texlive-latex-extra texlive-pictures texlive-science texlive-fonts-recommended fontconfig lmodern && python3 -m pip install --break-system-packages pymupdf && bash scripts/setup_cloud.sh",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "James-Yu.latex-workshop",
+        "tomoki1207.pdf"
+      ]
+    }
+  }
+}

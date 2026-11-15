@@ -1,0 +1,48 @@
+% ---- 7d : theorem (6 frames) --------------------------------------------------
+%      1: title only   2: theorem text   3: triangle ABC
+%      4: angle A (+ legend)   5: side AB   6: angle B
+\begin{frame}
+\begin{tikzpicture}[remember picture,overlay,shift={(current page.south west)},x=1cm,y=1cm]
+  \sHdr{មេរៀនថ្មី}{ពន្យល់ (Explain) : ទ្រឹស្ដីបទ}
+
+  % theorem card (frame 2)
+  \only<2->{
+  \fill[GoldAccent!10,rounded corners=8pt] (0.8,5.55) rectangle (15.2,7.45);
+  \draw[GoldAccent!70!black,line width=1pt,rounded corners=8pt] (0.8,5.55) rectangle (15.2,7.45);
+  \node[anchor=north west,text=NavyDeep,align=left,inner sep=0,text width=13.6cm,font=\fontsize{14.5}{24}\selectfont] at (1.1,7.3)
+     {\tikz[baseline=(thmlbl.base)]\node[fill=NavyDeep,rounded corners=3pt,inner sep=0pt,outer sep=0pt] (thmlbl) {\textcolor{white}{\bfseries\fontsize{11}{13}\selectfont\strut\ ទ្រឹស្តីបទ\ }};\ ៖ ត្រីកោណពីរប៉ុនគ្នាកាលណាវាមានជ្រុងមួយ ប៉ុនគ្នាជាប់នឹង\\
+    \hspace*{2cm}មុំពីរប៉ុនរៀងគ្នា។};
+  }
+
+  % triangle (frame 3) with highlighted parts (frames 4-6)
+  \only<3->{
+  \asaT{1.7}{1.6}{1.15}{NavyDeep}{f}{1.8pt}
+  \asaL{f}{}{NavyDeep}
+  }
+  \only<4->{
+    \fill[AngCol,opacity=.28] (fA)--++(0:0.75) arc[start angle=0,end angle=45,radius=0.75]--cycle;
+    \draw[AngCol,line width=2.6pt] ($(fA)+(0.75,0)$) arc[start angle=0,end angle=45,radius=0.75];
+  }
+  \only<5->{
+    \draw[SideCol,line width=4pt,line cap=round] (fA)--(fB);
+  }
+  \only<6->{
+    \fill[AngCol,opacity=.28] (fB)--++(180:0.72) arc[start angle=180,end angle=130,radius=0.72]--cycle;
+    \draw[AngCol,line width=2.6pt] ($(fB)+(180:0.72)$) arc[start angle=180,end angle=130,radius=0.72];
+    \draw[AngCol,line width=2.6pt] ($(fB)+(180:0.5)$) arc[start angle=180,end angle=130,radius=0.5];
+  }
+
+  % legend rows
+  \only<4->{
+    \node[anchor=west,text=NavyDeep,inner sep=0] at (8.4,4.45) {\fontsize{16}{20}\selectfont\muol{ម.ជ.ម} \ = \ មុំ \ – \ ជ្រុង \ – \ មុំ};
+    \badge{8.7}{3.55}{ម}{AngCol}
+    \node[anchor=west,text=NavyDeep,inner sep=0] at (9.2,3.55) {\fontsize{13}{17}\selectfont មុំមួយ $\angle A$ នៅចុងម្ខាង};}
+  \only<5->{
+    \badge{8.7}{2.65}{ជ}{SideCol}
+    \node[anchor=west,text=NavyDeep,inner sep=0] at (9.2,2.65) {\fontsize{13}{17}\selectfont ជ្រុង $AB$ នៅចំកណ្ដាល};}
+  \only<6->{
+    \badge{8.7}{1.75}{ម}{AngCol}
+    \node[anchor=west,text=NavyDeep,inner sep=0] at (9.2,1.75) {\fontsize{13}{17}\selectfont មុំមួយទៀត $\angle B$ នៅចុងម្ខាងទៀត};}
+  \sFtr
+\end{tikzpicture}
+\end{frame}

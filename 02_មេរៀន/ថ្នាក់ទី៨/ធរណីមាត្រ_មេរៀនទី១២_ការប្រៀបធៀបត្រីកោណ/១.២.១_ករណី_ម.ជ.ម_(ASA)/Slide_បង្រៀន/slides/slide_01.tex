@@ -1,0 +1,60 @@
+% =============================================================================
+%  SLIDE 1 – Title slide
+% =============================================================================
+\begin{frame}[plain]
+\begin{tikzpicture}[remember picture,overlay,shift={(current page.south west)},x=1cm,y=1cm]
+
+  % ---- background: deep navy → royal blue gradient ------------------------
+  \shade[shading=axis,shading angle=-35,left color=NavyDeep,right color=RoyalBlue]
+       (0,0) rectangle (16,9);
+
+  % ---- soft geometric shapes (PowerPoint "design ideas" feel) -------------
+  \fill[white,fill opacity=.055] (16,0)--(16,9)--(10.1,9)--(6.6,0)--cycle;
+  \fill[white,fill opacity=.045] (16,0)--(16,9)--(12.4,9)--(10.2,0)--cycle;
+  \fill[SkyLight,fill opacity=.10] (13.1,4.7) circle (3.45);
+  \draw[SkyLight,opacity=.28,line width=.8pt] (13.1,4.7) circle (3.95);
+  \fill[GoldAccent,fill opacity=.9] (15.12,1.1) circle (.07);
+  \fill[SkyLight,fill opacity=.8] (10.0,8.1) circle (.05);
+  \fill[SkyLight,fill opacity=.5] (14.9,8.3) circle (.09);
+
+  % ---- top-left: school name ----------------------------------------------
+  \node[anchor=south west,inner sep=0,text=white] at (0.95,7.95)
+       {\fontsize{14}{22}\selectfont\muol{វិទ្យាល័យព្រែកលៀប (សាលារៀនជំនាន់ថ្មី)}};
+  \node[anchor=south west,inner sep=0,text=SkyLight] at (0.95,7.50)
+       {\fontsize{9.5}{12}\selectfont\addfontfeature{LetterSpace=10}PREAK LEAP HIGH SCHOOL (NGS)};
+  \draw[white,opacity=.25,line width=.6pt] (0.95,7.12)--(10.5,7.12);
+
+  % ---- lesson title -------------------------------------------------------
+  \node[anchor=west,inner sep=0,text=GoldAccent] at (0.95,6.35)
+       {\fontsize{16}{24}\selectfont\muol{មេរៀនទី១២}};
+  \node[anchor=west,inner sep=0,text=white] at (0.95,4.75)
+       {\fontsize{26}{38}\selectfont\muol{ការប្រៀបធៀបត្រីកោណ}};
+  \node[anchor=west,inner sep=0,text=GoldAccent] at (0.95,3.15)
+       {\fontsize{18}{26}\selectfont\muol{ត្រីកោណប៉ុនគ្នា (ករណី ម.ជ.ម)}};
+
+  % ---- bottom row: teacher name (left) & subject pill (far right) ---------
+  \node[anchor=west,inner sep=0]
+       at (0.95,0.85)
+       {{\fontsize{13}{17}\selectfont{\color{GoldAccent}\bfseries បង្រៀនដោយ\ \,}{\color{white}\muol{\TeacherName}}}};
+
+  \node[anchor=east,fill=GoldAccent,text=NavyDeep,rounded corners=10pt,
+        inner xsep=12pt,inner ysep=4pt]
+       at (15.05,0.85) {\fontsize{11.5}{15}\selectfont\bfseries គណិតវិទ្យា ថ្នាក់ទី៨};
+
+  % ---- right: two congruent triangles (ASA motif) -------------------------
+  % Triangle A'B'C' (initial position, solid line, gold color)
+  \asatriangle{11.55}{2.95}{draw=GoldAccent,fill=GoldAccent}{'}{GoldAccent}{Tfront}
+
+  % Triangle ABC (destination position at the back, solid line, white color)
+  \asatriangle{13.10}{3.80}{draw=white,fill=white}{}{white}{Tback}
+
+  % Dashed connecting lines between corresponding vertices
+  \draw[SkyLight, line width=1.1pt, dash pattern=on 4pt off 3.5pt] (TfrontA) -- (TbackA);
+  \draw[SkyLight, line width=1.1pt, dash pattern=on 4pt off 3.5pt] (TfrontB) -- (TbackB);
+  \draw[SkyLight, line width=1.1pt, dash pattern=on 4pt off 3.5pt] (TfrontC) -- (TbackC);
+
+  % ---- bottom accent line -------------------------------------------------
+  \shade[shading=axis,left color=GoldAccent,right color=GoldAccent!0] (0,0) rectangle (16,.12);
+
+\end{tikzpicture}
+\end{frame}

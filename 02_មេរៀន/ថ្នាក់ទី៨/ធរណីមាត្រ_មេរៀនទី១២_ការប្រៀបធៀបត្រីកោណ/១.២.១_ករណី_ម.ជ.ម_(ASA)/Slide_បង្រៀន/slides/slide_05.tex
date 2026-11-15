@@ -1,0 +1,74 @@
+% =============================================================================
+%  SLIDE 5 – Equality of Alternate Interior Angles (5 frames)
+%    1: A1 = 60° given, B1 = ?     2: B1 = 60° (equal ticks) + equation
+%    3: A2 = 120° given, B2 = ?    4: B2 = 120° + equation
+%    5: conclusion
+% =============================================================================
+\begin{frame}
+\begin{tikzpicture}[remember picture,overlay,shift={(current page.south west)},x=1cm,y=1cm]
+
+  \fill[white] (0,0) rectangle (16,9);
+
+  % ---- header ----------------------------------------------------------------
+  \node[anchor=west,text=NavyDeep] at (0.8,8.35)
+       {{\fontsize{12}{17}\selectfont\muol{រំលឹកមេរៀនចាស់}}\ \ |\ \ %
+        {\fontsize{10.5}{15}\selectfont\bfseries ទីតាំង និងលក្ខណៈមុំឆ្លាស់ក្នុង}};
+  \draw[NavyDeep!18,line width=0.6pt] (0.8,7.98)--(15.2,7.98);
+
+  \altbase
+
+  % ---- guiding question ------------------------------------------------------
+  \only<1>{
+    \node[anchor=west,text=NavyDeep] at (0.8,7.45)
+         {\fontsize{12}{16}\selectfont បើ $\angle A_1=60^\circ$ តើ $\angle B_1$ ស្មើប៉ុន្មាន?};
+  }
+  \only<3>{
+    \node[anchor=west,text=NavyDeep] at (0.8,7.45)
+         {\fontsize{12}{16}\selectfont បើ $\angle A_2=120^\circ$ តើ $\angle B_2$ ស្មើប៉ុន្មាន?};
+  }
+
+  % ---- pair 1 ----------------------------------------------------------------
+  \only<1>{
+    \angmark{A}{180}{240}{1.05}{PairOne}{0}{$60^\circ$}{0.66}
+    \angmark{B}{0}{60}{1.05}{PairOne}{0}{\textbf{?}}{0.66}
+  }
+  \only<2->{
+    \angmark{A}{180}{240}{1.05}{PairOne}{1}{$60^\circ$}{0.66}
+    \angmark{B}{0}{60}{1.05}{PairOne}{1}{$60^\circ$}{0.66}
+  }
+  \only<2-4>{
+    \node[text=PairOne] at (4.9,1.4)
+         {\fontsize{17}{22}\selectfont $\boldsymbol{\angle A_1=\angle B_1=60^\circ}$};
+  }
+
+  % ---- pair 2 ----------------------------------------------------------------
+  \only<3>{
+    \angmark{A}{240}{360}{1.05}{PairTwo}{0}{$120^\circ$}{0.66}
+    \angmark{B}{60}{180}{1.05}{PairTwo}{0}{\textbf{?}}{0.66}
+  }
+  \only<4->{
+    \angmark{A}{240}{360}{1.05}{PairTwo}{2}{$120^\circ$}{0.66}
+    \angmark{B}{60}{180}{1.05}{PairTwo}{2}{$120^\circ$}{0.66}
+  }
+  \only<4>{
+    \node[text=PairTwo!85!black] at (11.1,1.4)
+         {\fontsize{17}{22}\selectfont $\boldsymbol{\angle A_2=\angle B_2=120^\circ}$};
+  }
+
+  % ---- conclusion ------------------------------------------------------------
+  \only<5>{
+    \node[draw=GoldAccent!70!black,fill=GoldAccent!10,line width=0.8pt,rounded corners=6pt,
+          inner xsep=22pt,inner ysep=5pt,text=NavyDeep] at (8,1.5)
+         {\fontsize{12}{15}\selectfont\bfseries មុំឆ្លាស់ក្នុងមានរង្វាស់ស្មើគ្នា};
+  }
+
+  % ---- footer ----------------------------------------------------------------
+  \fill[NavyDeep] (0,0) rectangle (16,0.65);
+  \shade[shading=axis,left color=GoldAccent,right color=GoldAccent!0] (0,0.65) rectangle (16,0.71);
+  \node[anchor=west,inner sep=0,text=white] at (0.8,0.28)
+       {\fontsize{8.5}{11}\selectfont \TeacherName\ \ |\ \ \color{SkyLight}គណិតវិទ្យា ថ្នាក់ទី៨};
+  \node[anchor=east,inner sep=0,text=GoldAccent] at (15.2,0.28)
+       {\fontsize{8.5}{11}\selectfont\muol{មេរៀនទី១២}\ \ \color{white}ការប្រៀបធៀបត្រីកោណ};
+
+\end{tikzpicture}
+\end{frame}

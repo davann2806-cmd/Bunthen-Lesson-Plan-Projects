@@ -1,0 +1,495 @@
+% !TeX program = xelatex
+% =============================================================================
+%  ត្រីកោណស្មើគ្នា – ករណី ម.ជ.ម   |   Congruent Triangles – ASA Condition
+%  Preah Sisowath High School  (វិទ្យាល័យព្រះស៊ីសុវត្ថិ)
+%
+%  STRUCTURE:  main.tex  = preamble + \input list (this file)
+%              slides/slide_NN.tex = one \begin{frame}...\end{frame} each
+%
+%  BUILD (run twice – TikZ "remember picture" needs a second pass):
+%      xelatex main.tex
+%      xelatex main.tex
+%  or:   latexmk -xelatex main.tex
+%
+%  FONTS (installed on this PC): Khmer OS Muol Light, Khmer OS Muol,
+%  Khmer OS Battambang, Calibri.
+% =============================================================================
+\documentclass[aspectratio=169,14pt]{beamer}
+
+% ---------------------------------------------------------------------------
+%  ✎  EDIT HERE – the only lines you need to change for the title slide
+% ---------------------------------------------------------------------------
+\newcommand{\TeacherName}{ហុក ប៊ុនថែន}   % ឈ្មោះគ្រូបង្រៀន
+% Optional: drop a file called  school-logo.png  next to this .tex file and it
+% will automatically replace the little triangle mark in the header.
+
+% ---------------------------------------------------------------------------
+%  Packages
+% ---------------------------------------------------------------------------
+\usepackage{amsmath,amssymb}
+\usepackage{fontspec}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{calc,decorations.pathreplacing}
+
+% ---------------------------------------------------------------------------
+%  Fonts  –  Latin: Calibri (PowerPoint look)   Khmer: Battambang / Muol
+% ---------------------------------------------------------------------------
+\setmainfont{Calibri}
+\setsansfont{Calibri}
+\renewcommand{\familydefault}{\sfdefault}
+\usefonttheme{professionalfonts}   % keep our fonts, do not let beamer override
+
+\newfontfamily\khmerbody[Script=Khmer]{Khmer OS Battambang}   % no real bold weight; Khmer stays normal weight
+\newfontfamily\muollight[Script=Khmer]{Khmer OS Muol Light}
+\newfontfamily\muolheavy[Script=Khmer]{Khmer OS Muol}
+
+% Automatic font switching (XeTeX inter-character classes):
+% every Khmer character (U+1780–17FF, plus ZWSP/ZWNJ/ZWJ used inside Khmer
+% text) is typeset with \khmerfont; as soon as the text returns to Latin,
+% digits or punctuation we switch back to Calibri.  So you can simply type
+% Khmer and English together in the same line.
+\let\khmerfont\khmerbody
+\makeatletter
+\newXeTeXintercharclass\khmerclass
+\count@="1780
+\loop
+  \XeTeXcharclass\count@=\khmerclass
+  \ifnum\count@<"17FF \advance\count@\@ne
+\repeat
+\XeTeXcharclass"200B=\khmerclass
+\XeTeXcharclass"200C=\khmerclass
+\XeTeXcharclass"200D=\khmerclass
+\XeTeXinterchartoks 0 \khmerclass={\khmerfont}
+\XeTeXinterchartoks \khmerclass 0={\sffamily}
+\XeTeXinterchartoks 4095 \khmerclass={\khmerfont}   % start of a box / paragraph
+\XeTeXinterchartoks \khmerclass 4095={\sffamily}    % end of a box / paragraph
+\XeTeXinterchartokenstate=1
+\makeatother
+
+% Titles in the traditional Khmer "Muol" style.
+\newcommand{\muol}[1]{{\let\khmerfont\muollight\muollight #1}}
+\newcommand{\muolbold}[1]{{\let\khmerfont\muolheavy\muolheavy #1}}
+
+% ---------------------------------------------------------------------------
+%  Colours (shared by every slide)
+% ---------------------------------------------------------------------------
+\definecolor{NavyDeep}{HTML}{071A4A}
+\definecolor{StepNavy}{HTML}{1E3A8A}
+\definecolor{RoyalBlue}{HTML}{1B4FD8}
+\definecolor{SkyLight}{HTML}{9ADBFF}
+\definecolor{GoldAccent}{HTML}{FFC83D}
+\definecolor{GreenAccent}{HTML}{2ED573}
+\definecolor{RedAccent}{HTML}{FF4757}
+
+% ---------------------------------------------------------------------------
+%  Beamer clean-up: no navigation bar; centred slide number in footer
+% ---------------------------------------------------------------------------
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[circle,fill=GoldAccent,text=NavyDeep,inner sep=0pt,minimum size=0.46cm,
+          font=\sffamily\bfseries\footnotesize,anchor=center]
+      at ([yshift=0.325cm]current page.south) {\insertframenumber};
+  \end{tikzpicture}}
+\setbeamertemplate{headline}{}
+\setbeamercolor{normal text}{fg=white}
+
+% ---------------------------------------------------------------------------
+%  Reusable pieces
+% ---------------------------------------------------------------------------
+
+% Small school mark: logo file if present, otherwise a gold triangle with an
+% ASA-style angle arc (ties in with the lesson topic).
+\newcommand{\SchoolMark}{%
+  \IfFileExists{school-logo.png}%
+    {\includegraphics[height=1.15cm]{school-logo.png}}%
+    {\begin{tikzpicture}[x=1cm,y=1cm]
+       \useasboundingbox (-0.05,-0.05) rectangle (1.15,1.05);
+       \fill[GoldAccent,opacity=.18] (0,0)--(1.1,0)--(0.78,1.0)--cycle;
+       \draw[GoldAccent,line width=1.3pt,line join=round]
+            (0,0)--(1.1,0)--(0.78,1.0)--cycle;
+       \draw[GoldAccent,line width=1pt] (0.38,0) arc[start angle=0,end angle=52,radius=0.38];
+     \end{tikzpicture}}}
+
+% A decorative ASA triangle:  #1,#2 = lower-left corner,  #3 = TikZ line style,
+% #4 = vertex-label suffix (empty or '),  #5 = label colour, #6 = coordinate prefix.
+% Geometry:  A=(0,0)  B=(3.4,0)  C=(2.5,3.0)   (angles  A≈50.2°,  B≈73.3°)
+\newcommand{\asatriangle}[6]{%
+  \begin{scope}[shift={(#1,#2)},scale=0.72]
+    \pgfmathsetmacro{\angA}{atan2(3.0,2.5)}
+    \pgfmathsetmacro{\angB}{180-atan2(3.0,0.9)}
+    \coordinate (#6A) at (0,0);
+    \coordinate (#6B) at (3.4,0);
+    \coordinate (#6C) at (2.5,3.0);
+    % translucent body, then the outline; arcs/ticks use fill=none so that the
+    % open arcs are not closed into filled wedges
+    \path[#3,fill opacity=.14] (0,0)--(3.4,0)--(2.5,3.0)--cycle;
+    \draw[#3,fill=none,line width=1.6pt,line join=round] (0,0)--(3.4,0)--(2.5,3.0)--cycle;
+    % one arc at A
+    \draw[#3,fill=none,solid,line width=1.1pt] (0.65,0) arc[start angle=0,end angle=\angA,radius=0.65];
+    % two arcs at B (well separated so they read as a double mark)
+    \draw[#3,fill=none,solid,line width=1.1pt] ($(3.4,0)+(180:0.46)$) arc[start angle=180,end angle=\angB,radius=0.46];
+    \draw[#3,fill=none,solid,line width=1.1pt] ($(3.4,0)+(180:0.72)$) arc[start angle=180,end angle=\angB,radius=0.72];
+    % one tick on the side AB
+    \draw[#3,fill=none,solid,line width=1.3pt] (1.7,-0.12)--(1.7,0.12);
+    % vertex labels (positioned so dashed translation lines do not collide with labels)
+    \ifx\relax#4\relax
+      \node[text=#5,font=\bfseries\itshape\fontsize{12}{14}\selectfont,anchor=south east,inner sep=2pt] at (-0.04,0.08) {$A$};
+      \node[text=#5,font=\bfseries\itshape\fontsize{12}{14}\selectfont,anchor=north,inner sep=2pt] at (3.38,-0.04) {$B$};
+      \node[text=#5,font=\bfseries\itshape\fontsize{12}{14}\selectfont,anchor=south,inner sep=3pt] at (2.5,3.02) {$C$};
+    \else
+      \node[text=#5,font=\bfseries\itshape\fontsize{12}{14}\selectfont,anchor=north east,inner sep=2pt] at (-0.02,-0.04) {$A#4$};
+      \node[text=#5,font=\bfseries\itshape\fontsize{12}{14}\selectfont,anchor=north,inner sep=2pt] at (3.38,-0.04) {$B#4$};
+      \node[text=#5,font=\bfseries\itshape\fontsize{12}{14}\selectfont,anchor=south east,inner sep=2pt] at (2.42,3.04) {$C#4$};
+    \fi
+  \end{scope}}
+
+  \newcommand{\hwtri}[7]{%
+    \begin{scope}[shift={(#1,5.0)}]
+      \coordinate (#6a) at (0,0);
+      \coordinate (#6b) at (3.2,0);
+      \coordinate (#6c) at (#2:2.4);
+      \path[draw=NavyDeep,fill=NavyDeep!4,line width=1.3pt,line join=round] (#6a)--(#6b)--(#6c)--cycle;
+      \draw[NavyDeep,line width=1.3pt] (1.6,-0.13)--(1.6,0.13);
+      \coordinate (#6m) at ($(#6a)!0.5!(#6c)$);
+      \draw[NavyDeep,line width=1.3pt] ($(#6m)!0.07cm!(#6a)$)++(#2+90:0.12) -- ++(#2-90:0.24);
+      \draw[NavyDeep,line width=1.3pt] ($(#6m)!0.07cm!(#6c)$)++(#2+90:0.12) -- ++(#2-90:0.24);
+      \draw[RoyalBlue,line width=1.1pt] (0.6,0) arc[start angle=0,end angle=#2,radius=0.6];
+      \node[anchor=north east,text=NavyDeep,font=\bfseries\itshape,inner sep=2pt] at (#6a) {$#3$};
+      \node[anchor=north west,text=NavyDeep,font=\bfseries\itshape,inner sep=2pt] at (#6b) {$#4$};
+      \node[anchor=south,text=NavyDeep,font=\bfseries\itshape,inner sep=2pt] at (#6c) {$#5$};
+      \node[anchor=north,text=NavyDeep,inner sep=2pt] at (1.6,-0.12) {\fontsize{9}{11}\selectfont $5\text{ cm}$};
+      \node[anchor=south east,text=NavyDeep,inner sep=2pt] at ($(#6m)+(#2+90:0.12)$) {\fontsize{9}{11}\selectfont $4\text{ cm}$};
+      \node[anchor=south west,text=RoyalBlue,inner sep=1pt] at (#2/2:0.68) {\fontsize{9}{11}\selectfont $#2^\circ$};
+      \node[fill=NavyDeep!6,draw=NavyDeep!25,line width=0.6pt,rounded corners=4pt,
+            inner xsep=8pt,inner ysep=2.5pt,text=NavyDeep] at (3.1,2.3) {\fontsize{10}{12}\selectfont\bfseries $\Delta #3#4#5$};
+      \only<4->{\draw[GreenAccent!80!black,line width=2pt] (#6a)--(#6b);}
+      \only<5->{\draw[GreenAccent!80!black,line width=2pt] (#6a)--(#6c);}
+      \only<6->{\draw[RedAccent,line width=1.8pt] (0.6,0) arc[start angle=0,end angle=#2,radius=0.6];}
+    \end{scope}}
+
+% ---------------------------------------------------------------------------
+%  Alternate-interior-angle figure (slides 4 & 5)
+%  d1 (top) and d2 (bottom) are parallel, transversal Delta cuts them at A, B.
+%  Delta slopes at 60° so that  A1 (lower-left at A) = B1 (upper-right at B) = 60°
+%  and A2 (lower-right at A) = B2 (upper-left at B) = 120°.
+% ---------------------------------------------------------------------------
+\newcommand{\altbase}{%
+  \coordinate (A) at (9.0,6.0);
+  \coordinate (B) at (7.268,3.0);
+  % parallel lines with direction arrows
+  \draw[NavyDeep,line width=1.6pt,-stealth] (3.2,6.0)--(13.0,6.0);
+  \draw[NavyDeep,line width=1.6pt,-stealth] (3.2,3.0)--(13.0,3.0);
+  \node[text=NavyDeep,anchor=west,font=\itshape\fontsize{13}{15}\selectfont] at (13.15,6.0) {$d_1$};
+  \node[text=NavyDeep,anchor=west,font=\itshape\fontsize{13}{15}\selectfont] at (13.15,3.0) {$d_2$};
+  % transversal
+  \draw[NavyDeep,line width=1.6pt] ($(A)+(60:1.2)$)--($(B)+(240:1.2)$);
+  \node[text=NavyDeep,anchor=south west,font=\fontsize{13}{15}\selectfont] at ($(A)+(60:1.2)$) {$\Delta$};
+  % points
+  \fill[NavyDeep] (A) circle (2.8pt);
+  \fill[NavyDeep] (B) circle (2.8pt);
+  \node[text=NavyDeep,font=\bfseries\itshape\fontsize{13}{15}\selectfont] at ($(A)+(135:0.4)$) {$A$};
+  \node[text=NavyDeep,font=\bfseries\itshape\fontsize{13}{15}\selectfont] at ($(B)+(-60:0.4)$) {$B$};}
+
+% Angle mark: #1 vertex, #2 start°, #3 end°, #4 radius, #5 colour,
+%             #6 number of equal-ticks (0,1,2), #7 label, #8 label radius
+\newcommand{\angmark}[8]{%
+  \fill[#5,opacity=.16] (#1)--++(#2:#4) arc[start angle=#2,end angle=#3,radius=#4]--cycle;
+  \draw[#5,line width=1.5pt] ($(#1)+(#2:#4)$) arc[start angle=#2,end angle=#3,radius=#4];
+  \pgfmathsetmacro{\tmpmid}{(#2+#3)/2}
+  \pgfmathsetmacro{\tmprl}{#4-0.1}
+  \pgfmathsetmacro{\tmprh}{#4+0.1}
+  \ifnum#6=1
+    \draw[#5,line width=1.3pt] ($(#1)+(\tmpmid:\tmprl)$)--($(#1)+(\tmpmid:\tmprh)$);
+  \fi
+  \ifnum#6=2
+    \pgfmathsetmacro{\tmpma}{\tmpmid-5}
+    \pgfmathsetmacro{\tmpmb}{\tmpmid+5}
+    \draw[#5,line width=1.3pt] ($(#1)+(\tmpma:\tmprl)$)--($(#1)+(\tmpma:\tmprh)$);
+    \draw[#5,line width=1.3pt] ($(#1)+(\tmpmb:\tmprl)$)--($(#1)+(\tmpmb:\tmprh)$);
+  \fi
+  \node[text=#5!75!black,font=\bfseries\fontsize{10}{12}\selectfont,inner sep=0pt] at ($(#1)+(\tmpmid:#8)$) {#7};}
+
+% thin variant (slide 19)
+\newcommand{\angmarkT}[8]{%
+  \fill[#5,opacity=.16] (#1)--++(#2:#4) arc[start angle=#2,end angle=#3,radius=#4]--cycle;
+  \draw[#5,line width=0.8pt] ($(#1)+(#2:#4)$) arc[start angle=#2,end angle=#3,radius=#4];
+  \pgfmathsetmacro{\tmpmid}{(#2+#3)/2}
+  \pgfmathsetmacro{\tmprl}{#4-0.1}
+  \pgfmathsetmacro{\tmprh}{#4+0.1}
+  \ifnum#6=1
+    \draw[#5,line width=0.7pt] ($(#1)+(\tmpmid:\tmprl)$)--($(#1)+(\tmpmid:\tmprh)$);
+  \fi
+  \ifnum#6=2
+    \pgfmathsetmacro{\tmpma}{\tmpmid-5}
+    \pgfmathsetmacro{\tmpmb}{\tmpmid+5}
+    \draw[#5,line width=0.7pt] ($(#1)+(\tmpma:\tmprl)$)--($(#1)+(\tmpma:\tmprh)$);
+    \draw[#5,line width=0.7pt] ($(#1)+(\tmpmb:\tmprl)$)--($(#1)+(\tmpmb:\tmprh)$);
+  \fi
+  \node[text=#5!75!black,font=\bfseries\fontsize{10}{12}\selectfont,inner sep=0pt] at ($(#1)+(\tmpmid:#8)$) {#7};}
+
+% Khmer callout: #1 node name, #2 label position, #3 arrow target, #4 colour
+\newcommand{\callout}[4]{%
+  \node[name=#1,fill=#4!8,draw=#4,line width=0.9pt,rounded corners=4pt,
+        inner xsep=8pt,inner ysep=4pt,text=#4!70!black] at (#2)
+       {\fontsize{11}{14}\selectfont\bfseries មុំឆ្លាស់ក្នុង};
+  \draw[#4,line width=1.1pt,-stealth,shorten >=1pt] (#1)--(#3);}
+
+\colorlet{PairOne}{RoyalBlue}
+\colorlet{PairTwo}{orange!90!black}
+
+% ---------------------------------------------------------------------------
+%  Shared pieces for slides 7 – 11
+% ---------------------------------------------------------------------------
+\colorlet{SideCol}{orange!90!black}   % colour for "ជ្រុង" (side)
+\colorlet{AngCol}{RoyalBlue}          % colour for "មុំ"   (angle)
+\colorlet{VertCol}{green!55!black}    % vertical angles
+\colorlet{AdjCol}{RoyalBlue}
+\colorlet{OppCol}{RedAccent}
+
+% header / footer used by every white content slide
+\newcommand{\sHdr}[2]{%
+  \fill[white] (0,0) rectangle (16,9);
+  \node[anchor=west,text=NavyDeep] at (0.8,8.35)
+       {{\fontsize{12}{17}\selectfont\muol{#1}}\ \ |\ \ {\fontsize{10.5}{15}\selectfont\bfseries #2}};
+  \draw[NavyDeep!18,line width=0.6pt] (0.8,7.98)--(15.2,7.98);}
+
+\newcommand{\sFtr}{%
+  \fill[NavyDeep] (0,0) rectangle (16,0.65);
+  \shade[shading=axis,left color=GoldAccent,right color=GoldAccent!0] (0,0.65) rectangle (16,0.71);
+  \node[anchor=west,inner sep=0,text=white] at (0.8,0.28)
+       {\fontsize{8.5}{11}\selectfont \TeacherName\ \ |\ \ \color{SkyLight}គណិតវិទ្យា ថ្នាក់ទី៨};
+  \node[anchor=east,inner sep=0,text=GoldAccent] at (15.2,0.28)
+       {\fontsize{8.5}{11}\selectfont\muol{មេរៀនទី១២}\ \ \color{white}ការប្រៀបធៀបត្រីកោណ};}
+
+% round badge: #1 x, #2 y, #3 label, #4 colour
+\newcommand{\badge}[4]{%
+  \fill[#4] (#1,#2) circle (0.27);
+  \node[font=\bfseries\fontsize{11}{13}\selectfont,text=white,inner sep=0] at (#1,#2) {#3};}
+
+% proof row: #1 x0, #2 y, #3 badge, #4 badge colour, #5 equation, #6 reason
+\newcommand{\prow}[6]{%
+  \badge{#1}{#2}{#3}{#4}
+  \node[anchor=west,text=NavyDeep,inner sep=0] at (#1+0.55,#2) {\fontsize{15}{18}\selectfont #5};
+  \node[anchor=west,text=black!65,inner sep=0] at (#1+5.0,#2) {\fontsize{10.5}{14}\selectfont #6};}
+
+% gold conclusion box: #1 x, #2 y, #3 text
+\newcommand{\concl}[3]{%
+  \node[draw=GoldAccent!70!black,fill=GoldAccent!12,line width=0.9pt,rounded corners=6pt,
+        inner xsep=16pt,inner ysep=7pt,text=NavyDeep] at (#1,#2)
+       {\fontsize{13}{17}\selectfont\bfseries #3};}
+
+% ---------------------------------------------------------------------------
+%  ASA triangle  A(0,0) B(4k,0) C(2.1751k,2.1751k)   ∠A = 45°, ∠B = 50°, AB = 4 cm·k/1
+%  #1 x  #2 y  #3 k  #4 colour  #5 coordinate prefix  #6 line width
+% ---------------------------------------------------------------------------
+\newcommand{\asaT}[6]{%
+  \pgfmathsetmacro{\asaW}{4*#3}
+  \pgfmathsetmacro{\asaH}{2.1751*#3}
+  \coordinate (#5A) at (#1,#2);
+  \coordinate (#5B) at ($(#1,#2)+(\asaW,0)$);
+  \coordinate (#5C) at ($(#1,#2)+(\asaH,\asaH)$);
+  \path[fill=#4,fill opacity=.12] (#5A)--(#5B)--(#5C)--cycle;
+  \draw[#4,line width=#6,line join=round] (#5A)--(#5B)--(#5C)--cycle;
+  \draw[#4,line width=1.1pt] ($(#5A)+(0.75,0)$) arc[start angle=0,end angle=45,radius=0.75];
+  \draw[#4,line width=1.1pt] ($(#5B)+(180:0.5)$) arc[start angle=180,end angle=130,radius=0.5];
+  \draw[#4,line width=1.1pt] ($(#5B)+(180:0.72)$) arc[start angle=180,end angle=130,radius=0.72];
+  \draw[#4,line width=1.4pt] ($(#5A)!0.5!(#5B)+(0,-0.12)$)--++(0,0.24);}
+
+% unfilled variant of \asaT
+\newcommand{\asaTn}[6]{%
+  \pgfmathsetmacro{\asaW}{4*#3}
+  \pgfmathsetmacro{\asaH}{2.1751*#3}
+  \coordinate (#5A) at (#1,#2);
+  \coordinate (#5B) at ($(#1,#2)+(\asaW,0)$);
+  \coordinate (#5C) at ($(#1,#2)+(\asaH,\asaH)$);
+  \draw[#4,line width=#6,line join=round] (#5A)--(#5B)--(#5C)--cycle;
+  \draw[#4,line width=1.1pt] ($(#5A)+(0.75,0)$) arc[start angle=0,end angle=45,radius=0.75];
+  \draw[#4,line width=1.1pt] ($(#5B)+(180:0.5)$) arc[start angle=180,end angle=130,radius=0.5];
+  \draw[#4,line width=1.1pt] ($(#5B)+(180:0.72)$) arc[start angle=180,end angle=130,radius=0.72];
+  \draw[#4,line width=1.4pt] ($(#5A)!0.5!(#5B)+(0,-0.12)$)--++(0,0.24);}
+
+% vertex labels: #1 prefix  #2 suffix ('' or empty)  #3 colour
+\newcommand{\asaL}[3]{%
+  \node[text=#3,font=\bfseries\itshape\fontsize{13}{15}\selectfont,anchor=north east,inner sep=2pt] at (#1A) {$A#2$};
+  \node[text=#3,font=\bfseries\itshape\fontsize{13}{15}\selectfont,anchor=north west,inner sep=2pt] at (#1B) {$B#2$};
+  \node[text=#3,font=\bfseries\itshape\fontsize{13}{15}\selectfont,anchor=south,inner sep=3pt] at (#1C) {$C#2$};}
+
+% measurements: #1 prefix  #2 colour
+\newcommand{\asaV}[2]{%
+  \node[text=#2,font=\bfseries\fontsize{9.5}{11}\selectfont,inner sep=0] at ($(#1A)+(22.5:1.15)$) {$45^\circ$};
+  \node[text=#2,font=\bfseries\fontsize{9.5}{11}\selectfont,inner sep=0] at ($(#1B)+(155:1.28)$) {$50^\circ$};
+  \node[text=#2,font=\bfseries\fontsize{10.5}{12}\selectfont,anchor=north,inner sep=1pt] at ($(#1A)!0.5!(#1B)+(0,-0.16)$) {$4\text{ cm}$};}
+
+% "the three remaining elements" AC, BC, ∠C : #1 prefix
+\newcommand{\asaQ}[1]{%
+  \draw[RedAccent,line width=2.8pt,dash pattern=on 5pt off 3pt] (#1A)--(#1C)--(#1B);
+  \draw[RedAccent,line width=1.7pt] ($(#1C)+(225:0.55)$) arc[start angle=225,end angle=310,radius=0.55];
+  \node[text=RedAccent,font=\bfseries\fontsize{14}{16}\selectfont,inner sep=0] at ($(#1C)+(267:0.95)$) {?};
+  \node[text=RedAccent,font=\bfseries\fontsize{14}{16}\selectfont,inner sep=0] at ($(#1A)!0.5!(#1C)+(135:0.32)$) {?};
+  \node[text=RedAccent,font=\bfseries\fontsize{14}{16}\selectfont,inner sep=0] at ($(#1B)!0.5!(#1C)+(45:0.32)$) {?};}
+
+% moving copy of ΔA'B'C' for the superposition animation: #1 frame, #2 fraction of travel left
+\newcommand{\movetri}[3]{%
+  \only<#1>{%
+    \pgfmathsetmacro{\mdx}{8.4*#2}
+    \pgfmathsetmacro{\mdy}{0.45*#2}
+    \asaT{1.9+\mdx}{2.9+\mdy}{1.2}{orange!90!black}{m}{1.8pt}
+    \ifnum#3=1 \asaL{m}{'}{orange!85!black}\asaV{m}{orange!85!black}\fi}}
+
+% ---------------------------------------------------------------------------
+%  Model problem figure (slide 9):  AB and CD cross at E, AD ∥ CB, EA = EB
+%  #1,#2 position of E   #3 scale
+% ---------------------------------------------------------------------------
+\newcommand{\modelfig}[3]{%
+  \coordinate (E) at (#1,#2);
+  \coordinate (A) at ($(E)+(-2.4*#3,1.3*#3)$);
+  \coordinate (D) at ($(E)+(1.5*#3,1.3*#3)$);
+  \coordinate (B) at ($(E)+(2.4*#3,-1.3*#3)$);
+  \coordinate (C) at ($(E)+(-1.5*#3,-1.3*#3)$);}
+\newcommand{\modelbase}{%
+  \draw[NavyDeep,line width=1.8pt,line join=round] (A)--(B) (C)--(D) (A)--(D) (C)--(B);
+  \fill[NavyDeep] (A) circle (2.4pt) (B) circle (2.4pt) (C) circle (2.4pt) (D) circle (2.4pt) (E) circle (2.4pt);
+  \foreach \p/\an/\nm in {A/south east/A,B/north west/B,C/north east/C,D/south west/D}{
+    \node[text=NavyDeep,font=\bfseries\itshape\fontsize{13}{15}\selectfont,anchor=\an,inner sep=3pt] at (\p) {$\nm$};}
+  \node[text=NavyDeep,font=\bfseries\itshape\fontsize{13}{15}\selectfont,anchor=north,inner sep=7pt] at (E) {$E$};}
+\newcommand{\mSides}[1]{%
+  \draw[#1,line width=2.2pt] ($(A)!0.5!(E)$)++(61.56:0.13)--++(241.56:0.26);
+  \draw[#1,line width=2.2pt] ($(B)!0.5!(E)$)++(61.56:0.13)--++(241.56:0.26);}
+\newcommand{\mPar}[1]{%
+  \draw[#1,line width=1.9pt,line cap=round,line join=round] ($(A)!0.5!(D)+(-0.07,0.11)$)--++(0.14,-0.11)--++(-0.14,-0.11);
+  \draw[#1,line width=1.9pt,line cap=round,line join=round] ($(C)!0.5!(B)+(-0.07,0.11)$)--++(0.14,-0.11)--++(-0.14,-0.11);}
+\newcommand{\mVert}[2]{%
+  \angmark{E}{40.9}{151.6}{#2}{#1}{2}{}{0}
+  \angmark{E}{220.9}{331.6}{#2}{#1}{2}{}{0}}
+\newcommand{\mAlt}[2]{%
+  \angmark{A}{-28.44}{0}{#2}{#1}{1}{}{0}
+  \angmark{B}{151.56}{180}{#2}{#1}{1}{}{0}}
+
+% ---------------------------------------------------------------------------
+%  Practice figure (slide 10): B on AD, E on AC, AB = AE, AD = AC
+%  #1,#2 position of A   #3 = AB = AE   #4 = AD = AC   (ratio 1 : 2 !)
+% ---------------------------------------------------------------------------
+\newcommand{\tenfig}[4]{%
+  \coordinate (A) at (#1,#2);
+  \coordinate (B) at ($(A)+(32:#3)$);
+  \coordinate (D) at ($(A)+(32:#4)$);
+  \coordinate (E) at ($(A)+(-24:#3)$);
+  \coordinate (C) at ($(A)+(-24:#4)$);}
+\newcommand{\tenbase}{%
+  \draw[NavyDeep,line width=0.9pt,line join=round] (A)--(D) (A)--(C) (B)--(C) (E)--(D);
+  \fill[NavyDeep] (A) circle (1.8pt) (B) circle (1.8pt) (C) circle (1.8pt) (D) circle (1.8pt) (E) circle (1.8pt);
+  \node[text=NavyDeep,font=\bfseries\itshape\fontsize{13}{15}\selectfont,anchor=east,inner sep=4pt] at (A) {$A$};
+  \node[text=NavyDeep,font=\bfseries\itshape\fontsize{13}{15}\selectfont,inner sep=0] at ($(B)+(122:0.33)$) {$B$};
+  \node[text=NavyDeep,font=\bfseries\itshape\fontsize{13}{15}\selectfont,inner sep=0] at ($(E)+(-114:0.33)$) {$E$};
+  \node[text=NavyDeep,font=\bfseries\itshape\fontsize{13}{15}\selectfont,anchor=south west,inner sep=3pt] at (D) {$D$};
+  \node[text=NavyDeep,font=\bfseries\itshape\fontsize{13}{15}\selectfont,anchor=north west,inner sep=3pt] at (C) {$C$};}
+\newcommand{\tSides}[1]{%
+  \draw[#1,line width=0.7pt] ($(A)!0.5!(B)$)++(122:0.13)--++(302:0.26);
+  \draw[#1,line width=0.7pt] ($(A)!0.5!(E)$)++(66:0.13)--++(246:0.26);}
+\newcommand{\tAngBE}[2]{%
+  \angmarkT{B}{212}{306.1}{#2}{#1}{2}{}{0}
+  \angmarkT{E}{61.9}{156}{#2}{#1}{2}{}{0}}
+\newcommand{\tAngA}[2]{%
+  \angmarkT{A}{-24}{32}{#2}{#1}{1}{}{0}}
+
+% ---------------------------------------------------------------------------
+%  Homework figure (slide 11):  #1,#2 = position of the origin   #3 = scale
+% ---------------------------------------------------------------------------
+\newcommand{\homefig}[3]{%
+  \coordinate (B) at ($(#1,#2)+(2.6*#3,0)$);
+  \coordinate (C) at ($(#1,#2)+(7.0*#3,0)$);
+  \coordinate (A) at ($(#1,#2)+(4.2*#3,5.0*#3)$);
+  \coordinate (D) at ($(#1,#2)+(4.70366*#3,0)$);
+  \coordinate (E) at ($(#1,#2)+(6.76505*#3,0.41955*#3)$);
+  \coordinate (K) at ($(#1,#2)+(2.45345*#3,-0.45798*#3)$);}
+\newcommand{\hnode}[3]{% point, anchor, label
+  \node[text=NavyDeep,font=\bfseries\itshape\fontsize{13}{15}\selectfont,anchor=#2,inner sep=3pt] at (#1) {$#3$};}
+\newcommand{\hometri}{%
+  \draw[NavyDeep,line width=1.8pt,line join=round] (A)--(B)--(C)--cycle;
+  \fill[NavyDeep] (A) circle (2.4pt) (B) circle (2.4pt) (C) circle (2.4pt);
+  \hnode{A}{south}{A}\hnode{B}{east}{B}\hnode{C}{north west}{C}}
+\newcommand{\homebis}{%
+  \draw[NavyDeep,line width=1.8pt] (A)--(D);
+  \fill[NavyDeep] (D) circle (2.4pt);
+  \hnode{D}{north}{D}
+  \angmark{A}{-107.74}{-84.25}{0.8}{AngCol}{1}{}{0}
+  \angmark{A}{-84.25}{-60.75}{0.8}{AngCol}{1}{}{0}}
+\newcommand{\homeE}{%
+  \draw[NavyDeep,line width=1.8pt] (E)--(D);
+  \fill[NavyDeep] (E) circle (2.4pt);
+  \hnode{E}{south west}{E}
+  \angmark{D}{95.75}{180}{0.62}{SideCol}{2}{}{0}
+  \angmark{D}{11.50}{95.75}{0.62}{SideCol}{2}{}{0}}
+\newcommand{\homeK}{%
+  \draw[NavyDeep,line width=1.8pt] (D)--(K);
+  \draw[NavyDeep,line width=1.8pt,dash pattern=on 5pt off 4pt] (B)--(K);
+  \fill[NavyDeep] (K) circle (2.4pt);
+  \hnode{K}{north}{K}}
+
+% ---------------------------------------------------------------------------
+%  Global bold maths: every formula is bold, and math is set ~8% smaller so
+%  the bold glyphs keep the same footprint as the old light ones.
+% ---------------------------------------------------------------------------
+\AtBeginDocument{\mathversion{bold}}
+\DeclareMathSizes{3.8}{3.5}{2.52}{1.82}
+\DeclareMathSizes{4.6}{4.23}{3.05}{2.2}
+\DeclareMathSizes{5.5}{5.06}{3.64}{2.63}
+\DeclareMathSizes{7}{6.44}{4.64}{3.35}
+\DeclareMathSizes{8}{7.36}{5.3}{3.83}
+\DeclareMathSizes{8.5}{7.82}{5.63}{4.07}
+\DeclareMathSizes{9}{8.28}{5.96}{4.31}
+\DeclareMathSizes{9.5}{8.74}{6.29}{4.54}
+\DeclareMathSizes{10}{9.2}{6.62}{4.78}
+\DeclareMathSizes{10.5}{9.66}{6.96}{5.02}
+\DeclareMathSizes{10.95}{10.07}{7.25}{5.24}
+\DeclareMathSizes{11}{10.12}{7.29}{5.26}
+\DeclareMathSizes{11.5}{10.58}{7.62}{5.5}
+\DeclareMathSizes{12}{11.04}{7.95}{5.74}
+\DeclareMathSizes{12.5}{11.5}{8.28}{5.98}
+\DeclareMathSizes{13}{11.96}{8.61}{6.22}
+\DeclareMathSizes{13.5}{12.42}{8.94}{6.46}
+\DeclareMathSizes{14}{12.88}{9.27}{6.7}
+\DeclareMathSizes{14.4}{13.25}{9.54}{6.89}
+\DeclareMathSizes{14.5}{13.34}{9.6}{6.94}
+\DeclareMathSizes{15}{13.8}{9.94}{7.18}
+\DeclareMathSizes{16}{14.72}{10.6}{7.65}
+\DeclareMathSizes{17}{15.64}{11.26}{8.13}
+\DeclareMathSizes{17.28}{15.9}{11.45}{8.27}
+\DeclareMathSizes{18}{16.56}{11.92}{8.61}
+\DeclareMathSizes{18.5}{17.02}{12.25}{8.85}
+\DeclareMathSizes{19}{17.48}{12.59}{9.09}
+\DeclareMathSizes{20}{18.4}{13.25}{9.57}
+\DeclareMathSizes{20.74}{19.08}{13.74}{9.92}
+\DeclareMathSizes{22}{20.24}{14.57}{10.52}
+\DeclareMathSizes{24.88}{22.89}{16.48}{11.9}
+\DeclareMathSizes{26}{23.92}{17.22}{12.44}
+\DeclareMathSizes{34}{31.28}{22.52}{16.27}
+
+\begin{document}
+
+\input{slides/slide_01}
+\input{slides/slide_02}
+\input{slides/slide_03}
+\input{slides/slide_04}
+\input{slides/slide_05}
+\input{slides/slide_06}
+\input{slides/slide_07}
+\input{slides/slide_08}
+\input{slides/slide_09}
+\input{slides/slide_10}
+\input{slides/slide_11}
+\input{slides/slide_12}
+\input{slides/slide_13}
+\input{slides/slide_14}
+\input{slides/slide_15}
+\input{slides/slide_16}
+\input{slides/slide_17}
+\input{slides/slide_18}
+\input{slides/slide_19}
+\input{slides/slide_20}
+% \input{slides/slide_21}  (merged into slide_20)
+\input{slides/slide_22}
+
+\end{document}

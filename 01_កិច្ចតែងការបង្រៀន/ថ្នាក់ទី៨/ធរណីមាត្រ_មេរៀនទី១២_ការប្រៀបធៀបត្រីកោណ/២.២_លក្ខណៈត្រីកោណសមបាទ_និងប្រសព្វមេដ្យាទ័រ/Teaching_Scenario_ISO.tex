@@ -1,0 +1,252 @@
+% !TeX program = xelatex
+\documentclass[a4paper,10pt]{article}
+
+% ============================================================================
+% ក្រដាសដាច់ដោយឡែក៖ សេណារីយ៉ូនៃការបង្រៀន (Scenario នៃការបង្រៀន – ៥០ នាទី)
+% ============================================================================
+\usepackage[a4paper, left=0.95cm, right=0.95cm, top=0.80cm, bottom=0.90cm, footskip=0.45cm]{geometry}
+\usepackage{amsmath}
+\usepackage{unicode-math}
+\usepackage{fontspec}
+\usepackage{array, longtable, colortbl}
+\usepackage[table]{xcolor}
+\usepackage{pifont}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+
+% LaTeX 2025 + longtable compatibility guard
+\makeatletter
+\let\@expl@@@mark@update@singlecol@structures@@\relax
+\makeatother
+
+% Cross-platform font path resolver (Windows local + Linux/Cloud repo fonts/)
+\providecommand{\NGSFindFonts}{%
+  \IfFileExists{C:/Windows/Fonts/cambria.ttc}{%
+    \def\NGSSysPath{C:/Windows/Fonts/}%
+    \def\NGSUserPath{C:/Users/KIT/AppData/Local/Microsoft/Windows/Fonts/}%
+  }{%
+    \IfFileExists{./fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{./fonts/}\def\NGSUserPath{./fonts/}}{%
+    \IfFileExists{../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../fonts/}\def\NGSUserPath{../fonts/}}{%
+    \IfFileExists{../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../fonts/}\def\NGSUserPath{../../fonts/}}{%
+    \IfFileExists{../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../fonts/}\def\NGSUserPath{../../../fonts/}}{%
+    \IfFileExists{../../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../../fonts/}\def\NGSUserPath{../../../../fonts/}}{%
+    \IfFileExists{../../../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../../../fonts/}\def\NGSUserPath{../../../../../fonts/}}{%
+    \IfFileExists{../../../../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../../../../fonts/}\def\NGSUserPath{../../../../../../fonts/}}{%
+      \def\NGSSysPath{../../../../../../../fonts/}\def\NGSUserPath{../../../../../../../fonts/}%
+    }}}}}}}%
+  }%
+}
+\NGSFindFonts
+
+\setmathfont[
+  Path={\NGSSysPath},
+  FontIndex=1,
+  Scale=1.02
+]{cambria.ttc}
+
+\defaultfontfeatures{Ligatures=TeX}
+
+\setmainfont[
+  Path={\NGSUserPath},
+  Extension=.ttf,
+  Script=Khmer,
+  BoldFont={KhmerOSsiemreap},
+  BoldFeatures={FakeBold=1.8},
+  ItalicFont={KhmerOSsiemreap},
+  ItalicFeatures={FakeSlant=0.25},
+  BoldItalicFont={KhmerOSsiemreap},
+  BoldItalicFeatures={FakeBold=1.8, FakeSlant=0.25}
+]{KhmerOSsiemreap}
+
+\newfontfamily\muol[
+  Path={\NGSUserPath},
+  Extension=.ttf,
+  Script=Khmer
+]{KhmerOSmuollight}
+
+\newfontfamily\TimesEn[
+  Path={\NGSSysPath},
+  Extension=.ttf,
+  Scale=1.00,
+  BoldFont={timesbd},
+  ItalicFont={timesi},
+  BoldItalicFont={timesbi}
+]{times}
+
+\newfontfamily\NagaBold[
+  Path={\NGSUserPath},
+  Extension=.ttf
+]{AKbalthom Naga Bold}
+
+\newfontfamily\CalibriFont[
+  Path={\NGSSysPath},
+  Extension=.ttf
+]{calibri}
+
+\XeTeXlinebreaklocale "km"
+\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
+
+\definecolor{stepgray}{HTML}{D9D9D9}
+\definecolor{headgray}{HTML}{F2F2F2}
+\definecolor{darkred}{HTML}{C00000}
+\definecolor{red5e}{HTML}{FF0000}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[R]{\CalibriFont\fontsize{11pt}{13pt}\selectfont\thepage}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\tabcolsep}{4pt}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcommand{\en}[1]{{\TimesEn #1}}
+\newcommand{\enbf}[1]{{\TimesEn\textbf{#1}}}
+\newcommand{\unit}[1]{\,\text{\en{#1}}}
+\newcommand{\fiveE}[1]{{\NagaBold\fontsize{9pt}{12.5pt}\selectfont\textcolor{red5e}{#1}}}
+\newcommand{\ditem}{\tikz[baseline=-0.5ex]\fill (0,0.40ex) -- (0.40ex,0) -- (0,-0.40ex) -- (-0.40ex,0) -- cycle;\hspace{0.25em}}
+\newcommand{\chkbox}{\tikz[baseline=-0.1ex]\draw[black, line width=0.75pt](0,0) rectangle (0.23,0.23);}
+\newcommand{\cnum}[1]{{\fontsize{9.5pt}{11pt}\selectfont\ding{\numexpr181+#1\relax}}\hspace{0.15em}}
+\newcommand{\tri}[1]{\ensuremath{\triangle #1}}
+\newcommand{\ang}[1]{\ensuremath{\angle #1}}
+\newcommand{\cg}{\ensuremath{\cong}}
+\newcommand{\ncg}{\ensuremath{\not\cong}}
+
+\begin{document}
+\fontsize{9.1pt}{13.1pt}\selectfont
+
+% -------------------- ក្បាលឯកសារ Scenario --------------------
+\begin{center}
+  {\muol\fontsize{10.5pt}{14.5pt}\selectfont ព្រះរាជាណាចក្រកម្ពុជា}\\[1pt]
+  {\muol\fontsize{9.8pt}{13.8pt}\selectfont ជាតិ សាសនា ព្រះមហាក្សត្រ}\\[3pt]
+  {\muol\fontsize{10.2pt}{14pt}\selectfont សេណារីយ៉ូនៃការបង្រៀន \enbf{(Scenario} នៃការបង្រៀន\enbf{)}}
+\end{center}
+
+\vspace{1pt}
+{\renewcommand{\arraystretch}{1.02}
+\begin{tabular}{@{}l l l p{0.4cm} l l l@{}}
+  - អនុវិទ្យាល័យ & : & ព្រះក្រសាំង (កំពង់ស្វាយ-កំពង់ធំ) & & - មុខវិជ្ជា & : & គណិតវិទ្យា ថ្នាក់ទី៨ \\
+  - មេរៀនទី១២ & : & ២.២ លក្ខណៈត្រីកោណសមបាទ និងប្រសព្វមេដ្យាទ័រ & & - រយៈពេលសរុប & : & \textcolor{darkred}{\textbf{១ ម៉ោងសិក្សា (៥០ នាទី)}} \\
+  - គ្រូបង្រៀន & : & ហុក ប៊ុនថែន & & - កាលបរិច្ឆេទ & : & ថ្ងៃពុធ ទី២ ខែធ្នូ ឆ្នាំ២០២៦ \\
+\end{tabular}
+}
+
+\vspace{2pt}
+
+% -------------------- I. តារាងបែងចែកពេលវេលា និងសេណារីយ៉ូលម្អិត (៥០ នាទី) --------------------
+\textbf{I.} {\muol តារាងបែងចែកពេលវេលា និងសេណារីយ៉ូប្រតិបត្តិការក្នុងថ្នាក់} \textbf{(៥០ នាទី)}
+
+\vspace{-2pt}
+\renewcommand{\arraystretch}{1.01}
+\begin{longtable}{|c|L{2.75cm}|c|L{7.65cm}|L{4.45cm}|}
+\hline
+\rowcolor{headgray}
+\multicolumn{1}{|c|}{\muol នាទី} &
+\multicolumn{1}{c|}{{\muol ជំហាន \enbf{/ 5Es}}} &
+\multicolumn{1}{c|}{\muol រយៈពេល} &
+\multicolumn{1}{c|}{{\muol សេណារីយ៉ូប្រតិបត្តិ \enbf{(}ពាក្យពេចន៍គ្រូ \enbf{\&} សម្ភារៈ\enbf{)}}} &
+\multicolumn{1}{c|}{{\muol ការគ្រប់គ្រង \enbf{\&} វិធីបម្រុង}} \\
+\hline
+\endfirsthead
+
+\hline
+\rowcolor{headgray}
+\multicolumn{1}{|c|}{\muol នាទី} &
+\multicolumn{1}{c|}{{\muol ជំហាន \enbf{/ 5Es}}} &
+\multicolumn{1}{c|}{\muol រយៈពេល} &
+\multicolumn{1}{c|}{{\muol សេណារីយ៉ូប្រតិបត្តិ \enbf{(}ពាក្យពេចន៍គ្រូ \enbf{\&} សម្ភារៈ\enbf{)}}} &
+\multicolumn{1}{c|}{{\muol ការគ្រប់គ្រង \enbf{\&} វិធីបម្រុង}} \\
+\hline
+\endhead
+
+\hline
+\endfoot
+
+\hline
+\endlastfoot
+
+00--02 & \textbf{ជំហានទី១}\newline រដ្ឋបាលថ្នាក់ & ២ នាទី &
+\ditem ពិនិត្យអវត្តមាន និងអនាម័យថ្នាក់រៀន ។\newline
+\ditem ចាត់ក្រុម ៣ នាក់ («ក្រុមស្ថាបត្យករហោជាង និងប៉មទឹកសហគមន៍») ចែកកញ្ចប់ ១:១ (ទំព័រ ១) ដាក់ផ្កាប់ទុកលើតុ ។ &
+ចាត់ប្រធានក្រុមស្រាប់ ហាមកាត់ក្រដាសឬបត់មុនបញ្ជាគ្រូ ។ \\ \hline
+
+02--05 & \textbf{ជំហានទី២ (ក)}\newline កំណែកិច្ចការផ្ទះ & ៣ នាទី &
+\ditem \textbf{សំណួរបញ្ឆោត (\#5ខ ទំ.១៦៤)}៖ «ក្នុងលំហាត់ទី៥(ខ) ហេតុអ្វីគ្រាន់តែ $T$ ជាចំណុចកណ្ដាលនៃ $RS$ មិនទាន់គ្រប់ធ្វើឱ្យបន្ទាត់ជាមេដ្យាទ័រទេ?» $\to$ ត្រូវមានសោទី២ គឺកែង $90^\circ$ ត្រង់ $T$ ។\newline
+\ditem ផ្ទៀងខ្លី \#1 ($x=40, BC=110\unit{cm}$), \#3 ($\tri{MTO}\cg\tri{MBA}$ ជ.ម.ជ) \& \#5 ($\tri{ABT}\cg\tri{DCT}$) ។ &
+កុំឱ្យសិស្សសរសេរវែងលើក្ដារខៀន ផ្ដោតលើសោភ្លោះ និងមុំរួម $\ang{M}$ ។ \\ \hline
+
+05--08 & \textbf{ជំហានទី២ (ខ)}\newline រំលឹកមេរៀនទាក់ទង & ៣ នាទី &
+\ditem សួរវាក្យសព្ទត្រីកោណសមបាទ ($\tri{ABC}$៖ កំពូល $A$, ជ្រុងស្មើ $AB=AC$, បាទ $BC$, មុំបាទ $\ang{B}, \ang{C}$) ។\newline
+\ditem ញែកមេដ្យាន កម្ពស់ ពុះមុំ និងមេដ្យាទ័រ រួចរំលឹកទ្រឹស្ដីបទផ្ទាល់-ច្រាសមេដ្យាទ័រ ($M\in\Delta\Leftrightarrow MB=MC$) ។ &
+គូសរូបញែកមេដ្យាន vs មេដ្យាទ័រលើក្ដារខៀន (មិនបាច់កាត់កំពូល) ។ \\ \hline
+
+08--11 & \fiveE{E1 Engage}\newline ហោជាង \& ប៉មទឹក & ៣ នាទី &
+\ditem លើករឿង \textbf{«ហោជាងសាលាឆទាន និងប៉មទឹកសហគមន៍ស្មើចម្ងាយពីផ្ទះ ៣ ខ្នង»}៖ (១) ខ្សែប្រយោលកែង $90^\circ$ ពីកំពូល $A$ នៃ $\tri{ABC}$ ($AB=AC$) ប៉ះកណ្ដាល $I$ ($IB=IC$) និងពុះ $\ang{A}$ ហេតុអ្វី ៤ ក្លាយជា ១? (២) រកប៉ម $O$ ឱ្យ $OA=OB=OC$ តើ $O$ នៅក្នុង $\tri{ABC}$ ជានិច្ចឬទេ? រួចសរសេរចំណងជើង ២. និង ២.២ ។ &
+ទុកជាបេសកកម្ម E2--E5; ស្រង់មតិដំបូងពីទីតាំង $O$ ក្នុងឬក្រៅ ។ \\ \hline
+
+11--22 & \fiveE{E2 Explore}\newline បត់ ១:១ \& POE & ១១ នាទី &
+\ditem \textbf{សកម្មភាព ១ (៦ ន.)}៖ ផ្ទៀងក្រិត $5.0\unit{cm}$ ទំព័រ ១ (\en{Actual Size 100\%}) បត់ $\tri{ABC}$ ទ្រេត $12^\circ$ ($BC=6.0, AB=AC=5.0, AI=4.0\unit{cm}$) ឱ្យ $B\mapsto C$ រក $\ang{B}=\ang{C}, IB=IC=3.0\unit{cm}, 90^\circ, \ang{BAI}=\ang{CAI}$ (៤-ក្នុង-១); ធៀបនឹងរូបកំពូលខុស $\tri{PQR}$ ($PQ=PR=4.5, QR=3.0\unit{cm}$) ពីបាទ $Q$: មេដ្យាន $QM$ ($\ang{QMR}\approx 66^\circ$) $\neq$ កម្ពស់ $QH\perp PR$ (គម្លាត $MH=1.25\unit{cm}$) ។\newline
+\ditem \textbf{សកម្មភាព ២ POE (៥ ន.)}៖ \textbf{Panel A} (មុំស្រួច $\tri{ABC}$៖ $75^\circ, 61^\circ, 44^\circ$) មេដ្យាទ័រ $AB, BC$ ជួបត្រង់ $O$ \textbf{ខាងក្នុង}, $OA=OB=OC=3.0\unit{cm}$; \textbf{Panel B} (មុំទាល $\tri{DEF}, \ang{E}=115^\circ$) បន្លាយមេដ្យាទ័រជួបត្រង់ $O'$ \textbf{ខាងក្រៅ}ឈម $\ang{E}$, រង្វង់/បន្ទាត់ $O'D=O'E=O'F=3.0\unit{cm}$ ។ &
+ត្រួតពិនិត្យសិស្សបត់ $B$ ត្រួត $C$ ពិត និងប្រើរ៉ាព័រទ័រ/បន្ទាត់វាស់ $MH=1.25\unit{cm}$ និង $O'D=O'E=O'F$ ។ \\ \hline
+
+22--28 & \fiveE{E3 Explain}\newline ផ្ទាល់-ច្រាស \& \cnum{1}--\cnum{5} & ៦ នាទី &
+\ditem បង្គុំលក្ខណៈផ្ទាល់ ($AB=AC\Rightarrow\ang{B}=\ang{C}$), \textbf{សម្រាយច្រាស ២ បន្ទាត់} ($\ang{B}=\ang{C}\Rightarrow\ang{ADB}=\ang{ADC}\Rightarrow\tri{ABD}\cg\tri{ACD}$ តាម \textbf{ម.ជ.ម} $\Rightarrow AB=AC$) និង ៤-ក្នុង-១ ចេញពីកំពូល $A$ តែមួយ (ទំ.១៥៧ បំពេញ «។», សម្រួល «ស្ថិតនៅលើ») ។\newline
+\ditem ទ្រឹស្ដីប្រសព្វមេដ្យាទ័រ (ទំ.១៥៨ កែខុសទំ.១៥៧ «មេដ្យានទ័រ»$\to$«មេដ្យាទ័រ») + ញែក $I$ (ស្មើជ្រុង, ក្នុង) vs $O$ (ស្មើកំពូល, ក្នុង/ក្រៅ) + បិទផ្ទាំង \textbf{ធនាគារ \cnum{1}--\cnum{5}} (ទំព័រ ៤) ។ &
+សង្កត់ធ្ងន់៖ ៤-ក្នុង-១ កើតមានតែចេញពី\textbf{កំពូល $A$} នៃជ្រុងស្មើប៉ុណ្ណោះ! \\ \hline
+
+28--38 & \fiveE{E4 Elaborate}\newline គំរូទំ.១៥៧ & ១០ នាទី &
+\ditem ចែកកាត \textbf{«ផែនទីច្រវាក់ប្រសព្វមេដ្យាទ័រ និងបន្ទាត់ ៤-ក្នុង-១»} (ទំព័រ ២, រូបមុំស្រួចមិនសមបាទ គ្មាន $90^\circ$ ត្រង់ $N$, $ON$ ដាច់ៗ + $?$)៖\newline
++ ២.៥ន. \textbf{[tracing]} លើ $OA, OB, OC$ (ចៀសវាងមើលច្រឡំ $A$-$O$-$M$ ត្រង់ជួរ)\newline
++ ៥.៥ន. ស្រាយ (ក) $OA=OB=OC$ (\cnum{4}) \& (ខ) $\tri{OAC}$ សមបាទកំពូល $O \Rightarrow ON\perp AC$ (\cnum{3})\newline
++ ២ន. \textbf{EIA 30s}៖ ហេតុអ្វី $ON$ មិនកាត់កំពូល $B$? ($BA\neq BC$) ។ &
+ហាមសន្មត $90^\circ$ ត្រង់ $N$ មុនស្រាយ (ខ)! បញ្ជាក់មូលហេតុ \cnum{4} មុន \cnum{3} ។ \\ \hline
+
+38--48 & \fiveE{E5 Evaluate}\newline ប្រតិបត្តិ \& កាត & ១០ នាទី &
+\ditem \textbf{ប្រតិបត្តិ «តុផ្ទៀងផ្ទាត់មុំបាទ និងប៉មទឹកសហគមន៍ ៣ តួនាទី» (៦.៥ ន.)} (ទំព័រ ៣)៖ (ក) ហោជាង $\ang{A}=50^\circ, BC=10\unit{m}$ និង (ខ) ផ្ទះ ៣ ខ្នង $\ang{B}=110^\circ, OA=2x+3, OC=5x-12$៖\newline
++ \textbf{តួនាទី ១ (\en{Pause-Ask})}៖ ផ្ទៀង $AI$ ៤-ក្នុង-១ (\cnum{3})\newline
++ \textbf{តួនាទី ២}៖ គណនា $\ang{B}=\ang{C}=65^\circ, \ang{BAI}=25^\circ, BI=5\unit{m}$ និង $x=5 \Rightarrow OA=OB=OC=13\unit{m}$ (\cnum{1}--\cnum{5})\newline
++ \textbf{តួនាទី ៣ (\en{Pause-Review})}៖ $O$ នៅ\textbf{ខាងក្រៅ}ឈម $\ang{B}$ + \textbf{បិទ E1} ។\newline
+\ditem \textbf{កាត A--D (៣.៥ ន.)} (ទំព័រ ៥)៖ A (\ding{51}), B (\ding{55} កំពូលខុស $E$), C (\ding{55} ច្រឡំ $I$ នឹង $O$), D (\ding{55} មុំទាល $O$ ក្រៅ) + ម្រាម ១--៣ ។ &
+បើពេលជិតអស់ បង្រួមកាត A--D មក ៩០ វិនាទី ដោយសួរមូលហេតុបដិសេធ B, C, D ។ \\ \hline
+
+48--50 & \textbf{ជំហានទី៥}\newline កិច្ចការផ្ទះ \& បណ្ដាំ & ២ នាទី &
+\ditem ចែកប័ណ្ណកិច្ចការផ្ទះ (ទំព័រ ៦, ទំ.១៦៤--១៦៥)៖ \#2 ($PQ=PR, \ang{PST}=\ang{PTS}$, ហាម \en{SSA} ប្រើ $180^\circ$), \#8 ($AB=AC$, កណ្ដាល $M,N \Rightarrow \tri{PBC}$ សមបាទ), \#11 (ក. $OE=BP \Rightarrow \tri{HOE}\cg\tri{DBP}$; ខ. $\tri{FPE}$ សមបាទ) ។\newline
+\ditem ណែនាំអានមុន \textbf{៣.១ វិសមភាពចំពោះជ្រុង និងមុំនៃត្រីកោណមួយ (ទំ. ១៥៨--១៥៩)} និងសុវត្ថិភាពចរាចរណ៍ ។ &
+ផ្ដាំសិស្សគូសសញ្ញា $BM=CN$ ដោយខ្លួនឯងលើរូប \#8 (គ្មានសញ្ញាឆ្នូតស្រាប់) ។ \\ \hline
+
+\rowcolor{stepgray}
+\multicolumn{2}{|r|}{\textbf{សរុបរយៈពេលបង្រៀនពេញ}} & \textbf{៥០ នាទី} &
+\multicolumn{2}{l|}{ត្រូវគ្នា ១០០\% នឹង \en{LS\_Plan\_ISO.tex} និង \en{Printable\_Materials\_ISO.tex} (ទំព័រ ១--៦)} \\ \hline
+\end{longtable}
+
+\vspace{2pt}
+
+% -------------------- II. បញ្ជីត្រៀមសម្ភារៈ & III. ការគ្រប់គ្រងកំហុស --------------------
+\begin{minipage}[t]{0.46\textwidth}
+  \textbf{II.} {\muol បញ្ជីត្រៀមសម្ភារៈមុនចូលថ្នាក់} \textbf{(ស-ខ្មៅ)}\\[3pt]
+  \begin{tabular}{|c|L{7.2cm}|}
+    \hline
+    \rowcolor{headgray}
+    \textbf{\ding{51}} & \multicolumn{1}{c|}{\textbf{សម្ភារៈត្រូវរៀបចំទុកជាមុន}} \\ \hline
+    \chkbox & កញ្ចប់ ១:១ ទំព័រ ១ (\textbf{Actual Size 100\%}, ក្រិត $5.0\unit{cm}$)៖ បន្ទះបត់ $\tri{ABC}$, រូបកំពូលខុស $\tri{PQR}$, Panel A ($75^\circ$) \& Panel B ($115^\circ$) \\ \hline
+    \chkbox & កន្ត្រៃ បន្ទាត់ក្រិត ១:១ រ៉ាព័រទ័រ និងដែកឈាន \\ \hline
+    \chkbox & កាត E4 (ទំព័រ ២), សន្លឹក ៣ តួនាទី E5 (ទំព័រ ៣) \& ផ្ទាំង \cnum{1}--\cnum{5} (ទំព័រ ៤) \\ \hline
+    \chkbox & កាត Exit \textbf{A--D} (ទំព័រ ៥) \& ប័ណ្ណកិច្ចការផ្ទះ \#2, \#8, \#11 (ទំព័រ ៦) \\ \hline
+  \end{tabular}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.51\textwidth}
+  \textbf{III.} {\muol កំហុសភ័ន្តច្រឡំ} \textbf{(តាមការស្រាវជ្រាវ) \&} {\muol ដំណោះស្រាយ}\\[3pt]
+  \begin{tabular}{|L{8.8cm}|}
+    \hline
+    \rowcolor{headgray}
+    \multicolumn{1}{|c|}{\textbf{ឧបសគ្គសិស្ស (Empirical Misconceptions) \& វិធានការទប់ស្កាត់}} \\ \hline
+    \textbf{១. កំហុសនិយមន័យ-គំនូរ និងកំពូលខុស៖} បត់ទ្រេត $12^\circ$ និងធៀបកំពូលបាទ $Q$ នៃ $\tri{PQR}$ \en{(Olson, 1975; Coad, 2006; Catman-Aksoy \& Isiksal-Bostan, 2024; Altıparmak \& Gürcan, 2021)} ។ \\ \hline
+    \textbf{២. ប្រសព្វមុំទាល $O'$ ខាងក្រៅ និងច្រឡំមជ្ឈមណ្ឌល ($0\%$ មុនបង្រៀន)៖} POE Panel B ($115^\circ$), តារាងប្រៀបធៀប $I$ vs $O$ និងប្រភពទ្រឹស្ដី \en{(Yıldız et al., 2010; Demiray et al., 2023; Xu et al., 2026; Milin Šipuš et al., 2022; Bento et al., 2018)} ។ \\ \hline
+    \textbf{៣. ច្រឡំផ្ទាល់-ច្រាស និងគម្លាតទំ.១៥៧៖} បំបែកប្រអប់ផ្ទាល់ vs ច្រាស (ម.ជ.ម) និងរូបមិនសមបាទគ្មាន $90^\circ$ ត្រង់ $N$ + \textbf{[tracing]} \en{(Winer \& Battista, 2022; Yeo \& Tzeng, 2019)} ។ \\ \hline
+    \textbf{៤. រូបត្រួតគ្នា ($44\%\text{--}67\%$) និងអន្ទាក់ \en{SSA} (\#2, \#8, \#11)៖} ប្រើ \cnum{1}--\cnum{5}, EIA, កាត A--D និងហាម \en{SSA} \en{(Scristia et al., 2022; Biber, 2020; Miyazaki et al., 2019)} ។ \\ \hline
+  \end{tabular}
+\end{minipage}
+
+\end{document}

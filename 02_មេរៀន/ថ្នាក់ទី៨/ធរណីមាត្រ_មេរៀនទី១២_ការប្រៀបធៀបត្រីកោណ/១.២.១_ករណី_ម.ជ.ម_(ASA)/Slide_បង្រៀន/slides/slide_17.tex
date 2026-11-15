@@ -1,0 +1,72 @@
+% ---- 9d : part ខ (5 frames) ----------------------------------------------------
+%      1: ΔAED ≅ ΔBEC (+ marks that prove it)   2: AD = BC , ∠ADE = ∠BCE (+ marks)
+%      3: ED = EC (+ marks)   4: "គេទាញបាន ED = EC"   5: conclusion box
+\begin{frame}
+\begin{tikzpicture}[remember picture,overlay,shift={(current page.south west)},x=1cm,y=1cm]
+  \sHdr{លំហាត់គំរូ}{ខ. ទាញបញ្ជាក់ថា $ED=EC$}
+
+  % ---------- left : solution text ----------
+  % left column: text confined to ~0.55 of the slide width (x = 0.6 … 9.0 cm)
+  \only<1->{\node[anchor=north west,text=NavyDeep,inner sep=0,text width=8.4cm,align=left] at (1.0,7.5) {\fontsize{14}{18}\selectfont ដោយ \ $\Delta AED\cong\Delta BEC$};}
+  \only<2->{
+    \node[anchor=north west,text=NavyDeep,inner sep=0] at (1.0,6.8) {\fontsize{14}{18}\selectfont
+      $\displaystyle\begin{aligned}
+        \text{វិបាក}\hspace{0.5cm}AD &= BC, \\
+        \angle ADE &= \angle BCE \\
+        \only<3->{ED} &\only<3->{{}= EC}
+      \end{aligned}$};}
+  \only<4->{
+    \node[anchor=north west,text=NavyDeep,inner sep=0,text width=8.4cm,align=left] at (1.0,4.3) {\fontsize{14}{18}\selectfont គេទាញបាន \ $ED=EC$};}
+  \only<5->{\node[anchor=west,draw=GoldAccent!70!black,fill=GoldAccent!12,line width=0.9pt,rounded corners=6pt,
+        inner xsep=16pt,inner ysep=7pt,text=NavyDeep] at (1.0,3.0)
+       {\fontsize{13}{17}\selectfont\bfseries ដូចនេះ \ $ED=EC$ \ ពិត};}
+
+  % right column: figure (x = 9.9 … 15.1 cm, clear gap from the text)
+  \modelfig{12.5}{4.3}{1.1}
+  \draw[NavyDeep,line width=0.9pt,line join=round] (A)--(B) (C)--(D) (A)--(D) (C)--(B);
+  \fill[NavyDeep] (A) circle (1.8pt) (B) circle (1.8pt) (C) circle (1.8pt) (D) circle (1.8pt) (E) circle (1.8pt);
+  \foreach \p/\an/\nm in {A/south east/A,B/north west/B,C/north east/C,D/south west/D}{
+    \node[text=NavyDeep,font=\bfseries\itshape\fontsize{13}{15}\selectfont,anchor=\an,inner sep=3pt] at (\p) {$\nm$};}
+  \node[text=NavyDeep,font=\bfseries\itshape\fontsize{13}{15}\selectfont,anchor=center,inner sep=0pt] at ($(E)+(186:0.58)$) {$E$};
+
+  % vertical angles at E (double tick)
+  \foreach \sa/\ea in {40.9/151.6,220.9/331.6}{
+    \draw[VertCol,line width=0.8pt] ($(E)+(\sa:0.4)$) arc[start angle=\sa,end angle=\ea,radius=0.4];
+    \pgfmathsetmacro{\mm}{(\sa+\ea)/2}
+    \draw[VertCol,line width=0.8pt] ($(E)+(\mm-5:0.31)$)--($(E)+(\mm-5:0.49)$);
+    \draw[VertCol,line width=0.8pt] ($(E)+(\mm+5:0.31)$)--($(E)+(\mm+5:0.49)$);}
+  % EA = EB (one tick)
+  \draw[SideCol,line width=1pt] ($(A)!0.5!(E)$)++(61.56:0.13)--++(241.56:0.26);
+  \draw[SideCol,line width=1pt] ($(B)!0.5!(E)$)++(61.56:0.13)--++(241.56:0.26);
+  % angles A = B
+  \foreach \pt/\sa/\ea in {A/-28.44/0,B/151.56/180}{
+    \draw[AngCol,line width=0.8pt] ($(\pt)+(\sa:0.5)$) arc[start angle=\sa,end angle=\ea,radius=0.5];}
+  \draw[AngCol,line width=0.8pt] ($(A)+(-14.22:0.42)$)--($(A)+(-14.22:0.58)$);
+  \draw[AngCol,line width=0.8pt] ($(B)+(165.78:0.42)$)--($(B)+(165.78:0.58)$);
+  % ---- frame 2 : AD = BC (three ticks) and ∠D = ∠C (double arc) ----
+  \only<2->{
+    \foreach \p/\q in {A/D,C/B}{
+      \begin{scope}[shift={($(\p)!0.5!(\q)$)}]
+        \draw[SideCol,line width=1pt] (-0.1,-0.13)--(-0.1,0.13) (0,-0.13)--(0,0.13) (0.1,-0.13)--(0.1,0.13);
+      \end{scope}}
+    % angles D = C (double arc)
+    \draw[GreenAccent!70!black,line width=0.8pt] ($(D)+(180:0.45)$) arc[start angle=180,end angle=220.9,radius=0.45];
+    \draw[GreenAccent!70!black,line width=0.8pt] ($(D)+(180:0.55)$) arc[start angle=180,end angle=220.9,radius=0.55];
+    \draw[GreenAccent!70!black,line width=0.8pt] ($(C)+(0:0.45)$) arc[start angle=0,end angle=40.9,radius=0.45];
+    \draw[GreenAccent!70!black,line width=0.8pt] ($(C)+(0:0.55)$) arc[start angle=0,end angle=40.9,radius=0.55];
+  }
+  % ---- frame 3 : ED = EC (two ticks) ----
+  \only<3->{
+    \foreach \p/\q in {E/D,E/C}{
+      \draw[SideCol,line width=1pt] ($(\p)!0.5!(\q)$)++(130.9:0.13)--++(310.9:0.26);}
+    \begin{scope}[shift={($(E)!0.5!(D)$)},rotate=40.9]
+      \draw[SideCol,line width=1pt] (-0.05,-0.13)--(-0.05,0.13) (0.05,-0.13)--(0.05,0.13);
+    \end{scope}
+    \begin{scope}[shift={($(E)!0.5!(C)$)},rotate=40.9]
+      \draw[SideCol,line width=1pt] (-0.05,-0.13)--(-0.05,0.13) (0.05,-0.13)--(0.05,0.13);
+    \end{scope}
+  }
+
+  \sFtr
+\end{tikzpicture}
+\end{frame}

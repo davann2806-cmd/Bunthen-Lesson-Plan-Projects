@@ -1,0 +1,278 @@
+% !TeX program = xelatex
+\documentclass[a4paper,10pt]{article}
+
+% ============================================================================
+% កញ្ចប់បណ្ណាល័យ (Packages) – តាមលំនាំ NGS Preah Krasang (ls_plan.tex)
+% ============================================================================
+\usepackage[a4paper, left=0.95cm, right=0.95cm, top=0.85cm, bottom=0.92cm, footskip=0.52cm]{geometry}
+\usepackage{amsmath}
+\usepackage{unicode-math}
+\usepackage{fontspec}
+\usepackage{array, longtable, multirow, colortbl}
+\usepackage[table]{xcolor}
+\usepackage{enumitem}
+\usepackage{pifont}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usetikzlibrary{calc, arrows.meta, angles, quotes, decorations.markings, babel}
+
+% LaTeX 2025 + longtable v4.24 compatibility guard
+\makeatletter
+\let\@expl@@@mark@update@singlecol@structures@@\relax
+\makeatother
+
+% ============================================================================
+% ការកំណត់ពុម្ពអក្សរ (Fonts Configuration)
+% ============================================================================
+\setmathfont[
+  Path={C:/Windows/Fonts/},
+  FontIndex=1,
+  Scale=1.02
+]{cambria.ttc}
+
+\defaultfontfeatures{Ligatures=TeX}
+
+\setmainfont[
+  Path={C:/Users/KIT/AppData/Local/Microsoft/Windows/Fonts/},
+  Extension=.ttf,
+  Script=Khmer,
+  BoldFont={KhmerOSsiemreap},
+  BoldFeatures={FakeBold=1.8},
+  ItalicFont={KhmerOSsiemreap},
+  ItalicFeatures={FakeSlant=0.25},
+  BoldItalicFont={KhmerOSsiemreap},
+  BoldItalicFeatures={FakeBold=1.8, FakeSlant=0.25}
+]{KhmerOSsiemreap}
+
+\newfontfamily\muol[
+  Path={C:/Users/KIT/AppData/Local/Microsoft/Windows/Fonts/},
+  Extension=.ttf,
+  Script=Khmer
+]{KhmerOSmuollight}
+
+\newfontfamily\NagaBold[
+  Path={C:/Users/KIT/AppData/Local/Microsoft/Windows/Fonts/},
+  Extension=.ttf
+]{AKbalthom Naga Bold}
+
+\newfontfamily\CalibriFont[
+  Path={C:/Windows/Fonts/},
+  Extension=.ttf
+]{calibri}
+
+\newfontfamily\Tacteing[
+  Path={C:/Users/KIT/AppData/Local/Microsoft/Windows/Fonts/}
+]{TACTENG.TTF}
+
+\newfontfamily\CourierBullet[
+  Path={C:/Windows/Fonts/},
+  Extension=.ttf
+]{cour}
+\newcommand{\wcirc}{{\CourierBullet\fontsize{9.5pt}{11pt}\selectfont o}}
+
+% ក្បួនកាត់ពាក្យខ្មែរ (Khmer word wrapping)
+\XeTeXlinebreaklocale "km"
+\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
+
+% ============================================================================
+% ការកំណត់ពណ៌ និងទម្រង់ទំព័រ (Colors & Page Style)
+% ============================================================================
+\definecolor{stepgray}{HTML}{D9D9D9}
+\definecolor{headgray}{HTML}{F2F2F2}
+\definecolor{boxgray}{HTML}{D9D9D9}
+\definecolor{darkred}{HTML}{C00000}
+\definecolor{red5e}{HTML}{FF0000}
+\definecolor{triblue}{HTML}{DAE8FC}
+\definecolor{triborders}{HTML}{6C8EBF}
+\definecolor{arrowblue}{HTML}{4472C4}
+\definecolor{figblue}{HTML}{1F4E9E}
+\definecolor{tealink}{HTML}{0F766E}
+\definecolor{amberwarm}{HTML}{D97706}
+\definecolor{pondcyan}{HTML}{DDF3FA}
+\definecolor{pondstroke}{HTML}{0E7490}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[R]{\CalibriFont\fontsize{11pt}{13pt}\selectfont\thepage}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\tabcolsep}{3.8pt}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+% ============================================================================
+% ម៉ាក្រូជំនួយ (Helper Macros)
+% ============================================================================
+\newcommand{\fiveE}[1]{{\NagaBold\fontsize{9.5pt}{13pt}\selectfont\textcolor{red5e}{#1}}}
+\newcommand{\timenote}[1]{\textcolor{darkred}{\textit{#1}}}
+\newcommand{\redsub}[1]{\textcolor{darkred}{#1}}
+\newcommand{\graybox}[1]{\colorbox{boxgray}{\strut\hspace{2pt}#1\hspace{2pt}}}
+\newcommand{\ditem}{\tikz[baseline=-0.5ex]\fill (0,0.42ex) -- (0.42ex,0) -- (0,-0.42ex) -- (-0.42ex,0) -- cycle;\hspace{0.3em}}
+\newcommand{\cnum}[1]{{\fontsize{10.5pt}{12pt}\selectfont\ding{\numexpr181+#1\relax}}\hspace{0.2em}}
+\newcommand{\cfig}[1]{\par\vspace{1pt}{\centering #1\par}\vspace{1pt}}
+\newcommand{\stepheader}[1]{\multicolumn{3}{|c|}{\cellcolor{stepgray}\muol #1} \\* \noalign{\hrule height 0.4pt}}
+\newcommand{\tri}[1]{\ensuremath{\triangle #1}}
+\newcommand{\ang}[1]{\ensuremath{\angle #1}}
+\newcommand{\cg}{\ensuremath{\cong}}
+
+% រចនាប័ទ្មគូសសម្គាល់ជ្រុងស្មើគ្នា (Tick mark styles - bold B&W print safe)
+\tikzset{
+  tk1/.style={postaction={decorate},decoration={markings,mark=at position 0.50 with {\draw[black, line width=0.85pt](0,-0.095)--(0,0.095);}}},
+  tk2/.style={postaction={decorate},decoration={markings,
+    mark=at position 0.45 with {\draw[black, line width=0.85pt](0,-0.095)--(0,0.095);},
+    mark=at position 0.55 with {\draw[black, line width=0.85pt](0,-0.095)--(0,0.095);}}}
+}
+
+% ក្បាច់ក្រោមបាវចនា (Tacteing Font - Keyboard '3')
+\newcommand{\khmflourish}{{\Tacteing\fontsize{36pt}{14pt}\selectfont\raisebox{-5pt}{3}}}
+
+% ============================================================================
+% ម៉ាក្រូគូសរូប TikZ (ស្តង់ដារអក្សរពណ៌ខ្មៅ ១០០%: every node/.style={font=\scriptsize, text=black})
+% ============================================================================
+% \newcommand{\figExample}{%
+% \begin{tikzpicture}[scale=0.74, every node/.style={font=\scriptsize, text=black}]
+%   ...
+% \end{tikzpicture}}
+
+% ============================================================================
+% ចាប់ផ្ដើមឯកសារ (Document Body)
+% ============================================================================
+\begin{document}
+\fontsize{9.5pt}{14.0pt}\selectfont
+
+% -------------------- ក្បាលកិច្ចតែងការ (Header) --------------------
+\begin{center}
+  {\muol\fontsize{11pt}{16pt}\selectfont ព្រះរាជាណាចក្រកម្ពុជា}\\[2pt]
+  {\muol\fontsize{10pt}{15pt}\selectfont ជាតិ សាសនា ព្រះមហាក្សត្រ}\\[1pt]
+  \khmflourish
+\end{center}
+
+\vspace{-15pt}
+{\muol\fontsize{9.5pt}{13.2pt}\selectfont
+មន្ទីរអប់រំ យុវជន និងកីឡា ខេត្តកំពង់ធំ\\
+ការិយាល័យអប់រំ យុវជន និងកីឡា ស្រុកកំពង់ស្វាយ\\
+អនុវិទ្យាល័យព្រះក្រសាំង}
+
+\vspace{2pt}
+\begin{center}
+  {\muol\fontsize{10pt}{15pt}\selectfont កិច្ចតែងការបង្រៀន}
+\end{center}
+\vspace{1pt}
+
+% -------------------- ព័ត៌មានទូទៅ (Metadata) --------------------
+{\renewcommand{\arraystretch}{1.06}
+\hspace*{4.6cm}%
+\begin{tabular}{@{}l l l@{}}
+  - \hspace{0.35cm} មុខវិជ្ជា & : & គណិតវិទ្យា ថ្នាក់ទី<<ថ្នាក់>> \\
+  - \hspace{0.35cm} ចំណងជើងមេរៀន & : & <<មេរៀន>> \\
+  - \hspace{0.35cm} ចំណងជើងរង & : & <<ចំណងជើងរង>> \\
+  - \hspace{0.35cm} រយៈពេល & : & ១ ម៉ោងសិក្សា (៥០នាទី) \\
+  - \hspace{0.35cm} បង្រៀនដោយ & : & ហុក ប៊ុនថែន \\
+  - \hspace{0.35cm} កាលបរិច្ឆេទ & : & \makebox[28mm]{\dotfill}\ ២០២៦ \\
+\end{tabular}
+
+\vspace{2pt}
+
+% -------------------- I. វត្ថុបំណង --------------------
+\textbf{I.} {\muol វត្ថុបំណង}\\[2pt]
+\hspace*{0.55cm}%
+\begin{tabular}{@{}l l l@{}}
+  \wcirc \hspace{0.25cm} វិជ្ជាសម្បទា & : & <<វិជ្ជាសម្បទា>> \\
+  \wcirc \hspace{0.25cm} បំណិនសម្បទា & : & <<បំណិនសម្បទា>> \\
+  \wcirc \hspace{0.25cm} ចរិយាសម្បទា & : & <<ចរិយាសម្បទា>> \\
+\end{tabular}
+
+\vspace{2pt}
+
+% -------------------- II. សម្ភារៈឧបទេស --------------------
+\textbf{II.} {\muol សម្ភារៈឧបទេស}\\[2pt]
+\hspace*{0.55cm}$\bullet$ \hspace{0.35cm} <<សម្ភារៈឧបទេស>>
+
+\vspace{2pt}
+
+% -------------------- III. វិធីសាស្រ្តបង្រៀន --------------------
+\textbf{III.} {\muol វិធីសាស្រ្តបង្រៀន}\\[2pt]
+\hspace*{0.55cm}%
+\begin{tabular}{@{}l l l@{}}
+  $\bullet$ \hspace{0.35cm} គោលវិធី & : \hspace{0.7cm} & សិស្សមជ្ឈមណ្ឌល \\
+  $\bullet$ \hspace{0.35cm} យុទ្ធវិធីបង្រៀន & : & ស្ថាបនានិយម គម្រូ 5Es (<<សកម្មភាពសង្ខេប>>) \\
+\end{tabular}
+}
+
+\vspace{2pt}
+
+% -------------------- IV. ដំណើរការបង្រៀន --------------------
+\textbf{IV.} {\muol ដំណើរការបង្រៀន}
+
+\vspace{-3pt}
+
+\renewcommand{\arraystretch}{1.05}
+\begin{longtable}{|L{5.50cm}|L{7.90cm}|L{4.80cm}|}
+\hline
+\rowcolor{headgray}
+\multicolumn{1}{|c|}{\muol សកម្មភាពគ្រូ} &
+\multicolumn{1}{c|}{\muol ខ្លឹមសារមេរៀន} &
+\multicolumn{1}{c|}{\muol សកម្មភាពសិស្ស} \\
+\hline
+\endfirsthead
+
+\hline
+\endhead
+
+\hline
+\endfoot
+
+\hline
+\endlastfoot
+
+% ==================== ជំហានទី១ (2min) ====================
+\stepheader{ជំហានទី១ (រដ្ឋបាលថ្នាក់)}
+- ពិនិត្យអវត្តមាន និងអនាម័យថ្នាក់រៀន
+&
+\hspace*{0.3cm}- រដ្ឋបាលថ្នាក់
+&
+- រាយការណ៍អវត្តមាន \\
+\hline
+
+% ==================== ជំហានទី២ (9min: ≤3 + 3 + E1 3) ====================
+\stepheader{ជំហានទី២ (កិច្ចការផ្ទះ + ទំនាក់ទំនងមេរៀនថ្មី)}
+% --- ២.១ .. ២.៥ (ប្រើ \\[-2pt] ចន្លោះជួរតូច, E1 - Engage 3min) ---
+& & \\
+\hline
+
+% ==================== ជំហានទី៣ (17min: E2 11 + E3 6) ====================
+\stepheader{ជំហានទី៣ (ខ្លឹមសារមេរៀនថ្មី)}
+% --- E2 - Explore (11min) និង E3 - Explain (6min) ---
+& & \\
+\hline
+
+% ==================== ជំហានទី៤ (20min: E4 10 + E5 10) ====================
+\stepheader{ជំហានទី៤ (ពង្រីកចំណេះដឹង)}
+% --- E4 - Elaborate (10min) និង E5 - Evaluate (10min) ---
+& & \\
+\hline
+
+% ==================== ជំហានទី៥ (≤2min) ====================
+\stepheader{ជំហានទី៥ (កិច្ចការផ្ទះ + បណ្ដាំផ្ញើ)}
+\timenote{ចំណាយពេលឱ្យតិចបំផុតកុំឱ្យលើស 2min}
+&
+\centerline{\muol កិច្ចការផ្ទះ}
+&
+- កត់ត្រា \\
+\end{longtable}
+
+% -------------------- កាលបរិច្ឆេទ និងហត្ថលេខា --------------------
+\vspace{2pt}
+\hfill
+\begin{minipage}{9.8cm}
+  {\centering
+    ថ្ងៃ\makebox[16mm]{\dotfill}\ ខែ\makebox[18mm]{\dotfill}\ ឆ្នាំមមី អដ្ឋស័ក ពុទ្ធសករាជ ២៥៧០\\[2pt]
+    ត្រូវនឹងថ្ងៃទី\makebox[10mm]{\dotfill}\ ខែ\makebox[18mm]{\dotfill}\ ឆ្នាំ២០២៦\\[3pt]
+    {\muol គ្រូបង្រៀន}\par}
+  \vspace{32pt}
+  \hfill{\muol ហុក ប៊ុនថែន}\hspace*{1.4cm}
+\end{minipage}
+
+\end{document}

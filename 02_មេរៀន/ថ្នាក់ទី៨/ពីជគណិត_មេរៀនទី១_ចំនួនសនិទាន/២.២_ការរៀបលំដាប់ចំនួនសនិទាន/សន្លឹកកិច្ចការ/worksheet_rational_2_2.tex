@@ -1,0 +1,229 @@
+% !TEX program = xelatex
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[
+  a4paper,
+  top=0.50cm,
+  bottom=0.50cm,
+  left=0.80cm,
+  right=0.80cm
+]{geometry}
+
+\usepackage{amsmath}
+\usepackage{unicode-math}
+\usepackage{fontspec}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{xcolor}
+\usepackage{pifont}
+\usepackage{tikz}
+\usetikzlibrary{calc,arrows.meta,positioning}
+
+\XeTeXlinebreaklocale "kh"
+\XeTeXlinebreakskip = 0pt plus 1pt minus 0.5pt
+
+% Cross-platform font path resolver (Windows local + Linux/Cloud repo fonts/)
+\providecommand{\NGSFindFonts}{%
+  \IfFileExists{C:/Windows/Fonts/cambria.ttc}{%
+    \def\NGSSysPath{C:/Windows/Fonts/}%
+    \def\NGSUserPath{C:/Users/KIT/AppData/Local/Microsoft/Windows/Fonts/}%
+  }{%
+    \IfFileExists{./fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{./fonts/}\def\NGSUserPath{./fonts/}}{%
+    \IfFileExists{../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../fonts/}\def\NGSUserPath{../fonts/}}{%
+    \IfFileExists{../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../fonts/}\def\NGSUserPath{../../fonts/}}{%
+    \IfFileExists{../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../fonts/}\def\NGSUserPath{../../../fonts/}}{%
+    \IfFileExists{../../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../../fonts/}\def\NGSUserPath{../../../../fonts/}}{%
+    \IfFileExists{../../../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../../../fonts/}\def\NGSUserPath{../../../../../fonts/}}{%
+    \IfFileExists{../../../../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../../../../fonts/}\def\NGSUserPath{../../../../../../fonts/}}{%
+      \def\NGSSysPath{../../../../../../../fonts/}\def\NGSUserPath{../../../../../../../fonts/}%
+    }}}}}}}%
+  }%
+}
+\NGSFindFonts
+
+\setmathfont[
+  Path={\NGSSysPath},
+  FontIndex=1,
+  Scale=1.0
+]{cambria.ttc}
+
+\setmainfont[
+  Path={\NGSUserPath},
+  Extension=.ttf,
+  Script=Khmer,
+  Scale=0.88,
+  BoldFont={KhmerOSsiemreap},
+  BoldFeatures={FakeBold=1.8},
+  ItalicFont={KhmerOSsiemreap},
+  ItalicFeatures={FakeSlant=0.18}
+]{KhmerOSsiemreap}
+
+\newfontfamily\muol[
+  Path={\NGSUserPath},
+  Extension=.ttf,
+  Script=Khmer,
+  Scale=0.88
+]{KhmerOSmuollight}
+
+\definecolor{headgray}{HTML}{D9D9D9}
+\definecolor{subgray}{HTML}{F2F2F2}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\tabcolsep}{4pt}
+\setlength{\fboxsep}{4pt}
+\setlength{\fboxrule}{0.6pt}
+\newcolumntype{W}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcommand{\fstrut}{\rule[-1.65ex]{0pt}{4.5ex}}
+\newcommand{\ditem}{\tikz[baseline=-0.5ex]\fill (0,0.40ex) -- (0.40ex,0) -- (0,-0.40ex) -- (-0.40ex,0) -- cycle;\hspace{0.25em}}
+
+% -------------------- ប្លុកសន្លឹកកិច្ចការសិស្ស ១ ច្បាប់ (កន្លះទំព័រ A4) --------------------
+\newcommand{\StudentWorksheet}{%
+  \noindent
+  \fcolorbox{black}{white}{%
+    \begin{minipage}{19.0cm}
+      % --- ក្បាលសន្លឹកកិច្ចការ ---
+      \begin{center}
+        {\muol\fontsize{9.5pt}{13pt}\selectfont អនុវិទ្យាល័យព្រះក្រសាំង — សន្លឹកកិច្ចការសិស្ស (មេរៀនទី១៖ ២.២. ការរៀបលំដាប់ចំនួនសនិទាន)}\\[2pt]
+        {\footnotesize
+        ឈ្មោះសិស្ស / ដៃគូ៖ \dotfill \hspace{0.25cm}
+        ថ្នាក់ទី៨៖ \makebox[1.1cm]{\dotfill} \hspace{0.25cm}
+        ក្រុមទី៖ \makebox[0.9cm]{\dotfill} \hspace{0.25cm}
+        កាលបរិច្ឆេទ៖ ០៤/១១/២០២៦}
+      \end{center}
+      \vspace{-5pt}
+      \noindent\rule{\linewidth}{0.5pt}\\[2pt]
+
+      % --- ផ្នែកទី១៖ សកម្មភាពរុករកជាដៃគូ (E2 - Explore) ---
+      \colorbox{headgray}{\makebox[18.8cm][l]{\muol\footnotesize ផ្នែកទី១៖ សកម្មភាពរុករកជាដៃគូ (សង្កេត គណនា និងទាញសន្និដ្ឋាន)}}\\[2pt]
+      \begin{tabular}{@{}W{9.25cm}|W{9.35cm}@{}}
+        {\bfseries\footnotesize \ditem សកម្មភាពទី១ (ឧទាហរណ៍ ១)៖ លំដាប់ចំនួនលើបន្ទាត់ចំនួន} \par\vspace{1pt}
+        {\footnotesize\fstrut ១. ចូរបំពេញចំនួនសនិទាន $\left(-\dfrac{1}{2}, -0.25, \dfrac{1}{4}, \dfrac{3}{4}\right)$ ក្នុងប្រអប់៖}
+        \begin{center}
+          \vspace{-5pt}
+          \begin{tikzpicture}[scale=0.78, every node/.style={font=\scriptsize}]
+            \draw[{Stealth[scale=0.7]}-{Stealth[scale=0.8]}, semithick] (-4.5,0) -- (4.5,0);
+            \foreach \x in {-4,-3,-2,-1,0,1,2,3,4} {
+              \draw (\x,0.08) -- (\x,-0.08);
+            }
+            \node[above=2pt] at (-4,0.06) {$-1$};
+            \node[above=2pt] at (-3,0.06) {$-0.75$};
+            \draw[fill=white, draw=black] (-2.35,0.15) rectangle (-1.65,0.70);
+            \draw[fill=white, draw=black] (-1.42,0.15) rectangle (-0.58,0.70);
+            \node[above=2pt] at ( 0,0.06) {$0$};
+            \draw[fill=white, draw=black] ( 0.65,0.15) rectangle ( 1.35,0.70);
+            \node[above=2pt] at ( 2,0.06) {$0.5$};
+            \draw[fill=white, draw=black] ( 2.65,0.15) rectangle ( 3.35,0.70);
+            \node[above=2pt] at ( 4,0.06) {$1$};
+          \end{tikzpicture}
+          \vspace{-5pt}
+        \end{center}
+        {\footnotesize ២. នៅលើបន្ទាត់ចំនួន ចំនួននៅខាងឆ្វេងគឺ \makebox[1.8cm]{\dotfill} (តូចជាង/ធំជាង) ចំនួននៅខាងស្ដាំជានិច្ច។\par\vspace{2pt}
+        {\bfseries \ditem សកម្មភាពទី៣ (ឧទាហរណ៍ ៣)៖ រកចំនួននៅចន្លោះ $\dfrac{3}{4}$ និង $\dfrac{6}{7}$}\par\vspace{2pt}
+        \fstrut គណនាមធ្យម៖ $\dfrac{1}{2}\left(\dfrac{3}{4}+\dfrac{6}{7}\right) = \dfrac{1}{2}\left(\dfrac{\makebox[0.65cm]{\dotfill}}{28}+\dfrac{\makebox[0.65cm]{\dotfill}}{28}\right) = \dfrac{\makebox[0.75cm]{\dotfill}}{56}$}
+        &
+        {\bfseries\footnotesize \ditem សកម្មភាពទី២ (ឧទាហរណ៍ ២)៖ រៀបចំនួនសនិទានពីតូចទៅធំ} \par\vspace{1pt}
+        {\footnotesize\fstrut គេឱ្យចំនួនសនិទានទាំង ៥៖ $\dfrac{1}{8} \ , \ -1 \ , \ \dfrac{-9}{7} \ , \ 0.28 \ , \ 1\dfrac{2}{5}$ ។\par\vspace{2pt}
+        \fstrut ១. បំបែកជាទសភាគ៖ $\dfrac{-9}{7} \approx \makebox[1.1cm]{\dotfill}$ , $\dfrac{1}{8} = \makebox[1.1cm]{\dotfill}$ , $1\dfrac{2}{5} = \makebox[1.0cm]{\dotfill}$\par\vspace{2pt}
+        ២. ដៅចំណុចទាំង ៥ លើបន្ទាត់ចំនួនខាងក្រោម៖}
+        \begin{center}
+          \vspace{-4pt}
+          \begin{tikzpicture}[scale=0.80, every node/.style={font=\scriptsize}]
+            \draw[{Stealth[scale=0.7]}-{Stealth[scale=0.8]}, semithick] (-4.2,0) -- (4.2,0);
+            \foreach \x/\lbl in {-3.4/-2, -1.7/-1, 0/0, 1.7/1, 3.4/2} {
+              \draw (\x,0.08) -- (\x,-0.08) node[below=1pt] {$\lbl$};
+            }
+          \end{tikzpicture}
+          \vspace{-3pt}
+        \end{center}
+        {\footnotesize ៣. ដូច្នេះ លំដាប់ពីតូចទៅធំគឺ៖\par\vspace{3pt}
+        \hspace*{0.3cm}\makebox[1.2cm]{\dotfill} $< \makebox[1.2cm]{\dotfill} < \makebox[1.2cm]{\dotfill} < \makebox[1.2cm]{\dotfill} < \makebox[1.2cm]{\dotfill}$}
+      \end{tabular}
+
+      \vspace{3pt}
+      \noindent\rule{\linewidth}{0.4pt}\\[2pt]
+
+      % --- ផ្នែកទី២ និង ផ្នែកទី៣ (២ ជួរឈរ) ---
+      \begin{tabular}{@{}W{9.25cm}|W{9.35cm}@{}}
+        \colorbox{subgray}{\makebox[9.05cm][l]{\muol\footnotesize ផ្នែកទី២៖ ពង្រីកចំណេះដឹង (លំហាត់គំរូ ២ - ខ)}} \par\vspace{2pt}
+        {\footnotesize\fstrut ចូររៀបចំនួនសនិទាន $1\dfrac{1}{3} \ , \ \dfrac{7}{3} \ , \ \dfrac{5}{4} \ , \ -1 \ , \ \dfrac{-9}{4}$ តាមលំដាប់ពីតូចទៅធំ៖\par\vspace{2pt}
+        \fstrut - តម្រូវភាគបែងរួម $12$៖ \hspace{0.1cm} $1\dfrac{1}{3} = \dfrac{4}{3} = \dfrac{\makebox[0.65cm]{\dotfill}}{12}$ , \hspace{0.1cm} $\dfrac{7}{3} = \dfrac{\makebox[0.65cm]{\dotfill}}{12}$ ,\par\vspace{3pt}
+        \fstrut\hspace*{0.25cm}$\dfrac{5}{4} = \dfrac{\makebox[0.65cm]{\dotfill}}{12}$ , \hspace{0.15cm} $-1 = -\dfrac{\makebox[0.65cm]{\dotfill}}{12}$ , \hspace{0.15cm} $\dfrac{-9}{4} = \dfrac{\makebox[0.75cm]{\dotfill}}{12}$\par\vspace{3pt}
+        - ដូច្នេះ លំដាប់ពីតូចទៅធំគឺ៖ \makebox[1.0cm]{\dotfill} $< \makebox[1.0cm]{\dotfill} < \makebox[1.0cm]{\dotfill} < \makebox[1.0cm]{\dotfill} < \makebox[1.0cm]{\dotfill}$}
+        &
+        \colorbox{subgray}{\makebox[9.15cm][l]{\muol\footnotesize ផ្នែកទី៣៖ វាយតម្លៃលទ្ធផលសិក្សា (លំហាត់ប្រតិបត្តិ ទំព័រទី៤)}} \par\vspace{2pt}
+        {\footnotesize\fstrut \textbf{ក.} រៀបតាមលំដាប់ពីធំទៅតូច៖ $\dfrac{3}{4} \ , \ \dfrac{4}{5} \ , \ \dfrac{7}{8} \ , \ 0.75$ \par\vspace{2pt}
+        \hspace*{0.25cm}- តម្រូវភាគបែងរួម $40$ (ឬទសភាគ)៖ \dotfill \par\vspace{3pt}
+        \hspace*{0.25cm}- ដូច្នេះ លំដាប់ពីធំទៅតូចគឺ៖ \dotfill \par\vspace{3pt}
+        \fstrut \textbf{ខ.} សរសេរជាទសភាគ៖ $\dfrac{9}{11} = \makebox[1.7cm]{\dotfill}$ និង $\dfrac{7}{2^3 \times 5} = \makebox[1.7cm]{\dotfill}$}
+      \end{tabular}
+    \end{minipage}%
+  }%
+}
+
+% -------------------- ប្លុកបណ្ណចំនួនសនិទានសម្រាប់កាត់បិទលើក្ដារខៀន និងចែកក្រុម --------------------
+\newcommand{\RationalCardSet}[2]{%
+  \noindent
+  \fcolorbox{black}{white}{%
+    \begin{minipage}{19.0cm}
+      {\muol\footnotesize #1}
+      \hfill
+      {\scriptsize (\ding{34} #2)}\\[4pt]
+      \centering
+      \begin{tikzpicture}[scale=0.95]
+        % 5 Cards for Example 2
+        \node[font=\scriptsize\bfseries] at (-1.1, 0.75) {ឧទាហរណ៍ ២៖};
+        \foreach \i/\val in {0/{\dfrac{1}{8}}, 1/{-1}, 2/{\dfrac{-9}{7}}, 3/{0.28}, 4/{1\dfrac{2}{5}}} {
+          \draw[dashed, rounded corners=2pt, fill=white, draw=black, line width=0.6pt]
+            (\i*2.05, 0) rectangle (\i*2.05+1.80, 1.45);
+          \node[font=\large\bfseries] at (\i*2.05+0.90, 0.725) {$\val$};
+        }
+        % 4 Cards for Sample Exercise 2a
+        \node[font=\scriptsize\bfseries] at (11.1, 0.75) {គំរូ ២ (ក)៖};
+        \foreach \j/\val in {0/{\dfrac{4}{3}}, 1/{0.3}, 2/{-0.25}, 3/{\dfrac{5}{4}}} {
+          \draw[dashed, rounded corners=2pt, fill=subgray, draw=black, line width=0.6pt]
+            (12.0+\j*1.60, 0) rectangle (12.0+\j*1.60+1.42, 1.45);
+          \node[font=\normalsize\bfseries] at (12.0+\j*1.60+0.71, 0.725) {$\val$};
+        }
+      \end{tikzpicture}
+    \end{minipage}%
+  }%
+}
+
+\begin{document}
+
+% ============================================================================
+% ទំព័រទី១៖ សន្លឹកកិច្ចការសិស្ស ២ ច្បាប់ក្នុង ១ ទំព័រ A4 (2-Up Print-Ready Layout)
+% ============================================================================
+\StudentWorksheet
+
+\vfill
+\begin{center}
+  \tikz \draw[dashed, line width=0.6pt, black!70]
+    (0,0) -- (19.2,0)
+    node[midway, fill=white, font=\scriptsize] {\ding{34} \ កាត់តាមបន្ទាត់ដាច់ៗនេះ (១ ទំព័រ សម្រាប់សិស្ស ២ នាក់ ឬ ២ គូ) \ \ding{34}};
+\end{center}
+\vfill
+
+\StudentWorksheet
+
+\newpage
+
+% ============================================================================
+% ទំព័រទី២៖ បណ្ណចំនួនសនិទានសម្រាប់កាត់បិទលើក្ដារខៀន (E1 & E3) និងចែកក្រុមសិស្ស
+% ============================================================================
+\begin{center}
+  {\muol\fontsize{10.5pt}{15pt}\selectfont បណ្ណចំនួនសនិទានសម្រាប់បិទលើក្ដារខៀន និងចែកតាមក្រុមសិស្ស (មេរៀនទី១៖ ២.២. ការរៀបលំដាប់ចំនួនសនិទាន)}\\[2pt]
+  {\footnotesize សម្រាប់គ្រូបិទលើក្ដារខៀនក្នុងវគ្គ \textbf{E1 - Engage} និងឱ្យតំណាងសិស្សឡើងតម្រៀបលើក្ដារខៀនក្នុងវគ្គ \textbf{E3 - Explain} (ដោយមិនប្រើ Slide)}
+\end{center}
+\vspace{4pt}
+
+\RationalCardSet{ឈុតទី១៖ សម្រាប់គ្រូបិទលើក្ដារខៀន (វគ្គ E1 - Engage និង E3 - Explain)}{កាត់តាមបន្ទាត់ដាច់ៗសម្រាប់បិទលើក្ដារខៀន}
+\vfill
+\RationalCardSet{ឈុតទី២៖ សម្រាប់សិស្សក្រុមទី ១}{កាត់តាមបន្ទាត់ដាច់ៗ រួចតម្រៀបពីតូចទៅធំ}
+\vfill
+\RationalCardSet{ឈុតទី៣៖ សម្រាប់សិស្សក្រុមទី ២}{កាត់តាមបន្ទាត់ដាច់ៗ រួចតម្រៀបពីតូចទៅធំ}
+\vfill
+\RationalCardSet{ឈុតទី៤៖ សម្រាប់សិស្សក្រុមទី ៣}{កាត់តាមបន្ទាត់ដាច់ៗ រួចតម្រៀបពីតូចទៅធំ}
+
+\end{document}

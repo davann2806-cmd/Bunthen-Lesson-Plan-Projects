@@ -1,0 +1,43 @@
+% ---- 9c : part ក ---------------------------------------------------------------
+\begin{frame}
+\begin{tikzpicture}[remember picture,overlay,shift={(current page.south west)},x=1cm,y=1cm]
+  \sHdr{លំហាត់គំរូ}{ក. ប្រៀបធៀបត្រីកោណ $AED$ និង $BEC$}
+
+  % ---------- left : solution text ----------
+  \only<1->{\node[anchor=west,text=NavyDeep,inner sep=0] at (0.6,7.1) {\fontsize{14}{18}\selectfont ក្នុង $\Delta AED$ និង $\Delta BEC$ មាន };}
+  \only<2->{\prow{0.8}{6.1}{ម}{AngCol}{$\angle DEA=\angle CEB$}{(មុំទល់កំពូល)}}
+  \only<3->{\prow{0.8}{5.1}{ជ}{SideCol}{$EA=EB$}{(សមតិកម្ម)}}
+  \only<4->{\prow{0.8}{4.1}{ម}{AngCol}{$\angle DAE=\angle CBE$}{(មុំឆ្លាស់ក្នុង ព្រោះ $AD\parallel CB$)}}
+  \only<5->{
+    \draw[NavyDeep!25,line width=0.6pt] (0.6,3.45)--(9.6,3.45);
+    \node[anchor=west,text=NavyDeep,inner sep=0] at (0.6,2.95)
+         {\fontsize{14}{18}\selectfont\textcolor{GreenAccent!55!black}{\textbf{សន្និដ្ឋាន}} \ $\Delta AED\cong\Delta BEC$ \ (ករណី ម.ជ.ម)};}
+  \only<6->{\concl{5.1}{1.75}{ដូចនេះ \ $\Delta AED\cong\Delta BEC$ \ (ករណី ម.ជ.ម)}}
+
+  % ---------- right : figure (thin, unfilled) ----------
+  \modelfig{12.9}{4.3}{0.85}
+  \draw[NavyDeep,line width=0.9pt,line join=round] (A)--(B) (C)--(D) (A)--(D) (C)--(B);
+  \fill[NavyDeep] (A) circle (1.8pt) (B) circle (1.8pt) (C) circle (1.8pt) (D) circle (1.8pt) (E) circle (1.8pt);
+  \foreach \p/\an/\nm in {A/south east/A,B/north west/B,C/north east/C,D/south west/D}{
+    \node[text=NavyDeep,font=\bfseries\itshape\fontsize{13}{15}\selectfont,anchor=\an,inner sep=3pt] at (\p) {$\nm$};}
+  \node[text=NavyDeep,font=\bfseries\itshape\fontsize{13}{15}\selectfont,anchor=center,inner sep=0pt] at ($(E)+(186:0.58)$) {$E$};
+  \only<2->{
+    \foreach \sa/\ea in {40.9/151.6,220.9/331.6}{
+      \draw[VertCol,line width=0.8pt] ($(E)+(\sa:0.4)$) arc[start angle=\sa,end angle=\ea,radius=0.4];
+      \pgfmathsetmacro{\mm}{(\sa+\ea)/2}
+      \draw[VertCol,line width=0.8pt] ($(E)+(\mm-5:0.31)$)--($(E)+(\mm-5:0.49)$);
+      \draw[VertCol,line width=0.8pt] ($(E)+(\mm+5:0.31)$)--($(E)+(\mm+5:0.49)$);}}
+  \only<3->{
+    \draw[SideCol,line width=1pt] ($(A)!0.5!(E)$)++(61.56:0.13)--++(241.56:0.26);
+    \draw[SideCol,line width=1pt] ($(B)!0.5!(E)$)++(61.56:0.13)--++(241.56:0.26);}
+  \only<4->{
+    \foreach \pt/\sa/\ea in {A/-28.44/0,B/151.56/180}{
+      \draw[AngCol,line width=0.8pt] ($(\pt)+(\sa:0.5)$) arc[start angle=\sa,end angle=\ea,radius=0.5];}
+    \draw[AngCol,line width=0.8pt] ($(A)+(-14.22:0.42)$)--($(A)+(-14.22:0.58)$);
+    \draw[AngCol,line width=0.8pt] ($(B)+(165.78:0.42)$)--($(B)+(165.78:0.58)$);
+    \draw[AngCol,line width=0.8pt,line cap=round,line join=round] ($(A)!0.5!(D)+(-0.07,0.11)$)--++(0.14,-0.11)--++(-0.14,-0.11);
+    \draw[AngCol,line width=0.8pt,line cap=round,line join=round] ($(C)!0.5!(B)+(-0.07,0.11)$)--++(0.14,-0.11)--++(-0.14,-0.11);}
+
+  \sFtr
+\end{tikzpicture}
+\end{frame}

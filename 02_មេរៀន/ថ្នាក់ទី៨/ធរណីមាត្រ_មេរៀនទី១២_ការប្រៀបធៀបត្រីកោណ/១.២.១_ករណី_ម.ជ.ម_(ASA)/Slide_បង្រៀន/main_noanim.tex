@@ -1,0 +1,41 @@
+% !TeX program = xelatex
+% =============================================================================
+%  NO-ANIMATION VERSION  –  one page per slide (final, complete step only)
+%
+%  This file does not re-typeset the slides.  It reads main.nav (written each
+%  time main.tex is compiled) and takes the LAST overlay page of every frame
+%  from main.pdf, i.e. the state where every animation step is already shown.
+%  Slide numbers in the footer therefore stay identical to main.pdf.
+%
+%  BUILD:  1) compile main.tex as usual (xelatex main.tex, twice)
+%          2) xelatex main_noanim.tex          ->  main_noanim.pdf
+% =============================================================================
+\documentclass{article}
+\usepackage{pdfpages}
+
+% ---------------------------------------------------------------------------
+%  Collect the last page of each frame from main.nav
+% ---------------------------------------------------------------------------
+\makeatletter
+\gdef\NoAnimPages{}
+\def\headcommand#1{#1}
+\def\slideentry#1#2#3#4#5#6{}
+\def\sectionentry#1#2#3#4#5{}
+\def\beamer@sectionentry#1#2#3#4#5{}
+\def\beamer@subsectionentry#1#2#3#4#5{}
+\def\beamer@partpages#1#2{}
+\def\beamer@sectionpages#1#2{}
+\def\beamer@subsectionpages#1#2{}
+\def\beamer@documentpages#1{}
+\def\beamer@appendixpages#1{}
+\def\beamer@framepages#1#2{%
+  \ifx\NoAnimPages\@empty \xdef\NoAnimPages{#2}%
+  \else \xdef\NoAnimPages{\NoAnimPages,#2}\fi}
+\IfFileExists{main.nav}{\input{main.nav}}%
+  {\PackageError{main_noanim}{main.nav not found}{Compile main.tex first.}}
+\makeatother
+
+\begin{document}
+\edef\NoAnimInclude{\noexpand\includepdf[pages={\NoAnimPages},fitpaper]{main.pdf}}
+\NoAnimInclude
+\end{document}

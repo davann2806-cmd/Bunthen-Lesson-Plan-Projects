@@ -1,0 +1,210 @@
+% !TeX program = xelatex
+\documentclass[10pt,a4paper]{article}
+\usepackage[a4paper,margin=0mm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{fontspec}
+\usepackage{tikz}
+\usetikzlibrary{calc,arrows.meta,angles,quotes}
+\usepackage{pifont}
+
+% -------------------------------------------------------------
+% កំណត់ពុម្ពអក្សរខ្មែរ (Khmer Fonts Setup via fontspec)
+% ចំណងជើងធំ៖ Khmer OS Muol Light
+% អត្ថបទ និងលំហាត់៖ Khmer OS Content
+% -------------------------------------------------------------
+\setmainfont{Khmer OS Content}[
+  AutoFakeBold=1.5,
+  Scale=0.98
+]
+\newfontfamily\khmermuol{Khmer OS Muol Light}[Scale=0.95]
+
+% ក្បួនកាត់បន្ទាត់ពាក្យខ្មែរក្នុង XeTeX (Khmer word breaking)
+\XeTeXlinebreaklocale "km"
+\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
+
+\linespread{1.18}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+
+% -------------------------------------------------------------
+% រូបមន្តគូរប្លង់សន្លឹកកិច្ចការ ១ ខ្ទង់ (Macro for Page 1 Half)
+% ប៉ារ៉ាម៉ែត្រ #1: ចម្ងាយគម្លាតបញ្ឈរពីផ្ចិតទំព័រ (Vertical shift)
+% -------------------------------------------------------------
+\newcommand{\renderhalf}[1]{%
+  \node[anchor=center, inner sep=0pt] at ($(current page.center) + (0, #1)$) {%
+    \begin{minipage}[c][134mm][c]{184mm}
+      % --- ១. ចំណងជើងសន្លឹកកិច្ចការ (WORKSHEET TITLE) ---
+      \begin{center}
+        {\khmermuol\fontsize{12.5pt}{16pt}\selectfont សន្លឹកកិច្ចការ៖ ការសង់ និងប្រៀបធៀបត្រីកោណ (ករណី ជ.ម.ជ)}\\[1.5mm]
+        {\fontsize{8.5pt}{11pt}\selectfont\color{black!75} គណិតវិទ្យាថ្នាក់ទី ៨ \enspace$\bullet$\enspace ករណីប៉ុនគ្នានៃត្រីកោណ (ជ្រុង-មុំ-ជ្រុង)}
+      \end{center}
+
+      \vspace{1mm}
+      % --- ២. ព័ត៌មានសិស្ស (STUDENT DETAILS) ---
+      \noindent
+      \fontsize{9.5pt}{13pt}\selectfont
+      \textbf{ឈ្មោះសិស្ស៖} \rule{66mm}{0.4pt}\hfill
+      \textbf{កាលបរិច្ឆេទ៖} \rule{38mm}{0.4pt}\hfill
+      \textbf{ថ្នាក់៖} \rule{26mm}{0.4pt}
+
+      \vspace{2.5mm}
+      % --- ៣. កិច្ចការទី ១ (TASK 1 INSTRUCTION) ---
+      \noindent
+      \fontsize{9pt}{12.5pt}\selectfont
+      \textbf{១. ដោយប្រើបន្ទាត់ក្រិត និងរ៉ាប់ទ័រ ចូរសង់ត្រីកោណ $ABC$ មួយដែលមាន៖} \\[0.15cm]
+      \hspace*{0.35cm}
+      អង្កត់ $AB = 4\text{ cm}$ ។ មុំ $\angle BAx = 60^\circ$ ត្រង់ចំណុច $A$ ។ ចំណុច $C$ នៅលើកន្លះបន្ទាត់ $Ax$ ដែល $AC = 6\text{ cm}$ ។
+
+      \vspace{1.5mm}
+      % --- ៤. ផ្ទៃសម្រាប់សង់រូប (LARGE WORKING AREA BOX) ---
+      \noindent
+      \begin{tikzpicture}
+        % ប្រអប់ខាងក្រៅ៖ ទទឹង 184mm កម្ពស់ 67mm (C នៅខ្ពស់ 5.2 cm ពី AB ដូច្នេះត្រូវការកម្ពស់ច្រើនជាងមុន)
+        \draw[line width=0.8pt, rounded corners=3pt, fill=black!0.8] (0, 0) rectangle (18.4, 6.7);
+
+        % ស្លាកសម្គាល់ប្រអប់
+        \node[anchor=north west, font=\fontsize{7.5pt}{9pt}\selectfont\bfseries, color=black!60] at (0.25, 6.45) {ផ្ទៃសម្រាប់សង់រូប};
+
+        % អង្កត់ AB៖ ប្រវែងពិតប្រាកដ 4.0 cm នៅខាងក្រោម (ទុកកន្លែងខាងលើសម្រាប់ C ខ្ពស់ 5.2 cm)
+        \coordinate (A) at (7.2, 0.75);
+        \coordinate (B) at (11.2, 0.75);
+
+        % គំនូសអង្កត់ AB (៤ សង់ទីម៉ែត្រពិតប្រាកដលើក្រដាស: 11.2cm - 7.2cm = 4.0cm)
+        \draw[line width=1.5pt, line cap=round] (A) -- (B);
+
+        % ចំណុចកំពូល A និង B
+        \fill (A) circle (2.2pt);
+        \fill (B) circle (2.2pt);
+
+        % គំនូសឆ្នូតផ្ចិតរ៉ាប់ទ័រ (Alignment ticks)
+        \draw[line width=0.5pt, black!45] ($(A) + (0, -0.2)$) -- ($(A) + (0, 0.2)$);
+        \draw[line width=0.5pt, black!45] ($(B) + (0, -0.2)$) -- ($(B) + (0, 0.2)$);
+
+        % ស្លាកឈ្មោះចំណុចកំពូល A និង B
+        \node[below left=2pt, font=\fontsize{10.5pt}{12pt}\selectfont\bfseries] at (A) {$A$};
+        \node[below right=2pt, font=\fontsize{10.5pt}{12pt}\selectfont\bfseries] at (B) {$B$};
+
+        % ស្លាកប្រវែង 4 cm
+        \node[below=4pt, font=\fontsize{9pt}{11pt}\selectfont] at (9.2, 0.75) {$4\text{ cm}$};
+
+        % ណែនាំជំនួយស្មារតីសិស្សក្នុងការសង់រូប
+        \node[anchor=south west, text width=5.6cm, font=\fontsize{7pt}{8.6pt}\selectfont, color=black!50] at (0.25, 0.2) {%
+          $\star$ ណែនាំ៖ តម្រឹមផ្ចិតរ៉ាប់ទ័រឱ្យចំកំពូល $A$ ដើម្បីវាស់មុំ $60^\circ$ រួចគូសកន្លះបន្ទាត់ $Ax$ ។ ដាក់ចំណុច $C$ លើ $Ax$ ឱ្យ $AC = 6\text{ cm}$ ហើយភ្ជាប់ $B$ ជាមួយ $C$ ។%
+        };
+      \end{tikzpicture}
+
+      \vspace{1.5mm}
+      % --- ៥. កិច្ចការទី ២ (TASK 2 INSTRUCTION) ---
+      \noindent
+      \fontsize{9pt}{12.5pt}\selectfont
+      \textbf{២. ចូរយកត្រីកោណ $A'B'C'$ ដែលគ្រូបានចែកឱ្យ មកដាក់ត្រួតពីលើត្រីកោណ $ABC$ ដែលបានសង់រួច ដោយឱ្យមុំ $A'$ ត្រួតស៊ីគ្នានឹងមុំ $A$ ។}
+
+      \vspace{1.5mm}
+      % --- ៦. សំណួរសង្កេត (TASK 3 OBSERVATION QUESTION) ---
+      \noindent
+      \textbf{៣. តើអ្នកសង្កេតឃើញយ៉ាងដូចម្តេច នៅពេលយកត្រីកោណ $A'B'C'$ មកដាក់ត្រួតពីលើត្រីកោណ $ABC$? ចូរសរសេរសេចក្តីសន្និដ្ឋានខាងក្រោម៖}
+
+      \vspace{1mm}
+      % --- ៧. បន្ទាត់ចុចៗសម្រាប់សរសេរចម្លើយ (3 DOTTED LINES) ---
+      \noindent
+      \begin{tikzpicture}
+        \foreach \i in {1, 2, 3} {
+          \draw[line width=0.6pt, loosely dotted, black!65] (0, {-\i * 5mm}) -- (18.4, {-\i * 5mm});
+        }
+      \end{tikzpicture}
+    \end{minipage}
+  };
+}
+
+% -------------------------------------------------------------
+% រូបមន្តគូរត្រីកោណគំរូ A'B'C' មួយ (Macro for Pre-cut Unit on Page 2)
+% A'B' = 4.0 cm, មុំ A' = 60 deg, A'C' = 6.0 cm
+% កំពូល C' នៅត្រង់ (3.0 cm, 5.196 cm) = (6 cos 60, 6 sin 60)
+% ប៉ុនគ្នា ១០០% នឹងត្រីកោណ ABC ដែលសិស្សសង់ក្នុងទំព័រទី ១
+% -------------------------------------------------------------
+\newcommand{\precutcard}{%
+  \begin{tikzpicture}[scale=1.0]
+    % ប្រអប់បន្ទាត់ដាច់ៗសម្រាប់កាត់ (Dashed border around card)
+    \draw[dashed, line width=0.65pt, gray!70, rounded corners=2pt] (-0.65, -0.9) rectangle (4.65, 6.15);
+
+    % ស្លាកកន្ត្រៃកាត់ (ដាក់ខាងលើឆ្វេង ដើម្បីកុំឱ្យជាន់ឈ្មោះ C')
+    \node[anchor=north west, font=\fontsize{6.5pt}{8pt}\selectfont, text=gray!80] at (-0.55, 6.08) {\ding{36} កាត់តាមបន្ទាត់នេះ};
+
+    % កូអរដោនេកំពូលទាំង ៣ នៃត្រីកោណ A'B'C'
+    \coordinate (Ap) at (0, 0);
+    \coordinate (Bp) at (4, 0);
+    \coordinate (Cp) at (3, 5.196);
+
+    % ផ្ទៃពណ៌ស្រាលខាងក្នុង និងគំនូសជ្រុងទាំង ៣
+    \fill[teal!8] (Ap) -- (Bp) -- (Cp) -- cycle;
+    \draw[line width=1.3pt, teal!80!black, line join=round] (Ap) -- (Bp) -- (Cp) -- cycle;
+
+    % ធ្នូមុំ 60 ដឺក្រេ ត្រង់ A'
+    \draw[line width=0.6pt, teal!70!black] (0.8, 0) arc (0:60:0.8);
+    \node[font=\fontsize{7pt}{8pt}\selectfont, text=teal!90!black] at (1.2, 0.5) {$60^\circ$};
+
+    % ចំណុចកំពូល
+    \fill (Ap) circle (1.8pt);
+    \fill (Bp) circle (1.8pt);
+    \fill (Cp) circle (1.8pt);
+
+    % ឈ្មោះកំពូល
+    \node[below left=1pt, font=\bfseries\small] at (Ap) {$A'$};
+    \node[below right=1pt, font=\bfseries\small] at (Bp) {$B'$};
+    \node[above=2pt, font=\bfseries\small] at (Cp) {$C'$};
+
+    % ប្រវែងជ្រុង A'B' = 4 cm និង A'C' = 6 cm
+    \node[below=2.5pt, font=\fontsize{7.5pt}{9pt}\selectfont] at (2, 0) {$4\text{ cm}$};
+    \node[rotate=60, font=\fontsize{7.5pt}{9pt}\selectfont] at ($(Ap)!0.5!(Cp) + (150:0.28)$) {$6\text{ cm}$};
+  \end{tikzpicture}%
+}
+
+\begin{document}
+
+% =============================================================
+% ទំព័រទី ១៖ សន្លឹកកិច្ចការ (PAGE 1: WORKSHEET - 2-UP A4)
+% =============================================================
+\begin{tikzpicture}[remember picture, overlay]
+  % ពាក់កណ្តាលផ្នែកខាងលើ
+  \renderhalf{74.25mm}
+
+  % បន្ទាត់សម្រាប់កាត់ក្រដាសចែកជាពីរ
+  \draw[line width=0.6pt, dashed, black!45]
+    ($(current page.west) + (8mm, 0)$) -- ($(current page.east) + (-8mm, 0)$);
+
+  % ស្លាកកន្ត្រៃកាត់ក្រដាស
+  \node[fill=white, inner sep=3.5pt, font=\fontsize{7.5pt}{9pt}\selectfont, text=black!65] at (current page.center) {%
+    \ding{36}\enspace កាត់តាមបន្ទាត់ដាច់ៗនេះ ដើម្បីបែងចែកសន្លឹកកិច្ចការជាពីរ\enspace\ding{36}%
+  };
+
+  % ពាក់កណ្តាលផ្នែកខាងក្រោម
+  \renderhalf{-74.25mm}
+\end{tikzpicture}
+
+\null\clearpage
+
+% =============================================================
+% ទំព័រទី ២៖ រូបត្រីកោណ A'B'C' សម្រាប់កាត់ (PAGE 2: PRE-CUT TRIANGLES)
+% =============================================================
+\newgeometry{top=12mm, bottom=12mm, left=15mm, right=15mm}
+
+\begin{center}
+  {\khmermuol\fontsize{13pt}{17pt}\selectfont ត្រីកោណគំរូ $A'B'C'$ សម្រាប់កាត់}\\[1.5mm]
+  {\fontsize{8.5pt}{11pt}\selectfont\color{black!70} $\bullet$ ត្រីកោណនីមួយៗត្រូវមានរង្វាស់ប៉ុនគ្នាបេះបិទ $A'B'=4\text{ cm}, \angle A'=60^\circ, A'C'=6\text{ cm}$}
+\end{center}
+\vspace{1mm}
+\hrule height 0.6pt
+\vspace{5mm}
+
+% តារាងក្រឡាត្រីកោណ ៩ (Grid of 9 congruent triangles: 3 columns x 3 rows)
+\noindent
+\begin{center}
+\begin{tabular}{ccc}
+  \precutcard & \precutcard & \precutcard \\[4mm]
+  \precutcard & \precutcard & \precutcard \\[4mm]
+  \precutcard & \precutcard & \precutcard
+\end{tabular}
+\end{center}
+
+\end{document}

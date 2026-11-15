@@ -1,0 +1,81 @@
+% =============================================================================
+%  SLIDE 2 – Homework Review (Vertical triangle stack, wide solution card)
+%    1: problem (header)           2: the two triangles + question
+%    3: congruence rule            4: ST = DE  (side highlighted on both)
+%    5: SR = DF  (side highlighted) 6: angle S ≠ angle D (arcs in red)
+%    7: conclusion
+% =============================================================================
+\begin{frame}
+\begin{tikzpicture}[remember picture,overlay,shift={(current page.south west)},x=1cm,y=1cm]
+
+  \fill[white] (0,0) rectangle (16,9);
+
+  % ---- header ----------------------------------------------------------------
+  \node[anchor=west,text=NavyDeep] at (0.8, 8.45)
+       {{\fontsize{12.5}{17}\selectfont\muol{កំណែកិច្ចការផ្ទះ}}\ \ %
+        {\fontsize{10}{14}\selectfont ពន្យល់ថាតើត្រីកោណទាំងពីរខាងក្រោម ប៉ុនគ្នាឬទេ?}};
+  \draw[NavyDeep!18,line width=0.6pt] (0.8,8.12)--(15.2,8.12);
+
+  % ---- TOP: two triangles side by side, centred in each half -----------------
+  % #1 = x of left vertex, #2 = angle, #3,#4,#5 = vertex names, #6 = prefix, #7 = name pill
+
+  \only<2->{
+    \hwtri{3.0}{50}{S}{T}{R}{L}{}
+    \hwtri{10.0}{60}{D}{E}{F}{M}{}
+
+    \draw[NavyDeep!14,line width=0.5pt,dashed] (8,4.5)--(8,7.7);
+    \draw[NavyDeep!18,line width=0.6pt] (0.8,4.3)--(15.2,4.3);
+  }
+
+  % ---- BOTTOM: solution -------------------------------------------------------
+  \only<2>{
+    \node[text=NavyDeep] at (8,2.4) {%
+      {\fontsize{18}{24}\selectfont តើត្រីកោណទាំងពីរនេះ\ \color{RoyalBlue}\bfseries ប៉ុនគ្នាដែរឬទេ?}};
+  }
+
+  \only<3->{
+    \node[anchor=west,font=\bfseries,text=NavyDeep] at (0.8,3.95)
+         {\fontsize{11}{16}\selectfont គេដឹងថា ត្រីកោណពីរប៉ុនគ្នា លុះត្រាតែធាតុត្រូវគ្នាជាធាតុប៉ុនគ្នា};
+  }
+  \only<4->{
+    \fill[GreenAccent!20] (1.15,2.95) circle (6.5pt);
+    \draw[GreenAccent!80!black,line width=0.9pt] (1.15,2.95) circle (6.5pt);
+    \draw[GreenAccent!80!black,line width=1.2pt,line cap=round,line join=round] (1.15,2.95)++(-3pt,-0.5pt)--++(2pt,-2pt)--++(4.2pt,5pt);
+    \node[anchor=west,text=NavyDeep] at (1.6,2.95) {%
+      {\fontsize{14}{18}\selectfont $\boldsymbol{ST = DE}$}\ \ {\fontsize{11}{16}\selectfont\color{black!70}(ជ្រុងត្រូវគ្នាប៉ុនគ្នា)}};
+  }
+  \only<5->{
+    \fill[GreenAccent!20] (1.15,2.15) circle (6.5pt);
+    \draw[GreenAccent!80!black,line width=0.9pt] (1.15,2.15) circle (6.5pt);
+    \draw[GreenAccent!80!black,line width=1.2pt,line cap=round,line join=round] (1.15,2.15)++(-3pt,-0.5pt)--++(2pt,-2pt)--++(4.2pt,5pt);
+    \node[anchor=west,text=NavyDeep] at (1.6,2.15) {%
+      {\fontsize{14}{18}\selectfont $\boldsymbol{SR = DF}$}\ \ {\fontsize{11}{16}\selectfont\color{black!70}(ជ្រុងត្រូវគ្នាប៉ុនគ្នា)}};
+  }
+  \only<6->{
+    \fill[RedAccent!15] (1.15,1.35) circle (6.5pt);
+    \draw[RedAccent!80!black,line width=0.9pt] (1.15,1.35) circle (6.5pt);
+    \draw[RedAccent!80!black,line width=1.2pt,line cap=round] (1.15,1.35)++(-2.2pt,-2.2pt)--++(4.4pt,4.4pt);
+    \draw[RedAccent!80!black,line width=1.2pt,line cap=round] (1.15,1.35)++(-2.2pt,2.2pt)--++(4.4pt,-4.4pt);
+    \node[anchor=west,text=NavyDeep] at (1.6,1.35) {%
+      {\fontsize{14}{18}\selectfont $\boldsymbol{\angle S \neq \angle D}$}\ \ {\fontsize{11}{16}\selectfont\color{RedAccent!85!black}(មុំត្រូវគ្នាមិនប៉ុនគ្នា)}};
+  }
+  \only<7->{
+    \fill[RedAccent!6] (9.8,1.0) rectangle (15.2,3.5);
+    \draw[RedAccent!50,line width=0.8pt] (9.8,1.0) rectangle (15.2,3.5);
+    \node[anchor=west,text=RoyalBlue] at (10.1,3.0) {\fontsize{12}{16}\selectfont\muol{សន្និដ្ឋាន}};
+    \node[anchor=west,text=NavyDeep,font=\bfseries] at (10.1,2.25)
+         {\fontsize{11.5}{16}\selectfont ត្រីកោណទាំងពីរ\ \textcolor{RedAccent!90!black}{\textbf{មិនប៉ុនគ្នាទេ}}};
+    \node[anchor=west,text=black!80] at (10.1,1.5)
+         {\fontsize{12}{16}\selectfont $\boldsymbol{\Delta STR \not\cong \Delta DEF}$};
+  }
+
+  % ---- footer ----------------------------------------------------------------
+  \fill[NavyDeep] (0,0) rectangle (16,0.65);
+  \shade[shading=axis,left color=GoldAccent,right color=GoldAccent!0] (0,0.65) rectangle (16,0.71);
+  \node[anchor=west,inner sep=0,text=white] at (0.8,0.28)
+       {\fontsize{8.5}{11}\selectfont \TeacherName\ \ |\ \ \color{SkyLight}គណិតវិទ្យា ថ្នាក់ទី៨};
+  \node[anchor=east,inner sep=0,text=GoldAccent] at (15.2,0.28)
+       {\fontsize{8.5}{11}\selectfont\muol{មេរៀនទី១២}\ \ \color{white}ការប្រៀបធៀបត្រីកោណ};
+
+\end{tikzpicture}
+\end{frame}

@@ -1,0 +1,94 @@
+name: Build NGS Khmer XeLaTeX PDFs
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "**/*.tex"
+      - "fonts/**"
+      - "scripts/**"
+      - ".github/workflows/build-latex.yml"
+  workflow_dispatch:
+    inputs:
+      target_path:
+        description: "Relative path to a .tex file or lesson folder"
+        required: true
+        default: "01_កិច្ចតែងការបង្រៀន/ថ្នាក់ទី៨/ធរណីមាត្រ_មេរៀនទី១២_ការប្រៀបធៀបត្រីកោណ/៣.១_វិសមភាពចំពោះជ្រុងនិងមុំនៃត្រីកោណមួយ"
+      commit_pdfs:
+        description: "Commit rebuilt PDFs back to main branch?"
+        type: boolean
+        required: false
+        default: true
+
+permissions:
+  contents: write
+
+jobs:
+  build-latex:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Install XeLaTeX & Python PyMuPDF
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            texlive-xetex \
+            texlive-latex-recommended \
+            texlive-latex-extra \
+            texlive-pictures \
+            texlive-science \
+            texlive-fonts-recommended \
+            fontconfig \
+            lmodern \
+            python3-pip
+          python3 -m pip install --break-system-packages pymupdf
+
+      - name: Install bundled Khmer & Math fonts
+        run: bash scripts/setup_cloud.sh
+
+      - name: Compile targeted or modified XeLaTeX documents
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            if [ "${{ inputs.commit_pdfs }}" = "true" ]; then
+              python3 scripts/compile_latex.py --target "${{ inputs.target_path }}" --in-place
+            else
+              python3 scripts/compile_latex.py --target "${{ inputs.target_path }}"
+            fi
+          elif [ "${{ github.event.before }}" = "0000000000000000000000000000000000000000" ]; then
+            python3 scripts/compile_latex.py --changed "${{ github.event.before }}" "${{ github.sha }}"
+          else
+            python3 scripts/compile_latex.py --changed "${{ github.event.before }}" "${{ github.sha }}" --in-place
+          fi
+
+      - name: Upload compiled PDFs as downloadable artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: compiled-khmer-pdfs-${{ github.run_number }}
+          path: dist_pdfs/
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Commit updated PDFs back to repository
+        if: |
+          (github.event_name == 'push' && github.event.before != '0000000000000000000000000000000000000000') ||
+          (github.event_name == 'workflow_dispatch' && inputs.commit_pdfs)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ -s dist_pdfs/compiled_paths.txt ]; then
+            while IFS= read -r pdf_path; do
+              [ -n "$pdf_path" ] && [ -f "$pdf_path" ] && git -c core.quotePath=false add -- "$pdf_path"
+            done < dist_pdfs/compiled_paths.txt
+            if ! git diff --cached --quiet; then
+              git commit -m "Auto-compile updated Khmer XeLaTeX PDFs [skip ci]"
+              git push
+            else
+              echo "No updated PDFs to commit."
+            fi
+          else
+            echo "No compiled PDFs manifest found."
+          fi

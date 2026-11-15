@@ -1,0 +1,242 @@
+% !TeX program = xelatex
+\documentclass[a4paper,10pt]{article}
+
+% ============================================================================
+% ក្រដាសដាច់ដោយឡែក៖ សេណារីយ៉ូនៃការបង្រៀន (Scenario នៃការបង្រៀន – ៥០ នាទី)
+% ============================================================================
+\usepackage[a4paper, left=0.95cm, right=0.95cm, top=1.0cm, bottom=1.1cm, footskip=0.5cm]{geometry}
+\usepackage{amsmath}
+\usepackage{unicode-math}
+\usepackage{fontspec}
+\usepackage{array, longtable, colortbl}
+\usepackage[table]{xcolor}
+\usepackage{pifont}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+
+% LaTeX 2025 + longtable compatibility guard
+\makeatletter
+\let\@expl@@@mark@update@singlecol@structures@@\relax
+\makeatother
+
+% Cross-platform font path resolver (Windows local + Linux/Cloud repo fonts/)
+\providecommand{\NGSFindFonts}{%
+  \IfFileExists{C:/Windows/Fonts/cambria.ttc}{%
+    \def\NGSSysPath{C:/Windows/Fonts/}%
+    \def\NGSUserPath{C:/Users/KIT/AppData/Local/Microsoft/Windows/Fonts/}%
+  }{%
+    \IfFileExists{./fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{./fonts/}\def\NGSUserPath{./fonts/}}{%
+    \IfFileExists{../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../fonts/}\def\NGSUserPath{../fonts/}}{%
+    \IfFileExists{../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../fonts/}\def\NGSUserPath{../../fonts/}}{%
+    \IfFileExists{../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../fonts/}\def\NGSUserPath{../../../fonts/}}{%
+    \IfFileExists{../../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../../fonts/}\def\NGSUserPath{../../../../fonts/}}{%
+    \IfFileExists{../../../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../../../fonts/}\def\NGSUserPath{../../../../../fonts/}}{%
+    \IfFileExists{../../../../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../../../../fonts/}\def\NGSUserPath{../../../../../../fonts/}}{%
+      \def\NGSSysPath{../../../../../../../fonts/}\def\NGSUserPath{../../../../../../../fonts/}%
+    }}}}}}}%
+  }%
+}
+\NGSFindFonts
+
+\setmathfont[
+  Path={\NGSSysPath},
+  FontIndex=1,
+  Scale=1.02
+]{cambria.ttc}
+
+\defaultfontfeatures{Ligatures=TeX}
+
+\setmainfont[
+  Path={\NGSUserPath},
+  Extension=.ttf,
+  Script=Khmer,
+  BoldFont={KhmerOSsiemreap},
+  BoldFeatures={FakeBold=1.8},
+  ItalicFont={KhmerOSsiemreap},
+  ItalicFeatures={FakeSlant=0.25},
+  BoldItalicFont={KhmerOSsiemreap},
+  BoldItalicFeatures={FakeBold=1.8, FakeSlant=0.25}
+]{KhmerOSsiemreap}
+
+\newfontfamily\muol[
+  Path={\NGSUserPath},
+  Extension=.ttf,
+  Script=Khmer
+]{KhmerOSmuollight}
+
+\newfontfamily\NagaBold[
+  Path={\NGSUserPath},
+  Extension=.ttf
+]{AKbalthom Naga Bold}
+
+\newfontfamily\CalibriFont[
+  Path={\NGSSysPath},
+  Extension=.ttf
+]{calibri}
+
+\XeTeXlinebreaklocale "km"
+\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
+
+\definecolor{stepgray}{HTML}{D9D9D9}
+\definecolor{headgray}{HTML}{F2F2F2}
+\definecolor{darkred}{HTML}{C00000}
+\definecolor{red5e}{HTML}{FF0000}
+\definecolor{figblue}{HTML}{1F4E9E}
+\definecolor{tealink}{HTML}{0F766E}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[R]{\CalibriFont\fontsize{11pt}{13pt}\selectfont\thepage}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\tabcolsep}{4pt}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcommand{\fiveE}[1]{{\NagaBold\fontsize{9pt}{12.5pt}\selectfont\textcolor{red5e}{#1}}}
+\newcommand{\ditem}{\tikz[baseline=-0.5ex]\fill (0,0.40ex) -- (0.40ex,0) -- (0,-0.40ex) -- (-0.40ex,0) -- cycle;\hspace{0.25em}}
+\newcommand{\chkbox}{\tikz[baseline=-0.1ex]\draw[thin](0,0) rectangle (0.24,0.24);}
+\newcommand{\cnum}[1]{{\fontsize{9.5pt}{11pt}\selectfont\ding{\numexpr181+#1\relax}}\hspace{0.15em}}
+
+\begin{document}
+\fontsize{9.5pt}{15.4pt}\selectfont
+
+% -------------------- ក្បាលឯកសារ Scenario --------------------
+\begin{center}
+  {\muol\fontsize{11pt}{16pt}\selectfont ព្រះរាជាណាចក្រកម្ពុជា}\\[1pt]
+  {\muol\fontsize{10pt}{15pt}\selectfont ជាតិ សាសនា ព្រះមហាក្សត្រ}\\[4pt]
+  {\muol\fontsize{10.5pt}{15pt}\selectfont សេណារីយ៉ូនៃការបង្រៀន (Scenario នៃការបង្រៀន)}
+\end{center}
+
+\vspace{2pt}
+{\renewcommand{\arraystretch}{1.08}
+\begin{tabular}{@{}l l l p{1.0cm} l l l@{}}
+  - អនុវិទ្យាល័យ & : & ព្រះក្រសាំង & & - មុខវិជ្ជា & : & គណិតវិទ្យា ថ្នាក់ទី៨ \\
+  - មេរៀនទី១២ & : & ការប្រៀបធៀបត្រីកោណ (១.២.២ ករណី ជ.ម.ជ) & & - រយៈពេលសរុប & : & \textcolor{darkred}{\textbf{១ ម៉ោងសិក្សា (៥០ នាទី)}} \\
+  - គ្រូបង្រៀន & : & ហុក ប៊ុនថែន & & - គំរូបង្រៀន & : & 5Es សកម្មភាពច្នៃប្រឌិត \\
+\end{tabular}
+}
+
+\vspace{4pt}
+
+% -------------------- I. តារាងបែងចែកពេលវេលា និងសេណារីយ៉ូលម្អិត (៥០ នាទី) --------------------
+\textbf{I.} {\muol តារាងបែងចែកពេលវេលា និងសេណារីយ៉ូប្រតិបត្តិការក្នុងថ្នាក់ (៥០ នាទី)}
+
+\vspace{-2pt}
+\renewcommand{\arraystretch}{1.16}
+\begin{longtable}{|c|L{2.8cm}|c|L{7.6cm}|L{4.4cm}|}
+\hline
+\rowcolor{headgray}
+\multicolumn{1}{|c|}{\muol នាទី} &
+\multicolumn{1}{c|}{\muol ជំហាន / 5Es} &
+\multicolumn{1}{c|}{\muol រយៈពេល} &
+\multicolumn{1}{c|}{\muol សេណារីយ៉ូប្រតិបត្តិ (ពាក្យពេចន៍គ្រូ \& សម្ភារៈ)} &
+\multicolumn{1}{c|}{\muol ការគ្រប់គ្រង \& វិធីបម្រុង} \\
+\hline
+\endfirsthead
+
+\hline
+\rowcolor{headgray}
+\multicolumn{1}{|c|}{\muol នាទី} &
+\multicolumn{1}{c|}{\muol ជំហាន / 5Es} &
+\multicolumn{1}{c|}{\muol រយៈពេល} &
+\multicolumn{1}{c|}{\muol សេណារីយ៉ូប្រតិបត្តិ (ពាក្យពេចន៍គ្រូ \& សម្ភារៈ)} &
+\multicolumn{1}{c|}{\muol ការគ្រប់គ្រង \& វិធីបម្រុង} \\
+\hline
+\endhead
+
+\hline
+\endfoot
+
+\hline
+\endlastfoot
+
+00--02 & \textbf{ជំហានទី១}\newline រដ្ឋបាលថ្នាក់ & ២ នាទី &
+\ditem ហៅអវត្តមានរហ័ស ពិនិត្យអនាម័យតុ ។\newline
+\ditem ចែកសិស្សជាក្រុម ៣ នាក់ («ក្រុមវិស្វករ») ដាក់កញ្ចប់សម្ភារៈពិសោធន៍ទុកមុខតុ (ហាមទាន់បើកមុនបញ្ជា)។ &
+ចាត់តាំងប្រធានក្រុមទុកមុន ដើម្បីកុំឱ្យខាតពេលរើតុកៅអី។ \\ \hline
+
+02--05 & \textbf{ជំហានទី២ (ក)}\newline កំណែកិច្ចការផ្ទះ & ៣ នាទី &
+\ditem បញ្ចាំង\textbf{ល្បែងចាប់កំហុស} ៖ ដាក់សំណួរបញ្ឆោតលើ Slide «តើ $\angle KBD = \angle ABD$ ត្រូវឬខុស?»\newline
+\ditem ទុកពេល ៣០ វិនាទីឱ្យដៃគូពិភាក្សា រួចសង្ខេបចម្លើយ\textbf{«ម.ជ.ម»} ទាំង ២ សំណួរ ក និង ខ លើ Slide។ &
+មិនចាំបាច់ហៅសិស្សសរសេរពេញលើក្ដារខៀនទេ ផ្ដោតតែត្រង់មុំបន្ថែមគ្នា។ \\ \hline
+
+05--08 & \textbf{ជំហានទី២ (ខ)}\newline រំលឹកមេរៀនទាក់ទង & ៣ នាទី &
+\ditem \textbf{កាយវិការរហ័ស ១ (១.៥ នាទី)} ៖ បញ្ជា «លើកប៊ិច ២ ខ្វែងគ្នា!» សួរពីមុំទល់កំពូល + បញ្ចាំង Slide បញ្ជាក់ $\angle AOB = \angle A'OB'$ ។\newline
+\ditem \textbf{កាយវិការរហ័ស ២ (១.៥ នាទី)} ៖ បញ្ជា «បត់កែងក្រដាសព្រៀងជាពីរ!» ភ្ជាប់ទៅកន្លះបន្ទាត់ពុះមុំ $OZ$ ។ &
+ប្រសិនបើសិស្សភ្លេចឈ្មោះ «មុំទល់កំពូល» ឱ្យធ្វើកាយវិការដៃខ្វែងម្ដងទៀតព្រមគ្នា។ \\ \hline
+
+08--11 & \fiveE{E1 Engage}\newline បេសកកម្មស្រះទឹក & ៣ នាទី &
+\ditem និទានបញ្ហាពិត៖ «វិស្វករចង់វាស់ទទឹងស្រះ $AB$ ដោយមិនចុះទឹក គាត់ដៅបង្គោល $O$ វាស់ $OA'=OA$, $OB'=OB$ និង $A'B'=18\text{ m}$ ។ តើគាត់ហ៊ានថា $AB=18\text{ m}$ ដោយសំអាងលើអ្វី?»\newline
+\ditem ស្រង់មតិសិស្សទស្សន៍ទាយ (ជឿ/មិនទាន់ជឿ) រួចសរសេរចំណងជើងមេរៀនថ្មី ១.២.២។ &
+កុំទាន់ផ្ដល់ចម្លើយពិតនៅទីនេះ ទុកឱ្យសិស្សចង់រកចម្លើយនៅ E2--E5។ \\ \hline
+
+11--22 & \fiveE{E2 Explore}\newline ពិសោធន៍ ១ \& ២ & ១១ នាទី &
+\ditem \textbf{ពិសោធន៍ ១៖ ចង្កឹះគន្លឹះ \& ក្រដាសស្តើង (៧ នាទី)} ៖\newline
++ ២ នាទី៖ បើក–បិទ $\angle A$ ($30^\circ\leftrightarrow 100^\circ$) ពោលព្រមគ្នា «ជ្រុង $BC$ ចាក់សោពេលមុំអមចន្លោះ $\angle A$ ចាក់សោ»\newline
++ ៣ នាទី៖ ចាក់សោ $\angle A=60^\circ$ គូស $BC \approx 5.29\text{cm}$\newline
++ ២ នាទី៖ កាត់/គូរលើក្រដាសស្តើង \textbf{បង្វិល–ត្រឡប់ត្រួតបេះបិទ} លើត្រីកោណក្រុមជិតខាង ។\newline
+\ditem \textbf{ពិសោធន៍ ២៖ POE អន្ទាក់ ជ.ជ.ម (៤ នាទី)} ៖ ៣០វិ. ទស្សន៍ទាយ (P) $\rightarrow$ ២ន. យោលបន្ទះ $BC=4\text{cm}$ ផ្ទាល់ដៃកាត់ $Ax$ ត្រង់ $C_1, C_2$ (O) $\rightarrow$ ១.៥ន. ពន្យល់ + បញ្ចាំង Slide សំយោគ (E) ។ &
+គ្រូដើរត្រួតការចាក់សោ $60^\circ$ និងការបង្វិលក្រដាសស្តើង។ បើក្រុមយឺត ប្រើបន្ទះគំរូកាត់ស្រេចជួយផ្ទៀង។ \\ \hline
+
+22--28 & \fiveE{E3 Explain}\newline បង្គុំទ្រឹស្ដីបទ & ៦ នាទី &
+\ditem បញ្ជាកាយវិការបើក–ចាក់សោ S--A--S នាំបង្គុំទ្រឹស្ដីបទ ជ.ម.ជ លើរូបបង្វិល–ឆ្លុះ $140^\circ$ ។\newline
+\ditem បញ្ជាក់ \textbf{គោលការណ៍កំពូលរួម} បិទ \textbf{ធនាគារហេតុផល} (\cnum{1} បម្រាប់ \cnum{2} មុំទល់កំពូល/ពុះមុំ \cnum{3} ជ្រុងរួម \cnum{4} ជ.ម.ជ $\rightarrow$ \cnum{5} ធាតុត្រូវគ្នា) និងញែកសញ្ញា $=$ (ប្រវែង/រង្វាស់) vs $\cong$ (ប៉ុនគ្នា) ។ &
+សង្កត់ធ្ងន់៖ កំពូលមុំត្រូវជាប់ចន្លោះជ្រុងទាំងពីរជានិច្ច ទោះរូបដាក់បញ្ច្រាស ឬត្រួតលើគ្នា។ \\ \hline
+
+28--38 & \fiveE{E4 Elaborate}\newline កាត ៣ ជំហាន (ស-ខ្មៅ) & ១០ នាទី &
+\ditem ចែក \textbf{កាតស៊ើបអង្កេតសញ្ញាគន្លឹះ ៣ ជំហាន (ស-ខ្មៅ)} ៖\newline
++ ៣ នាទី៖ ចង្អុលអូស + គូស $|$ ($OA=OB$), ចង្អុលបត់ + ព័ទ្ធកំពូល $O$ \& ធ្នូ ($\angle AOM=\angle BOM$), ចង្អុលអូស + គូស $\parallel$ ($OM=OM$)\newline
++ ៥ នាទី៖ ផែនការ P2 (រក $\triangle$ ផ្ទុក $MA,MB$) + សរសេរ ៣ បន្ទាត់ដាក់លេខ \cnum{1}--\cnum{4} (បញ្ជាក់ \cnum{3} ជ្រុងរួម) + វិបាក \cnum{5}\newline
++ ២ នាទី៖ \textbf{POE ៣០វិ.} $M$ រំកិលលើ $OZ$ (ញែកអ្វីប្រែ vs អ្វីថេរ) ។ &
+បើសិស្សភ្លេច $OM=OM$ ឱ្យម្រាមដៃចង្អុលអូសកំណាត់កណ្ដាល $OM$ ហើយដាក់សញ្ញា $\parallel$ (\cnum{3} Reflexive)។ \\ \hline
+
+38--48 & \fiveE{E5 Evaluate}\newline Relay \& មេដៃ ៤ កាត & ១០ នាទី &
+\ditem \textbf{Relay Proof Race ៣ តួនាទី (៧ នាទី)} ៖\newline
++ អ្នកទី១ (\textbf{Pause-Ask})៖ ពន្យល់មាត់មុនគូស (ចាប់ \cnum{2} $\angle AOB=\angle A'OB'$, \textbf{ហាមគូស $AB=A'B'$}) ព័ទ្ធ $O$\newline
++ អ្នកទី២៖ ផ្ទៀង $O$ ចន្លោះជ្រុង សរសេរ \cnum{1}--\cnum{4} (រក្សា $=$ vs $\cong$)\newline
++ អ្នកទី៣ (\textbf{Pause-Review})៖ ផ្ទៀងលំដាប់ $O\to A\to B$ ទល់ $O\to A'\to B'$ ទាញ $AB=A'B'=18\text{ m}$ (\cnum{5}) បិទ E1 ។\newline
+\ditem \textbf{មេដៃបញ្ឆោត ៤ កាត ស-ខ្មៅ (៣ នាទី)} ៖ ចង្អុលខ្យល់ S--A--S មុនលើកមេដៃ/ខ្វែងដៃ (ជ.ម.ជ $140^\circ$, ជ.ជ.ម, គ្មានសញ្ញាស្មានភ្នែក, ម.ម.ម/លំដាប់ខុស) + ម្រាម ១--៣ ទំនុកចិត្ត ។ &
+ត្រៀមកាតពិន្ទុ ៣ ក្រុមដំបូង។ បើសល់ពេលតិច បង្រួមមេដៃបញ្ឆោតមក ១.៥--២ នាទី (៤ កាតរហ័ស)។ \\ \hline
+
+48--50 & \textbf{ជំហានទី៥}\newline កិច្ចការផ្ទះ \& បណ្ដាំផ្ញើ & ២ នាទី &
+\ditem បញ្ចាំងកិច្ចការផ្ទះ ($\triangle ABC$ សមបាត $AB=AC$, បន្ទាត់ពុះ $AD$, $E\in AD$, ស្រាយតាមធនាគារ \cnum{1}--\cnum{5}) និងផ្ញើចូល Telegram / Classroom ។\newline
+\ditem ផ្ដាំផ្ញើសុវត្ថិភាពចរាចរណ៍ ជួយការងារឪពុកម្ដាយ។ &
+កុំបន្លាយលើសម៉ោង បញ្ជូនរូបលំហាត់តាមអនឡាញជាស្រេច។ \\ \hline
+
+\rowcolor{stepgray}
+\multicolumn{2}{|r|}{\textbf{សរុបរយៈពេលបង្រៀនពេញ}} & \textbf{៥០ នាទី} &
+\multicolumn{2}{l|}{ត្រូវគ្នា ១០០\% ជាមួយកិច្ចតែងការបង្រៀន ១.២.២ ករណី ជ.ម.ជ (បំបែកតាមភស្តុតាងស្រាវជ្រាវ)} \\ \hline
+\end{longtable}
+
+\vspace{2pt}
+
+% -------------------- II. បញ្ជីត្រៀមសម្ភារៈ & ការគ្រប់គ្រងស្ថានការណ៍ --------------------
+\begin{minipage}[t]{0.46\textwidth}
+  \textbf{II.} {\muol បញ្ជីត្រៀមសម្ភារៈមុនចូលថ្នាក់}\\[3pt]
+  \begin{tabular}{|c|L{7.2cm}|}
+    \hline
+    \rowcolor{headgray}
+    \textbf{\ding{51}} & \multicolumn{1}{c|}{\textbf{សម្ភារៈត្រូវរៀបចំទុកជាមុន}} \\ \hline
+    \chkbox & កញ្ចប់ចង្កឹះ/បន្ទះរឹង $4\text{cm}, 6\text{cm}$ មូលម្ជុលគន្លឹះ \& ក្រដាសស្តើងផ្ទៀងត្រួត \\ \hline
+    \chkbox & រ៉ាប៉ទ័រ និងបន្ទាត់ក្រិតសម្រាប់ចាក់សោ $\angle A=60^\circ$ ($BC\approx 5.29\text{cm}$) \\ \hline
+    \chkbox & កាតស៊ើបអង្កេតសញ្ញាគន្លឹះ ៣ ជំហាន (ស-ខ្មៅ) \& ផ្ទាំងធនាគារហេតុផល \cnum{1}--\cnum{5} \\ \hline
+    \chkbox & Slide Animation ៖ ចាប់កំហុស, ស្រះទឹក, ប៉ោល $C_1,C_2$, មេដៃ ៤ កាត ស-ខ្មៅ \\ \hline
+  \end{tabular}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.51\textwidth}
+  \textbf{III.} {\muol កំហុសភ័ន្តច្រឡំ (តាមការស្រាវជ្រាវ) \& ដំណោះស្រាយ}\\[3pt]
+  \begin{tabular}{|L{8.8cm}|}
+    \hline
+    \rowcolor{headgray}
+    \multicolumn{1}{|c|}{\textbf{ឧបសគ្គសិស្ស (Empirical Misconceptions) \& វិធានការទប់ស្កាត់}} \\ \hline
+    \textbf{១. អន្ទាក់ ជ.ជ.ម (SSA) \& អគតិរូបបង្វិល-បញ្ច្រាស៖} ឱ្យយោលប៉ោល $4\text{cm}$ ផ្ទាល់ និងអនុវត្ត \textit{គោលការណ៍កំពូលរួម} លើរូបបង្វិល $140^\circ$ / ត្រួតគ្នា។ \\ \hline
+    \textbf{២. រំលងជ្រុងរួម $OM=OM$, មុំទល់កំពូល ឬស្មានគ្មានសញ្ញា៖} តម្រូវ \textbf{Pause-Ask} និយាយមាត់មុនគូស ចង្អុលអូស + គូស $\parallel$ (\cnum{3}) ហាមគូស $AB=A'B'$។ \\ \hline
+    \textbf{៣. ច្រឡំ $=$ vs $\cong$ ឬលំដាប់កំពូលខុស៖} បិទធនាគារ \cnum{1}--\cnum{5} ផ្ទៀង \textbf{Pause-Review} លំដាប់ $O\to A\to B$ ទល់ $O\to A'\to B'$។ \\ \hline
+    \textbf{៤. យឺតពេលនៅ E2 (១១ នាទី)៖} បង្រួមពិសោធន៍ ២ មក ៣ នាទី និងកាត់មេដៃ E5 មក ២ នាទី ដើម្បីរក្សា ៥០ នាទីពេញ។ \\ \hline
+  \end{tabular}
+\end{minipage}
+
+\end{document}

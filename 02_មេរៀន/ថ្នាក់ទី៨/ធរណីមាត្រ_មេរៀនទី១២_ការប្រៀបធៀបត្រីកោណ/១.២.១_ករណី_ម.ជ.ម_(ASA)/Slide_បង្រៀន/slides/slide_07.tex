@@ -1,0 +1,84 @@
+% ---- 6b : adjacent angles (question left, triangle right) --------------------
+\begin{frame}
+\begin{tikzpicture}[remember picture,overlay,shift={(current page.south west)},x=1cm,y=1cm]
+
+  \fill[white] (0,0) rectangle (16,9);
+
+  % ---- header ----------------------------------------------------------------
+  \node[anchor=west,text=NavyDeep] at (0.8,8.35)
+       {{\fontsize{12}{17}\selectfont\muol{ទំនាក់ទំនងមេរៀនថ្មី}}\ \ |\ \ %
+        {\fontsize{10.5}{15}\selectfont\bfseries មុំជាប់ជ្រុង នៃត្រីកោណ}};
+  \draw[NavyDeep!18,line width=0.6pt] (0.8,7.98)--(15.2,7.98);
+
+  % ---- LEFT PANEL: QUESTION CARD  (frame 2) ----------------------------------
+  \only<2->{
+  \fill[RoyalBlue!5,rounded corners=8pt] (0.8,2.8) rectangle (6.2,7.5);
+  \draw[RoyalBlue!30,line width=0.8pt,rounded corners=8pt] (0.8,2.8) rectangle (6.2,7.5);
+  \node[anchor=west,fill=GoldAccent,text=NavyDeep,font=\bfseries\fontsize{10.5}{13}\selectfont,
+        rounded corners=4pt,inner xsep=9pt,inner ysep=3.5pt] at (1.15,7.05) {សំណួរ};
+
+  \node[anchor=north west,text width=4.8cm,align=left,inner sep=0,text=NavyDeep] at (1.15,6.5) {%
+    {\fontsize{11.5}{19}\selectfont ក្នុងត្រីកោណ $ABC$ មួយ}\\[5pt]
+    {\fontsize{11.5}{19}\selectfont ចំពោះជ្រុង $AB$ តើមុំណា}\\[5pt]
+    {\fontsize{11.5}{19}\selectfont ខ្លះដែលនៅចុងសងខាង និង}\\[5pt]
+    {\fontsize{11.5}{19}\selectfont ជាប់ជាមួយនឹងជ្រុង $AB$ នេះ?}};
+  }
+
+  % ---- triangle (right side) -------------------------------------------------
+  \begin{scope}[shift={(5.4,0)}]
+  \coordinate (A) at (3.3,3.5);
+  \coordinate (B) at (7.7,3.5);
+  \coordinate (C) at (5.9,6.8);
+  % ---- frame 3 : the triangle -------------------------------------------------
+  \only<3->{
+  \path[fill=NavyDeep!5] (A)--(B)--(C)--cycle;
+  \draw[NavyDeep,line width=1.8pt,line join=round] (A)--(B)--(C)--cycle;
+  \fill[NavyDeep] (A) circle (2.6pt) (B) circle (2.6pt) (C) circle (2.6pt);
+  \node[text=NavyDeep,font=\bfseries\itshape\fontsize{14}{16}\selectfont,anchor=north east,inner sep=3pt] at (A) {$A$};
+  \node[text=NavyDeep,font=\bfseries\itshape\fontsize{14}{16}\selectfont,anchor=north west,inner sep=3pt] at (B) {$B$};
+  \node[text=NavyDeep,font=\bfseries\itshape\fontsize{14}{16}\selectfont,anchor=south,inner sep=4pt] at (C) {$C$};
+  }
+
+  % ---- frame 4 : side AB ------------------------------------------------------
+  \only<4->{
+    \draw[GoldAccent!90!black,line width=3.2pt,line cap=round] (A)--(B);
+    \draw[decorate,decoration={brace,mirror,amplitude=9pt,raise=6pt},NavyDeep,line width=1.2pt]
+         (A)--(B);
+    \node[draw=NavyDeep,fill=NavyDeep!6,rounded corners=4pt,inner xsep=10pt,inner ysep=4pt,
+          text=NavyDeep] at (5.5,2.0)
+         {\fontsize{12}{15}\selectfont\bfseries ជ្រុង $AB$};
+  }
+
+  % ---- frame 5 : adjacent angle A ---------------------------------------------
+  \only<5->{
+    \fill[AdjCol,opacity=.18] (A)--++(0:0.9) arc[start angle=0,end angle=51.77,radius=0.9]--cycle;
+    \draw[AdjCol,line width=1.6pt] ($(A)+(0:0.9)$) arc[start angle=0,end angle=51.77,radius=0.9];
+    \node[name=cA,fill=AdjCol!8,draw=AdjCol,line width=0.9pt,rounded corners=4pt,
+          inner xsep=9pt,inner ysep=6pt,text=AdjCol!70!black,align=center] at ($(A)+(30:6.0)$)
+         {\fontsize{10.5}{14}\selectfont\bfseries មុំ $\angle A$\\[1pt]
+          \fontsize{9.5}{12}\selectfont(មុំជាប់ជ្រុង $AB$)};
+    \draw[AdjCol,line width=1.1pt,-stealth,shorten >=1.2pt] (cA)--($(A)+(30:0.9)$);
+  }
+
+  % ---- frame 6 : adjacent angle B ---------------------------------------------
+  \only<6->{
+    \fill[AdjCol,opacity=.18] (B)--++(118.61:0.9) arc[start angle=118.61,end angle=180,radius=0.9]--cycle;
+    \draw[AdjCol,line width=1.6pt] ($(B)+(118.61:0.9)$) arc[start angle=118.61,end angle=180,radius=0.9];
+    \node[name=cB,fill=AdjCol!8,draw=AdjCol,line width=0.9pt,rounded corners=4pt,
+          inner xsep=9pt,inner ysep=6pt,text=AdjCol!70!black,align=center] at ($(B)+(150:6.2)$)
+         {\fontsize{10.5}{14}\selectfont\bfseries មុំ $\angle B$\\[1pt]
+          \fontsize{9.5}{12}\selectfont(មុំជាប់ជ្រុង $AB$)};
+    \draw[AdjCol,line width=1.1pt,-stealth,shorten >=1.2pt] (cB)--($(B)+(150:0.9)$);
+  }
+  \end{scope}
+
+  % ---- footer ----------------------------------------------------------------
+  \fill[NavyDeep] (0,0) rectangle (16,0.65);
+  \shade[shading=axis,left color=GoldAccent,right color=GoldAccent!0] (0,0.65) rectangle (16,0.71);
+  \node[anchor=west,inner sep=0,text=white] at (0.8,0.28)
+       {\fontsize{8.5}{11}\selectfont \TeacherName\ \ |\ \ \color{SkyLight}គណិតវិទ្យា ថ្នាក់ទី៨};
+  \node[anchor=east,inner sep=0,text=GoldAccent] at (15.2,0.28)
+       {\fontsize{8.5}{11}\selectfont\muol{មេរៀនទី១២}\ \ \color{white}ការប្រៀបធៀបត្រីកោណ};
+
+\end{tikzpicture}
+\end{frame}

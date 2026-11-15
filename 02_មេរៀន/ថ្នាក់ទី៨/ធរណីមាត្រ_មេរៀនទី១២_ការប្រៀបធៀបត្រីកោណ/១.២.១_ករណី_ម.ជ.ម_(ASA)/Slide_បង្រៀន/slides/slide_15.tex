@@ -1,0 +1,66 @@
+% ---- 9b : solving steps + figure (split screen) ------------------------------
+\begin{frame}
+\begin{tikzpicture}[remember picture,overlay,shift={(current page.south west)},x=1cm,y=1cm]
+  \sHdr{លំហាត់គំរូ}{ជំហាននៃការដោះស្រាយ}
+  \draw[NavyDeep!12,line width=0.5pt,dashed] (9.0,0.9)--(9.0,7.8);
+
+  % ---------- right : figure, synchronised with the steps ----------
+  \modelfig{12.2}{4.5}{0.95}
+  % thin, unfilled, cumulative marks (local to this slide)
+  \draw[NavyDeep,line width=0.9pt,line join=round] (A)--(B) (C)--(D) (A)--(D) (C)--(B);
+  \fill[NavyDeep] (A) circle (1.8pt) (B) circle (1.8pt) (C) circle (1.8pt) (D) circle (1.8pt) (E) circle (1.8pt);
+  \foreach \p/\an/\nm in {A/south east/A,B/north west/B,C/north east/C,D/south west/D}{
+    \node[text=NavyDeep,font=\bfseries\itshape\fontsize{13}{15}\selectfont,anchor=\an,inner sep=3pt] at (\p) {$\nm$};}
+  \node[text=NavyDeep,font=\bfseries\itshape\fontsize{13}{15}\selectfont,anchor=east,inner sep=2pt] at ($(E)+(-0.55,0)$) {$E$};
+  \only<1->{
+    \draw[SideCol,line width=1pt] ($(A)!0.5!(E)$)++(61.56:0.13)--++(241.56:0.26);
+    \draw[SideCol,line width=1pt] ($(B)!0.5!(E)$)++(61.56:0.13)--++(241.56:0.26);}
+  \only<2->{
+    \foreach \pt/\sa/\ea in {A/-28.44/0,B/151.56/180}{
+      \draw[AngCol,line width=0.8pt] ($(\pt)+(\sa:0.6)$) arc[start angle=\sa,end angle=\ea,radius=0.6];}
+    \foreach \sa/\ea in {40.9/151.6,220.9/331.6}{
+      \draw[VertCol,line width=0.8pt] ($(E)+(\sa:0.45)$) arc[start angle=\sa,end angle=\ea,radius=0.45];
+      \pgfmathsetmacro{\mm}{(\sa+\ea)/2}
+      \draw[VertCol,line width=0.8pt] ($(E)+(\mm-5:0.35)$)--($(E)+(\mm-5:0.55)$);
+      \draw[VertCol,line width=0.8pt] ($(E)+(\mm+5:0.35)$)--($(E)+(\mm+5:0.55)$);}
+    \draw[AngCol,line width=0.8pt] ($(A)+(-14.22:0.5)$)--($(A)+(-14.22:0.7)$);
+    \draw[AngCol,line width=0.8pt] ($(B)+(165.78:0.5)$)--($(B)+(165.78:0.7)$);}
+  \only<3->{
+    \draw[AngCol,line width=0.8pt,line cap=round,line join=round] ($(A)!0.5!(D)+(-0.07,0.11)$)--++(0.14,-0.11)--++(-0.14,-0.11);
+    \draw[AngCol,line width=0.8pt,line cap=round,line join=round] ($(C)!0.5!(B)+(-0.07,0.11)$)--++(0.14,-0.11)--++(-0.14,-0.11);}
+  \only<1>{\node[text=SideCol,inner sep=0] at (12.2,2.3) {\fontsize{12}{15}\selectfont $EA=EB$};}
+  \only<2>{\node[text=AngCol,inner sep=0] at (12.2,2.3) {\fontsize{11}{14}\selectfont $\angle A$ , $\angle E$ \ និង \ $\angle B$ , $\angle E$};}
+  \only<3>{\node[text=AngCol,inner sep=0] at (12.2,2.3) {\fontsize{10.5}{14}\selectfont $\angle E$ ទល់កំពូល \ , \ $\angle A=\angle B$ ឆ្លាស់ក្នុង};}
+  \only<4>{\node[text=GreenAccent!55!black,inner sep=0] at (12.2,2.3) {\fontsize{12}{15}\selectfont $\Delta AED\cong\Delta BEC$};}
+  \only<5>{\node[text=RedAccent!85!black,inner sep=0] at (12.2,2.3) {\fontsize{12}{15}\selectfont $ED=EC$};}
+
+  % ---------- left : five step boxes ----------
+  \only<1->{
+    \fill[RoyalBlue!6,rounded corners=6pt] (0.7,6.35) rectangle (8.6,7.25);
+    \draw[RoyalBlue!35,line width=0.8pt,rounded corners=6pt] (0.7,6.35) rectangle (8.6,7.25);
+    \badge{1.2}{6.8}{១}{AngCol}
+    \node[anchor=west,text=NavyDeep,inner sep=0] at (1.7,6.8) {\fontsize{11}{14}\selectfont មើលរូប រក\textbf{ជ្រុងត្រូវគ្នា}ដែលប្រធានប្រាប់};}
+  \only<2->{
+    \fill[RoyalBlue!6,rounded corners=6pt] (0.7,5.2) rectangle (8.6,6.1);
+    \draw[RoyalBlue!35,line width=0.8pt,rounded corners=6pt] (0.7,5.2) rectangle (8.6,6.1);
+    \badge{1.2}{5.65}{២}{AngCol}
+    \node[anchor=west,text=NavyDeep,inner sep=0] at (1.7,5.65) {\fontsize{11}{14}\selectfont កំណត់\textbf{មុំ}ដែលនៅចុងសងខាងជ្រុងនោះ};}
+  \only<3->{
+    \fill[RoyalBlue!6,rounded corners=6pt] (0.7,3.85) rectangle (8.6,4.95);
+    \draw[RoyalBlue!35,line width=0.8pt,rounded corners=6pt] (0.7,3.85) rectangle (8.6,4.95);
+    \badge{1.2}{4.4}{៣}{AngCol}
+    \node[anchor=west,text=NavyDeep,inner sep=0] at (1.7,4.62) {\fontsize{11}{14}\selectfont កំណត់\textbf{លក្ខណៈ}ដែលធ្វើឱ្យមុំនោះប៉ុនគ្នា};
+    \node[anchor=west,text=black!55,inner sep=0] at (1.7,4.15) {\fontsize{8.5}{11}\selectfont (មុំទល់កំពូល , មុំឆ្លាស់ក្នុង , មុំរួម ...)};}
+  \only<4->{
+    \fill[GreenAccent!8,rounded corners=6pt] (0.7,2.7) rectangle (8.6,3.6);
+    \draw[GreenAccent!70!black,line width=0.8pt,rounded corners=6pt] (0.7,2.7) rectangle (8.6,3.6);
+    \badge{1.2}{3.15}{៤}{GreenAccent!65!black}
+    \node[anchor=west,text=NavyDeep,inner sep=0] at (1.7,3.15) {\fontsize{11}{14}\selectfont \textbf{សន្និដ្ឋាន}ថាត្រីកោណប៉ុនគ្នា (ករណី ម.ជ.ម)};}
+  \only<5->{
+    \fill[RedAccent!6,rounded corners=6pt] (0.7,1.55) rectangle (8.6,2.45);
+    \draw[RedAccent!60,line width=0.8pt,rounded corners=6pt] (0.7,1.55) rectangle (8.6,2.45);
+    \badge{1.2}{2.0}{៥}{RedAccent!85!black}
+    \node[anchor=west,text=NavyDeep,inner sep=0] at (1.7,2.0) {\fontsize{11}{14}\selectfont ទាញ\textbf{វិបាក} (ធាតុដែលនៅសល់ត្រូវគ្នាប៉ុនគ្នា)};}
+  \sFtr
+\end{tikzpicture}
+\end{frame}

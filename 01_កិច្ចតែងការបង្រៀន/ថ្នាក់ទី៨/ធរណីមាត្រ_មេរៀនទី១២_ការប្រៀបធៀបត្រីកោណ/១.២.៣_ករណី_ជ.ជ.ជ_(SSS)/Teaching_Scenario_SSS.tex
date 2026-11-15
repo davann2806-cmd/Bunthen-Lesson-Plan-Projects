@@ -1,0 +1,244 @@
+% !TeX program = xelatex
+\documentclass[a4paper,10pt]{article}
+
+% ============================================================================
+% ក្រដាសដាច់ដោយឡែក៖ សេណារីយ៉ូនៃការបង្រៀន (Scenario នៃការបង្រៀន – ៥០ នាទី)
+% ============================================================================
+\usepackage[a4paper, left=0.95cm, right=0.95cm, top=0.95cm, bottom=1.05cm, footskip=0.50cm]{geometry}
+\usepackage{amsmath}
+\usepackage{unicode-math}
+\usepackage{fontspec}
+\usepackage{array, longtable, colortbl}
+\usepackage[table]{xcolor}
+\usepackage{pifont}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+
+% LaTeX 2025 + longtable compatibility guard
+\makeatletter
+\let\@expl@@@mark@update@singlecol@structures@@\relax
+\makeatother
+
+% Cross-platform font path resolver (Windows local + Linux/Cloud repo fonts/)
+\providecommand{\NGSFindFonts}{%
+  \IfFileExists{C:/Windows/Fonts/cambria.ttc}{%
+    \def\NGSSysPath{C:/Windows/Fonts/}%
+    \def\NGSUserPath{C:/Users/KIT/AppData/Local/Microsoft/Windows/Fonts/}%
+  }{%
+    \IfFileExists{./fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{./fonts/}\def\NGSUserPath{./fonts/}}{%
+    \IfFileExists{../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../fonts/}\def\NGSUserPath{../fonts/}}{%
+    \IfFileExists{../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../fonts/}\def\NGSUserPath{../../fonts/}}{%
+    \IfFileExists{../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../fonts/}\def\NGSUserPath{../../../fonts/}}{%
+    \IfFileExists{../../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../../fonts/}\def\NGSUserPath{../../../../fonts/}}{%
+    \IfFileExists{../../../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../../../fonts/}\def\NGSUserPath{../../../../../fonts/}}{%
+    \IfFileExists{../../../../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../../../../fonts/}\def\NGSUserPath{../../../../../../fonts/}}{%
+      \def\NGSSysPath{../../../../../../../fonts/}\def\NGSUserPath{../../../../../../../fonts/}%
+    }}}}}}}%
+  }%
+}
+\NGSFindFonts
+
+\setmathfont[
+  Path={\NGSSysPath},
+  FontIndex=1,
+  Scale=1.02
+]{cambria.ttc}
+
+\defaultfontfeatures{Ligatures=TeX}
+
+\setmainfont[
+  Path={\NGSUserPath},
+  Extension=.ttf,
+  Script=Khmer,
+  BoldFont={KhmerOSsiemreap},
+  BoldFeatures={FakeBold=1.8},
+  ItalicFont={KhmerOSsiemreap},
+  ItalicFeatures={FakeSlant=0.25},
+  BoldItalicFont={KhmerOSsiemreap},
+  BoldItalicFeatures={FakeBold=1.8, FakeSlant=0.25}
+]{KhmerOSsiemreap}
+
+\newfontfamily\muol[
+  Path={\NGSUserPath},
+  Extension=.ttf,
+  Script=Khmer
+]{KhmerOSmuollight}
+
+\newfontfamily\NagaBold[
+  Path={\NGSUserPath},
+  Extension=.ttf
+]{AKbalthom Naga Bold}
+
+\newfontfamily\CalibriFont[
+  Path={\NGSSysPath},
+  Extension=.ttf
+]{calibri}
+
+\XeTeXlinebreaklocale "km"
+\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
+
+\definecolor{stepgray}{HTML}{D9D9D9}
+\definecolor{headgray}{HTML}{F2F2F2}
+\definecolor{darkred}{HTML}{C00000}
+\definecolor{red5e}{HTML}{FF0000}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[R]{\CalibriFont\fontsize{11pt}{13pt}\selectfont\thepage}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\tabcolsep}{4pt}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcommand{\fiveE}[1]{{\NagaBold\fontsize{9pt}{12.5pt}\selectfont\textcolor{red5e}{#1}}}
+\newcommand{\ditem}{\tikz[baseline=-0.5ex]\fill (0,0.40ex) -- (0.40ex,0) -- (0,-0.40ex) -- (-0.40ex,0) -- cycle;\hspace{0.25em}}
+\newcommand{\chkbox}{\tikz[baseline=-0.1ex]\draw[black, line width=0.75pt](0,0) rectangle (0.23,0.23);}
+\newcommand{\cnum}[1]{{\fontsize{9.5pt}{11pt}\selectfont\ding{\numexpr181+#1\relax}}\hspace{0.15em}}
+\newcommand{\tri}[1]{\ensuremath{\triangle #1}}
+\newcommand{\ang}[1]{\ensuremath{\angle #1}}
+\newcommand{\cg}{\ensuremath{\cong}}
+\newcommand{\ncg}{\ensuremath{\not\cong}}
+
+\begin{document}
+\fontsize{9.4pt}{14.8pt}\selectfont
+
+% -------------------- ក្បាលឯកសារ Scenario --------------------
+\begin{center}
+  {\muol\fontsize{11pt}{16pt}\selectfont ព្រះរាជាណាចក្រកម្ពុជា}\\[1pt]
+  {\muol\fontsize{10pt}{15pt}\selectfont ជាតិ សាសនា ព្រះមហាក្សត្រ}\\[4pt]
+  {\muol\fontsize{10.5pt}{15pt}\selectfont សេណារីយ៉ូនៃការបង្រៀន (Scenario នៃការបង្រៀន)}
+\end{center}
+
+\vspace{2pt}
+{\renewcommand{\arraystretch}{1.06}
+\begin{tabular}{@{}l l l p{0.6cm} l l l@{}}
+  - អនុវិទ្យាល័យ & : & ព្រះក្រសាំង (កំពង់ស្វាយ-កំពង់ធំ) & & - មុខវិជ្ជា & : & គណិតវិទ្យា ថ្នាក់ទី៨ \\
+  - មេរៀនទី១២ & : & ១.២.៣ ជ្រុងបីប៉ុនរៀងគ្នា (ជ.ជ.ជ) & & - រយៈពេលសរុប & : & \textcolor{darkred}{\textbf{១ ម៉ោងសិក្សា (៥០ នាទី)}} \\
+  - គ្រូបង្រៀន & : & ហុក ប៊ុនថែន & & - កាលបរិច្ឆេទ & : & ថ្ងៃសុក្រ ទី២៧ ខែវិច្ឆិកា ឆ្នាំ២០២៦ \\
+\end{tabular}
+}
+
+\vspace{3pt}
+
+% -------------------- I. តារាងបែងចែកពេលវេលា និងសេណារីយ៉ូលម្អិត (៥០ នាទី) --------------------
+\textbf{I.} {\muol តារាងបែងចែកពេលវេលា និងសេណារីយ៉ូប្រតិបត្តិការក្នុងថ្នាក់ (៥០ នាទី)}
+
+\vspace{-2pt}
+\renewcommand{\arraystretch}{1.12}
+\begin{longtable}{|c|L{2.75cm}|c|L{7.65cm}|L{4.45cm}|}
+\hline
+\rowcolor{headgray}
+\multicolumn{1}{|c|}{\muol នាទី} &
+\multicolumn{1}{c|}{\muol ជំហាន / 5Es} &
+\multicolumn{1}{c|}{\muol រយៈពេល} &
+\multicolumn{1}{c|}{\muol សេណារីយ៉ូប្រតិបត្តិ (ពាក្យពេចន៍គ្រូ \& សម្ភារៈ)} &
+\multicolumn{1}{c|}{\muol ការគ្រប់គ្រង \& វិធីបម្រុង} \\
+\hline
+\endfirsthead
+
+\hline
+\rowcolor{headgray}
+\multicolumn{1}{|c|}{\muol នាទី} &
+\multicolumn{1}{c|}{\muol ជំហាន / 5Es} &
+\multicolumn{1}{c|}{\muol រយៈពេល} &
+\multicolumn{1}{c|}{\muol សេណារីយ៉ូប្រតិបត្តិ (ពាក្យពេចន៍គ្រូ \& សម្ភារៈ)} &
+\multicolumn{1}{c|}{\muol ការគ្រប់គ្រង \& វិធីបម្រុង} \\
+\hline
+\endhead
+
+\hline
+\endfoot
+
+\hline
+\endlastfoot
+
+00--02 & \textbf{ជំហានទី១}\newline រដ្ឋបាលថ្នាក់ & ២ នាទី &
+\ditem ហៅអវត្តមានរហ័ស និងពិនិត្យអនាម័យថ្នាក់រៀន ។\newline
+\ditem ចាត់សិស្សជាក្រុម ៣ នាក់ («ក្រុមជាងសំណង់ដំបូល») ដាក់កញ្ចប់កាត់ ១:១ (ទំព័រ ១) ទុកមុខតុ។ &
+ចាត់ប្រធានក្រុមស្រាប់ពីមុន ហាមបើកកញ្ចប់កាត់មុនបញ្ជា ។ \\ \hline
+
+02--05 & \textbf{ជំហានទី២ (ក)}\newline កំណែកិច្ចការផ្ទះ & ៣ នាទី &
+\ditem \textbf{ល្បែងចាប់កំហុស}៖ សួរបញ្ឆោត «តើអាចយក $AB=AC$ មកដាក់ក្នុង $\tri{BDE}, \tri{CDE}$ បានឬទេ?»\newline
+\ditem ផ្ទៀងចម្លើយ SAS ទាំង ក ($DB=DC, \ang{ADB}=\ang{ADC}$) និង ខ ($\tri{BDE}\cg\tri{CDE} \Rightarrow EB=EC$)។ &
+កុំហៅសរសេរឡើងវិញលើក្ដារខៀន ផ្ដោតតែការបញ្ជូន $DB=DC$ ពី ក ទៅ ខ ។ \\ \hline
+
+05--08 & \textbf{ជំហានទី២ (ខ)}\newline រំលឹកមេរៀនទាក់ទង & ៣ នាទី &
+\ditem \textbf{ភាគ ១ (១.៥ ន.)}៖ គូសធ្នូកាំ $5\text{cm}$ ផ្ចិត $A$ បញ្ជាក់គ្រប់ចំណុចលើធ្នូមានចម្ងាយ $5\text{cm}$ ពី $A$ ។\newline
+\ditem \textbf{ភាគ ២ (១.៥ ន.)}៖ បង្ហាញ $F\text{-}J\text{-}G\text{-}K$ រត់ត្រង់ជួរ $FJ=GK \Rightarrow FG = FJ+JG = GK+JG = JK$ ។ &
+បើសិស្សភ្លេចបូក $JG$ ឱ្យម្រាមដៃអូសពី $F\to G$ និង $J\to K$ ភ្លាម ។ \\ \hline
+
+08--11 & \fiveE{E1 Engage}\newline អាថ៌កំបាំងដំបូល & ៣ នាទី &
+\ditem លើករឿងពិត៖ «ជាង ២ នាក់នៅកំពង់ស្វាយកាត់ដំបូល $6\text{m}, 5\text{m}, 3\text{m}$ ដូចគ្នាដោយ\textbf{គ្មានរ៉ាព័រទ័រ} ហេតុអ្វីរាង/មុំថេរ ខណៈទ្វារ ៤ របារទ្រេតដួល?»\newline
+\ditem ស្រង់មតិទស្សន៍ទាយ រួចសរសេរចំណងជើង ១.២.៣ ។ &
+កុំទាន់លាតត្រដាងចម្លើយ ទុកឱ្យសិស្សចង់សាកល្បងនៅ E2 ។ \\ \hline
+
+11--22 & \fiveE{E2 Explore}\newline ពិសោធន៍ ១ \& ២ & ១១ នាទី &
+\ditem \textbf{សកម្មភាព ១៖ ស៊ុម ៤ vs ៣ របារ \& ប្រសព្វធ្នូ (៧ ន.)}៖\newline
++ ២.៥ន. ចាក់ម្ជុល ៤ របារ ($6,5,4,3\text{cm}$) តេស្តការទ្រេតប្រែរាង\newline
++ ២.៥ន. តភ្ជាប់ $AB=6, AC=5, BC=3\text{cm}$ + ធ្នូ $r_1=5, r_2=3\text{cm}$ ប្រសព្វ $C$ តែ \textbf{១ គត់}\newline
++ ២ន. ត្រួតបង្វិល-ត្រឡប់ក្រដាសកាត់លើក្រុមជិតខាង ១០០\% ។\newline
+\ditem \textbf{សកម្មភាព ២៖ POE អន្ទាក់ ម.ម.ម (៤ ន.)}៖ ៣០វិ. ទស្សន៍ទាយ (P) $\rightarrow$ ២.៥ន. ត្រួត $\tri{PQR}$ ($4\text{cm}$) លើ $\tri{P'Q'R'}$ ($6\text{cm}$) មុំ $60^\circ$ ច្រាន ម.ម.ម (O–E) + ១ន. តេស្ត $2, 2.5, 6\text{cm}$ ។ &
+បោះពុម្ពសម្ភារៈទំព័រ ១ តាមខ្នាត \textbf{Actual Size 100\%} ។ គ្រូត្រួតការប្រើម្ជុល និងដែកឈានប្រសព្វ $C$ ។ \\ \hline
+
+22--28 & \fiveE{E3 Explain}\newline ទ្រឹស្ដីបទ \& កំពូល & ៦ នាទី &
+\ditem បង្គុំទ្រឹស្ដីបទ ជ.ជ.ជ លើរូបបង្វិល-ឆ្លុះ $\approx 135^\circ$ + \textbf{គោលការណ៍កំពូលឈមជ្រុងស្មើ} ។\newline
+\ditem ដឹកនាំរកកំហុសបោះពុម្ពទំព័រ ១៥២ (\textbf{$AB=B'C' \rightarrow BC=B'C'$}) បិទផ្ទាំង \textbf{ធនាគារហេតុផល \cnum{1}--\cnum{5}} (ទំព័រ ៤) និងញែក $=$ vs $\cg$ ។ &
+សង្កត់ធ្ងន់៖ ដាក់រូបបង្វិល-ឆ្លុះ កុំគូសតែទម្រង់ត្រង់ស្ដង់ដារ ។ \\ \hline
+
+28--38 & \fiveE{E4 Elaborate}\newline ស្ពាន $JG$ (\textbf{[tracing]}) & ១០ នាទី &
+\ditem ចែកកាត \textbf{«ស្ពានតភ្ជាប់អង្កត់ $JG$ និងគំនូស $|, \parallel, |||$»} (ទំព័រ ២, ទំព័រគោល ១៥២)៖\newline
++ ៣ន. ប្រើម្រាមដៃ \textbf{[tracing]} គូស $|$ ($EF=HK$), $\parallel$ ($FJ=GK$), $|||$ ($EG=HJ$) និងអូសស្ពាន $JG$\newline
++ ៥.៥ន. សរសេរភស្តុតាង \cnum{1}--\cnum{4} ($\tri{EFG}\cg\tri{HKJ}$) + វិបាក \cnum{5} ($\ang{E}=\ang{H}$)\newline
++ ១.៥ន. \textbf{EIA ពិនិត្យក្រោយ (30s)} រំកិល $\tri{HKJ}$ រក្សា $FJ=GK$ ញែកប្រែ ($JG,FG,JK$) vs ថេរ ($FG=JK$) ។ &
+ដាក់លេខ \cnum{2} នៅជួរ $FG=JK$ កុំឱ្យសិស្សលោតរំលង $JG$ ។ គូស $|||$ លើផ្នែកខាងលើ $EG, HJ$ កុំឱ្យប៉ះចំណុចប្រសព្វ ។ \\ \hline
+
+38--48 & \fiveE{E5 Evaluate}\newline អធិការកិច្ច \& កាត A--D & ១០ នាទី &
+\ditem \textbf{ក្រុមអធិការកិច្ចប្លង់ ៣ តួនាទី (៧ ន.)} (ទំព័រ ៣, ប្រតិបត្តិទំ.១៥៣)៖\newline
++ \textbf{អ្នកទី១ (Pause-Ask)}៖ ពន្យល់មុនគូស $|, \parallel, |||$ (\textbf{ហាមគូស $RT=SV$})\newline
++ \textbf{អ្នកទី២}៖ អូសស្ពានឈរ $ST$ ស្រាយ $RT=SV$ (\cnum{2}) និង \cnum{1}--\cnum{4}\newline
++ \textbf{អ្នកទី៣ (Pause-Review)}៖ ផ្ទៀង $R\leftrightarrow V, Z\leftrightarrow W, T\leftrightarrow S$ ទាញ \cnum{5} \& \textbf{បិទ E1} ។\newline
+\ditem \textbf{កាតត្រួតពិនិត្យ A--D (៣ ន. / 60--90s)} (ទំព័រ ៥)៖ (A) \ding{51} ជ.ជ.ជ $135^\circ$, (B) \ding{55} ម.ម.ម $60^\circ$, (C) \ding{55} $FJ=GK$ ខ្វះស្ពាន, (D) \ding{55} លំដាប់កំពូលខុស + ម្រាម ១--៣ ។ &
+បើ E2 ចំណាយលើស ១ នាទី កាត់កាត A--D មក ៩០ វិនាទីរហ័ស ដើម្បីបញ្ចប់ទាន់ ៥០ នាទី ។ \\ \hline
+
+48--50 & \textbf{ជំហានទី៥}\newline កិច្ចការផ្ទះ \& បណ្ដាំ & ២ នាទី &
+\ditem ចែកប័ណ្ណកិច្ចការផ្ទះ (ទំព័រ ៦)៖ លំហាត់ទី៤ (ទំ.១៦៤ ខ្លែង $ABCD$) \& ទី៩ (ទំ.១៦៥ ប្រយ័ត្ន $\tri{ABC}\cg\tri{DCB}$ កុំច្រឡំ $BDC$) ។\newline
+\ditem ផ្ដាំផ្ញើសុវត្ថិភាពចរាចរណ៍ និងជួយការងារឪពុកម្ដាយ ។ &
+បញ្ជូនរូបលំហាត់ចូល Telegram / Classroom ជាស្រេច ។ \\ \hline
+
+\rowcolor{stepgray}
+\multicolumn{2}{|r|}{\textbf{សរុបរយៈពេលបង្រៀនពេញ}} & \textbf{៥០ នាទី} &
+\multicolumn{2}{l|}{ត្រូវគ្នា ១០០\% នឹង \texttt{LS\_Plan\_SSS.tex} និង \texttt{Printable\_Materials\_SSS.tex} (ទំព័រ ១--៦)} \\ \hline
+\end{longtable}
+
+\vspace{2pt}
+
+% -------------------- II. បញ្ជីត្រៀមសម្ភារៈ & III. ការគ្រប់គ្រងកំហុស --------------------
+\begin{minipage}[t]{0.46\textwidth}
+  \textbf{II.} {\muol បញ្ជីត្រៀមសម្ភារៈមុនចូលថ្នាក់ (ស-ខ្មៅ)}\\[3pt]
+  \begin{tabular}{|c|L{7.2cm}|}
+    \hline
+    \rowcolor{headgray}
+    \textbf{\ding{51}} & \multicolumn{1}{c|}{\textbf{សម្ភារៈត្រូវរៀបចំទុកជាមុន}} \\ \hline
+    \chkbox & សន្លឹកកាត់ ១:១ ទំព័រ ១ (\textbf{Actual Size 100\%})៖ របារ $6,5,4,3\text{cm}$, របារ $2,2.5,6\text{cm}$ \& ត្រីកោណ AAA $4,6\text{cm}$ \\ \hline
+    \chkbox & ម្ជុលខ្ទាស់/ប៊ូតុងចោះរន្ធ ដែកឈាន និងបន្ទាត់ក្រិតសម្រាប់សង់ធ្នូប្រសព្វ $C$ \\ \hline
+    \chkbox & កាតសកម្មភាព E4 (ទំព័រ ២), សន្លឹកអធិការកិច្ច ៣ តួនាទី E5 (ទំព័រ ៣) \& ផ្ទាំងធនាគារ \cnum{1}--\cnum{5} (ទំព័រ ៤) \\ \hline
+    \chkbox & កាត Exit \textbf{A--D} (ទំព័រ ៥) \& ប័ណ្ណកិច្ចការផ្ទះទី៤, ទី៩ (ទំព័រ ៦) \\ \hline
+  \end{tabular}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.51\textwidth}
+  \textbf{III.} {\muol កំហុសភ័ន្តច្រឡំ (តាមការស្រាវជ្រាវ) \& ដំណោះស្រាយ}\\[3pt]
+  \begin{tabular}{|L{8.8cm}|}
+    \hline
+    \rowcolor{headgray}
+    \multicolumn{1}{|c|}{\textbf{ឧបសគ្គសិស្ស (Empirical Misconceptions) \& វិធានការទប់ស្កាត់}} \\ \hline
+    \textbf{១. អន្ទាក់ ម.ម.ម (AAA) \& រូបបង្វិល-ឆ្លុះ (ធ្លាក់ដល់ ២១.៥\%)៖} ត្រួតផ្ទាល់ $\tri{PQR}$ ($4\text{cm}$) លើ $\tri{P'Q'R'}$ ($6\text{cm}$) និងប្រើ \textit{គោលការណ៍កំពូលឈមជ្រុងស្មើ} លើរូបឆ្លុះ $135^\circ$ ។ \\ \hline
+    \textbf{២. រូបត្រួតគ្នា (ធ្លាក់ពី ៨៤\%$\to$៤៩\%) \& រំលងស្ពាន $JG/ST$៖} បង្ខំ \textbf{[tracing]} អូស $JG/ST$ និង \textbf{Pause-Ask} ហាមគូស $RT=SV$ មុនសរសេរ \cnum{2} ។ \\ \hline
+    \textbf{៣. ភ័ន្តច្រឡំធ្នូដែកឈាន \& $=$ vs $\cg$ (៦៤\%)៖} បញ្ជាក់ធ្នូកាំ $5,3\text{cm}$ ជាចម្ងាយថេរ និងប្រើផ្ទាំង \cnum{1}--\cnum{5} ញែក $=$ (ប្រវែង/មុំ) ពី $\cg$ (ត្រីកោណ) ។ \\ \hline
+    \textbf{៤. កំហុសសៀវភៅទំ.១៥២ \& លំហាត់ទី៩៖} កែ $AB=B'C'\to BC=B'C'$ ក្នុង E3 និងផ្ទៀង $\tri{ABC}\cg\tri{DCB}$ ជំនួស $BDC$ ។ \\ \hline
+  \end{tabular}
+\end{minipage}
+
+\end{document}

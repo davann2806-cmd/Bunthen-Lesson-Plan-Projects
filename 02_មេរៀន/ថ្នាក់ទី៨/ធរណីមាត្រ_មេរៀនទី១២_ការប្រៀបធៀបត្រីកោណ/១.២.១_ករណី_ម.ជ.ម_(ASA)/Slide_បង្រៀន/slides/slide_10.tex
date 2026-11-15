@@ -1,0 +1,46 @@
+% ---- 7c : superposition animation (13 frames) --------------------------------
+%      1: ΔABC + instruction     2: ΔA'B'C' appears at its start position
+%      3-10: ΔA'B'C' slides onto ΔABC     11: all vertices coincide
+%      12: observation           13: conclusion  ΔABC ≅ ΔA'B'C' 
+\begin{frame}
+\begin{tikzpicture}[remember picture,overlay,shift={(current page.south west)},x=1cm,y=1cm]
+  \sHdr{មេរៀនថ្មី}{ស្វែងយល់ (Explore) : ការត្រួតត្រីកោណ}
+
+  % fixed triangle ABC (thick blue underneath)
+  \asaT{1.9}{2.9}{1.2}{AngCol}{f}{3.2pt}
+  \asaV{f}{AngCol}
+  \only<1-10>{\asaL{f}{}{NavyDeep}}
+
+  % instructions
+  \only<1-11>{
+    \node[text=NavyDeep] at (8,6.9)
+         {\fontsize{12.5}{17}\selectfont យកត្រីកោណ $A'B'C'$ មកត្រួតលើត្រីកោណ $ABC$ ដោយឱ្យ $A'B'$ ស្ថិតលើ $AB$};}
+  \only<12->{
+    \node[text=NavyDeep] at (8,6.9)
+         {\fontsize{15}{20}\selectfont សង្កេតឃើញ កំពូល និងជ្រុងទាំងអស់\textcolor{RedAccent!85!black}{\textbf{ត្រួតស៊ីគ្នាបេះបិទ}}};}
+
+  % moving ΔA'B'C'
+  \movetri{2}{1}{1}
+  \movetri{3}{0.88}{1}
+  \movetri{4}{0.76}{1}
+  \movetri{5}{0.64}{1}
+  \movetri{6}{0.52}{0}
+  \movetri{7}{0.4}{0}
+  \movetri{8}{0.29}{0}
+  \movetri{9}{0.18}{0}
+  \movetri{10}{0.08}{0}
+
+  % coincident position
+  \only<11->{
+    \asaT{1.9}{2.9}{1.2}{orange!90!black}{m}{1.3pt}
+    \node[text=NavyDeep,font=\bfseries\itshape\fontsize{13}{15}\selectfont,anchor=north east,inner sep=2pt] at (mA) {$A\equiv A'$};
+    \node[text=NavyDeep,font=\bfseries\itshape\fontsize{13}{15}\selectfont,anchor=north west,inner sep=2pt] at (mB) {$B\equiv B'$};
+    \node[text=NavyDeep,font=\bfseries\itshape\fontsize{13}{15}\selectfont,anchor=south,inner sep=3pt] at (mC) {$C\equiv C'$};
+  }
+
+  \only<13->{
+    \concl{8}{1.45}{ដូចនេះ ត្រីកោណទាំងពីរប៉ុនគ្នា $\Delta ABC\cong\Delta A'B'C'$}
+  }
+  \sFtr
+\end{tikzpicture}
+\end{frame}

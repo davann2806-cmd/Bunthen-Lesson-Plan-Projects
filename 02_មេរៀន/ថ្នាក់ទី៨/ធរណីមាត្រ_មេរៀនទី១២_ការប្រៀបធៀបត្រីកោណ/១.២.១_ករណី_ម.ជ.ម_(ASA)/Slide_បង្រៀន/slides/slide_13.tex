@@ -1,0 +1,50 @@
+\begin{frame}
+\begin{tikzpicture}[remember picture,overlay,shift={(current page.south west)},x=1cm,y=1cm]
+  \sHdr{វិបាក}{Consequences of ASA}
+
+  % ---- LEFT : congruent triangles (always visible, unfilled) ----
+  \asaTn{0.9}{5.5}{0.7}{AngCol}{f}{2pt}
+  \asaL{f}{}{NavyDeep}
+  \asaTn{0.9}{2.2}{0.7}{orange!90!black}{g}{2pt}
+  \asaL{g}{'}{NavyDeep}
+
+  % ---- RIGHT : table framework + headers (step 1) ----
+  \fill[NavyDeep!3,rounded corners=8pt] (5.3,2.75) rectangle (15.5,7.55);
+  \draw[NavyDeep!35,line width=1pt,rounded corners=8pt] (5.3,2.75) rectangle (15.5,7.55);
+  \draw[NavyDeep!35,line width=0.8pt] (5.3,6.75)--(15.5,6.75);
+  \draw[NavyDeep!35,line width=0.8pt] (8.6,2.75)--(8.6,7.55);
+  \draw[NavyDeep!35,line width=0.8pt] (12.0,2.75)--(12.0,7.55);
+  \node[text=RoyalBlue] at (6.95,7.15) {\fontsize{12}{14}\selectfont\muol{សមតិកម្ម}};
+  \node[text=GreenAccent!70!black] at (10.3,7.15) {\fontsize{12}{14}\selectfont\muol{សន្និដ្ឋាន}};
+  \node[text=RedAccent!85!black] at (13.75,7.15) {\fontsize{12}{14}\selectfont\muol{វិបាក}};
+
+  % ---- frame 2 : hypothesis (3 given facts) ----
+  \only<2->{
+    \badge{5.65}{5.85}{ម}{AngCol}
+    \node[anchor=west,text=NavyDeep,inner sep=0] at (6.0,5.85) {\fontsize{12}{16}\selectfont $\boldsymbol{\angle A=\angle A'}$};
+    \badge{5.65}{4.75}{ជ}{SideCol}
+    \node[anchor=west,text=NavyDeep,inner sep=0] at (6.0,4.75) {\fontsize{12}{16}\selectfont $\boldsymbol{AB=A'B'}$};
+    \badge{5.65}{3.65}{ម}{AngCol}
+    \node[anchor=west,text=NavyDeep,inner sep=0] at (6.0,3.65) {\fontsize{12}{16}\selectfont $\boldsymbol{\angle B=\angle B'}$};
+  }
+  % ---- frame 3 : arrow + conclusion  ΔABC ≅ ΔA'B'C' (ASA) ----
+  \only<3->{
+    \draw[-stealth,GreenAccent!70!black,line width=2.2pt] (8.3,4.75)--(8.9,4.75);
+    \node[text=NavyDeep] at (10.3,5.25) {\fontsize{12}{16}\selectfont $\boldsymbol{\Delta ABC}\,\boldsymbol{\cong}$};
+    \node[text=NavyDeep] at (10.3,4.75) {\fontsize{12}{16}\selectfont $\boldsymbol{\Delta A'B'C'}$};
+    \node[text=GreenAccent!55!black,align=center] at (10.3,3.95) {\fontsize{9.5}{12}\selectfont (តាមករណី ម.ជ.ម)};
+  }
+  % ---- frames 4-6 : consequences one by one ----
+  \only<4->{
+    \draw[-stealth,RedAccent!85!black,line width=2.2pt] (11.7,4.75)--(12.3,4.75);
+    \node[anchor=west,text=NavyDeep,inner sep=0] at (12.8,5.85) {\fontsize{12}{16}\selectfont $\boldsymbol{AC = A'C'}$};
+  }
+  \only<5->{
+    \node[anchor=west,text=NavyDeep,inner sep=0] at (12.8,4.75) {\fontsize{12}{16}\selectfont $\boldsymbol{BC = B'C'}$};
+  }
+  \only<6->{
+    \node[anchor=west,text=NavyDeep,inner sep=0] at (12.8,3.65) {\fontsize{12}{16}\selectfont $\boldsymbol{\angle C = \angle C'}$};
+  }
+  \sFtr
+\end{tikzpicture}
+\end{frame}

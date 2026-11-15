@@ -1,0 +1,731 @@
+\documentclass[a4paper,10pt]{article}
+
+% ============================================================================
+% កញ្ចប់បណ្ណាល័យ (Packages)
+% ============================================================================
+\usepackage[a4paper, left=0.95cm, right=0.95cm, top=1.0cm, bottom=1.1cm, footskip=0.5cm]{geometry}
+\usepackage{amsmath}
+\usepackage{unicode-math}
+\usepackage{fontspec}
+\usepackage{array, longtable, multirow, colortbl}
+\usepackage[table]{xcolor}
+\usepackage{enumitem}
+\usepackage{pifont}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usetikzlibrary{calc, arrows.meta, positioning, decorations.markings, babel}
+
+% ============================================================================
+% ការកំណត់ពុម្ពអក្សរឱ្យដូច Microsoft Word ១០០% (MS Word Fonts Configuration)
+% ============================================================================
+% Cross-platform font path resolver (Windows local + Linux/Cloud repo fonts/)
+\providecommand{\NGSFindFonts}{%
+  \IfFileExists{C:/Windows/Fonts/cambria.ttc}{%
+    \def\NGSSysPath{C:/Windows/Fonts/}%
+    \def\NGSUserPath{C:/Users/KIT/AppData/Local/Microsoft/Windows/Fonts/}%
+  }{%
+    \IfFileExists{./fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{./fonts/}\def\NGSUserPath{./fonts/}}{%
+    \IfFileExists{../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../fonts/}\def\NGSUserPath{../fonts/}}{%
+    \IfFileExists{../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../fonts/}\def\NGSUserPath{../../fonts/}}{%
+    \IfFileExists{../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../fonts/}\def\NGSUserPath{../../../fonts/}}{%
+    \IfFileExists{../../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../../fonts/}\def\NGSUserPath{../../../../fonts/}}{%
+    \IfFileExists{../../../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../../../fonts/}\def\NGSUserPath{../../../../../fonts/}}{%
+    \IfFileExists{../../../../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../../../../fonts/}\def\NGSUserPath{../../../../../../fonts/}}{%
+      \def\NGSSysPath{../../../../../../../fonts/}\def\NGSUserPath{../../../../../../../fonts/}%
+    }}}}}}}%
+  }%
+}
+\NGSFindFonts
+
+\setmathfont[
+  Path={\NGSSysPath},
+  FontIndex=1,
+  Scale=1.02
+]{cambria.ttc}
+
+\defaultfontfeatures{Ligatures=TeX}
+
+\setmainfont[
+  Path={\NGSUserPath},
+  Extension=.ttf,
+  Script=Khmer,
+  BoldFont={KhmerOSsiemreap},
+  BoldFeatures={FakeBold=1.8},
+  ItalicFont={KhmerOSsiemreap},
+  ItalicFeatures={FakeSlant=0.22},
+  BoldItalicFont={KhmerOSsiemreap},
+  BoldItalicFeatures={FakeBold=1.8, FakeSlant=0.22}
+]{KhmerOSsiemreap}
+
+\newfontfamily\muol[
+  Path={\NGSUserPath},
+  Extension=.ttf,
+  Script=Khmer
+]{KhmerOSmuollight}
+
+\newfontfamily\NagaBold[
+  Path={\NGSUserPath},
+  Extension=.ttf
+]{AKbalthom Naga Bold}
+
+\newfontfamily\CalibriFont[
+  Path={\NGSSysPath},
+  Extension=.ttf
+]{calibri}
+
+\newfontfamily\CourierBullet[
+  Path={\NGSSysPath},
+  Extension=.ttf
+]{cour}
+\newcommand{\wcirc}{{\CourierBullet\fontsize{9.5pt}{11pt}\selectfont o}}
+
+% ============================================================================
+% ការកំណត់ពណ៌ និងទម្រង់ទំព័រ (Colors & Page Style)
+% ============================================================================
+\definecolor{stepgray}{HTML}{D9D9D9}
+\definecolor{headgray}{HTML}{F2F2F2}
+\definecolor{boxgray}{HTML}{D9D9D9}
+\definecolor{darkred}{HTML}{C00000}
+\definecolor{red5e}{HTML}{FF0000}
+\definecolor{triblue}{HTML}{DAE8FC}
+\definecolor{triborders}{HTML}{6C8EBF}
+\definecolor{arrowblue}{HTML}{4472C4}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[R]{\CalibriFont\fontsize{11pt}{13pt}\selectfont\thepage}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\tabcolsep}{3.8pt}
+
+% ប្រភេទជួរឈរតារាងតម្រឹមឆ្វេង (Left-aligned table column type)
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+% ============================================================================
+% ម៉ាក្រូជំនួយ (Helper Macros)
+% ============================================================================
+\newcommand{\fiveE}[1]{{\NagaBold\fontsize{9.5pt}{13pt}\selectfont\textcolor{red5e}{#1}}}
+\newcommand{\timenote}[1]{\textcolor{darkred}{\textit{#1}}}
+\newcommand{\redsub}[1]{\textcolor{darkred}{#1}}
+\newcommand{\graybox}[1]{\colorbox{boxgray}{\strut\hspace{2pt}#1\hspace{2pt}}}
+\newcommand{\ditem}{\tikz[baseline=-0.5ex]\fill (0,0.42ex) -- (0.42ex,0) -- (0,-0.42ex) -- (-0.42ex,0) -- cycle;\hspace{0.3em}}
+\newcommand{\cnum}[1]{{\fontsize{10.5pt}{12pt}\selectfont\ding{\numexpr181+#1\relax}}\hspace{0.2em}}
+\newcommand{\cfig}[1]{\par\vspace{2pt}{\centering #1\par}\vspace{2pt}}
+\newcommand{\stepheader}[1]{\multicolumn{3}{|c|}{\cellcolor{stepgray}\muol #1} \\* \noalign{\hrule height 0.4pt}}
+\newcommand{\fstrut}{\rule[-1.85ex]{0pt}{4.9ex}}
+\newcommand{\topfstrut}{\rule{0pt}{3.8ex}}
+\newcommand{\botfstrut}{\rule[-2.0ex]{0pt}{0pt}}
+
+% ក្បាច់ក្រោមបាវចនា (Tacteing Flourish)
+\newcommand{\khmflourish}{%
+  \begin{tikzpicture}[x=0.05bp, y=-0.05bp, baseline=0pt]
+    \path[fill=black, nonzero rule]
+      (847,-111) .. controls (867,-92) and (921,-137) .. (902,-147)
+      .. controls (865,-168) and (826,-126) .. (803,-126)
+      .. controls (750,-126) and (704,-146) .. (655,-143)
+      .. controls (652,-129) and (616,-116) .. (612,-107)
+      .. controls (616,-101) and (651,-89) .. (655,-74)
+      .. controls (706,-73) and (747,-92) .. (804,-92)
+      .. controls (825,-92) and (871,-48) .. (904,-72)
+      .. controls (916,-81) and (866,-126) .. (847,-111)
+      (1284,-108) -- (943,-122) -- (943,-97) -- (1284,-108)
+      (426,-119) -- (78,-108) -- (426,-97) -- (426,-119)
+      (522,-111) .. controls (502,-93) and (446,-136) .. (467,-147)
+      .. controls (504,-168) and (543,-126) .. (566,-126)
+      .. controls (594,-126) and (619,-118) .. (644,-136)
+      .. controls (629,-158) and (612,-176) .. (592,-193)
+      .. controls (629,-193) and (655,-163) .. (684,-143)
+      .. controls (712,-164) and (739,-193) .. (776,-193)
+      .. controls (757,-176) and (740,-157) .. (725,-136)
+      .. controls (756,-112) and (783,-141) .. (821,-143)
+      .. controls (801,-162) and (774,-192) .. (811,-192)
+      .. controls (831,-175) and (849,-156) .. (864,-135)
+      .. controls (876,-118) and (943,-114) .. (943,-111)
+      .. controls (943,-104) and (876,-101) .. (864,-84)
+      .. controls (849,-63) and (831,-44) .. (811,-27)
+      .. controls (774,-27) and (801,-57) .. (821,-76)
+      .. controls (783,-78) and (756,-107) .. (725,-83)
+      .. controls (740,-61) and (757,-43) .. (776,-26)
+      .. controls (739,-26) and (712,-55) .. (684,-76)
+      .. controls (655,-56) and (629,-26) .. (592,-26)
+      .. controls (612,-43) and (629,-61) .. (644,-83)
+      .. controls (619,-101) and (594,-92) .. (566,-92)
+      .. controls (544,-92) and (498,-48) .. (465,-72)
+      .. controls (451,-82) and (502,-129) .. (522,-111)
+      (684,-132) .. controls (661,-132) and (623,-115) .. (623,-109)
+      .. controls (623,-101) and (663,-87) .. (684,-87)
+      .. controls (706,-87) and (746,-101) .. (746,-109)
+      .. controls (746,-115) and (708,-132) .. (684,-132)
+      (684,-116) .. controls (675,-116) and (659,-112) .. (659,-109)
+      .. controls (659,-105) and (676,-102) .. (684,-102)
+      .. controls (693,-102) and (710,-105) .. (710,-109)
+      .. controls (710,-112) and (694,-116) .. (684,-116);
+  \end{tikzpicture}%
+}
+
+% ============================================================================
+% ម៉ាក្រូគូសបន្ទាត់ចំនួន និងរូបភាពគណិតវិទ្យា (TikZ Math Diagram Macros)
+% ============================================================================
+
+% ១. គំនូសព្រួញផលគុណខ្វែង (Cross-multiplication diagram from Textbook p.3)
+\newcommand{\drawCrossMult}{%
+  \begin{tikzpicture}[baseline=-0.5ex, scale=0.88, every node/.style={font=\scriptsize}]
+    \node (n1) at (0, 0.28) {$6$};
+    \node (d1) at (0,-0.28) {$11$};
+    \draw[thin] (-0.20,0) -- (0.20,0);
+    \node (n2) at (1.35, 0.28) {$7$};
+    \node (d2) at (1.35,-0.28) {$12$};
+    \draw[thin] (1.15,0) -- (1.55,0);
+    \draw[{Stealth[scale=0.6]}-{Stealth[scale=0.6]}, thin, black] (0.18, 0.22) -- (1.15,-0.22);
+    \draw[{Stealth[scale=0.6]}-{Stealth[scale=0.6]}, thin, black] (0.18,-0.22) -- (1.15, 0.22);
+    \node[font=\tiny, fill=white, inner sep=0.8pt] at (0.68, 0.26) {$?$};
+  \end{tikzpicture}%
+}
+
+% ២. បន្ទាត់ចំនួនក្នុងឧទាហរណ៍ ១ (Textbook p.3 Number Line: -1 to 1)
+\newcommand{\drawTextbookNumberLine}[1][1.0]{%
+  \begin{tikzpicture}[scale=#1, every node/.style={font=\scriptsize}]
+    \draw[-{Stealth[scale=0.8]}, semithick] (-3.5,0) -- (3.7,0);
+    \foreach \x/\lbl in {
+      -2.8/{-1},
+      -2.1/{-0.75},
+      -1.4/{-\frac{1}{2}},
+      -0.7/{-0.25},
+       0.0/{0},
+       0.7/{\frac{1}{4}},
+       1.4/{0.5},
+       2.1/{\frac{3}{4}},
+       2.8/{1}
+    } {
+      \draw[thin] (\x,-0.08) -- (\x,0.08);
+      \node[above=2pt, font=\scriptsize] at (\x,0.06) {$\lbl$};
+    }
+  \end{tikzpicture}%
+}
+
+% ៣. បន្ទាត់ចំនួនសម្រាប់ឧទាហរណ៍ ២ (-9/7, -1, 1/8, 0.28, 1 2/5)
+\newcommand{\drawExampleTwoLine}[1][1.0]{%
+  \begin{tikzpicture}[scale=#1, every node/.style={font=\scriptsize}]
+    \draw[{Stealth[scale=0.7]}-{Stealth[scale=0.8]}, semithick] (-3.4,0) -- (3.6,0);
+    % ក្រិតចំនួនគត់ -2, -1, 0, 1, 2
+    \foreach \x/\n in {-3.0/-2, -1.5/-1, 0/0, 1.5/1, 3.0/2} {
+      \draw[thin] (\x,-0.09) -- (\x,0.09);
+      \node[below=2pt, font=\scriptsize] at (\x,-0.08) {$\n$};
+    }
+    % ចំណុចទាំង ៥៖ -9/7 (-1.285 -> -1.93), -1 (-1.5), 1/8 (0.125 -> 0.19), 0.28 (0.42), 1 2/5 (1.4 -> 2.1)
+    \fill[black] (-1.93,0) circle (1.4pt) node[above=2pt, font=\scriptsize] {$-\frac{9}{7}$};
+    \fill[black] (-1.50,0) circle (1.4pt) node[above=2pt, font=\scriptsize] {$-1$};
+    \fill[black] (0.19,0) circle (1.4pt) node[above=2pt, font=\scriptsize] {$\frac{1}{8}$};
+    \fill[black] (0.62,0) circle (1.4pt) node[above=2pt, font=\scriptsize] {$0.28$};
+    \fill[black] (2.10,0) circle (1.4pt) node[above=2pt, font=\scriptsize] {$1\frac{2}{5}$};
+  \end{tikzpicture}%
+}
+
+% ៤. រូបបន្ទាត់ចំនួនបង្ហាញចំនួនសនិទាននៅចន្លោះ 3/4 និង 6/7 (ឧទាហរណ៍ ៣)
+\newcommand{\drawMidpointLine}[1][1.0]{%
+  \begin{tikzpicture}[scale=#1, every node/.style={font=\scriptsize}]
+    \draw[-{Stealth[scale=0.8]}, semithick] (-2.8,0) -- (2.9,0);
+    \draw[thin] (-1.8,-0.10) -- (-1.8,0.10);
+    \draw[thin] ( 0.0,-0.10) -- ( 0.0,0.10);
+    \draw[thin] ( 1.8,-0.10) -- ( 1.8,0.10);
+    \fill[black] (-1.8,0) circle (1.4pt) node[above=2pt, font=\scriptsize] {$\dfrac{3}{4} = \dfrac{42}{56}$};
+    \fill[black] ( 1.8,0) circle (1.4pt) node[above=2pt, font=\scriptsize] {$\dfrac{6}{7} = \dfrac{48}{56}$};
+    \fill[black] ( 0.0,0) circle (1.5pt) node[above=2pt, font=\scriptsize] {$\dfrac{45}{56}$};
+  \end{tikzpicture}%
+}
+
+% ============================================================================
+% ចាប់ផ្ដើមឯកសារ (Document Body)
+% ============================================================================
+\begin{document}
+\fontsize{9.5pt}{15.8pt}\selectfont
+
+% -------------------- ក្បាលកិច្ចតែងការ (Header) --------------------
+\begin{center}
+  {\muol\fontsize{11pt}{16pt}\selectfont ព្រះរាជាណាចក្រកម្ពុជា}\\[2pt]
+  {\muol\fontsize{10pt}{15pt}\selectfont ជាតិ សាសនា ព្រះមហាក្សត្រ}\\[1pt]
+  \khmflourish
+\end{center}
+
+\vspace{-12pt}
+{\muol\fontsize{10pt}{15pt}\selectfont អនុវិទ្យាល័យព្រះក្រសាំង}
+
+\vspace{4pt}
+\begin{center}
+  {\muol\fontsize{10pt}{15pt}\selectfont កិច្ចតែងការបង្រៀន}
+\end{center}
+\vspace{2pt}
+
+% -------------------- ព័ត៌មានទូទៅ (Metadata) --------------------
+{\renewcommand{\arraystretch}{1.10}
+\hspace*{4.6cm}%
+\begin{tabular}{@{}l l l@{}}
+  - \hspace{0.35cm} មុខវិជ្ជា & : & គណិតវិទ្យា ថ្នាក់ទី៨ (ពីជគណិត) \\
+  - \hspace{0.35cm} ចំណងជើងមេរៀន & : & មេរៀនទី១ ចំនួនសនិទាន \\
+  - \hspace{0.35cm} ចំណងជើងរង & : & ២. ការប្រៀបធៀប និងរៀបលំដាប់នៃចំនួនសនិទាន \\
+  & & ២.២. ការរៀបលំដាប់ចំនួនសនិទាន \\
+  - \hspace{0.35cm} រយៈពេល & : & ១ ម៉ោងសិក្សា (៤៥នាទី) \\
+  - \hspace{0.35cm} បង្រៀនដោយ & : & ហុក ប៊ុនថែន \\
+  - \hspace{0.35cm} កាលបរិច្ឆេទ & : & ០៤ វិច្ឆិកា ២០២៦ \\
+\end{tabular}
+
+\vspace{3pt}
+
+% -------------------- I. វត្ថុបំណង --------------------
+\textbf{I.} {\muol វត្ថុបំណង}\\[2pt]
+\hspace*{0.55cm}%
+\begin{tabular}{@{}l l l@{}}
+  \wcirc \hspace{0.25cm} វិជ្ជាសម្បទា & : & សិស្សប្រាប់បានពីវិធីរៀបលំដាប់ចំនួនសនិទាន (ពីតូចទៅធំ ឬពីធំទៅតូច) និងការរកចំនួនសនិទាន \\
+  & & នៅចន្លោះចំនួនសនិទានពីរបានត្រឹមត្រូវ តាមរយៈការសង្កេតបន្ទាត់ចំនួនលើក្ដារខៀន និងសំណួរបំផុស។ \\
+  \wcirc \hspace{0.25cm} បំណិនសម្បទា & : & សិស្សរៀបលំដាប់ចំនួនសនិទាន (តាមបន្ទាត់ចំនួន ទសភាគ ឬតម្រូវភាគបែងរួម) និងគណនារកចំនួន \\
+  & & សនិទាននៅចន្លោះចំនួនសនិទានពីរបានច្បាស់លាស់ តាមរយៈការធ្វើសន្លឹកកិច្ចការជាដៃគូ និងលំហាត់ប្រតិបត្តិ។ \\
+  \wcirc \hspace{0.25cm} ចរិយាសម្បទា & : & សិស្សមានស្មារតីសហការ យកចិត្តទុកដាក់ និងមានទំនុកចិត្តក្នុងការបង្ហាញចម្លើយលើក្ដារខៀន \\
+  & & តាមរយៈការពិភាក្សា និងអនុវត្តផ្ទាល់ជាមួយដៃគូក្នុងថ្នាក់។ \\
+\end{tabular}
+
+\vspace{3pt}
+
+% -------------------- II. សម្ភារៈឧបទេស --------------------
+\textbf{II.} {\muol សម្ភារៈឧបទេស}\\[2pt]
+\hspace*{0.55cm}$\bullet$ \hspace{0.35cm} សៀវភៅសិក្សាគោលថ្នាក់ទី៨ (ទំព័រ ៣--៤) សន្លឹកកិច្ចការសិស្ស បណ្ណចំនួនសនិទាន បន្ទាត់វែង និងហ្វឺត/ដីសពណ៌
+
+\vspace{3pt}
+
+% -------------------- III. វិធីសាស្រ្តបង្រៀន --------------------
+\textbf{III.} {\muol វិធីសាស្រ្តបង្រៀន}\\[2pt]
+\hspace*{0.55cm}%
+\begin{tabular}{@{}l l l@{}}
+  $\bullet$ \hspace{0.35cm} គោលវិធី & : \hspace{0.7cm} & សិស្សមជ្ឈមណ្ឌល \\
+  $\bullet$ \hspace{0.35cm} យុទ្ធវិធីបង្រៀន & : & ស្ថាបនានិយម គម្រូ 5Es (ការងារដៃគូ និងសន្លឹកកិច្ចការ) \\
+\end{tabular}
+}
+
+\vspace{3pt}
+
+% -------------------- III. ដំណើរការបង្រៀន --------------------
+\textbf{III.} {\muol ដំណើរការបង្រៀន}
+
+\vspace{-3pt}
+
+% ============================================================================
+% តារាងដំណើរការបង្រៀន (Modular Multi-Row 3-Column Lesson Plan Table)
+% បច្ចេកទេស៖ បំបែកតារាងជាជួរដេកតូចៗតាមផ្នែកនីមួយៗ (ដោយមិនដាក់ \hline នៅចន្លោះជួរតូចៗ)
+% និងប្រើ \endhead / \endfoot ដើម្បីឱ្យ LaTeX បំពេញក្រដាសនីមួយៗឱ្យពេញ ១០០% ទើបឆ្លងទំព័រថ្មី។
+% ============================================================================
+\renewcommand{\arraystretch}{1.17}
+\setlength{\LTpost}{2pt}
+\begin{longtable}{|L{5.50cm}|L{7.90cm}|L{4.80cm}|}
+\hline
+\rowcolor{headgray}
+\multicolumn{1}{|c|}{\muol សកម្មភាពគ្រូ} &
+\multicolumn{1}{c|}{\muol ខ្លឹមសារមេរៀន} &
+\multicolumn{1}{c|}{\muol សកម្មភាពសិស្ស} \\
+\hline
+\endfirsthead
+
+\hline
+\endhead
+
+\hline
+\endfoot
+
+\hline
+\endlastfoot
+
+% ==================== ជំហានទី១ ====================
+\stepheader{ជំហានទី១ (រដ្ឋបាលថ្នាក់)}
+- ពិនិត្យអវត្តមានសិស្ស \newline
+- ពិនិត្យអនាម័យ និងសម្លៀកបំពាក់ \newline
+- ពង្រឹងវិន័យ និងសណ្ដាប់ធ្នាប់ក្នុងថ្នាក់
+&
+\hspace*{0.3cm}- រដ្ឋបាលថ្នាក់ \newline
+\hspace*{0.3cm}- អនាម័យថ្នាក់រៀន \newline
+\hspace*{0.3cm}- សណ្ដាប់ធ្នាប់ថ្នាក់រៀន
+&
+- ប្រធានថ្នាក់រាយការណ៍ \newline
+- រក្សាភាពស្ងៀមស្ងាត់ \\[2pt]
+\hline
+
+% ==================== ជំហានទី២ ====================
+\stepheader{ជំហានទី២ (កិច្ចការផ្ទះ +ទំនាក់ទំនងមេរៀនថ្មី)}
+% --- ផ្នែក 2.1: កំណែកិច្ចការផ្ទះ (លំហាត់គំរូ ១ ទំព័រទី៣) ---
+- ពិនិត្យសៀវភៅកិច្ចការផ្ទះរបស់សិស្ស \newline
+- ហៅសិស្ស ២ នាក់ឡើងបំពេញចម្លើយ \newline
+\hspace*{0.2cm}កិច្ចការផ្ទះលើក្ដារខៀន \newline
+- សរសើរលើកទឹកចិត្តសិស្សដែលបានខិត\newline
+\hspace*{0.2cm}ខំធ្វើកិច្ចការផ្ទះបានត្រឹមត្រូវ \newline
+\timenote{ចំណាយពេលឱ្យតិចបំផុតកុំឱ្យលើស 3min}
+&
+\centerline{\redsub{កំណែកិច្ចការផ្ទះ (លំហាត់គំរូ ១ ទំព័រទី៣)}}
+\hspace*{0.1cm}១. បំពេញចន្លោះដោយសញ្ញា $( > , < , = )$ ចំពោះចំនួនខាងក្រោម៖ \par\vspace{3pt}
+\hspace*{0.3cm}\begin{tabular}{@{}p{3.4cm}p{3.8cm}@{}}
+  ក. $-6 \ \dots \ -3$ & ខ. $\fstrut\dfrac{-2}{7} \ \dots \ \dfrac{-5}{7}$ \\[4pt]
+  គ. $\fstrut\dfrac{4}{3} \ \dots \ 1\dfrac{5}{7}$ & ឃ. $\fstrut 0.45 \ \dots \ \dfrac{54}{100}$
+\end{tabular}
+&
+- យកសៀវភៅកិច្ចការផ្ទះដាក់លើតុ \newline
+- តំណាងសិស្ស ២ នាក់ឡើងបំពេញ \newline
+\hspace*{0.2cm}ចម្លើយលើក្ដារខៀន \\[-3pt]
+
+% --- ផ្នែក 2.2: ចម្លើយកំណែកិច្ចការផ្ទះ (ក និង ខ) ---
+&
+\centerline{ដំណោះស្រាយ}
+\hspace*{0.2cm}បំពេញចន្លោះដោយសញ្ញា $( > , < , = )$ ៖ \par\vspace{2pt}
+\hspace*{0.3cm}\begin{tabular}{@{}p{3.4cm}p{3.8cm}@{}}
+  ក. $-6 < -3$ & ខ. $\fstrut\dfrac{-2}{7} > \dfrac{-5}{7}$ \\[3pt]
+\end{tabular}
+&
+\par\vspace*{0.3cm}
+- សង្កេត និងផ្ទៀងផ្ទាត់ចម្លើយលើក្ដារខៀន \\[2pt]
+
+% --- ផ្នែក 2.3: ចម្លើយកំណែកិច្ចការផ្ទះ (គ និង ឃ) ---
+- បញ្ជាក់បន្ថែមលើក្ដារខៀនអំពីការបំប្លែង \newline
+\hspace*{0.2cm}ចំនួនចម្រុះ $1\dfrac{5}{7}$ និងទសភាគ $0.45$ \newline
+\hspace*{0.2cm}ទៅជាប្រភាគមុននឹងប្រៀបធៀប
+&
+\vspace*{2pt}\hspace*{0.2cm}\fstrut គ. $\dfrac{4}{3} = \dfrac{28}{21}$ និង $1\dfrac{5}{7} = \dfrac{7+5}{7} = \dfrac{12}{7} = \dfrac{36}{21}$ \par\vspace{3pt}
+\hspace*{0.25cm}\fstrut គេបាន $\dfrac{28}{21}$ និង $\dfrac{36}{21}$ ដោយ $36 > 28$ នាំឱ្យ \graybox{$\dfrac{4}{3} < 1\dfrac{5}{7}$} ។ \par\vspace{3pt}
+\hspace*{0.2cm}\fstrut ឃ. $0.45 = \dfrac{45}{100}$ និង $\dfrac{54}{100}$ \par\vspace{3pt}
+\hspace*{0.25cm}\fstrut ដោយ $45 < 54$ នាំឱ្យ \graybox{$0.45 < \dfrac{54}{100}$} ។
+&
+- កែតម្រូវចំណុចខ្វះខាត \newline
+\hspace*{0.2cm}ចូលក្នុងសៀវភៅ \\[2pt]
+
+% --- ផ្នែក 2.4: រំលឹកមេរៀនទាក់ទងមេរៀនថ្មី (ផលគុណខ្វែង ឧទាហរណ៍ ២ ទំព័រទី៣) ---
+- សរសេរប្រភាគ $\dfrac{6}{11}$ និង $\dfrac{7}{12}$ លើក្ដារខៀន \newline
+\hspace*{0.2cm}រួចសួរសិស្សឱ្យប្រៀបធៀបដោយប្រើ \newline
+\hspace*{0.2cm}ផលគុណខ្វែង \newline
+\timenote{ចំណាយពេលឱ្យតិចបំផុតកុំឱ្យលើស 1.5min}
+&
+\centerline{\redsub{រំលឹកមេរៀនទាក់ទងមេរៀនថ្មី}}
+\hspace*{0.1cm}- ការប្រៀបធៀបចំនួនសនិទានដោយផលគុណខ្វែង៖ \par\vspace{2pt}
+\hspace*{0.2cm}\ditem \textbf{ឧទាហរណ៍ ២ :} ចំនួនសនិទាន $\dfrac{6}{11}$ និង $\dfrac{7}{12}$ មានផលគុណខ្វែង \drawCrossMult \par\vspace{2pt}
+\hspace*{0.5cm}$6 \times 12 < 7 \times 11$ \newline
+\hspace*{0.5cm}\botfstrut $72 < 77$ \hspace{0.2cm} ដូច្នេះ គេសន្និដ្ឋានថា $\dfrac{6}{11} < \dfrac{7}{12}$ ។
+&
+- គណនាផលគុណខ្វែងផ្ទាល់មាត់៖ \newline
+\hspace*{0.2cm}$6 \times 12 = 72$ និង $7 \times 11 = 77$ \newline
+- ឆ្លើយថា $\dfrac{6}{11} < \dfrac{7}{12}$ \\[2pt]
+
+% --- ផ្នែក 2.5: ប្រអប់ជាទូទៅនៃផលគុណខ្វែង ---
++ ឱ្យសិស្សទាញរូបមន្តទូទៅនៃការប្រៀប\newline
+\hspace*{0.2cm}ធៀបប្រភាគពីរដែលមានភាគបែងវិជ្ជមាន
+&
+\cfig{%
+{\setlength{\tabcolsep}{5pt}%
+\footnotesize
+\renewcommand{\arraystretch}{1.20}
+\begin{tabular}{|L{7.35cm}|}
+  \hline
+  \rowcolor{headgray}
+  \fstrut\textbf{ជាទូទៅ :} ចំពោះចំនួនសនិទាន $\dfrac{a}{b}$ និង $\dfrac{c}{d}$ ដែល $b > 0$ និង $d > 0$ \\[2pt]
+  \rowcolor{headgray}
+  \fstrut\hspace*{0.25cm}- បើ $\dfrac{a}{b} < \dfrac{c}{d}$ នោះ $ad < bc$ \\[2pt]
+  \rowcolor{headgray}
+  \fstrut\hspace*{0.25cm}- ច្រាសមកវិញ បើ $ad < bc$ នោះ $\dfrac{a}{b} < \dfrac{c}{d}$ ។ \\[2pt]
+  \hline
+\end{tabular}}%
+}
+&
+- ឆ្លើយរូបមន្តទូទៅ៖ \newline
+\hspace*{0.2cm}ចំពោះ $b>0, d>0$ បើ $ad < bc$ \par\vspace{2pt}
+\hspace*{0.2cm}\fstrut នោះ $\dfrac{a}{b} < \dfrac{c}{d}$ \\[2pt]
+
+% --- ផ្នែក 2.6: រំលឹកពីបន្ទាត់ចំនួន ---
+- គូសបន្ទាត់ចំនួនលើក្ដារខៀន រួចសួរសិស្ស \newline
+\timenote{ចំណាយពេលឱ្យតិចបំផុតកុំឱ្យលើស 1.5min} \newline
++ នៅលើបន្ទាត់ចំនួន តើចំនួនអវិជ្ជមាន និង\newline
+\hspace*{0.2cm}ចំនួនវិជ្ជមានស្ថិតនៅខាងណាគល់ $0$?
+&
+\hspace*{0.1cm}- ទីតាំងចំនួននៅលើបន្ទាត់ចំនួន (គូសលើក្ដារខៀន)៖
+\cfig{%
+\begin{tikzpicture}[scale=0.88, every node/.style={font=\scriptsize}]
+  \draw[{Stealth[scale=0.7]}-{Stealth[scale=0.8]}, semithick] (-3.3,0) -- (3.3,0);
+  \draw[thin] (0,-0.08) -- (0,0.08) node[below=3pt] {$0$};
+  \node[above=2pt] at (-1.75,0.04) {ចំនួនអវិជ្ជមាន ($<0$)};
+  \node[above=2pt] at ( 1.75,0.04) {ចំនួនវិជ្ជមាន ($>0$)};
+  \node[below=3pt, font=\tiny] at (-1.75,-0.05) {(នៅខាងឆ្វេងគល់ $0$)};
+  \node[below=3pt, font=\tiny] at ( 1.75,-0.05) {(នៅខាងស្ដាំគល់ $0$)};
+\end{tikzpicture}%
+}
+&
+- ចំនួនអវិជ្ជមាននៅខាងឆ្វេងគល់ $0$ \newline
+\hspace*{0.2cm}និងចំនួនវិជ្ជមាននៅខាងស្ដាំគល់ $0$ \\[-3pt]
+
+% --- ផ្នែក 2.7: E1 - Engage ---
+\fiveE{E1- Engage (3min)} \newline
+- បិទបណ្ណចំនួនសនិទានទាំង ៥ លើក្ដារខៀន៖ \par\vspace{2pt}
+\hspace*{0.2cm}\fstrut$\dfrac{1}{8}, -1, \dfrac{-9}{7}, 0.28, 1\dfrac{2}{5}$ \par\vspace{2pt}
+- សួរបំផុសសិស្ស៖ \newline
+\hspace*{0.2cm}+ កាលពីម៉ោងមុន យើងចេះប្រៀបធៀប \newline
+\hspace*{0.35cm}ចំនួនពីរ។ ចុះបើមានចំនួនសនិទានច្រើន \newline
+\hspace*{0.35cm}ទម្រង់ខុសគ្នាបែបនេះ តើយើងរៀបវា\newline
+\hspace*{0.35cm}ពីតូចទៅធំដោយវិធីណា? \newline
+\hspace*{0.2cm}+ តើនៅចន្លោះ $\dfrac{3}{4}$ និង $\dfrac{6}{7}$ មានចំនួន\newline
+\hspace*{0.35cm}សនិទានផ្សេងទៀតដែរឬទេ?
+&
+\hspace*{0.1cm}- បណ្ណចំនួនសនិទានទាំង ៥ បិទលើក្ដារខៀន៖
+\cfig{%
+\renewcommand{\arraystretch}{1.30}
+\begin{tabular}{|c|c|c|c|c|}
+  \hline
+  \fstrut\hspace{0.25cm}$\dfrac{1}{8}$\hspace{0.25cm} &
+  \hspace{0.25cm}$-1$\hspace{0.25cm} &
+  \hspace{0.25cm}$\dfrac{-9}{7}$\hspace{0.25cm} &
+  \hspace{0.25cm}$0.28$\hspace{0.25cm} &
+  \hspace{0.25cm}$1\dfrac{2}{5}$\hspace{0.25cm} \\
+  \hline
+\end{tabular}%
+}
+\hspace*{0.1cm}- សំណួរបំផុស៖ តើត្រូវរៀបបណ្ណទាំងនេះតាមលំដាប់ពីតូចទៅធំ \par\vspace{3pt}
+\hspace*{0.3cm}\botfstrut និងរកចំនួនសនិទាននៅចន្លោះ $\dfrac{3}{4}$ និង $\dfrac{6}{7}$ ដោយរបៀបណា? \par\vspace{2pt}
+\hspace*{0.1cm}- ភ្ជាប់ចូលមេរៀនថ្មី៖ \textbf{២.២. ការរៀបលំដាប់ចំនួនសនិទាន}
+&
+- សង្កេតបណ្ណចំនួនសនិទាន \newline
+\hspace*{0.2cm}លើក្ដារខៀន និងគិតរកវិធីរៀប\newline
+\hspace*{0.2cm}លំដាប់ (ដៅលើបន្ទាត់ចំនួន \newline
+\hspace*{0.2cm}បំបែកជាទសភាគ ឬតម្រូវភាគបែងរួម)
+\par\vspace*{0.1cm}
+- ឆ្លើយតាមការគិត និងត្រៀមរៀន\newline
+\hspace*{0.2cm}មេរៀនថ្មី \\
+\hline
+
+% ==================== ជំហានទី៣ ====================
+\stepheader{ជំហានទី៣ (ខ្លឹមសារមេរៀនថ្មី)}
+% --- ផ្នែក 3.1: ចំណងជើងមេរៀន និងសកម្មភាពរុករក E2 (ឧទាហរណ៍ ១) ---
+\mbox{- សរសេរចំណងជើងមេរៀនថ្មីលើក្ដារខៀន}
+\par\vspace*{0.05cm}
+\fiveE{E2 - Explore (8min)} \newline
+\ditem ចែកសន្លឹកកិច្ចការឱ្យសិស្សធ្វើជាដៃគូ \newline
+\hspace*{0.2cm}(ផ្នែកទី១៖ សកម្មភាពរុករក) \newline
+\ditem \textbf{សកម្មភាពទី១ (ឧទាហរណ៍ ១)៖} \newline
+\hspace*{0.2cm}ឱ្យសិស្សសង្កេតបន្ទាត់ចំនួនក្នុងសន្លឹក\newline
+\hspace*{0.2cm}កិច្ចការ បំពេញចំនួនដែលបាត់ និងសួរ៖ \newline
+\hspace*{0.2cm}«តើតម្លៃចំនួនប្រែប្រួលដូចម្ដេច \newline
+\hspace*{0.2cm}ពីឆ្វេងទៅស្ដាំ?»
+&
+មេរៀនទី១ \hspace{0.15cm} {\muol ចំនួនសនិទាន (ត)} \newline
+២. ការប្រៀបធៀប និងរៀបលំដាប់នៃចំនួនសនិទាន \newline
+២.២. ការរៀបលំដាប់ចំនួនសនិទាន
+\par\vspace*{0.05cm}
+\textbf{ឧទាហរណ៍ ១ :} លំដាប់ចំនួនសនិទាននៅលើបន្ទាត់ចំនួន
+\cfig{\drawTextbookNumberLine[0.95]}
+&
+- កត់ត្រាចំណងជើងមេរៀន
+\par\vspace*{0.1cm}
+\ditem ទទួលសន្លឹកកិច្ចការ និងពិភាក្សាជាដៃគូ \newline
+\ditem បំពេញចំនួន $-\dfrac{1}{2}, -0.25, \dfrac{1}{4}, \dfrac{3}{4}$ \newline
+\hspace*{0.2cm}លើបន្ទាត់ចំនួន និងសន្និដ្ឋានថា៖ \newline
+\hspace*{0.2cm}ចំនួននៅខាងឆ្វេងតូចជាងខាងស្ដាំ \\[-3pt]
+
+% --- ផ្នែក 3.2: សកម្មភាពរុករក E2 (ឧទាហរណ៍ ២) ---
+\ditem \textbf{សកម្មភាពទី២ (ឧទាហរណ៍ ២)៖} \newline
+\hspace*{0.2cm}ឱ្យសិស្សពិភាក្សាជាដៃគូ បំបែកចំនួន \newline
+\hspace*{0.2cm}សនិទានទាំង ៥ ជាចំនួនទសភាគ រួចដៅ \newline
+\hspace*{0.2cm}លើបន្ទាត់ចំនួនក្នុងសន្លឹកកិច្ចការ និង\newline
+\hspace*{0.2cm}សរសេរតាមលំដាប់ពីតូចទៅធំ
+&
+\vspace*{2pt}\fstrut\textbf{ឧទាហរណ៍ ២ :} សរសេរចំនួនសនិទានខាងក្រោមពីតូចទៅធំ៖ \par\vspace{2pt}
+\hspace*{1.2cm}\fstrut$\dfrac{1}{8} \ , \ -1 \ , \ \dfrac{-9}{7} \ , \ 0.28 \ , \ 1\dfrac{2}{5}$ ។ \par\vspace{3pt}
+\hspace*{0.10cm}\fstrut ដោយ $\dfrac{-9}{7} \approx -1.29 , \, -1 , \, \dfrac{1}{8} = 0.125 , \, 0.28 , \, 1\dfrac{2}{5} = 1.4$
+\cfig{\drawExampleTwoLine[0.88]}
+\hspace*{0.15cm}\fstrut គេបានលំដាប់ពីតូចទៅធំគឺ៖ \graybox{$-\dfrac{9}{7} , -1 , \dfrac{1}{8} , 0.28 , 1\dfrac{2}{5}$} ។
+&
+\ditem គណនាតម្លៃទសភាគជាដៃគូ៖ \par\vspace{2pt}
+\fstrut$-\dfrac{9}{7} \approx -1.29 < -1 < 0.125$ \newline
+\hspace*{0.8cm}$< 0.28 < 1.4$ \par\vspace{2pt}
+- ដៅចំណុចលើបន្ទាត់ចំនួន និងរៀប\newline
+\hspace*{0.2cm}លំដាប់ពីតូចទៅធំក្នុងសន្លឹកកិច្ចការ \\[2pt]
+
+% --- ផ្នែក 3.3: សកម្មភាពរុករក E2 និង E3 Explain (ឧទាហរណ៍ ៣) ---
+\ditem \textbf{សកម្មភាពទី៣ (ឧទាហរណ៍ ៣)៖} \newline
+\hspace*{0.2cm}ឱ្យសិស្សគណនាមធ្យមនៃ $\dfrac{3}{4}$ និង $\dfrac{6}{7}$ \par\vspace{1pt}
+\hspace*{0.2cm}ក្នុងសន្លឹកកិច្ចការដើម្បីរកចំនួននៅចន្លោះ \par\vspace{2pt}
+\fiveE{E3 - Explain (6min)} \newline
+\ditem ហៅតំណាងដៃគូ ៣ គូ ឡើងបង្ហាញចម្លើយ \newline
+\hspace*{0.2cm}និងតម្រៀបបណ្ណចំនួនលើក្ដារខៀន \newline
+\mbox{\cnum{1}តើយើងមានវិធីអ្វីខ្លះដើម្បីរៀបលំដាប់} \newline
+\hspace*{0.35cm}ចំនួនសនិទាន?
+&
+\fstrut\textbf{ឧទាហរណ៍ ៣ :} រកចំនួនសនិទាននៅចន្លោះ $\dfrac{3}{4}$ និង $\dfrac{6}{7}$ ។ \par\vspace{2pt}
+\hspace*{0.15cm}មានន័យថា គេត្រូវរកមធ្យមនៃចំនួនសនិទានទាំងពីរគឺ៖ \par\vspace{4pt}
+\hspace*{0.15cm}\fstrut$\dfrac{\frac{3}{4}+\frac{6}{7}}{2}$ ឬ $\dfrac{1}{2}\left(\dfrac{3}{4}+\dfrac{6}{7}\right) = \dfrac{1}{2}\left(\dfrac{21}{28}+\dfrac{24}{28}\right) = \dfrac{1}{2}\left(\dfrac{45}{28}\right) = \dfrac{45}{56}$
+\cfig{\drawMidpointLine[0.85]}
+\fstrut ដូច្នេះ ចំនួនសនិទាននៅចន្លោះ $\dfrac{3}{4}$ និង $\dfrac{6}{7}$ គឺ \graybox{$\dfrac{45}{56}$ ឬ $0.804$}។
+&
+\ditem គណនាមធ្យមដោយបូកចំនួន \newline
+\hspace*{0.2cm}\fstrut ទាំងពីរ រួចចែកនឹង $2$ បាន $\dfrac{45}{56}$ \newline
+\ditem តំណាងដៃគូឡើងបកស្រាយ \newline
+\hspace*{0.2cm}លើក្ដារខៀន និងឆ្លើយសំណួរគ្រូ៖ \newline
+១. ដៅលើបន្ទាត់ចំនួន \newline
+២. បំបែកជាចំនួនទសភាគ \newline
+៣. តម្រូវភាគបែងរួមវិជ្ជមាន \\[2pt]
+
+% --- ផ្នែក 3.4: វិធានសង្ខេប និងតារាងលក្ខណៈ ---
+\mbox{\cnum{2}គ្រូសង្ខេបវិធានទាំង ៣ លើក្ដារខៀន} \newline
+\hspace*{0.35cm}ឱ្យសិស្សកត់ត្រាចូលសៀវភៅមេរៀន
+&
+\cfig{%
+\footnotesize
+\renewcommand{\arraystretch}{1.18}
+\begin{tabular}{|c|L{4.70cm}|}
+  \hline
+  \rowcolor{headgray}
+  \textbf{វិធីសាស្ត្រ} & \multicolumn{1}{c|}{\textbf{ខ្លឹមសារអនុវត្ត}} \\
+  \hline
+  ១. បន្ទាត់ចំនួន & ចំនួនខាងឆ្វេងតូចជាងចំនួនខាងស្ដាំជានិច្ច \\
+  \hline
+  ២. តម្រូវភាគបែងរួម & តម្រូវភាគបែងរួមវិជ្ជមាន រួចប្រៀបធៀបភាគយក \\
+  \hline
+  ៣. ចំនួននៅចន្លោះ $x, y$ & \fstrut គណនាមធ្យម $\dfrac{x+y}{2} = \dfrac{1}{2}(x+y)$ \\[2pt]
+  \hline
+\end{tabular}%
+}
+&
+\ditem កត់ត្រាខ្លឹមសារមេរៀន និងតារាងសង្ខេប \newline
+\hspace*{0.2cm}ចូលក្នុងសៀវភៅមេរៀន \\
+\hline
+
+% ==================== ជំហានទី៤ ====================
+\stepheader{ជំហានទី៤ (ពង្រីកចំណេះដឹង)}
+% --- ផ្នែក 4.1: E4 - Elaborate (លំហាត់គំរូ ២ ទំព័រទី៣-៤) ---
+\fiveE{E4 - Elaborate (10min)} \newline
+\ditem សរសេរលំហាត់គំរូ ២ លើក្ដារខៀន និងសួរ៖ \newline
+\hspace*{0.2cm}- ប្រភាគ $\dfrac{4}{3}, 1\dfrac{1}{3}, \dfrac{7}{3}$ មានភាគបែង $3$ \newline
+\hspace*{0.35cm}(ចែកមិនដាច់) តើយើងគួររៀបលំដាប់\newline
+\hspace*{0.35cm}តាមវិធីណាទើបជាក់លាក់? \newline
+\hspace*{0.2cm}- ក្នុង (ក) តើ $0.3, -0.25$ ស្មើប្រភាគអ្វី? \newline
+\hspace*{0.2cm}- តើភាគបែងរួមនៃ $3, 10, 100, 4$ ប៉ុន្មាន?
+&
+{\muol លំហាត់គំរូ ២} \textbf{:} រៀបចំនួនសនិទានខាងក្រោមតាមលំដាប់ពីតូចទៅធំ \par\vspace{2pt}
+\hspace*{0.10cm}\begin{tabular}{@{}p{3.55cm}p{4.05cm}@{}}
+  \fstrut ក. $\dfrac{4}{3} , 0.3 , -0.25 , \dfrac{5}{4}$ &
+  \fstrut ខ. $1\dfrac{1}{3} , \dfrac{7}{3} , \dfrac{5}{4} , -1 , \dfrac{-9}{4}$ ។
+\end{tabular}
+&
+\ditem សង្កេតប្រធានលំហាត់ និងឆ្លើយ៖ \newline
+- ប្រើវិធីតម្រូវភាគបែងរួមវិជ្ជមាន \par\vspace{2pt}
+- \fstrut បំប្លែង $0.3 = \dfrac{3}{10}$ និង $-0.25 = -\dfrac{25}{100}$ \par\vspace{2pt}
+- ភាគបែងរួមគឺ $120$ \\[-2pt]
+
+% --- ផ្នែក 4.2a: ដំណោះស្រាយលំហាត់គំរូ ២ (ក) ---
+\ditem ណែនាំជំហានដោះស្រាយលើក្ដារខៀន៖ \newline
+\hspace*{0.05cm}\mbox{\cnum{1}បំប្លែងទសភាគ/ចំនួនចម្រុះជាប្រភាគ} \newline
+\hspace*{0.05cm}\mbox{\cnum{2}រកភាគបែងរួមវិជ្ជមានតូចបំផុត} \newline
+\hspace*{0.05cm}\mbox{\cnum{3}តម្រូវភាគបែងរួមគ្រប់ចំនួនសនិទាន} \newline
+\hspace*{0.05cm}\mbox{\cnum{4}ប្រៀបធៀបភាគយក រួចរៀបចំនួនដើម} \newline
+\ditem ដោះស្រាយ (ក) លើក្ដារខៀនជាគំរូ
+&
+\centerline{\redsub{ដំណោះស្រាយ}}
+\fstrut ក. គេបាន $\dfrac{4}{3} \ , \ 0.3 = \dfrac{3}{10} \ , \ -0.25 = -\dfrac{25}{100} \ , \ \dfrac{5}{4}$ តម្រូវភាគបែងរួម $120$ \par\vspace{3pt}
+\hspace*{0.25cm}\fstrut$\dfrac{4}{3} = \dfrac{160}{120} \ , \ 0.3 = \dfrac{36}{120} \ , \ -0.25 = -\dfrac{30}{120} \ , \ \dfrac{5}{4} = \dfrac{150}{120}$ \par\vspace{3pt}
+\hspace*{0.25cm}\fstrut ដូច្នេះ \hspace{0.15cm} \graybox{$-0.25 < 0.3 < \dfrac{5}{4} < \dfrac{4}{3}$} ។
+&
+\ditem ចូលរួមគណនាភាគយកពេលតម្រូវ \newline
+\hspace*{0.2cm}ភាគបែងរួម $120$ ជាមួយគ្រូ \newline
+- កត់ត្រាដំណោះស្រាយគំរូ (ក) \\[2pt]
+
+% --- ផ្នែក 4.2b: ដំណោះស្រាយលំហាត់គំរូ ២ (ខ) ---
+\ditem ឱ្យសិស្សធ្វើសំណួរ (ខ) ក្នុងសន្លឹកកិច្ចការ \newline
+\hspace*{0.2cm}(ផ្នែកទី២) ដោយតម្រូវភាគបែងរួម $12$ \newline
+\hspace*{0.2cm}រួចហៅសិស្សម្នាក់ឡើងកែលើក្ដារខៀន
+&
+\vspace*{2pt}\fstrut ខ. គេបាន $1\dfrac{1}{3} \ , \ \dfrac{7}{3} \ , \ \dfrac{5}{4} \ , \ -1 \ , \ \dfrac{-9}{4}$ តម្រូវភាគបែងរួម $12$ \par\vspace{3pt}
+\hspace*{0.25cm}\fstrut$1\dfrac{1}{3} = \dfrac{4}{3} = \dfrac{16}{12} \ , \ \dfrac{7}{3} = \dfrac{28}{12} \ , \ \dfrac{5}{4} = \dfrac{15}{12}$ \par\vspace{3pt}
+\hspace*{0.25cm}\fstrut$-1 = -\dfrac{12}{12} \ , \ \dfrac{-9}{4} = \dfrac{-27}{12}$ \par\vspace{3pt}
+\hspace*{0.25cm}\fstrut ដូច្នេះ \hspace{0.15cm} \graybox{$\dfrac{-9}{4} < -1 < \dfrac{5}{4} < \dfrac{4}{3} < \dfrac{7}{3}$} ។
+&
+\ditem ដោះស្រាយសំណួរ (ខ) ក្នុងសន្លឹកកិច្ចការ \newline
+\ditem តំណាងសិស្សឡើងកែលើក្ដារខៀន \newline
+\hspace*{0.2cm}និងផ្ទៀងផ្ទាត់ចម្លើយរួមគ្នា \\[1pt]
+
+% --- ផ្នែក 4.3: E5 - Evaluate (លំហាត់ប្រតិបត្តិ ទំព័រទី៤) ---
+\fiveE{E5 - Evaluate (8min)} \newline
+\ditem ឱ្យសិស្សធ្វើ {\muol លំហាត់ប្រតិបត្តិ} (ទំព័រទី៤) \newline
+\hspace*{0.2cm}ក្នុងសន្លឹកកិច្ចការ (ផ្នែកទី៣)៖ \newline
+ក. រៀបតាមលំដាប់ពីធំទៅតូច៖ \par\vspace{2pt}
+\hspace*{0.35cm}\fstrut$\dfrac{3}{4} \ , \ \dfrac{4}{5} \ , \ \dfrac{7}{8} \ , \ 0.75$ ។ \par\vspace{2pt}
+ខ. សរសេរចំនួនសនិទាន \fstrut$\dfrac{9}{11} \ , \ \dfrac{7}{2^3 \times 5}$ \par\vspace{1pt}
+\hspace*{0.35cm}ជាចំនួនទសភាគ ។
+&
+{\muol ចម្លើយលំហាត់ប្រតិបត្តិ} \par\vspace{1pt}
+\fstrut ក. រៀបចំនួនសនិទានតាមលំដាប់ពីធំទៅតូច $\dfrac{3}{4} \ , \ \dfrac{4}{5} \ , \ \dfrac{7}{8} \ , \ 0.75$ ៖ \par\vspace{2pt}
+\hspace*{0.25cm}តម្រូវភាគបែងរួម $40$ គេបាន៖ \par\vspace{2pt}
+\hspace*{0.25cm}\fstrut$\dfrac{3}{4} = \dfrac{30}{40} \ , \ \dfrac{4}{5} = \dfrac{32}{40} \ , \ \dfrac{7}{8} = \dfrac{35}{40} \ , \ 0.75 = \dfrac{3}{4} = \dfrac{30}{40}$ \par\vspace{3pt}
+\hspace*{0.25cm}\fstrut ដូច្នេះ លំដាប់ពីធំទៅតូចគឺ \graybox{$\dfrac{7}{8} \ , \ \dfrac{4}{5} \ , \ \dfrac{3}{4} = 0.75$} ។
+&
+{\muol ចម្លើយរំពឹងទុកទី១ (តម្រូវភាគបែង)} \par\vspace{2pt}
+\fstrut$\dfrac{3}{4} = \dfrac{30}{40} \ , \ \dfrac{4}{5} = \dfrac{32}{40} \ , \ \dfrac{7}{8} = \dfrac{35}{40}$ \par\vspace{2pt}
+ដោយ $35 > 32 > 30$ \par\vspace{2pt}
+\fstrut គេបាន $\dfrac{7}{8} > \dfrac{4}{5} > \dfrac{3}{4} = 0.75$ \\[1pt]
+
+% --- ផ្នែក 4.4: ចម្លើយប្រតិបត្តិ (ខ) និងចម្លើយរំពឹងទុកទី២ ---
+\ditem ដើរពិនិត្យកិច្ចការសិស្សតាមតុ \newline
+\ditem ហៅសិស្ស ២ នាក់ឡើងសរសេរចម្លើយ \newline
+\hspace*{0.2cm}(ក) និង (ខ) លើក្ដារខៀន (បង្ហាញទាំងវិធី \newline
+\hspace*{0.2cm}តម្រូវភាគបែងរួម និងវិធីបំបែកជាទសភាគ) \newline
+\ditem កែសម្រួល និងវាយតម្លៃលទ្ធផលសិក្សា
+&
+\fstrut ខ. សរសេរចំនួនសនិទាន $\dfrac{9}{11} \ , \ \dfrac{7}{2^3 \times 5}$ ជាចំនួនទសភាគ ៖ \par\vspace{2pt}
+\hspace*{0.25cm}ដោយ $9 \div 11 = 0.8181\dots = 0.\overline{81}$ \par\vspace{2pt}
+\hspace*{0.25cm}\fstrut និង $\dfrac{7}{2^3 \times 5} = \dfrac{7}{8 \times 5} = \dfrac{7}{40} = 0.175$ \par\vspace{3pt}
+\hspace*{0.25cm}\fstrut ដូច្នេះ \hspace{0.15cm} \graybox{$\dfrac{9}{11} = 0.\overline{81} \ , \ \dfrac{7}{2^3 \times 5} = 0.175$} ។
+&
+{\muol ចម្លើយរំពឹងទុកទី២ (តាមទសភាគ)} \par\vspace{2pt}
+\fstrut$\dfrac{3}{4} = 0.75 \ , \ \dfrac{4}{5} = 0.8 \ , \ \dfrac{7}{8} = 0.875$ \par\vspace{2pt}
+\fstrut នាំឱ្យ $\dfrac{7}{8} > \dfrac{4}{5} > \dfrac{3}{4} = 0.75$ \par\vspace{2pt}
+\fstrut ខ. $\dfrac{9}{11} = 0.\overline{81} \ , \ \dfrac{7}{40} = 0.175$ \par\vspace{1pt}
+\ditem ឡើងកែលើក្ដារខៀន និងផ្ទៀងផ្ទាត់ចម្លើយ \\[2pt]
+\hline
+
+% ==================== ជំហានទី៥ ====================
+\stepheader{ជំហានទី៥ (កិច្ចការផ្ទះ + បណ្ដាំផ្ញើ)}
+% --- ផ្នែក 5.1: កិច្ចការផ្ទះ ---
+\timenote{ចំណាយពេលឱ្យតិចបំផុតកុំឱ្យលើស 2min} \newline
+\ditem សរសេរកិច្ចការផ្ទះលើក្ដារខៀន ឱ្យសិស្ស \newline
+\hspace*{0.2cm}កត់ត្រាចូលសៀវភៅកិច្ចការផ្ទះ
+&
+\centerline{\muol កិច្ចការផ្ទះ}
+១. រៀបចំនួនសនិទានខាងក្រោមតាមលំដាប់ពីតូចទៅធំ និងដៅលើបន្ទាត់ចំនួន៖ \par\vspace{2pt}
+\hspace*{0.4cm}\fstrut$-\dfrac{3}{2} \ , \ 0.75 \ , \ -\dfrac{1}{4} \ , \ 1\dfrac{1}{2} \ , \ -0.5 \ , \ \dfrac{5}{4}$ \par\vspace{2pt}
+២. សរសេរចំនួនទសភាគខួប $0.\overline{4} \ , \ 1.\overline{285} \ , \ 0.8\overline{21}$ ទៅជាចំនួនសនិទាន \newline
+\hspace*{0.4cm}រួចរៀបតាមលំដាប់ពីតូចទៅធំ (ប្រតិបត្តិ គ ទំព័រទី៤)។ \par\vspace{2pt}
+\fstrut ៣. រកចំនួនសនិទានពីរដែលនៅចន្លោះ $\dfrac{2}{5}$ និង $\dfrac{3}{4}$ ។
+&
+\par\vspace*{0.2cm}
+\ditem កត់ត្រាកិច្ចការផ្ទះចូលសៀវភៅ \\[-6pt]
+
+% --- ផ្នែក 5.2: បណ្ដាំផ្ញើ ---
+\ditem ពេលចេញទៅផ្ទះ សូមគោរពច្បាប់\newline
+\hspace*{0.2cm}ចរាចរណ៍ ជួយកិច្ចការផ្ទះឪពុកម្ដាយ \newline
+\hspace*{0.2cm}និងកុំភ្លេចធ្វើកិច្ចការផ្ទះឱ្យបានគ្រប់គ្នា
+&
+\cfig{%
+\begin{tikzpicture}[scale=0.76, every node/.style={font=\scriptsize}]
+  \draw[{Stealth[scale=0.7]}-{Stealth[scale=0.8]}, semithick] (-3.5,0) -- (3.5,0);
+  \foreach \x/\n in {-3.0/-2, -1.5/-1, 0/0, 1.5/1, 3.0/2} {
+    \draw[thin] (\x,-0.08) -- (\x,0.08);
+    \node[below=1pt, font=\tiny] at (\x,-0.07) {$\n$};
+  }
+  \node[above=2pt, font=\tiny, text=gray!70!black] at (0,0.06) {(បន្ទាត់ចំនួនសម្រាប់ដៅចំណុចក្នុងលំហាត់ទី១)};
+\end{tikzpicture}%
+}
+&
+\par\vspace*{0.1cm}
+\ditem បាទ/ចាស៎លោកគ្រូ \\
+\end{longtable}
+
+% -------------------- កាលបរិច្ឆេទ និងហត្ថលេខា (Date & Signature) --------------------
+\vspace{0pt}
+\hfill
+\begin{minipage}{9.5cm}
+  \centering
+  ថ្ងៃពុធ ១០រោច ខែអស្សុជ ឆ្នាំមមី អដ្ឋស័ក ពុទ្ធសករាជ ២៥៧០\\[1pt]
+  ត្រូវនឹងថ្ងៃទី០៤ ខែវិច្ឆិកា ឆ្នាំ២០២៦\\[1pt]
+  {\muol គ្រូបង្រៀន}\\[14pt]
+  {\muol\hspace*{2.2cm}ហុក ប៊ុនថែន}
+\end{minipage}
+
+\end{document}
