@@ -22,10 +22,28 @@
 \makeatother
 
 % ============================================================================
-% ការកំណត់ពុម្ពអក្សរ (Fonts Configuration)
+% ការកំណត់ពុម្ពអក្សរ (Fonts Configuration - Cross-Platform Windows + Cloud fonts/)
 % ============================================================================
+\providecommand{\NGSFindFonts}{%
+  \IfFileExists{C:/Windows/Fonts/cambria.ttc}{%
+    \def\NGSSysPath{C:/Windows/Fonts/}%
+    \def\NGSUserPath{C:/Users/KIT/AppData/Local/Microsoft/Windows/Fonts/}%
+  }{%
+    \IfFileExists{./fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{./fonts/}\def\NGSUserPath{./fonts/}}{%
+    \IfFileExists{../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../fonts/}\def\NGSUserPath{../fonts/}}{%
+    \IfFileExists{../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../fonts/}\def\NGSUserPath{../../fonts/}}{%
+    \IfFileExists{../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../fonts/}\def\NGSUserPath{../../../fonts/}}{%
+    \IfFileExists{../../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../../fonts/}\def\NGSUserPath{../../../../fonts/}}{%
+    \IfFileExists{../../../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../../../fonts/}\def\NGSUserPath{../../../../../fonts/}}{%
+    \IfFileExists{../../../../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../../../../fonts/}\def\NGSUserPath{../../../../../../fonts/}}{%
+      \def\NGSSysPath{../../../../../../../fonts/}\def\NGSUserPath{../../../../../../../fonts/}%
+    }}}}}}}%
+  }%
+}
+\NGSFindFonts
+
 \setmathfont[
-  Path={C:/Windows/Fonts/},
+  Path={\NGSSysPath},
   FontIndex=1,
   Scale=1.02
 ]{cambria.ttc}
@@ -33,7 +51,7 @@
 \defaultfontfeatures{Ligatures=TeX}
 
 \setmainfont[
-  Path={C:/Users/KIT/AppData/Local/Microsoft/Windows/Fonts/},
+  Path={\NGSUserPath},
   Extension=.ttf,
   Script=Khmer,
   BoldFont={KhmerOSsiemreap},
@@ -45,27 +63,27 @@
 ]{KhmerOSsiemreap}
 
 \newfontfamily\muol[
-  Path={C:/Users/KIT/AppData/Local/Microsoft/Windows/Fonts/},
+  Path={\NGSUserPath},
   Extension=.ttf,
   Script=Khmer
 ]{KhmerOSmuollight}
 
 \newfontfamily\NagaBold[
-  Path={C:/Users/KIT/AppData/Local/Microsoft/Windows/Fonts/},
+  Path={\NGSUserPath},
   Extension=.ttf
 ]{AKbalthom Naga Bold}
 
 \newfontfamily\CalibriFont[
-  Path={C:/Windows/Fonts/},
+  Path={\NGSSysPath},
   Extension=.ttf
 ]{calibri}
 
 \newfontfamily\Tacteing[
-  Path={C:/Users/KIT/AppData/Local/Microsoft/Windows/Fonts/}
+  Path={\NGSUserPath}
 ]{TACTENG.TTF}
 
 \newfontfamily\CourierBullet[
-  Path={C:/Windows/Fonts/},
+  Path={\NGSSysPath},
   Extension=.ttf
 ]{cour}
 \newcommand{\wcirc}{{\CourierBullet\fontsize{9.5pt}{11pt}\selectfont o}}
@@ -111,7 +129,7 @@
 \newcommand{\graybox}[1]{\colorbox{boxgray}{\strut\hspace{2pt}#1\hspace{2pt}}}
 \newcommand{\ditem}{\tikz[baseline=-0.5ex]\fill (0,0.42ex) -- (0.42ex,0) -- (0,-0.42ex) -- (-0.42ex,0) -- cycle;\hspace{0.3em}}
 \newcommand{\cnum}[1]{{\fontsize{10.5pt}{12pt}\selectfont\ding{\numexpr181+#1\relax}}\hspace{0.2em}}
-\newcommand{\cfig}[1]{\par\vspace{1pt}{\centering #1\par}\vspace{1pt}}
+\newcommand{\cfig}[1]{\par\vspace{4pt}{\centering #1\par}\vspace{4pt}}
 \newcommand{\stepheader}[1]{\multicolumn{3}{|c|}{\cellcolor{stepgray}\muol #1} \\* \noalign{\hrule height 0.4pt}}
 \newcommand{\tri}[1]{\ensuremath{\triangle #1}}
 \newcommand{\ang}[1]{\ensuremath{\angle #1}}
@@ -129,18 +147,20 @@
 \newcommand{\khmflourish}{{\Tacteing\fontsize{36pt}{14pt}\selectfont\raisebox{-5pt}{3}}}
 
 % ============================================================================
-% ម៉ាក្រូគូសរូប TikZ (ស្តង់ដារអក្សរពណ៌ខ្មៅ ១០០%: every node/.style={font=\scriptsize, text=black})
+% ម៉ាក្រូគូសរូប TikZ (អក្សរពណ៌ខ្មៅ ១០០%, ទំហំសមាមាត្រ 3.8cm–6.8cm មិនបញ្ជ្រៀតគ្នា)
+% every node/.style={font=\footnotesize, text=black} និងគម្លាត label >= 2.5mm
 % ============================================================================
 % \newcommand{\figExample}{%
-% \begin{tikzpicture}[scale=0.74, every node/.style={font=\scriptsize, text=black}]
+% \begin{tikzpicture}[scale=1.0, every node/.style={font=\footnotesize, text=black}]
+%   % ទទឹងរូបទោល 3.8cm–5.2cm (ក្នុង Col 2: 4.5cm–6.8cm ឬ 6.2cm–7.4cm បើរូប ២ គូ)
 %   ...
 % \end{tikzpicture}}
 
 % ============================================================================
-% ចាប់ផ្ដើមឯកសារ (Document Body)
+% ចាប់ផ្ដើមឯកសារ (Document Body — ចំនួនទំព័រ 4–8+ តាមខ្លឹមសារជាក់ស្ដែង, ពេញទំព័រ >=90%)
 % ============================================================================
 \begin{document}
-\fontsize{9.5pt}{14.0pt}\selectfont
+\fontsize{10pt}{15.2pt}\selectfont
 
 % -------------------- ក្បាលកិច្ចតែងការ (Header) --------------------
 \begin{center}
@@ -208,7 +228,7 @@
 
 \vspace{-3pt}
 
-\renewcommand{\arraystretch}{1.05}
+\renewcommand{\arraystretch}{1.15}
 \begin{longtable}{|L{5.50cm}|L{7.90cm}|L{4.80cm}|}
 \hline
 \rowcolor{headgray}
@@ -233,34 +253,48 @@
 &
 \hspace*{0.3cm}- រដ្ឋបាលថ្នាក់
 &
-- រាយការណ៍អវត្តមាន \\
+- រាយការណ៍អវត្តមាន \\[3pt]
 \hline
 
 % ==================== ជំហានទី២ (9min: ≤3 + 3 + E1 3) ====================
 \stepheader{ជំហានទី២ (កិច្ចការផ្ទះ + ទំនាក់ទំនងមេរៀនថ្មី)}
-% --- ២.១ .. ២.៥ (ប្រើ \\[-2pt] ចន្លោះជួរតូច, E1 - Engage 3min) ---
-& & \\
+% ច្បាប់បំបែកជួរ longtable: រាល់ E1..E5 ត្រូវបំបែកជាជួររងតូចៗ (2–5 បន្ទាត់/ជួរ) បញ្ចប់ដោយ \\[3pt] (គ្មាន \hline កណ្ដាលជំហាន)
+% រូបភាព TikZ នីមួយៗដាក់ក្នុងជួររងដាច់ដោយឡែក (& \cfig{...} & \\[3pt]) ដើម្បីឱ្យទំព័រ 1..N-1 ពេញ >=90%
+% គំរូជួររងអក្សរចុះបន្ទាត់ (Teacher-Friendly Vertical Structure — ហាមសរសេរអក្សរតរហូត):
+% \fiveE{E1 - Engage} \timenote{(3 min)}\par\vspace{2pt}
+% $\bullet$ គ្រូបង្ហាញស្ថានភាព...\par\vspace{2pt}
+% \hspace*{0.3em}-- សំណួរ៖ «...»
+% &
+% \textbf{១. បេសកកម្ម E1៖ ...}\par\vspace{2pt}
+% ...
+% &
+% $\circ$ សិស្សសង្កេត...\par\vspace{2pt}
+% $\circ$ សិស្សទស្សន៍ទាយ... \\[3pt]
+% & \cfig{\figExample} & \\[3pt]
 \hline
 
 % ==================== ជំហានទី៣ (17min: E2 11 + E3 6) ====================
 \stepheader{ជំហានទី៣ (ខ្លឹមសារមេរៀនថ្មី)}
-% --- E2 - Explore (11min) និង E3 - Explain (6min) ---
-& & \\
+% បំបែក E2 (11 min) និង E3 (6 min) ជាជួររងតូចៗ 2–5 បន្ទាត់ + ជួររងរូបភាពដាច់ដោយឡែក \\[3pt]
+% គ្រប់ជំហានគណិតវិទ្យា សម្មតិកម្ម/សន្និដ្ឋាន/សម្រាយបញ្ជាក់ និងចម្លើយសិស្ស ត្រូវចុះបន្ទាត់ថ្មីជានិច្ច
+& & \\[3pt]
 \hline
 
 % ==================== ជំហានទី៤ (20min: E4 10 + E5 10) ====================
 \stepheader{ជំហានទី៤ (ពង្រីកចំណេះដឹង)}
-% --- E4 - Elaborate (10min) និង E5 - Evaluate (10min) ---
-& & \\
+% បំបែក E4 (10 min) និង E5 (10 min) ជាជួររងតូចៗ + ជួររងរូបភាពធំច្បាស់ 3.8–6.8 cm \\[3pt]
+& & \\[3pt]
 \hline
 
 % ==================== ជំហានទី៥ (≤2min) ====================
 \stepheader{ជំហានទី៥ (កិច្ចការផ្ទះ + បណ្ដាំផ្ញើ)}
-\timenote{ចំណាយពេលឱ្យតិចបំផុតកុំឱ្យលើស 2min}
+\timenote{ចំណាយពេលឱ្យតិចបំផុតកុំឱ្យលើស 2min}\par\vspace{2pt}
+$\bullet$ គ្រូដាក់កិច្ចការផ្ទះ...
 &
-\centerline{\muol កិច្ចការផ្ទះ}
+\centerline{\muol កិច្ចការផ្ទះ}\par\vspace{2pt}
+% ១ បន្ទាត់ = ១ លំហាត់/សំណួរ
 &
-- កត់ត្រា \\
+$\circ$ សិស្សកត់ត្រា \\[3pt]
 \end{longtable}
 
 % -------------------- កាលបរិច្ឆេទ និងហត្ថលេខា --------------------

@@ -1,6 +1,6 @@
 # Standard 5-Stage Research-Driven NGS Lesson Package Pipeline
 
-Use this workflow **before** authoring or upgrading any 50-minute NGS Khmer lesson package (`LS_Plan_<Topic>.tex`, `Teaching_Scenario_<Topic>.tex`, `Teaching_Guideline_<Topic>.tex`, `Printable_Materials_<Topic>.tex`, and `ឯកសារស្រាវជ្រាវយោង_PDF\`). It grounds every classroom task in verified peer-reviewed empirical evidence while strictly enforcing anti-CAPTCHA compliance, Black & White (B&W) print safety, true 1:1 scale manipulatives, and clean A4 page balance.
+Use this workflow **before** authoring or upgrading any 50-minute NGS Khmer lesson package (`LS_Plan_<Topic>.tex`, `Teaching_Scenario_<Topic>.tex`, `Teaching_Guideline_<Topic>.tex`, `Printable_Materials_<Topic>.tex`, and `ឯកសារស្រាវជ្រាវយោង_PDF\`). It grounds every classroom task in verified peer-reviewed empirical evidence while strictly enforcing anti-CAPTCHA compliance, Black & White (B&W) print safety, true 1:1 scale manipulatives, flexible content-driven page counts (`4–8+` pp.), proportional clear TikZ diagrams (`3.8–6.8 cm`), structured line-by-line teacher formatting, full A4 paper utilization (`>= 90%` fill / `<= 1.5 cm` bottom gap on Pages `1..N-1`), and mandatory Stage 5 bottom-gap & visual PNG verification.
 
 ---
 
@@ -13,10 +13,10 @@ Use this workflow **before** authoring or upgrading any 50-minute NGS Khmer less
    - `scholar-proof` (`proof_<year>_<firstauthor>.pdf`): Cognitive Load Theory / avoiding "proof shock", monochrome B&W print-safe symbolic diagram coding + bracketed finger-tracing prompts, numbered warrant banks, forward/backward planning (`P2`) + Looking Back (`EIA`), collaborative `Pause-Ask` / `Pause-Review` gates, and rapid diagnostic exit foils.
    - Optional `evidence-curator`: Curates targeted extra Open-Access papers (e.g., erroneous examples, realistic/historical indirect measurement), copies & numbers all verified PDFs into `ឯកសារស្រាវជ្រាវយោង_PDF\`, and generates `00_បញ្ជីឯកសារភស្តុតាង_Evidence_Index.md`.
 2. **Stages 2–5 Package Authors & Verifier**:
-   - `lesson-author`: Updates/creates `Research_Brief_<Topic>.md`, `LS_Plan_<Topic>.tex` (4 pp.), and `Teaching_Scenario_<Topic>.tex` (2 pp.).
+   - `lesson-author`: Updates/creates `Research_Brief_<Topic>.md`, `LS_Plan_<Topic>.tex` (flexible 4–8+ A4 pp., granular sub-rows, structured line breaks), and `Teaching_Scenario_<Topic>.tex` (flexible 2–4 A4 pp.).
    - `printables-author`: Authors `Printable_Materials_<Topic>.tex` (1 kit per A4 page, true `1:1` scale manipulatives, B&W thick TikZ).
-   - `guideline-author`: Authors `Teaching_Guideline_<Topic>.tex` (Word-styled manual & APA 7th mini-research report referencing exact verified PDFs, `LS_Plan`, and `Printable_Materials` pages).
-   - `verifier` + `skill-pkg-updater`: Independently validates PDF integrity (`fitz`), compiles/inspects PNGs for every page, and keeps workspace/global skills in sync.
+   - `guideline-author`: Authors `Teaching_Guideline_<Topic>.tex` (~14–20 pp. Word-styled manual & APA 7th mini-research report with `breakable` boxes, referencing exact verified PDFs, `LS_Plan`, and `Printable_Materials` pages).
+   - `verifier` + `skill-pkg-updater`: Independently validates PDF integrity (`fitz`), enforces the Stage 5 quantitative bottom-gap check (`<= 1.6 cm` on Pages `1..N-1`) + 100% PNG visual audit, and keeps workspace/global skills in sync.
 
 ### Option B: Single-Agent Mode
 Run the exact same 5 stages sequentially: gather and verify 5–14 Open-Access PDFs spanning misconceptions, manipulatives/POE, and proof scaffolding/assessment into `papers\`, populate `ឯកសារស្រាវជ្រាវយោង_PDF\`, draft `Research_Brief_<Topic>.md`, author all 4 synchronized `.tex` deliverables, double-compile each with `xelatex`, move explicit `.aux`/`.log`/`.out` artifacts, and visually inspect every rendered PNG page across all 4 PDFs.
@@ -202,9 +202,9 @@ Write the pedagogical narrative in clear **Khmer** while preserving **exact Engl
 # សង្ខេបការស្រាវជ្រាវគរុកោសល្យ (Research Brief): <Topic> (<Grade>)
 
 - **កញ្ចប់ឯកសារបង្រៀនគោលដៅ** (`01_កិច្ចតែងការបង្រៀន\...\`)៖
-  - `LS_Plan_<Topic>.tex` (៥០ នាទី, គំរូ 5Es, ៤ ទំព័រ A4)
-  - `Teaching_Scenario_<Topic>.tex` (២ ទំព័រ A4)
-  - `Teaching_Guideline_<Topic>.tex` (សៀវភៅណែនាំគ្រូ & របាយការណ៍ស្រាវជ្រាវ APA 7th)
+  - `LS_Plan_<Topic>.tex` (៥០ នាទី, គំរូ 5Es, ៤–៨+ ទំព័រ A4 តាមខ្លឹមសារជាក់ស្ដែង, ពេញទំព័រ >=៩០%)
+  - `Teaching_Scenario_<Topic>.tex` (២–៤ ទំព័រ A4)
+  - `Teaching_Guideline_<Topic>.tex` (សៀវភៅណែនាំគ្រូ & របាយការណ៍ស្រាវជ្រាវ APA 7th, ~១៤–២០ ទំព័រ)
   - `Printable_Materials_<Topic>.tex` (សម្ភារៈបោះពុម្ព B&W 1:1 scale)
   - `ឯកសារស្រាវជ្រាវយោង_PDF\` (`00_បញ្ជីឯកសារភស្តុតាង_Evidence_Index.md` + `01_...pdf`..)
 
@@ -237,22 +237,24 @@ Write the pedagogical narrative in clear **Khmer** while preserving **exact Engl
 
 All 4 `.tex` files must synchronize **word-for-word** on measurements, vertex labels, Warrant Bank `①–⑤`, diagnostic foils `A–D`, and homework items `ក`/`ខ`. Enforce these shared research-derived rules first:
 - **Monochrome B&W Print-Safe Classroom Scaffolding (Zero Color-Pen Dependency)**: Replace color coding (`២–៣ ពណ៌`, `ពណ៌ខៀវ/ក្រហម/បៃតង`) with **monochrome symbolic coding + embodied tracing prompts**: edge ticks (`|`/`||`), angle arcs, circled shared vertices/midpoints, bracketed finger-tracing cues (`[ចង្អុលអូស...]` / `[tracing]`), and a Numbered Warrant Bank (`①–⑤`).
-- **Break Visual-Orientation & Separate-Figure Stereotypes**: Include rotated/reflected/inverted triangles (e.g., ~`140°`) and adjacent/overlapped/bow-tie figures with 100% pure black TikZ labels (`every node/.style={font=\scriptsize, text=black}`) and bold B&W strokes (`line width=0.8pt`–`1.4pt`, `black`, `white`, `gray!8`–`gray!38`/`gray!65`, `tk1`/`tk2` `0.85pt`).
+- **Break Visual-Orientation & Separate-Figure Stereotypes (Proportional Size, Never Micro-Shrunk)**: Include rotated/reflected/inverted triangles (e.g., ~`140°`) and adjacent/overlapped/bow-tie figures with 100% pure black TikZ labels (`every node/.style={font=\footnotesize, text=black}` or `\small`, `>= 8.5pt–10pt` in `LS_Plan`; `>= 10pt` in `Teaching_Guideline`) offset `>= 2.5mm` from segments/arcs/ticks, and bold B&W strokes (`line width=0.8pt`–`1.4pt`, `black`, `white`, `gray!8`–`gray!38`/`gray!65`, `tk1`/`tk2` `0.85pt`). Single `LS_Plan` figures must be **`3.8 cm – 5.2 cm`** wide (`3.6–4.4 cm` in Col 1/Col 3; `4.5–6.8 cm` in Col 2); side-by-side pairs belong in `7.90 cm` Col 2 at **`6.2 cm – 7.4 cm`** total width (or stacked vertically with `>= 4mm` gap in narrow columns) — forbid tiny `< 3.5 cm` / `scale < 0.80` / `\tiny` figures or squeezing `< 2 cm` triangles side-by-side.
 
-### 3.1 `LS_Plan_<Topic>.tex` (Strictly 4 Balanced A4 Pages)
+### 3.1 `LS_Plan_<Topic>.tex` (Flexible `4–8+` Content-Driven A4 Pages, `>= 90%` Bottom Fill)
 - Build from `references/lesson_plan_template.tex`, preserving the 3-level Kampong Thom header (`មន្ទីរអប់រំ យុវជន និងកីឡា ខេត្តកំពង់ធំ` → `ការិយាល័យអប់រំ យុវជន និងកីឡា ស្រុកកំពង់ស្វាយ` → `អនុវិទ្យាល័យព្រះក្រសាំង`), `TACTENG.TTF` `'3'` flourish, **50-minute split** (`2 + 9 + 17 + 20 + ≤2`), zero time-summary table inside `LS_Plan`, matching lunar & solar dates (`ឆ្នាំមមី អដ្ឋស័ក ពុទ្ធសករាជ ២៥៧០` / `២០២៦`), and centered `គ្រូបង្រៀន` + `\vspace{32pt}` + `\hfill{\muol ហុក ប៊ុនថែន}\hspace*{1.4cm}`.
-- Use modular micro-rows (`\\[-2pt]`) without forced `\pagebreak` (~92–98% page fill). Never use `\rowcolor` inside nested sub-tables (`\cellcolor{headgray}` + `\\[2pt] \hline`), never put Khmer inside `\texttt{...}`, and never prefix `-` before `\ditem`/`$\bullet$`/`\wcirc`.
+- **Content-Driven Flexible Page Count (`4` to `7–8+` Pages — Remove Rigid 4-Page Cap)**: Let `LS_Plan` flow naturally across **`4, 5, 6, 7, 8+` A4 pages** according to actual content, derivations, dialogue, and proportional figures (`\fontsize{10pt}{15.2pt}\selectfont`, `\arraystretch{1.15}`, `\cfig` `4pt` vertical padding, NO forced `\pagebreak`). Never force-squeeze into 4 pages at the cost of tiny figures or cramped text, while keeping Pages `1..N-1` `>= 90%` filled (`<= 1.5 cm` bottom gap) and Final Page `N` `>= 40%` filled (never a 2-line orphan signature page).
+- **Granular `longtable` Sub-Rows (Eliminate Large Bottom Whitespace)**: Because `longtable` breaks pages only at `\\` row boundaries, **forbid** monolithic rows (`> 5–6` lines or mixing prose + TikZ + nested `tabular` in one row). Split every 5E phase (`E1..E5`) into **granular `2–5 line` sub-rows** separated by `\\[3pt]` (**without** middle `\hline`; use `\hline` only between major steps `ជំហានទី១..៥`), and put each TikZ figure in its own dedicated row (`& \cfig{...} & \\[3pt]`).
+- **Teacher-Friendly Line-by-Line Vertical Structure (Forbid Run-On Paragraphs & `\\[-2pt]`)**: Start every phase badge (`\fiveE{...} \timenote{...}`) on its own line (`\par\vspace{2pt}`), and put every teacher action (`$\bullet$ គ្រូ...`), guiding question (`\hspace*{0.3em}– សំណួរ៖ «...»`), board header (`\textbf{សម្មតិកម្ម៖}`, `\textbf{សន្និដ្ឋាន៖}`, `\textbf{សម្រាយបញ្ជាក់៖}`), individual proof/math line (`1 line = 1 step`), and student answer (`$\circ$ សិស្ស...`) on a **new line** (`\par\vspace{2pt}` or separate sub-row `\\[3pt]`). Never use `\rowcolor` inside nested sub-tables (`\cellcolor{headgray}` + `\\[2pt] \hline`), never put Khmer inside `\texttt{...}`, and never prefix `-` before `\ditem`/`$\bullet$`/`\wcirc`.
 
-### 3.2 `Teaching_Scenario_<Topic>.tex` (2 A4 Pages)
-- Minute-by-minute execution & board-management script synchronized to the 50-minute 5Es split, listing exact timing checkpoints, classroom transitions, B&W material distribution cues, `Pause-Ask` / `Pause-Review` relay gates, and the empirical misconception diagnosis table.
+### 3.2 `Teaching_Scenario_<Topic>.tex` (Flexible `2–4` A4 Pages)
+- Minute-by-minute execution & board-management script across **2–4 natural A4 pages** according to actual lesson content (`>= 90%` fill / `<= 1.5 cm` bottom gap on Pages `1..N-1` using granular `longtable` sub-rows), synchronized to the 50-minute 5Es split, listing exact timing checkpoints, classroom transitions, B&W material distribution cues, `Pause-Ask` / `Pause-Review` relay gates, and the empirical misconception diagnosis table.
 
 ### 3.3 `Teaching_Guideline_<Topic>.tex` (Mobile-First Pedagogical Manual & Mini-Research Report)
-- **Screen/Mobile-First Readability (Contrast with 4-Page `LS_Plan`)**: Because teachers read `Teaching_Guideline_*.pdf` primarily on smartphones/tablets without printing, **NEVER** squeeze prose into `9pt–10pt` margins. Use `\documentclass[a4paper,12pt]{article}` and let pages flow naturally across **~13–16 readable A4 pages** with a strict 5-tier font scale:
+- **Screen/Mobile-First Readability & Zero Bottom-Gap Boxes (`~14–20` Natural A4 Pages)**: Because teachers read `Teaching_Guideline_*.pdf` primarily on smartphones/tablets without printing, **NEVER** squeeze prose into `9pt–10pt` margins. Use `\documentclass[a4paper,12pt]{article}`, load `\tcbuselibrary{breakable,skins}`, mark `phasebox`, `scriptbox`, and multi-paragraph `tcolorbox`es as **`breakable`** with `\needspace <= 2.2cm` (on headings only so large bottom gaps never appear), and let pages flow naturally across **~14–20 readable A4 pages** with a strict 5-tier font scale:
   - **Tier 1 (Official Header & Title, unwrapped `\muol`)**: `ព្រះរាជាណាចក្រកម្ពុជា` (`13.5pt/21pt`), `ជាតិ សាសនា ព្រះមហាក្សត្រ` (`12pt/18.5pt`) + `\khmflourish` (`TACTENG` `'3'`, `38pt`); 3-line Kampong Thom / Kampong Svay / Preah Krasang (`10.8pt/17pt`); Main Title (`14pt/22pt`); Subtitle (`11.5pt/18pt`).
   - **Tier 2 (`\secbanner`, 2-line banners)**: Line 1 Khmer title in unwrapped `\muol\fontsize{12pt}{19pt}\selectfont`; Line 2 English subtitle in `\fontsize{10pt}{14.5pt}\selectfont\enit{...}` (`top=6pt, bottom=6pt, left=9pt, right=9pt`).
   - **Tier 3 (Systematic `\muol` Structural Headings)**: `\subsec` (`11.5pt/18.5pt` + bottom rule + `\needspace{2.5cm}`), `phasebox` titles (`11pt/17.5pt`, timing badge `10.5pt`), Callout Box headers (Metadata & Synthesis boxes, `11pt/17pt`), `scriptbox` lead-in `«គ្រូនិយាយថា៖` (`10.8pt/17pt`), figure captions `រូបទី ១៖...` (`10.5pt/16.5pt`), table headers (`10.2pt/16pt`), and signature labels (`11.5pt/18pt`, preserving `\vspace{32pt}` + `\hspace*{1.4cm}`).
   - **Tier 4 (Unified Body Prose, Lists, `phasebox` & `scriptbox`)**: Uniform **`11.5pt / 18.2pt`** (`KhmerOSsiemreap` `FakeBold=1.8, FakeSlant=0.25`, `Cambria Math` `Scale=1.06`, `Times New Roman` `\en{...}` `Scale=1.02`, `\parskip=4.5pt`).
-  - **Tier 5 (Dense Tables, APA 7th References & TikZ Diagrams)**: Evidence `longtable` `10.2pt / 15.5pt` (`\arraystretch{1.28}`), APA 7th Reference List `10.8pt / 16.2pt` (`\TimesEn`, `\hangindent=0.85cm`), TikZ diagram labels **`>= 9.8pt–10pt`** cleanly spaced within `18.10 cm` text width (`10.5pt` captions).
+  - **Tier 5 (Dense Tables, APA 7th References & TikZ Diagrams)**: Evidence `longtable` `10.2pt / 15.5pt` (`\arraystretch{1.28}`), APA 7th Reference List `10.8pt / 16.2pt` (`\TimesEn`, `\hangindent=0.85cm`), TikZ diagram labels **`>= 10pt`** cleanly spaced within `6.5 cm – 14.0 cm` figure widths inside the `18.10 cm` text width (`10.5pt` captions).
 - **CRITICAL `\muol` (`KhmerOSmuollight`) Glyph Safety Rule**:
   - **NEVER** wrap `\muol` inside `\textbf{...}` (or apply `FakeBold` to `KhmerOSmuollight`).
   - **ALWAYS** wrap every embedded Latin letter, digit, or ASCII punctuation (`SAS`, `E1–E5`, `POE`, `PDF`, `APA`, `#`, `&`, `/`, `-`, `(`, `)`) inside `\enbf{...}` (or math `$...$`) when inside `\muol`, because `KhmerOSmuollight` lacks Latin/ASCII glyphs. Verify **`0 Missing character`** warnings in `.log`.
@@ -306,8 +308,41 @@ Confirm **only the 4 `.tex`/`.pdf` pairs and `ឯកសារស្រាវជ�
 
 ---
 
-## Stage 5 — Full-Page Visual PNG Inspection (All 4 PDFs)
+## Stage 5 — Mandatory Final Bottom-Fill Audit & Visual PNG Inspection (All 4 PDFs)
 
+Before declaring **any** lesson complete, execute **BOTH** Stage 5 gates:
+
+### 5.1 Quantitative PyMuPDF (`fitz`) Bottom-Gap & Page-Fill Audit
+Run on `LS_Plan_<Topic>.pdf`, `Teaching_Scenario_<Topic>.pdf`, and `Teaching_Guideline_<Topic>.pdf`:
+- Every non-final page (`1 .. N-1`) MUST have **`bottom_gap <= 1.6 cm`** (`>= ~90%` usable page height filled).
+- Final page `N` MUST have **`fill >= 40%`** (never a tiny 2-line orphan signature page).
+
+```python
+import fitz
+from pathlib import Path
+
+def check_bottom_fill(pdf_path: Path, top_band_pt: float = 30.0, bot_limit_pt: float = 812.0, max_gap_cm: float = 1.6):
+    with fitz.open(pdf_path) as doc:
+        n = len(doc)
+        usable = bot_limit_pt - top_band_pt
+        failures = []
+        for idx, page in enumerate(doc):
+            blocks = [b for b in page.get_text("blocks") if b[3] > top_band_pt + 4 and b[1] < bot_limit_pt - 8]
+            draws = [d["rect"] for d in page.get_drawings() if d["rect"].y1 > top_band_pt + 4 and d["rect"].y0 < bot_limit_pt - 8]
+            max_y = max([b[3] for b in blocks] + [r.y1 for r in draws] + [top_band_pt])
+            gap_cm = (bot_limit_pt - max_y) * 2.54 / 72.0
+            fill_pct = 100.0 * (max_y - top_band_pt) / usable
+            ok = (fill_pct >= 40.0) if (idx == n - 1) else (gap_cm <= max_gap_cm)
+            print(f"{pdf_path.name} P{idx+1}/{n}: fill={fill_pct:.1f}% bottom_gap={gap_cm:.2f}cm ok={ok}")
+            if not ok:
+                failures.append((idx + 1, fill_pct, gap_cm))
+        if failures:
+            raise AssertionError(f"Bottom-fill check failed for {pdf_path.name}: {failures}")
+```
+
+*(Note: For `Teaching_Guideline_*.pdf` with `bottom=2.30cm`, pass `top_band_pt=66.0, bot_limit_pt=776.0`.)*
+
+### 5.2 Full-Page Visual PNG Inspection (`read_file` on All Pages)
 Render **every page** of **all 4 compiled PDFs** to **175–190 dpi PNG** via PyMuPDF and inspect **EVERY PNG** with `read_file` before reporting completion:
 
 ```powershell
@@ -318,8 +353,10 @@ python -c "import fitz; docs=['LS_Plan_<Topic>','Teaching_Scenario_<Topic>','Tea
 ```
 
 Visual sign-off checklist (via `read_file` on **every** rendered PNG across all 4 PDFs):
-1. **`LS_Plan_<Topic>.pdf`**: Exactly **4 balanced A4 pages** (~92–98% fill), zero sparse spillover pages, no mid-page Column 3 holes, matching dates, and clean `\vspace{32pt}` signature block on Page 4.
-2. **`Teaching_Scenario_<Topic>.pdf`**: Clean **2 balanced A4 pages** synced with the 50-minute 5Es pacing and empirical misconception table.
-3. **`Teaching_Guideline_<Topic>.pdf`**: Comfortable **mobile-first readability** (~13–16 A4 pages, `11.5pt / 18.2pt` body & `scriptbox`, `10.2pt–10.8pt` tables & APA, `>= 9.8pt–10pt` TikZ labels + `10.5pt` captions), clean unwrapped `\muol` heading hierarchy with zero missing glyphs, spacious `2.30cm` header/footer clearance where Khmer ascenders/subscripts never touch `\headrule`/`\footrule` (and Page 1 omits running header via `\thispagestyle{firstpage}`), `TACTENG` `'3'`, `\en{...}` Times New Roman APA 7th citations/references, verbatim scripts, Evidence Table, and Reference List.
-4. **`Printable_Materials_<Topic>.pdf`**: Exact **1 kit per A4 page** (`\clearpage`), pure B&W thick lines (`1.0pt`–`1.4pt`), crisp `✂` cut boxes, and visually verified true `1:1` ruler calibration bar (`5 cm`) & cut-out proportions on the hands-on mat page.
-5. **Cross-Package TikZ & Typography Integrity**: Every TikZ label across all 4 PDFs is 100% pure black with zero overlapping lines/arcs/dots/shading; Khmer glyphs (`FakeBold=1.8`, `FakeSlant=0.25`), math symbols, `\cellcolor{headgray}` headers, zero `- \ditem` mixes, and zero `\texttt` Khmer boxes.
+1. **Zero Large Bottom Gaps (`<= 1.5–1.6 cm` / `>= 90%` fill on Pages `1..N-1`)**: No premature `longtable` page breaks or unbroken boxes leaving big empty space above the footer; final page `N` balanced (`>= 40%` fill) with a clean `\vspace{32pt}` signature block on `LS_Plan`.
+2. **Flexible Content-Driven Page Count**: `LS_Plan_<Topic>.pdf` flows naturally across **`4–8+` A4 pages** and `Teaching_Scenario_<Topic>.pdf` across **`2–4` A4 pages** matching real lesson content; `Teaching_Guideline_<Topic>.pdf` (`~14–20` A4 pages) preserves `breakable` boxes and `2.30cm` header/footer clearance where Khmer ascenders/subscripts never touch `\headrule`/`\footrule`.
+3. **Proportional Uncramped TikZ Figures (`3.8–6.8 cm` in `LS_Plan`, `>= 10pt` in `Guideline`)**: Every TikZ label is 100% pure black (`\footnotesize`/`\small`, `>= 2.5mm` clearance) with zero micro-shrunk `< 3.5 cm` figures, zero squeezed `< 2 cm` triangles, and zero overlapping lines/arcs/dots/shading; `Printable_Materials_<Topic>.pdf` preserves **1 kit per A4 page** (`\clearpage`), thick B&W strokes (`1.0pt`–`1.4pt`), crisp `✂` cut boxes, and visually verified true `1:1` ruler calibration bar (`5 cm`) & cut-out proportions.
+4. **Structured Teacher-Friendly Line Breaks**: Every phase badge, teacher action, guiding question, board header, individual math/proof line, and student response begins cleanly on its own line — zero run-on walls and zero `\\[-2pt]`.
+5. **Typography & Glyph Integrity**: Khmer glyphs (`FakeBold=1.8`, `FakeSlant=0.25`), math symbols, unwrapped `\muol` hierarchy (`0 Missing character`), `TACTENG` `'3'`, `\en{...}` Times New Roman APA citations/references, `\cellcolor{headgray}` headers, zero `- \ditem` mixes, and zero `\texttt` Khmer boxes render cleanly.
+
+**Mandatory Loop**: If ANY quantitative check or visual PNG check fails, **do not finish** — split monolithic `longtable` rows into granular `2–5 line` sub-rows (`\\[3pt]`), separate diagrams into dedicated rows, enlarge cramped TikZ figures, add explicit line breaks, recompile twice, and re-run Stage 5 until 100% of pages pass.
