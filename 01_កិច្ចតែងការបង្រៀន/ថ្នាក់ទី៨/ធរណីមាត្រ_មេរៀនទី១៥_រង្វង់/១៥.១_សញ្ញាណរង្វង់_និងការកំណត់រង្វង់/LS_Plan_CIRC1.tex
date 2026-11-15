@@ -1,0 +1,517 @@
+% !TEX program = xelatex
+\documentclass[a4paper,10pt]{article}
+
+\makeatletter
+\let\@expl@@@mark@update@singlecol@structures@@\relax
+\makeatother
+
+\usepackage[a4paper, left=0.95cm, right=0.95cm, top=0.85cm, bottom=0.92cm, footskip=0.52cm]{geometry}
+\usepackage{fontspec}
+\usepackage{amsmath, amssymb}
+\usepackage{longtable, array, colortbl}
+\usepackage[table]{xcolor}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usetikzlibrary{calc, angles, quotes, arrows.meta, decorations.markings}
+
+% Cross-platform font discovery
+\makeatletter
+\newcommand{\NGSFindFonts}{%
+  \IfFileExists{../../../fonts/KhmerOSsiemreap.ttf}{%
+    \def\NGSUserPath{../../../fonts/}\def\NGSSysPath{../../../fonts/}%
+  }{%
+    \IfFileExists{../../../../fonts/KhmerOSsiemreap.ttf}{%
+      \def\NGSUserPath{../../../../fonts/}\def\NGSSysPath{../../../../fonts/}%
+    }{%
+      \IfFileExists{fonts/KhmerOSsiemreap.ttf}{%
+        \def\NGSUserPath{fonts/}\def\NGSSysPath{fonts/}%
+      }{%
+        \def\NGSUserPath{C:/Users/user/AppData/Local/Microsoft/Windows/Fonts/}%
+        \def\NGSSysPath{C:/Windows/Fonts/}%
+      }%
+    }%
+  }%
+}
+\NGSFindFonts
+\makeatother
+
+\XeTeXlinebreaklocale "km"
+\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
+
+\setmainfont[
+  Path = {\NGSUserPath},
+  Extension = .ttf,
+  UprightFont = KhmerOSsiemreap,
+  BoldFont = KhmerOSsiemreap,
+  BoldFeatures = {FakeBold=1.8},
+  ItalicFont = KhmerOSsiemreap,
+  ItalicFeatures = {FakeSlant=0.25}
+]{KhmerOSsiemreap}
+
+\newfontfamily\muol[Path={\NGSUserPath}]{KhmerOSmuollight.ttf}
+\newfontfamily\Tacteing[Path={\NGSUserPath}]{TACTENG.TTF}
+\newfontfamily\enfont[Path={\NGSSysPath}, Scale=1.0]{times.ttf}
+\newfontfamily\enbold[Path={\NGSSysPath}, Scale=1.0]{timesbd.ttf}
+\newfontfamily\enital[Path={\NGSSysPath}, Scale=1.0]{timesi.ttf}
+\newfontfamily\calibrifont[Path={\NGSSysPath}, Scale=0.95]{calibri.ttf}
+\newfontfamily\symfont[Path={\NGSSysPath}, Scale=0.95]{cour.ttf}
+
+\DeclareTextFontCommand{\en}{\enfont}
+\newcommand{\enbf}[1]{{\enbold #1}}
+\newcommand{\enit}[1]{{\enital #1}}
+\newcommand{\khmflourish}{{\Tacteing\fontsize{17pt}{17pt}\selectfont 3}}
+\newcommand{\wcirc}{{\symfont\char"25CB}}
+
+\definecolor{headgray}{HTML}{E6E6E6}
+\definecolor{stepgray}{HTML}{D4D4D4}
+\definecolor{fiveecolor}{HTML}{8B0000}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyfoot[R]{{\calibrifont\fontsize{9.5pt}{11pt}\selectfont\thepage}}
+
+\setlength{\parindent}{0pt}
+\setlength{\LTpre}{2pt}
+\setlength{\LTpost}{2pt}
+\setlength{\tabcolsep}{4.5pt}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+\newcommand{\fiveE}[2]{{\color{fiveecolor}\enbf{#1} \enit{(#2)}}}
+\newcommand{\timenote}[1]{{\color{fiveecolor}\textit{#1}}}
+\newcommand{\stepheader}[1]{%
+  \rowcolor{stepgray}%
+  \multicolumn{3}{|c|}{\rule[-4pt]{0pt}{15pt}{\muol\fontsize{10pt}{14pt}\selectfont #1}} \\*%
+  \hline
+}
+\newcommand{\cfig}[1]{\begin{center}\vspace{-2pt}#1\vspace{-3pt}\end{center}}
+
+\newcommand{\tri}[1]{\triangle #1}
+\newcommand{\unit}[1]{\,\text{\en{#1}}}
+\newcommand{\cnum}[1]{\tikz[baseline=-0.58ex]\node[circle, fill=black, text=white, inner sep=0.85pt, minimum size=1.95ex, font=\enbold\scriptsize]{#1};}
+
+\newcommand{\rightbox}[4][0.20cm]{%
+  \coordinate (rbA) at ($(#3)!#1!(#2)$);
+  \coordinate (rbB) at ($(#3)!#1!(#4)$);
+  \coordinate (rbC) at ($(rbA)+(#3)!#1!(#4)-(#3)$);
+  \draw[black, line width=0.65pt] (rbA) -- (rbC) -- (rbB);
+}
+
+\newcommand{\tickone}[2]{%
+  \coordinate (tkM) at ($(#1)!0.5!(#2)$);
+  \draw[black, line width=0.7pt] ($(tkM)!0.11cm!90:(#2)$) -- ($(tkM)!0.11cm!-90:(#2)$);
+}
+\newcommand{\ticktwo}[2]{%
+  \coordinate (tkM1) at ($(#1)!0.47!(#2)$);
+  \coordinate (tkM2) at ($(#1)!0.53!(#2)$);
+  \draw[black, line width=0.7pt] ($(tkM1)!0.11cm!90:(#2)$) -- ($(tkM1)!0.11cm!-90:(#2)$);
+  \draw[black, line width=0.7pt] ($(tkM2)!0.11cm!90:(#2)$) -- ($(tkM2)!0.11cm!-90:(#2)$);
+}
+
+% ============================================================================
+% ម៉ាក្រូរូបភាព TikZ ស-ខ្មៅ សមាមាត្រច្បាស់ (3.8 cm – 6.8 cm, អក្សរខ្មៅ 100%)
+% ============================================================================
+
+% ១. រូបបេសកកម្ម E1៖ បំណែកមាត់ចានបុរាណកោង (តើត្រូវដៅប៉ុន្មានចំណុចដើម្បីរកផ្ចិត O?)
+\newcommand{\figEngageCIRCOne}{%
+\begin{tikzpicture}[scale=0.52, every node/.style={font=\footnotesize, text=black}]
+  % រង្វង់ដើមដាច់ៗ
+  \draw[black!55, line width=0.75pt, densely dashed] (0,0) circle (3.2);
+  % បំណែកមាត់ចានបុរាណ (ពីមុំ 35 ដល់ 145)
+  \fill[gray!28] (35:3.2) arc (35:145:3.2) -- (140:2.35) .. controls (105:2.1) and (75:2.45) .. (40:2.3) -- cycle;
+  \draw[black, line width=1.15pt] (35:3.2) arc (35:145:3.2);
+  \draw[black, line width=0.8pt] (145:3.2) -- (140:2.35) .. controls (105:2.1) and (75:2.45) .. (40:2.3) -- (35:3.2);
+  \fill[black] (0,0) circle (2.2pt);
+  \draw[black, line width=0.75pt, densely dashed, ->] (0,0) -- (90:3.15);
+  \node[below=2pt] at (0,0) {ផ្ចិតដើម $O = ?$};
+  \node[right=1pt] at (0,1.45) {$r = ?$};
+  \node[above=2pt] at (90:3.25) {បំណែកគែមចានបុរាណ};
+\end{tikzpicture}}
+
+% ២. រូប E2៖ ធាតុនៃរង្វង់ C(O,r) និងការកំណត់រង្វង់តាម ២ ចំណុច (មេដ្យាទ័រ)
+\newcommand{\figExploreCIRCOne}{%
+\begin{tikzpicture}[scale=0.41, every node/.style={font=\footnotesize, text=black}]
+  % ខាងឆ្វេង៖ ធាតុនៃរង្វង់ C(O,r) (ទំ.១៩៧)
+  \begin{scope}[shift={(0,0)}]
+    \coordinate (O) at (3.0,2.8);
+    \coordinate (A) at ($(O)+(62:2.5)$);
+    \coordinate (C) at ($(O)+(242:2.5)$);
+    \coordinate (B) at ($(O)+(6:2.5)$);
+    \draw[black, line width=1.05pt] (O) circle (2.5);
+    \draw[black, line width=0.95pt] (A)--(C) (A)--(B) (O)--(B);
+    \fill[black] (O) circle (2.4pt) (A) circle (2.2pt) (B) circle (2.2pt) (C) circle (2.2pt);
+    \node[left=2pt] at (O) {$O$};
+    \node[above right=1pt] at (A) {$A$};
+    \node[right=1pt] at (B) {$B$};
+    \node[below left=1pt] at (C) {$C$};
+    \node[left=1pt] at ($(O)!0.52!(A)$) {$r$};
+    \node[below=1pt] at ($(O)!0.55!(B)$) {$r$};
+    \node[align=center] at (3.0,-1.55) {$C(O,r)$៖ អង្កត់ផ្ចិត $AC$\\អង្កត់ធ្នូ $AB$};
+  \end{scope}
+  % ខាងស្ដាំ៖ រង្វង់កាត់តាម ២ ចំណុច A, B មានផ្ចិតលើមេដ្យាទ័រ d (ទំ.១៩៨)
+  \begin{scope}[shift={(8.8,0)}]
+    \coordinate (A2) at (1.6,4.2);
+    \coordinate (B2) at (4.4,1.4);
+    \coordinate (M) at ($(A2)!0.5!(B2)$);
+    \coordinate (O1) at ($(M)+(0.75,0.75)$);
+    \coordinate (O2) at ($(M)+(-0.80,-0.80)$);
+    \draw[black, line width=0.9pt] (A2)--(B2);
+    \draw[black, line width=0.95pt, densely dashed] ($(M)+(-2.1,-2.1)$) -- ($(M)+(2.0,2.0)$);
+    \draw[black, line width=0.85pt] (O1) circle ({veclen(2.15,0.65)});
+    \draw[black!75, line width=0.8pt] (O2) circle ({veclen(2.20,0.60)});
+    \rightbox[0.20cm]{A2}{M}{$(M)+(1.0,1.0)$}
+    \tickone{A2}{M}\tickone{M}{B2}
+    \fill[black] (A2) circle (2.2pt) (B2) circle (2.2pt) (O1) circle (2.2pt) (O2) circle (2.2pt);
+    \node[above left=1pt] at (A2) {$A$};
+    \node[below right=1pt] at (B2) {$B$};
+    \node[right=1.5pt] at (O1) {$O_1$};
+    \node[left=1.5pt] at (O2) {$O_2$};
+    \node[above right=0.5pt] at ($(M)+(1.7,1.7)$) {$d$};
+    \node[align=center] at (3.0,-1.55) {តាម $A,B$៖ ផ្ចិតស្ថិតលើ\\មេដ្យាទ័រ $d$};
+  \end{scope}
+\end{tikzpicture}}
+
+% ៣. រូប E4៖ លំហាត់គំរូ (ទំ.១៩៨) ប្រសព្វមេដ្យាទ័រ MN និង PQ កំណត់ផ្ចិត O តែមួយគត់
+\newcommand{\figModelCIRCOne}{%
+\begin{tikzpicture}[scale=0.50, every node/.style={font=\footnotesize, text=black}]
+  \coordinate (O) at (0,0);
+  \def\R{2.9}
+  \coordinate (A) at (155:\R);
+  \coordinate (B) at (50:\R);
+  \coordinate (C) at (-105:\R);
+  \coordinate (M1) at ($(A)!0.5!(C)$);
+  \coordinate (M2) at ($(A)!0.5!(B)$);
+  \coordinate (Mend) at (205:3.25);
+  \coordinate (Nend) at (25:3.25);
+  \coordinate (Qend) at (102.5:3.25);
+  \coordinate (Pend) at (-77.5:3.25);
+  \draw[black, line width=1.1pt] (O) circle (\R);
+  \draw[black, line width=0.95pt] (A)--(B)--(C)--cycle;
+  \draw[black, line width=0.75pt, densely dashed] (O)--(A) (O)--(B) (O)--(C);
+  \draw[black, line width=0.9pt] (Mend) -- (Nend);
+  \draw[black, line width=0.9pt] (Qend) -- (Pend);
+  \rightbox[0.19cm]{A}{M1}{O}
+  \rightbox[0.19cm]{A}{M2}{O}
+  \ticktwo{A}{M1}\ticktwo{M1}{C}
+  \tickone{A}{M2}\tickone{M2}{B}
+  \fill[black] (O) circle (2.5pt) (A) circle (2.2pt) (B) circle (2.2pt) (C) circle (2.2pt);
+  \node[above left=1pt] at (A) {$A$};
+  \node[above right=1pt] at (B) {$B$};
+  \node[below left=1pt] at (C) {$C$};
+  \node[right=3pt] at (0,-0.22) {$O$};
+  \node[below left=0pt] at (Mend) {$M$};
+  \node[right=0.5pt] at (Nend) {$N$};
+  \node[above=0.5pt] at (Qend) {$Q$};
+  \node[below right=0pt] at (Pend) {$P$};
+  \node[align=center] at (0,-4.15) {លំហាត់គំរូ (ទំ.១៩៨)៖ $O = MN \cap PQ \Rightarrow OA = OB = OC$};
+\end{tikzpicture}}
+
+% ៤. រូប E5៖ ប្រតិបត្តិ ទំ.១៩៨ (AB = 6 cm ជាមួយគូរង្វង់ទាំង ៣ ករណី ក, ខ)
+\newcommand{\figPracticeCIRCOne}{%
+\begin{tikzpicture}[scale=0.31, every node/.style={font=\scriptsize, text=black}]
+  % ក. r1=2, r2=4 (ប៉ះគ្នា 1 ចំណុច)
+  \begin{scope}[shift={(0,0)}]
+    \coordinate (A) at (0,0); \coordinate (B) at (6,0);
+    \draw[black, line width=0.9pt] (A)--(B);
+    \draw[black, line width=0.95pt] (A) circle (2.0);
+    \draw[black, line width=0.95pt] (B) circle (4.0);
+    \fill[black] (A) circle (2.6pt) (B) circle (2.6pt) (2,0) circle (3.2pt);
+    \node[below=1pt] at (A) {$A$}; \node[below=1pt] at (B) {$B$};
+    \node[align=center] at (3.5,-5.45) {ក. $(2,4)$៖ ប៉ះគ្នា\\($1$ ចំណុច)};
+  \end{scope}
+  % ខ. r1=3, r2=5 (កាត់គ្នា 2 ចំណុច)
+  \begin{scope}[shift={(11.4,0)}]
+    \coordinate (A) at (0,0); \coordinate (B) at (6,0);
+    \draw[black, line width=0.9pt] (A)--(B);
+    \draw[black, line width=0.95pt] (A) circle (3.0);
+    \draw[black, line width=0.95pt] (B) circle (4.2);
+    \fill[black] (A) circle (2.6pt) (B) circle (2.6pt);
+    \node[below=1pt] at (A) {$A$}; \node[below=1pt] at (B) {$B$};
+    \node[align=center] at (3.2,-5.45) {ខ. $(3,5)$៖ កាត់គ្នា\\($2$ ចំណុច)};
+  \end{scope}
+\end{tikzpicture}}
+
+\begin{document}
+\fontsize{10pt}{15.0pt}\selectfont
+
+% ==================== ក្បាលរដ្ឋបាលផ្លូវការ ====================
+{\centering
+  {\muol\fontsize{11pt}{16pt}\selectfont ព្រះរាជាណាចក្រកម្ពុជា}\\[2pt]
+  {\muol\fontsize{11pt}{16pt}\selectfont ជាតិ សាសនា ព្រះមហាក្សត្រ}\\[-2pt]
+  \khmflourish\par
+}
+\vspace{-4pt}
+{\muol\fontsize{10pt}{15.2pt}\selectfont
+មន្ទីរអប់រំ យុវជន និងកីឡា ខេត្តកំពង់ធំ\\
+ការិយាល័យអប់រំ យុវជន និងកីឡា ស្រុកកំពង់ស្វាយ\\
+អនុវិទ្យាល័យព្រះក្រសាំង\par}
+
+\vspace{2pt}
+{\centering{\muol\fontsize{12pt}{18pt}\selectfont កិច្ចតែងការបង្រៀន}\par}
+\vspace{2pt}
+
+{\fontsize{10pt}{15.0pt}\selectfont
+\hspace*{3.7cm}%
+\begin{tabular}{@{}l l l l@{}}
+  - & មុខវិជ្ជា & : & គណិតវិទ្យា ថ្នាក់ទី៨ \\
+  - & ចំណងជើងមេរៀន & : & មេរៀនទី១៥ រង្វង់ \\
+  - & ចំណងជើងរង & : & ១. រង្វង់៖ និយមន័យ និងការកំណត់រង្វង់ (ទំព័រ ១៩៧--១៩៨) \\
+  - & រយៈពេល & : & ១ ម៉ោងសិក្សា (៥០ នាទី) \\
+  - & បង្រៀនដោយ & : & ហុក ប៊ុនថែន \\
+  - & កាលបរិច្ឆេទ & : & ថ្ងៃសុក្រ ទី១៨ ខែធ្នូ ឆ្នាំ២០២៦ \\
+\end{tabular}
+
+\vspace{1pt}
+
+% -------------------- I. វត្ថុបំណង --------------------
+\textbf{I.} {\muol វត្ថុបំណង}\\[1pt]
+\hspace*{0.55cm}%
+\begin{tabular}{@{}l l L{14.2cm}@{}}
+  \wcirc \hspace{0.25cm} វិជ្ជាសម្បទា & : & សិស្សប្រាប់និយមន័យរង្វង់ $C(O,r)$ អង្កត់ធ្នូ អង្កត់ផ្ចិត និងទ្រឹស្ដីបទនៃការកំណត់រង្វង់តែមួយគត់កាត់តាមបីចំណុចមិនស្ថិតនៅលើបន្ទាត់តែមួយបានត្រឹមត្រូវ ។ \\
+  \wcirc \hspace{0.25cm} បំណិនសម្បទា & : & សិស្សសង់រង្វង់ដោយប្រើដែកឈាន រកផ្ចិតរង្វង់ចារឹកក្រៅត្រីកោណតាមប្រសព្វមេដ្យាទ័រ និងស្រាយបញ្ជាក់លក្ខណៈស្មើចម្ងាយពីផ្ចិតលើសន្លឹកកិច្ចការបានត្រឹមត្រូវ ។ \\
+  \wcirc \hspace{0.25cm} ចរិយាសម្បទា & : & សិស្សមានទម្លាប់ប្រើប្រាស់ដែកឈាននិងបន្ទាត់ក្រិតដោយផ្ចិតផ្ចង់ សហការពិភាក្សាដៃគូ និងឱ្យតម្លៃលើការអនុវត្តធរណីមាត្ររង្វង់ក្នុងជីវភាពពិត ។ \\
+\end{tabular}
+
+\vspace{1pt}
+
+% -------------------- II. សម្ភារៈឧបទេស --------------------
+\textbf{II.} {\muol សម្ភារៈឧបទេស}\\[1pt]
+\hspace*{0.55cm}\parbox[t]{18.2cm}{$\bullet$ \hspace{0.25cm} សម្រាប់គ្រូ៖ សៀវភៅសិក្សាគោលគណិតវិទ្យាថ្នាក់ទី៨ (ទំ.១៩៧--១៩៨ និង ២០៤) ក្ដារខៀន ដីស បន្ទាត់វែង និងដែកឈានក្ដារខៀន (គ្មានស្លាយ \en{LCD}) ។\\
+$\bullet$ \hspace{0.25cm} សម្រាប់សិស្ស៖ សន្លឹកកិច្ចការសិស្ស ស-ខ្មៅ (\en{Worksheet\_CIRC1} ២ ទំព័រពេញ) សៀវភៅគោល ដែកឈាន បន្ទាត់ក្រិត និងខ្មៅដៃ ។}
+
+\vspace{1pt}
+
+% -------------------- III. វិធីសាស្រ្តបង្រៀន --------------------
+\textbf{III.} {\muol វិធីសាស្រ្តបង្រៀន}\\[1pt]
+\hspace*{0.45cm}%
+\begin{tabular}{@{}l l L{14.85cm}@{}}
+  $\bullet$ \hspace{0.25cm} គោលវិធី & : & សិស្សមជ្ឈមណ្ឌល (បង្រៀនដោយមិនប្រើស្លាយ \en{LCD} យកសន្លឹកកិច្ចការពិសោធន៍ដែកឈានជាគោល) \\
+  $\bullet$ \hspace{0.25cm} យុទ្ធវិធីបង្រៀន & : & ស្ថាបនានិយម គំរូ \en{5Es} រួមផ្សំការទស្សន៍ទាយ-សង្កេត-ពន្យល់ (\en{POE}) លើសំណុំចំណុចមេដ្យាទ័រ និងសម្រាយបញ្ជាក់បំពេញចន្លោះ \\
+\end{tabular}
+}
+
+\vspace{1pt}
+
+% -------------------- IV. ដំណើរការបង្រៀន --------------------
+\textbf{IV.} {\muol ដំណើរការបង្រៀន}
+
+\vspace{1pt}
+
+\renewcommand{\arraystretch}{1.15}
+\begin{longtable}{|L{5.50cm}|L{7.90cm}|L{4.80cm}|}
+\hline
+\rowcolor{headgray}
+\multicolumn{1}{|c|}{\muol សកម្មភាពគ្រូ} &
+\multicolumn{1}{c|}{\muol ខ្លឹមសារមេរៀន} &
+\multicolumn{1}{c|}{\muol សកម្មភាពសិស្ស} \\
+\hline
+\endfirsthead
+
+\hline
+\rowcolor{headgray}
+\multicolumn{1}{|c|}{\muol សកម្មភាពគ្រូ} &
+\multicolumn{1}{c|}{\muol ខ្លឹមសារមេរៀន} &
+\multicolumn{1}{c|}{\muol សកម្មភាពសិស្ស} \\
+\hline
+\endhead
+
+\hline
+\endfoot
+
+\hline
+\endlastfoot
+
+% ==================== ជំហានទី១ (2min) ====================
+\stepheader{ជំហានទី១ ៖ រដ្ឋបាលថ្នាក់ (២ នាទី)}
+$\bullet$ ពិនិត្យអវត្តមាន សណ្ដាប់ធ្នាប់ និងការត្រៀមដែកឈាន បន្ទាត់ក្រិតរបស់សិស្ស\par\vspace{1pt}
+$\bullet$ ចែកសន្លឹកកិច្ចការ \en{Worksheet\_CIRC1} (១ សន្លឹកសងខាង) ដល់សិស្សគ្រប់គ្នា
+&
+$\bullet$ ពិនិត្យវត្តមាន វិន័យ និងឧបករណ៍ធរណីមាត្រ (សន្លឹកកិច្ចការ ដែកឈាន និងបន្ទាត់ក្រិត)
+&
+$\circ$ ប្រធានថ្នាក់រាយការណ៍អវត្តមាន\par\vspace{1pt}
+$\circ$ ទទួលសន្លឹកកិច្ចការ និងសរសេរឈ្មោះ \\[3pt]
+\hline
+
+% ==================== ជំហានទី២ (9min: ≤3 + 3 + E1 3) ====================
+\stepheader{ជំហានទី២ ៖ កែកិច្ចការផ្ទះ រំលឹកមេរៀនចាស់ និងភ្ជាប់មេរៀនថ្មី (៩ នាទី)}
+\timenote{(កែកិច្ចការផ្ទះ $\le 3\unit{min}$)}\par\vspace{1pt}
+$\bullet$ ហៅសិស្ស ២ នាក់ឡើងបង្ហាញចម្លើយសង្ខេបនៃលំហាត់ទី៦(៥) និងលំហាត់ទី៧(២) (ទំ.១៩៥--១៩៦)
+&
+\textbf{កំណែកិច្ចការផ្ទះ (មេរៀនទី១៤ ទំ.១៩៥--១៩៦)៖}\par\vspace{1pt}
+១. \textbf{លំហាត់ទី៦(៥)៖} $S = 42 \times 21 - 4\times\left(\frac{1}{2}\times 6\times 6\right) = 882 - 72 = \mathbf{810}$ ។\par\vspace{1pt}
+២. \textbf{លំហាត់ទី៧(២)៖} ចតុកោណព្នាយ ($b'=15, b=30, h=15$)៖ $S = \frac{(15+30)\times 15}{2} = \mathbf{337.5}$ ។
+&
+$\circ$ ឡើងកែលើក្ដារខៀន និងផ្ទៀងផ្ទាត់ចម្លើយក្នុងសៀវភៅ \\[3pt]
+
+\timenote{(រំលឹកមេរៀនទាក់ទង $3\unit{min}$)} $\bullet$ សួររំលឹកលក្ខណៈមេដ្យាទ័រនៃអង្កត់៖ «តើមេដ្យាទ័រនៃអង្កត់ $AB$ ជាបន្ទាត់ដូចម្ដេច? ហើយចំណុច $O$ នៅលើមេដ្យាទ័រមានលក្ខណៈអ្វី?»
+&
+\textbf{រំលឹកលក្ខណៈមេដ្យាទ័រនៃអង្កត់៖}\par\vspace{1pt}
+$\bullet$ មេដ្យាទ័រនៃអង្កត់ $AB$ ជាបន្ទាត់កែងនឹង $AB$ ត្រង់ចំណុចកណ្ដាល ។\par\vspace{1pt}
+$\bullet$ គ្រប់ចំណុច $O$ ស្ថិតនៅលើមេដ្យាទ័រនៃ $AB$ តែងមានចម្ងាយស្មើទៅចុងទាំងពីរ៖ $OA = OB$ ។
+&
+$\circ$ ឆ្លើយរំលឹកនិយមន័យ និងលក្ខណៈស្មើចម្ងាយ $OA = OB$ នៃមេដ្យាទ័រ \\[3pt]
+
+\fiveE{E1 - Engage}{3 min}\par\vspace{1pt}
+$\bullet$ ឱ្យសិស្សពិនិត្យ \textbf{ផ្នែកទី១} លើសន្លឹកកិច្ចការ៖ បុរាណវិទូរកឃើញ \textbf{បំណែកគែមចានបុរាណកោងមួយដុំ} ហើយចង់រកផ្ចិតដើម $O$ និងកាំ $r$ របស់ចានទាំងមូល
+&
+\textbf{បេសកកម្ម E1៖ រកផ្ចិតដើមនៃបំណែកមាត់ចានបុរាណ}\par\vspace{1pt}
+$\bullet$ សំណួរបំផុស៖ «តើគេត្រូវដៅចំណុចយ៉ាងតិចប៉ុន្មាននៅលើគែមកោងនៃបំណែកចាន ដើម្បីសង់រកផ្ចិតដើម $O$ ឃើញតែមួយគត់?» (ទុកផ្ទៀងនៅ E5)
+&
+$\circ$ សង្កេតរូបបំណែកចាន និងគូសធីកទស្សន៍ទាយ ($1, 2$ ឬ $3$ ចំណុច) \\[3pt]
+
+&
+\cfig{\figEngageCIRCOne}
+& \\[3pt]
+\hline
+
+% ==================== ជំហានទី៣ (17min: E2 11 + E3 6) ====================
+\stepheader{ជំហានទី៣ ៖ ការរុករកសញ្ញាណរង្វង់ និងការកំណត់រង្វង់តាមដែកឈាន (១៧ នាទី)}
+\fiveE{E2 - Explore}{11 min}\par\vspace{1pt}
+$\bullet$ ណែនាំដៃគូសិស្សប្រើដែកឈានបើកគំលាត $r = 2\unit{cm}$ គូសរង្វង់ផ្ចិត $O$ លើ \textbf{ផ្នែកទី២ (ក)} រួចវាស់ប្រៀបធៀប $OA, OB, OC$ អង្កត់ធ្នូ $AB$ និងអង្កត់ផ្ចិត $AC$
+&
+\textbf{សកម្មភាពទី១៖ ធាតុនៃរង្វង់ $C(O,r)$ (ទំ.១៩៧)}\par\vspace{1pt}
+$\bullet$ គ្រប់ចំណុច $A, B, C$ លើរង្វង់មានចម្ងាយស្មើគ្នាពីផ្ចិត $O$៖ $OA = OB = OC = r$ ។\par\vspace{1pt}
+$\bullet$ អង្កត់ភ្ជាប់ពីរចំណុចលើរង្វង់ហៅថា \textbf{អង្កត់ធ្នូ ($AB$)} ។ អង្កត់ធ្នូដែលកាត់តាមផ្ចិត $O$ ហៅថា \textbf{អង្កត់ផ្ចិត ($AC = 2r$)} ។
+&
+$\circ$ គូសរង្វង់ដោយដែកឈាន និងកំណត់ឈ្មោះកាំ $r$ អង្កត់ធ្នូ $AB$ និងអង្កត់ផ្ចិត $AC$ \\[3pt]
+
+$\bullet$ ឱ្យដៃគូសិស្សធ្វើពិសោធន៍ដែកឈានក្នុង \textbf{ផ្នែកទី២ (ខ)} លើករណីកាត់តាម ១ ចំណុច និង ២ ចំណុច (ឧទាហរណ៍ទី១--២ ទំ.១៩៧--១៩៨)
+&
+\textbf{សកម្មភាពទី២៖ ការកំណត់រង្វង់ទាំង ៤ ករណី (ទំ.១៩៧--១៩៨)}\par\vspace{1pt}
+-- \textbf{ករណី ១ ចំណុច ($A$)៖} គូសបានរង្វង់ \textbf{ច្រើនរាប់មិនអស់} (ផ្ចិតស្ថិតក្នុងប្លង់) ។\par\vspace{1pt}
+-- \textbf{ករណី ២ ចំណុច ($A,B$)៖} គូសបានរង្វង់ \textbf{ច្រើនរាប់មិនអស់} តែផ្ចិតទាំងអស់ស្ថិតនៅលើ \textbf{មេដ្យាទ័រនៃអង្កត់ $AB$} ។
+&
+$\circ$ សាកល្បងសង់ដោយដែកឈានលើប្រអប់ទី១ និងទី២ រួចកត់ត្រាទីតាំងផ្ចិត \\[3pt]
+
+$\bullet$ ឱ្យដៃគូបន្តសង់ករណី ៣ ចំណុចមិនរត់ត្រង់គ្នា (ឧទាហរណ៍ទី៣) និង \textbf{អន្ទាក់ POE ៣ ចំណុចរត់ត្រង់គ្នា} (សម្គាល់ ទំ.១៩៨)
+&
+-- \textbf{ករណី ៣ ចំណុចមិនរត់ត្រង់គ្នា ($A,B,C$)៖} មេដ្យាទ័រពីរប្រសព្វគ្នាត្រង់ $O$ តែមួយ $\Rightarrow$ គូសបានរង្វង់ \textbf{តែមួយគត់} ។\par\vspace{1pt}
+-- \textbf{អន្ទាក់ POE (៣ ចំណុចរត់ត្រង់គ្នា)៖} មេដ្យាទ័រទាំងពីរស្របគ្នា ($d_1 \parallel d_2$) គ្មានចំណុចប្រសព្វ $\Rightarrow$ \textbf{មិនអាចគូសរង្វង់កាត់តាមទាំងបីចំណុចបានទេ} ។
+&
+$\circ$ រកឃើញថាមេដ្យាទ័រពីរប្រសព្វគ្នាបានផ្ចិត ១ គត់ ឯករណីរត់ត្រង់គ្នាមេដ្យាទ័រស្របគ្នាគូសមិនបាន \\[3pt]
+
+&
+\cfig{\figExploreCIRCOne}
+& \\[3pt]
+
+\fiveE{E3 - Explain}{6 min}\par\vspace{1pt}
+$\bullet$ សំយោគនិយមន័យរង្វង់ $C(O,r)$ ព្រមទាំងធាតុអង្កត់ធ្នូ និងអង្កត់ផ្ចិតលើក្ដារខៀន
+&
+\textbf{និយមន័យ និងទ្រឹស្ដីបទ (ទំ.១៩៧--១៩៨)៖}\par\vspace{1pt}
+$\bullet$ \textbf{និយមន័យ៖} សំណុំចំណុចក្នុងប្លង់ដែលមានចម្ងាយស្មើនឹង $r$ ពីផ្ចិត $O$ ហៅថា \textbf{រង្វង់} កំណត់ដោយ $C(O, r)$ ($d = 2r$ ជាប្រវែងអង្កត់ផ្ចិត) ។
+&
+$\circ$ បំពេញនិយមន័យរង្វង់ $C(O,r)$ ក្នុង \textbf{ផ្នែកទី៣} នៃសន្លឹកកិច្ចការ \\[3pt]
+
+$\bullet$ ឱ្យសិស្សសង្ខេបទ្រឹស្ដីបទការកំណត់រង្វង់តែមួយគត់ និងតារាងសង្ខេបទាំង ៤ ករណី
+&
+$\bullet$ \textbf{ទ្រឹស្ដីបទ៖} តាមបីចំណុចដែលមិនស្ថិតនៅលើបន្ទាត់តែមួយ គេអាចគូសបានរង្វង់តែមួយគត់ដែលកាត់តាមចំណុចទាំងនោះ ។\par\vspace{2pt}
+{\fontsize{8.8pt}{12pt}\selectfont\renewcommand{\arraystretch}{1.14}
+\begin{tabular}{|L{2.30cm}|L{2.10cm}|L{2.65cm}|}
+\hline
+\cellcolor{headgray}\centering\textbf{ចំណុចឱ្យ} &
+\cellcolor{headgray}\centering\textbf{ចំនួនរង្វង់} &
+\cellcolor{headgray}\centering\arraybackslash\textbf{ទីតាំងផ្ចិត} \\[2pt]
+\hline
+១ ចំណុច ($A$) & រាប់មិនអស់ & ក្នុងប្លង់ \\[1.5pt]
+\hline
+២ ចំណុច ($A,B$) & រាប់មិនអស់ & លើមេដ្យាទ័រ $AB$ \\[1.5pt]
+\hline
+៣ មិនរត់ត្រង់គ្នា & \textbf{តែ ១ គត់} & ប្រសព្វមេដ្យាទ័រ \\[1.5pt]
+\hline
+៣ រត់ត្រង់គ្នា & \textbf{$0$ រង្វង់} & គ្មាន ($d_1 \parallel d_2$) \\[1.5pt]
+\hline
+\end{tabular}}
+&
+$\circ$ បំពេញទ្រឹស្ដីបទ និងតារាងសង្ខេបការកំណត់រង្វង់លើសន្លឹកកិច្ចការ \\[3pt]
+
+$\bullet$ បង្ហាញធនាគារហេតុផល \cnum{1}--\cnum{4} និងឱ្យសិស្សឆ្លើយសំណួរពិត/មិនពិតទាំង ៣ ដើម្បីបំបែកការយល់ច្រឡំ
+&
+$\bullet$ \textbf{ធនាគារហេតុផល៖} \cnum{1} និយមន័យ $C(O,r)$ $\;\vert\;$ \cnum{2} លក្ខណៈមេដ្យាទ័រ ($OA=OB$) $\;\vert\;$ \cnum{3} លក្ខណៈឆ្លងនៃសមភាព $\;\vert\;$ \cnum{4} បន្ទាត់ពីរកែងនឹងបន្ទាត់តែមួយនោះស្របគ្នា ។\par\vspace{1pt}
+$\bullet$ \textbf{ចំណាំ៖} ផ្ចិត $O$ មិនស្ថិតលើខ្សែរង្វង់ $C(O,r)$ ទេ ព្រោះ $OO = 0 \ne r$ ។
+&
+$\circ$ កត់ត្រាធនាគារហេតុផល និងឆ្លើយផ្ទៀងផ្ទាត់សំណួរពិត/មិនពិតទាំង ៣ \\[3pt]
+\hline
+
+% ==================== ជំហានទី៤ (20min: E4 10 + E5 10) ====================
+\stepheader{ជំហានទី៤ ៖ ពង្រឹងចំណេះដឹងតាមសម្រាយបញ្ជាក់ និងវាយតម្លៃ (២០ នាទី)}
+\fiveE{E4 - Elaborate}{10 min}\par\vspace{1pt}
+$\bullet$ ដឹកនាំសិស្សរៀបចំសម្មតិកម្ម និងសង់មេដ្យាទ័រទាំងពីរក្នុង \textbf{លំហាត់គំរូ (ទំ.១៩៨)} លើ \textbf{ផ្នែកទី៤}
+&
+\textbf{លំហាត់គំរូ (ទំ.១៩៨)៖} ស្រាយបញ្ជាក់ថាចំណុចមិនរត់ត្រង់គ្នា $A, B, C$ ស្ថិតនៅលើរង្វង់តែមួយគត់ ។\par\vspace{1pt}
+-- យក $MN$ ជាមេដ្យាទ័រនៃ $AC$ និង $PQ$ ជាមេដ្យាទ័រនៃ $AB$ ។ ដោយ $A, B, C$ មិនរត់ត្រង់គ្នា នោះ $MN$ និង $PQ$ កាត់គ្នាត្រង់ចំណុច $O$ តែមួយគត់ ។
+&
+$\circ$ កំណត់មេដ្យាទ័រ $MN, PQ$ និងចំណុចប្រសព្វ $O$ លើសន្លឹកកិច្ចការ \\[3pt]
+
+$\bullet$ ឱ្យសិស្សភ្ជាប់លេខហេតុផល \cnum{2} និង \cnum{3} ដើម្បីទាញរក $OA = OB = OC$
+&
+-- $O \in MN \Rightarrow OA = OC$ (តាម \cnum{2}) និង $O \in PQ \Rightarrow OA = OB$ (តាម \cnum{2}) ។\par\vspace{1pt}
+-- តាម \cnum{3} គេបាន $OA = OB = OC = r$ ។ ដូចនេះ $A, B, C$ ស្ថិតនៅលើរង្វង់ $C(O, OA)$ តែមួយគត់ ។
+&
+$\circ$ បំពេញចន្លោះសម្រាយបញ្ជាក់ និងសរសេរលេខហេតុផល \cnum{2}, \cnum{3}, \cnum{1} \\[3pt]
+
+&
+\cfig{\figModelCIRCOne}
+& \\[3pt]
+
+$\bullet$ សួរពង្រឹងរហ័សអំពីទីតាំងចំណុចធៀបនឹងរង្វង់ $C(O, 3.5\unit{cm})$
+&
+\textbf{អនុវត្តរហ័ស៖} ក្នុង $C(O, 3.5\unit{cm})$ អង្កត់ផ្ចិតមានប្រវែង $d = 2r = 7\unit{cm}$ ៖\par
+-- បើ $OM = 2.8\unit{cm} < r$ (ក្នុងរង្វង់) ; $ON = 3.5\unit{cm} = r$ (លើរង្វង់) ; $OP = 4.2\unit{cm} > r$ (ក្រៅរង្វង់) ។
+&
+$\circ$ គណនា $d = 7\unit{cm}$ និងកំណត់ទីតាំងចំណុច $M, N, P$ លើសន្លឹកកិច្ចការ \\[3pt]
+
+\fiveE{E5 - Evaluate}{10 min}\par\vspace{1pt}
+$\bullet$ ឱ្យសិស្សប្រើដែកឈានសង់រង្វង់ក្នុង \textbf{ប្រតិបត្តិ (ទំ.១៩៨)} លើអង្កត់ $AB = 6\unit{cm}$ (ករណី ក និង ខ) រួចរាប់ចំនួនចំណុចប្រសព្វ
+&
+\textbf{ប្រតិបត្តិ (ទំ.១៩៨ — អង្កត់ $AB = 6\unit{cm}$)៖}\par\vspace{1pt}
+$\bullet$ \textbf{ក.} $C(A, 2\unit{cm})$ និង $C(B, 4\unit{cm})$៖ $2 + 4 = 6 = AB \Rightarrow$ រង្វង់ទាំងពីរ \textbf{ប៉ះគ្នាក្រៅត្រង់ ១ ចំណុច} លើអង្កត់ $AB$ ។\par\vspace{1pt}
+$\bullet$ \textbf{ខ.} $C(A, 3\unit{cm})$ និង $C(B, 5\unit{cm})$៖ $5 - 3 < 6 < 3 + 5 \Rightarrow$ រង្វង់ទាំងពីរ \textbf{កាត់គ្នាត្រង់ ២ ចំណុច} ។
+&
+$\circ$ សង់គូរង្វង់ដោយដែកឈានលើមាត្រដ្ឋាន $1:1$ និងកត់ត្រាប្រសព្វ $1$ និង $2$ ចំណុច \\[3pt]
+
+$\bullet$ ឱ្យសិស្សបន្តពិនិត្យករណី គ និងផ្ទៀងផ្ទាត់សន្លឹកកិច្ចការជាមួយដៃគូ
+&
+$\bullet$ \textbf{គ.} $C(A, 1\unit{cm})$ និង $C(B, 2\unit{cm})$៖ $1 + 2 = 3 < 6 \Rightarrow$ រង្វង់ទាំងពីរ \textbf{ដាច់ពីគ្នា (០ ចំណុចប្រសព្វ)} ។
+&
+$\circ$ ឃើញថាគូរង្វង់ដាច់ពីគ្នា ($0$ ចំណុច) រួចផ្ទៀងជាមួយដៃគូ \\[3pt]
+
+&
+\cfig{\figPracticeCIRCOne}
+& \\[3pt]
+
+$\bullet$ ពិនិត្យចម្លើយបិទបេសកកម្ម E1 (បំណែកមាត់ចានបុរាណ) និងធ្វើតេស្តរហ័ស ៦០ វិនាទី (\en{Exit Check})
+&
+$\bullet$ \textbf{បិទបេសកកម្ម E1៖} ត្រូវដៅយ៉ាងតិច \textbf{៣ ចំណុចមិនរត់ត្រង់គ្នា} $A, B, C$ លើគែមចាន រួចសង់មេដ្យាទ័រនៃអង្កត់ធ្នូ $AB$ និង $BC$ ប្រសព្វគ្នាបានផ្ចិតដើម $O$ តែមួយគត់!\par\vspace{1pt}
+$\bullet$ \textbf{Exit Check៖} បើ $E, F, G$ រត់ត្រង់គ្នាលើបន្ទាត់តែមួយ ចំនួនរង្វង់កាត់តាមទាំងបីចំណុចគឺ៖ \textbf{A. $0$ រង្វង់ (ត្រូវ)} $\;\vert\;$ B. $1$ រង្វង់ $\;\vert\;$ C. $2$ រង្វង់ $\;\vert\;$ D. រាប់មិនអស់ ។
+&
+$\circ$ សរសេរវិធីរកផ្ចិតបំណែកចាន និងលើកម្រាមដៃទី១ ជ្រើសចម្លើយ \textbf{A ($0$ រង្វង់)} \\[3pt]
+\hline
+
+% ==================== ជំហានទី៥ (≤2min) ====================
+\stepheader{ជំហានទី៥ ៖ កិច្ចការផ្ទះ និងបណ្ដាំផ្ញើ ($\le$ ២ នាទី)}
+\timenote{(ចំណាយពេល $\le 2\unit{min}$)}\par\vspace{1pt}
+$\bullet$ ដាក់កិច្ចការផ្ទះ លំហាត់ទី៦ និងទី៧ (ទំ.២០៤)\par\vspace{1pt}
+$\bullet$ ផ្ដាំផ្ញើឱ្យអានមុន ចំណុច \textbf{២. មុំផ្ចិត និងធ្នូ} (ទំ.១៩៩--២០០) និងយករ៉ាប់ព័រទ័រវាស់មុំមកម៉ោងក្រោយ
+&
+\textbf{កិច្ចការផ្ទះ (សៀវភៅសិក្សាគោល ទំព័រ ២០៤)៖}\par\vspace{1pt}
+១. \textbf{លំហាត់ទី ៦៖} ត្រីកោណសម័ង្ស $ABC$ មាន $I, J, K$ ជាចំណុចកណ្ដាលជ្រុង $AB, BC, CA$ ។ ស្រាយបញ្ជាក់ថា $B, I, K, C$ ស្ថិតនៅលើរង្វង់តែមួយដែលមានផ្ចិត $J$ (ណែនាំ៖ បង្ហាញថា $JB = JI = JK = JC = \frac{1}{2}AB$) ។\par\vspace{1pt}
+២. \textbf{លំហាត់ទី ៧៖} ចតុកោណ $ABCD$ មានអង្កត់ទ្រូងកែងគ្នា ($AC \perp BD$) និង $M, N, R, S$ ជាចំណុចកណ្ដាលជ្រុងទាំងបួន ។ ស្រាយថា $M, N, R, S$ ស្ថិតលើរង្វង់តែមួយ ។
+&
+$\circ$ កត់ត្រាកិច្ចការផ្ទះ និងត្រៀមរ៉ាប់ព័រទ័រសម្រាប់ម៉ោងបន្ទាប់\par\vspace{1pt}
+$\circ$ ទទួលបណ្ដាំផ្ញើ និងជម្រាបលាគ្រូ \\[3pt]
+\end{longtable}
+
+% -------------------- កាលបរិច្ឆេទ និងហត្ថលេខា --------------------
+\vspace{10pt}
+\hfill
+\begin{minipage}{9.8cm}
+  {\centering
+    ថ្ងៃសុក្រ ៩កើត ខែមិគសិរ ឆ្នាំមមី អដ្ឋស័ក ពុទ្ធសករាជ ២៥៧០\\[2pt]
+    ព្រះក្រសាំង, ថ្ងៃទី១៨ ខែធ្នូ ឆ្នាំ២០២៦\\[3pt]
+    {\muol គ្រូបង្រៀន}\par}
+  \vspace{28pt}
+  \hfill{\muol ហុក ប៊ុនថែន}\hspace*{1.4cm}
+\end{minipage}
+
+\end{document}
