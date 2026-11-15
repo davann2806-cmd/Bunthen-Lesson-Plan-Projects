@@ -163,7 +163,7 @@
 \newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
 
 \newcommand{\secbanner}[2]{%
-  \Needspace{5.5cm}%
+  \Needspace{2.2cm}%
   \vspace{2pt}%
   \begin{tcolorbox}[
     enhanced, sharp corners, colback=stepgray, colframe=black,
@@ -176,8 +176,20 @@
   \end{tcolorbox}%
 }
 
+\newcommand{\refbanner}[1]{%
+  \Needspace{2.2cm}%
+  \vspace{2pt}%
+  \begin{tcolorbox}[
+    enhanced, sharp corners, colback=panelgray, colframe=black,
+    boxrule=0.85pt, left=9pt, right=9pt, top=6pt, bottom=6pt,
+    before skip=6pt, after skip=5pt
+  ]
+    {\muol\fontsize{12pt}{19pt}\selectfont #1}%
+  \end{tcolorbox}%
+}
+
 \newcommand{\subsec}[1]{%
-  \Needspace{3.8cm}%
+  \Needspace{1.6cm}%
   \vspace{4pt}%
   \subsectitle{#1}\par%
   \vspace{-2pt}%
@@ -185,20 +197,22 @@
   \vspace{3.5pt}%
 }
 
-\newtcolorbox{phasebox}[3]{%
-  enhanced, breakable, sharp corners, colback=white, colframe=black,
-  boxrule=1.0pt, top=5pt, bottom=5pt, left=9pt, right=9pt,
-  toptitle=3.5pt, bottomtitle=3.5pt,
-  before skip=6pt, after skip=5pt,
-  colbacktitle=headgray, coltitle=black,
-  fonttitle=\fontsize{11pt}{14.5pt}\selectfont,
-  fontupper=\fontsize{11.5pt}{14.92pt}\selectfont,
-  title={%
+\newenvironment{phasebox}[3]{%
+  \par\Needspace{2.4cm}%
+  \begin{tcolorbox}[
+    enhanced, sharp corners, colback=headgray, colframe=black,
+    boxrule=1.0pt, top=3.5pt, bottom=3.5pt, left=8pt, right=8pt,
+    before skip=5pt, after skip=3pt
+  ]
     \linespread{1.0}\selectfont\renewcommand{\arraystretch}{1.0}%
     \begin{tabular*}{\linewidth}{@{}>{\raggedright\arraybackslash}p{12.80cm}@{\extracolsep{\fill}}r@{}}
       {\muol\fontsize{11pt}{14.5pt}\selectfont #1} & {\fontsize{10.5pt}{13.5pt}\selectfont\en{#2 |} #3}%
     \end{tabular*}%
-  }
+  \end{tcolorbox}%
+  \begingroup\fontsize{11.5pt}{14.92pt}\selectfont
+}{%
+  \par\endgroup
+  \vspace{3pt}{\color{black}\hrule height 0.75pt}\vspace{5pt}%
 }
 
 \newtcolorbox{scriptbox}{%
@@ -253,7 +267,7 @@
 
 \vspace{2pt}
 \begin{tcolorbox}[
-  enhanced, sharp corners, colback=headgray, colframe=black,
+  enhanced, sharp corners, breakable, colback=headgray, colframe=black,
   boxrule=0.85pt, top=5pt, bottom=5pt, left=7pt, right=7pt,
   before skip=2pt, after skip=6pt
 ]
@@ -263,7 +277,7 @@
     \textbf{- មុខវិជ្ជា / ថ្នាក់} & : & គណិតវិទ្យា (ថ្នាក់ទី៨) & \textbf{- កាលបរិច្ឆេទ} & : & ថ្ងៃចន្ទ ទី៣០ ខែវិច្ឆិកា ឆ្នាំ២០២៦ \\
     \textbf{- ជំពូក / មេរៀន} & : & ធរណីមាត្រ / មេរៀនទី១២ & \textbf{- រយៈពេល} & : & ៥០ នាទី (១ ម៉ោងសិក្សា) \\
     \textbf{- ចំណុចរង} & : & ១.៣.២ អ.ជ (\en{HL}) \& ប្រសព្វពុះមុំ & \textbf{- សៀវភៅគោល} & : & ទំ. ១៥៤--១៥៦ និង ១៦៥ (\en{\#10, \#12}) \\
-    \textbf{- បង្រៀនដោយ} & : & ហុក ប៊ុនថែន & \textbf{- ឯកសារកញ្ចប់} & : & \en{4 Docs + 14 Verified PDFs}
+    \textbf{- បង្រៀនដោយ} & : & ហុក ប៊ុនថែន & \textbf{- ឯកសារកញ្ចប់} & : & \en{4 Docs + Open-Access PDFs}
   \end{tabular}
 \end{tcolorbox}
 
@@ -276,7 +290,7 @@
 
 មេរៀនរង \textbf{១.៣.២ «ករណីត្រីកោណកែង អ.ជ (\en{HL}) និងប្រសព្វពុះមុំក្នុងត្រីកោណ»} ជាជំហានបញ្ចប់ដ៏សំខាន់នៃមេរៀនទី១២ ដែលភ្ជាប់ចំណេះដឹងករណី \textbf{អ.ម (\en{HA})} និងលក្ខណៈពុះមុំតែមួយខ្សែ (ទំ.១៥២--១៥៣) មករកចំណុចប្រសព្វនៃកន្លះបន្ទាត់ពុះមុំក្នុងទាំងបី (\en{Incenter $I$}) របស់ត្រីកោណទូទៅ។ សម្រាប់សិស្សថ្នាក់ទី៨ នៅអនុវិទ្យាល័យព្រះក្រសាំង ស្រុកកំពង់ស្វាយ ការឈានចូលករណី \textbf{អ.ជ (\en{HL})} បង្កបញ្ហាប្រឈមធំចំនួន ៣ យ៉ាង៖ \cnum{1} ករណី \en{HL} មានលក្ខណៈជាលំនាំ \textbf{ជ.ជ.ម (\en{SSA})} ដែលមុំ $90^\circ$ \emph{មិននៅចន្លោះ} អ៊ីប៉ូតេនុស និងជ្រុងកែងឡើយ ដូច្នេះសិស្សងាយភ័ន្តថា \en{SSA} គ្រប់ប្រភេទសុទ្ធតែប៉ុនគ្នា ឬបរាជ័យក្នុងការពន្យល់ថាហេតុអ្វី $90^\circ$ តែមួយគត់ដែលលុបភាពមិនប្រាកដ \en{(Yigit Koyunkaya, 2018)}។ \cnum{2} ការសម្រាយបង្ហាញប្រសព្វពុះមុំក្នុងទាមទារខ្សែសង្វាក់ពីរដំណាក់កាល (\textbf{អ.ម $\times 2 \to$ អ.ជ}៖ បង្ហាញ $ID=IE=IF$ ជាមុន រួចប្រើ $AI$ រួម ទាញរក $\ang{IAD}=\ang{IAF}$) ដែលងាយបង្ក \textbf{រង្វង់តក្ក (\en{Circular Reasoning RelHS2})} និងការរំលងជ្រុងរួម \en{(Anwar et al., 2023; Winer \& Battista, 2022)}។ \cnum{3} អត្ថបទនិងរូបសៀវភៅគោលទំព័រ ១៥៤--១៥៦ និងលំហាត់ \en{\#10} ទំ.១៦៥ មានកំហុសបច្ចេកទេសជាក់លាក់ (ដូចជា កំហុស \en{1a--1c} ទំ.១៥៤ រូបសម័ង្សល្បួង+គំនូស \en{/} មិនត្រឹមត្រូវ ទំ.១៥៥ រូបសមបាទ ទំ.១៥៦ និងបាត់ឃ្លា \en{[AC} និង \en{AB]} ទំ.១៦៥) ដែលទាមទារឱ្យគ្រូជួសជុលជាក់ស្ដែងមុនបង្រៀន \en{(Tchonang Youkap et al., 2020; Biber, 2020)}។
 
-មគ្គុទ្ទេសក៍នេះរួមបញ្ចូលភស្តុតាងស្រាវជ្រាវអន្តរជាតិទាំង \textbf{១៤ \en{PDFs}} ទៅក្នុងលំហូរ ៥០ នាទី (\en{2 + 9 + 17 + 20 + 2 min}) តាមរយៈការបត់ក្រដាសកម្រិត \en{1:1 (Boz-Yaman, 2024)} ដ្យាក្រាមខ្សែសង្វាក់ \en{Flow-Chart} និងធនាគារហេតុផល \cnum{1}--\cnum{5} \en{(Anwar et al., 2021; Miyazaki et al., 2019)} ការអូសម្រាមដៃ \en{\textbf{[tracing]} (Yeo \& Tzeng, 2019)} និងរចនាសម្ព័ន្ធ \en{Pause-Ask-Pause-Review} លើក្រុម \textbf{«ក្រុមវិស្វករសួនរង្វង់ត្រីកោណ»} \en{(Masinading \& Gaylo, 2022)}។
+មគ្គុទ្ទេសក៍នេះរួមបញ្ចូលភស្តុតាងស្រាវជ្រាវអន្តរជាតិ \en{Open-Access PDFs} ទៅក្នុងលំហូរ ៥០ នាទី (\en{2 + 9 + 17 + 20 + 2 min}) តាមរយៈការបត់ក្រដាសកម្រិត \en{1:1 (Boz-Yaman, 2024)} ដ្យាក្រាមខ្សែសង្វាក់ \en{Flow-Chart} និងធនាគារហេតុផល \cnum{1}--\cnum{5} \en{(Anwar et al., 2021; Miyazaki et al., 2019)} ការអូសម្រាមដៃ \en{\textbf{[tracing]} (Yeo \& Tzeng, 2019)} និងរចនាសម្ព័ន្ធ \en{Pause-Ask-Pause-Review} លើក្រុម \textbf{«ក្រុមវិស្វករសួនរង្វង់ត្រីកោណ»} \en{(Masinading \& Gaylo, 2022)}។
 
 \subsec{១\enbf{.}២ ដំណើរសាច់រឿង ៥០ នាទី \enbf{(2 + 9 + 17 + 20 + 2 min)} និងសមាហរណកម្មកញ្ចប់ឯកសារ ៤}
 
@@ -329,7 +343,7 @@
 % ============================================================================
 % ផ្នែកទី ២៖ ការសំយោគឯកសារស្រាវជ្រាវអន្តរជាតិ (Mini-Literature Review)
 % ============================================================================
-\secbanner{ផ្នែកទី ២៖ ការសំយោគឯកសារស្រាវជ្រាវអន្តរជាតិ \enbf{(Mini-Literature Review)}}{Section 2: Research-to-Practice Rationale Grounded in 14 Verified Open-Access PDFs}
+\secbanner{ផ្នែកទី ២៖ ការសំយោគឯកសារស្រាវជ្រាវអន្តរជាតិ \enbf{(Mini-Literature Review)}}{Section 2: Research-to-Practice Rationale Grounded in Verified Open-Access Literature}
 
 \subsec{២\enbf{.}១ ករណី អ\enbf{.}ជ \enbf{(HL)} ប្រឆាំងនឹងភាពមិនប្រាកដ ជ\enbf{.}ជ\enbf{.}ម \enbf{(SSA), APOS RASR} និងបន្ទាត់ជំនួយ}
 
@@ -349,7 +363,7 @@
 
 នៅកម្រិតថ្នាក់ទី៨ ជាក់ស្ដែង \en{Manalo (2025)} (\en{N = 109}) បានរកឃើញថា \en{85.32\% (93/109)} នៃសិស្សជាប់គាំងនៅ \en{Van Hiele Level 0} ហើយ \en{0.00\%} ឈានដល់ \en{Level 3} លើ \en{Proof Task 3} ដោយត្អូញត្អែរខ្វះឧទាហរណ៍គំរូ \en{Statement--Reason (p. 24)}។ ទន្ទឹមគ្នា \en{Masinading \& Gaylo (2022)} (\en{N = 60} ថ្នាក់ទី៨) រកឃើញសិស្ស \en{86\%--94\%} ខ្សោយកម្រិត \en{DNME} មុនរៀនត្រីកោណប៉ុនគ្នា និងបន្ទាត់ពុះមុំ ប៉ុន្តែយុទ្ធសាស្ត្រ \en{Show \& Tell} និង \en{Pause-Ask-Pause-Review} បង្កើនពិន្ទុពី \en{13.10 $\to$ 18.03} (\en{ANCOVA F = 6.648, p = .01}; អត្រាជាប់ \en{57\% vs 27\%}; ទំនាក់ទំនង \en{r = .662}, $r^2$ \en{= 43.80\%})។ លើសពីនេះ \en{Winer \& Battista (2022)} (\en{N = 7, 84 proofs}) បង្ហាញថា \en{72.5\% (61/84)} នៃសំណេរសម្រាយមានគម្លាតទម្រង់ (\en{27} ករណីរំលងសម្មតិកម្ម, \en{40\% = 65/165 FG2} សរសេរឈ្មោះទ្រឹស្ដីបទខុស និង \en{LG2} រង្វង់តក្ក) ដែលអាចបន្ថយដោយការនិយាយផ្ទាល់មាត់ និងធនាគារហេតុផល \cnum{1}--\cnum{5} របស់ \en{Miyazaki et al. (2019)}។ ជាចុងក្រោយ ការអូសម្រាមដៃ \en{\textbf{[tracing]}} របស់ \en{Yeo \& Tzeng (2019)} (\en{N = 72}) បង្កើនការផ្ទេរចំណេះដឹង (\en{M = 3.00 vs 2.31, F(1,68) = 9.38, p = .003, $\eta^2$ = .121}) និងបន្ថយបន្ទុកគិត (\en{p < .001}) ខណៈការគូរបំបែកត្រីកោណត្រួតគ្នាដោះស្រាយការធ្លាក់ចុះភាពត្រឹមត្រូវពី \en{92\%} (ដាច់) មក \en{82\%} (ជាប់) និង \en{53\%} (ត្រួតគ្នា) របស់ \en{Biber (2020)} (\en{N = 55})។
 
-\subsec{២\enbf{.}៤ តារាងផ្ទៀងផ្គងឯកសារភស្តុតាង \enbf{PDF} ទាំង ១៤ \enbf{(Evidence Alignment Summary)}}
+\subsec{២\enbf{.}៤ តារាងផ្ទៀងផ្គងឯកសារភស្តុតាងស្រាវជ្រាវ \enbf{(Evidence Alignment Summary)}}
 
 \begingroup
 \linespread{1.0}\fontsize{10.2pt}{15.0pt}\selectfont
@@ -406,7 +420,7 @@
 % ============================================================================
 % ផ្នែកទី ៣៖ តារាងឡូជីខលគំរូ 5Es ពេញលេញ (50 នាទី)
 % ============================================================================
-\Needspace{5.0cm}
+\Needspace{2.0cm}
 \secbanner{ផ្នែកទី ៣៖ តារាងឡូជីខលគំរូ \enbf{5Es} ពេញលេញ \enbf{(50} នាទី\enbf{)}}{Section 3: Complete 5Es Logic Matrix, Book pp. 154--156 \& 165 Errata Alerts \& Scaffolding}
 
 \begingroup
@@ -484,7 +498,6 @@
 \end{scriptbox}
 \end{phasebox}
 
-\Needspace{4.5cm}
 \begin{phasebox}{ជំហាន ៣ខ \enbf{(E3)}៖ សម្រាយ \enbf{HL (1a--1c),} ផ្ចិត ៣ \enbf{\&} ធនាគារ \cnum{1}\enbf{--}\cnum{5}}{22--28 min}{6 នាទី}
 \textbf{គោលបំណង}៖ ផ្គុំពំនោលទ្រឹស្ដីបទទាំង ២ បិទរង្វង់តក្ក \en{RelHS2} ទំ.១៥៤ ញែកផ្ចិត ៣ និងប្រកាសធនាគារហេតុផល \cnum{1}--\cnum{5} \en{(Anwar et al., 2023; Demiray et al., 2023; Miyazaki et al., 2019)}។
 \begin{scriptbox}
@@ -493,7 +506,6 @@
 \end{scriptbox}
 \end{phasebox}
 
-\Needspace{4.5cm}
 \begin{phasebox}{ជំហាន ៤ក \enbf{(E4)}៖ ផែនទីច្រវាក់ \enbf{HA $\times 2 \to$ HL (}ទំ\enbf{.}១៥៥\enbf{)}}{28--38 min}{10 នាទី}
 \textbf{គោលបំណង}៖ ហ្វឹកហាត់ \en{\textbf{[tracing]}} និងផែនទីហូរពីរដំណាក់កាលលើរូបត្រីកោណមិនសម័ង្សដោយគ្មានគំនូសភាន់ច្រឡំ \en{(Yeo \& Tzeng, 2019; Manalo, 2025; Anwar et al., 2021; Tchonang Youkap et al., 2020)}។
 \begin{scriptbox}
@@ -502,7 +514,6 @@
 \end{scriptbox}
 \end{phasebox}
 
-\Needspace{4.5cm}
 \begin{phasebox}{ជំហាន ៤ខ \enbf{(E5) \&} ៥៖ ប្រតិបត្តិ ទំ\enbf{.}១៥៦\enbf{,} កាត \enbf{A--D \&} ផ្ទះ}{38--50 min}{12 នាទី}
 \textbf{គោលបំណង}៖ ផ្ទេរទៅរូបបំបែក $\tri{MDB}, \tri{MEC}$ (\en{7'}), វាយតម្លៃបុគ្គល \en{A--D} (\en{3'}), និងចែកប័ណ្ណ \en{\#10, \#12} (\en{$\le$ 2'}) \en{(Biber, 2020; Masinading \& Gaylo, 2022)}។
 \begin{scriptbox}
@@ -512,7 +523,7 @@
 \end{scriptbox}
 \end{phasebox}
 
-\Needspace{5.5cm}
+\Needspace{2.0cm}
 \subsec{៤\enbf{.}១ ប្លង់រៀបចំក្ដារខៀន ៣ ផ្នែក \enbf{(Blackboard Management Plan)}}
 
 {\linespread{1.05}\fontsize{10.2pt}{15.0pt}\selectfont
@@ -595,14 +606,12 @@
 \end{longtable}
 \endgroup
 
-\Needspace{7.5cm}
-\subsec{៥\enbf{.}៣ ដ្យាក្រាមបច្ចេកទេស ៤ \enbf{(TikZ} ស\enbf{-}ខ្មៅ ស្តង់ដារ \enbf{$\ge$ 9.8pt/13.5pt)}}
+\subsec{៥\enbf{.}៣ ដ្យាក្រាមបច្ចេកទេស ៤ \enbf{(TikZ} ស\enbf{-}ខ្មៅ ស្តង់ដារ \enbf{$\ge$ 10pt)}}
 
 % --- រូបទី ១ ---
-\Needspace{6.8cm}
-\begin{tcolorbox}[enhanced, sharp corners, colback=white, colframe=black, boxrule=0.8pt, top=5pt, bottom=4pt, left=4pt, right=4pt, before skip=4pt, after skip=6pt]
+\begin{tcolorbox}[enhanced, sharp corners, colback=white, colframe=black, boxrule=0.8pt, top=10pt, bottom=9pt, left=4pt, right=4pt, before skip=16pt, after skip=6pt]
 \centering
-\begin{tikzpicture}[x=0.94cm, y=0.94cm, every node/.style={font=\linespread{1.0}\fontsize{9.8pt}{13.5pt}\selectfont, text=black}]
+\begin{tikzpicture}[x=0.94cm, y=0.94cm, every node/.style={font=\linespread{1.0}\fontsize{10pt}{13.8pt}\selectfont, text=black}]
   % Panel Divider & Headers
   \draw[line width=0.6pt, dashed, gray!70] (8.35, 0.05) -- (8.35, 4.92);
   \node[anchor=north, fill=headgray, draw=black, line width=0.5pt, inner sep=2.8pt] at (4.15, 4.90) {\textbf{ក. \en{POE 1}៖ បត់ \en{3-4-5 cm} ($90^\circ$ ឱ្យ អ.ជ តែ ១ គូ)}};
@@ -653,62 +662,61 @@
   \fill (R1) circle (1.5pt);
   \fill (R2) circle (1.5pt);
   \fill (H) circle (1.3pt);
-  \draw[ang1] (P) ++(0:0.55) arc (0:35:0.55);
+  \draw[ang1] (P) ++(0:0.65) arc (0:35:0.65);
   \node[below left] at (P) {\en{$P$}};
-  \node[anchor=south west, inner sep=1pt] at (9.82, 1.36) {\en{$35^\circ$}};
+  \node[inner sep=1pt] at ($(P)+(15:1.05)$) {\en{$35^\circ$}};
   \node[above] at (Q) {\en{$Q$}};
   \node[below] at (R1) {\en{$R_1$}};
   \node[below] at (H) {\en{$H$}};
   \node[below] at (R2) {\en{$R_2$}};
   \node[below] at (16.70, 1.28) {\en{$X$}};
   \node[fill=white, inner sep=1.2pt, above left] at (10.85, 2.48) {\en{$4\unit{cm}$}};
-  \node[fill=white, inner sep=1.2pt, above right] at (13.32, 2.38) {\en{$r=2.8$}};
-  \node[anchor=west, align=left] at (14.55, 2.65) {កាត់ ២ ត្រីកោណ\\($\tri{PQR_1} \ncg \tri{PQR_2}$)};
+  \node[fill=white, inner sep=1.2pt, below left=1pt] at (13.28, 2.42) {\en{$r=2.8$}};
+  \node[anchor=west, align=left] at (14.58, 2.68) {កាត់ ២ ត្រីកោណ\\($\tri{PQR_1} \ncg \tri{PQR_2}$)};
   \node[anchor=south] at (12.80, 0.04) {នៅ $90^\circ$ រង្វង់\textbf{ប៉ះតែ ១ ចំណុច} ($H$)};
 \end{tikzpicture}\par
-\vspace{2pt}
+\vspace{12pt}
 {\fontsize{10.5pt}{14pt}\selectfont\textbf{រូបទី ១៖} ការផ្ទៀង \en{POE 1} រវាងករណី \en{HL (3-4-5 cm)} តែមួយគត់ និងល្បួង $35^\circ$ (\en{SSA}) ដែលបាន ២ ត្រីកោណ \en{(Yigit Koyunkaya, 2018; Muzaini et al., 2023)}។}
 \end{tcolorbox}
 
 % --- រូបទី ២ ---
-\Needspace{7.2cm}
 \begin{tcolorbox}[enhanced, sharp corners, colback=white, colframe=black, boxrule=0.8pt, top=5pt, bottom=4pt, left=4pt, right=4pt, before skip=4pt, after skip=6pt]
 \centering
-\begin{tikzpicture}[x=0.94cm, y=0.94cm, every node/.style={font=\linespread{1.0}\fontsize{9.8pt}{13.5pt}\selectfont, text=black}]
-  \draw[line width=0.6pt, dashed, gray!70] (7.75, 0.05) -- (7.75, 5.22);
-  \node[anchor=north, fill=headgray, draw=black, line width=0.5pt, inner sep=2.8pt] at (3.85, 5.20) {\textbf{ក. \en{POE 2}៖ បត់ត្រីកោណមិនសម័ង្ស (\en{9.2/6.5/8.0 cm})}};
-  \node[anchor=north, fill=headgray, draw=black, line width=0.5pt, inner sep=2.8pt] at (12.50, 5.20) {\textbf{ខ. ការញែកផ្ចិត ៣ ប្រភេទ \en{(I vs O vs G)}}};
+\begin{tikzpicture}[x=0.94cm, y=0.94cm, every node/.style={font=\linespread{1.0}\fontsize{10pt}{13.8pt}\selectfont, text=black}]
+  \draw[line width=0.6pt, dashed, gray!70] (7.75, 0.05) -- (7.75, 5.36);
+  \node[anchor=north, fill=headgray, draw=black, line width=0.5pt, inner sep=2.8pt] at (3.85, 5.34) {\textbf{ក. \en{POE 2}៖ បត់ត្រីកោណមិនសម័ង្ស (\en{9.2/6.5/8.0 cm})}};
+  \node[anchor=north, fill=headgray, draw=black, line width=0.5pt, inner sep=2.8pt] at (12.50, 5.34) {\textbf{ខ. ការញែកផ្ចិត ៣ ប្រភេទ \en{(I vs O vs G)}}};
 
-  % Left Panel: Scalene ABC (scale=0.52) + Incenter I + Inscribed circle + dashed AI
-  \coordinate (B2) at (1.45, 1.12);
-  \coordinate (C2) at (6.234, 1.12);
-  \coordinate (A2) at (3.2289, 3.9940);
-  \coordinate (I2) at (3.4528, 2.2356);
+  % Left Panel: Proportional Scalene ABC + Incenter I + Inscribed circle + dashed AI
+  \coordinate (B2) at (1.08, 0.86);
+  \coordinate (C2) at (6.60, 0.86);
+  \coordinate (A2) at (3.1308, 4.1773);
+  \coordinate (I2) at (3.3900, 2.1477);
   \coordinate (D2) at ($(B2)!(I2)!(A2)$);
-  \coordinate (E2) at (3.4528, 1.12);
+  \coordinate (E2) at (3.3900, 0.86);
   \coordinate (F2) at ($(A2)!(I2)!(C2)$);
   \draw[line width=1.15pt] (B2) -- (C2) -- (A2) -- cycle;
-  \draw[line width=0.75pt, dashed, gray!85] (I2) circle (1.1156);
+  \draw[line width=0.75pt, dashed, gray!85] (I2) circle (1.2877);
   \draw[line width=0.95pt] (B2) -- (I2) -- (C2);
   \draw[line width=1.00pt, dashed] (A2) -- (I2); % Strictly dashed AI
   \draw[line width=0.85pt] (I2) -- (D2) (I2) -- (E2) (I2) -- (F2);
-  \rightanglemark[0.18]{(D2)}{(A2)}{(I2)}
-  \rightanglemark[0.18]{(E2)}{(C2)}{(I2)}
-  \rightanglemark[0.18]{(F2)}{(A2)}{(I2)}
+  \rightanglemark[0.19]{(D2)}{(A2)}{(I2)}
+  \rightanglemark[0.19]{(E2)}{(C2)}{(I2)}
+  \rightanglemark[0.19]{(F2)}{(A2)}{(I2)}
   % Angle arcs at B and C ONLY (NEVER at A, NO / on AD,BD,BE,AF)
-  \draw[ang1] (B2) ++(0:0.40) arc (0:29.1:0.40);
-  \draw[ang1] (B2) ++(29.1:0.46) arc (29.1:58.2:0.46);
-  \draw[ang1] (C2) ++(180:0.42) arc (180:158.1:0.42);
-  \draw[ang1] (C2) ++(158.1:0.48) arc (158.1:136.3:0.48);
-  \fill (I2) circle (1.7pt);
-  \node[above] at (A2) {\en{$A$}};
-  \node[below left] at (B2) {\en{$B$}};
-  \node[below right] at (C2) {\en{$C$}};
-  \node[left] at (D2) {\en{$D$}};
-  \node[below] at (E2) {\en{$E$}};
-  \node[above right] at (F2) {\en{$F$}};
-  \node[fill=white, inner sep=1pt, right] at (3.56, 2.34) {\en{$I$}};
-  \node[anchor=south] at (3.85, 0.02) {\en{$r = ID=IE=IF \approx 2.1\unit{cm}$ ($\ne IA,IB,IC$)}};
+  \draw[ang1] (B2) ++(0:0.44) arc (0:29.1:0.44);
+  \draw[ang1] (B2) ++(29.1:0.51) arc (29.1:58.2:0.51);
+  \draw[ang1] (C2) ++(180:0.46) arc (180:158.1:0.46);
+  \draw[ang1] (C2) ++(158.1:0.53) arc (158.1:136.3:0.53);
+  \fill (I2) circle (1.8pt);
+  \node[above=1pt] at (A2) {\en{$A$}};
+  \node[left=1.5pt] at (B2) {\en{$B$}};
+  \node[right=1.5pt] at (C2) {\en{$C$}};
+  \node[left=1.5pt] at (D2) {\en{$D$}};
+  \node[below=0.5pt] at (E2) {\en{$E$}};
+  \node[above right=1pt] at (F2) {\en{$F$}};
+  \node[fill=white, inner sep=1pt, right] at (3.52, 2.26) {\en{$I$}};
+  \node[anchor=south] at (3.85, -0.18) {\en{$r = ID=IE=IF \approx 2.1\unit{cm}$ ($\ne IA,IB,IC$)}};
 
   % Right Panel: 3 Centers (I, O, G) spaced cleanly with 3-line captions
   \begin{scope}[shift={(8.05, 1.88)}]
@@ -763,10 +771,9 @@
 \end{tcolorbox}
 
 % --- រូបទី ៣ ---
-\Needspace{7.2cm}
 \begin{tcolorbox}[enhanced, sharp corners, colback=white, colframe=black, boxrule=0.8pt, top=5pt, bottom=4pt, left=4pt, right=4pt, before skip=4pt, after skip=6pt]
 \centering
-\begin{tikzpicture}[x=0.94cm, y=0.94cm, every node/.style={font=\linespread{1.0}\fontsize{9.8pt}{13.5pt}\selectfont, text=black}]
+\begin{tikzpicture}[x=0.94cm, y=0.94cm, every node/.style={font=\linespread{1.0}\fontsize{10pt}{13.8pt}\selectfont, text=black}]
   \draw[line width=0.6pt, dashed, gray!70] (8.40, 0.05) -- (8.40, 5.32);
   \node[anchor=north, fill=headgray, draw=black, line width=0.5pt, inner sep=2.8pt] at (4.20, 5.30) {\textbf{ក. គំរូកែ \en{1a--1c} ទំ.១៥៤ (កុំសរសេររង្វង់តក្ក)}};
   \node[anchor=north, fill=headgray, draw=black, line width=0.5pt, inner sep=2.8pt] at (12.80, 5.30) {\textbf{ខ. គំរូកែរូបលំហាត់គំរូ ទំ.១៥៥ (ត្រីកោណមិនសម័ង្ស)}};
@@ -805,52 +812,51 @@
     \textbf{\en{1b}:} សរសេរ \textbf{(តាមលក្ខខណ្ឌ អ.ម)} ជំនួស អ.ជ រង្វង់តក្ក\\
     \textbf{\en{1c}:} កែអក្ខរាវិរុទ្ធ «លកខណ្ឌ» $\to$ \textbf{«លក្ខខណ្ឌ»}};
 
-  % Right Panel: Book p.155 Fixed Scalene Incenter Model (scale=0.48, clean callouts)
-  \coordinate (B3r) at (10.45, 1.08);
-  \coordinate (C3r) at (14.866, 1.08);
-  \coordinate (A3r) at (12.092, 3.733);
-  \coordinate (I3r) at (12.299, 2.110);
+  % Right Panel: Book p.155 Fixed Scalene Incenter Model (clean callouts)
+  \coordinate (B3r) at (9.90, 0.86);
+  \coordinate (C3r) at (14.868, 0.86);
+  \coordinate (A3r) at (11.7457, 3.8456);
+  \coordinate (I3r) at (11.9790, 2.0190);
   \coordinate (D3r) at ($(B3r)!(I3r)!(A3r)$);
-  \coordinate (E3r) at (12.299, 1.08);
+  \coordinate (E3r) at (11.9790, 0.86);
   \coordinate (F3r) at ($(A3r)!(I3r)!(C3r)$);
   \draw[line width=1.15pt] (B3r) -- (C3r) -- (A3r) -- cycle;
   \draw[line width=0.95pt] (B3r) -- (I3r) -- (C3r);
   \draw[line width=1.05pt, dashed] (A3r) -- (I3r); % Strictly dashed AI
   \draw[line width=0.85pt] (I3r) -- (D3r) (I3r) -- (E3r) (I3r) -- (F3r);
-  \rightanglemark[0.17]{(D3r)}{(A3r)}{(I3r)}
-  \rightanglemark[0.17]{(E3r)}{(C3r)}{(I3r)}
-  \rightanglemark[0.17]{(F3r)}{(A3r)}{(I3r)}
+  \rightanglemark[0.18]{(D3r)}{(A3r)}{(I3r)}
+  \rightanglemark[0.18]{(E3r)}{(C3r)}{(I3r)}
+  \rightanglemark[0.18]{(F3r)}{(A3r)}{(I3r)}
   % Bisector arcs ONLY at B and C (NO arcs at A, NO / on AD,BD,BE,AF)
-  \draw[ang1] (B3r) ++(0:0.40) arc (0:29.1:0.40);
-  \draw[ang1] (B3r) ++(29.1:0.46) arc (29.1:58.2:0.46);
-  \draw[ang1] (C3r) ++(180:0.42) arc (180:158.1:0.42);
-  \draw[ang1] (C3r) ++(158.1:0.48) arc (158.1:136.3:0.48);
-  \fill (I3r) circle (1.7pt);
-  \node[above] at (A3r) {\en{$A$}};
-  \node[below left] at (B3r) {\en{$B$}};
-  \node[below right] at (C3r) {\en{$C$}};
+  \draw[ang1] (B3r) ++(0:0.42) arc (0:29.1:0.42);
+  \draw[ang1] (B3r) ++(29.1:0.49) arc (29.1:58.2:0.49);
+  \draw[ang1] (C3r) ++(180:0.44) arc (180:158.1:0.44);
+  \draw[ang1] (C3r) ++(158.1:0.51) arc (158.1:136.3:0.51);
+  \fill (I3r) circle (1.8pt);
+  \node[above=1pt] at (A3r) {\en{$A$}};
+  \node[left=1.5pt] at (B3r) {\en{$B$}};
+  \node[right=1.5pt] at (C3r) {\en{$C$}};
   \node[left=1.5pt, fill=white, inner sep=1pt] at (D3r) {\en{$D$}};
-  \node[below] at (E3r) {\en{$E$}};
-  \node[above right] at (F3r) {\en{$F$}};
-  \node[fill=white, inner sep=1pt, right] at (12.42, 2.18) {\en{$I$}};
+  \node[below=0.5pt] at (E3r) {\en{$E$}};
+  \node[above right=1pt] at (F3r) {\en{$F$}};
+  \node[fill=white, inner sep=1pt, right] at (12.12, 2.08) {\en{$I$}};
   % Clean non-overlapping Callout arrows
   \node[anchor=west, align=left] at (8.52, 3.38) {គ្មាន \en{/} លើ\\ \en{$AD, BD$}};
-  \draw[-{Stealth[length=1.8mm]}, line width=0.7pt] (10.35, 3.38) -- (11.52, 3.05);
+  \draw[-{Stealth[length=1.8mm]}, line width=0.7pt] (10.35, 3.38) -- (11.15, 2.95);
   \node[anchor=west, align=left] at (14.20, 3.85) {គ្មានធ្នូនៅ \en{$\ang{A}$}\\គ្មាន \en{/} លើ \en{$AF$}};
-  \draw[-{Stealth[length=1.8mm]}, line width=0.7pt] (14.15, 3.85) -- (12.35, 3.55);
+  \draw[-{Stealth[length=1.8mm]}, line width=0.7pt] (14.15, 3.85) -- (12.05, 3.45);
   \node[anchor=west, fill=white, inner sep=1pt] at (14.40, 2.25) {\en{$AI$} ដាច់ៗ};
-  \draw[-{Stealth[length=1.8mm]}, line width=0.7pt] (14.35, 2.28) -- (12.26, 2.85);
-  \node[anchor=south] at (12.80, 0.02) {\textbf{រូបមិនសម័ង្ស៖} គ្មាន \en{/} លើ \en{$AD, BD, BE, AF$} និងគ្មានធ្នូ $\ang{A}$};
+  \draw[-{Stealth[length=1.8mm]}, line width=0.7pt] (14.35, 2.28) -- (11.90, 2.75);
+  \node[anchor=south] at (12.80, -0.16) {\textbf{រូបមិនសម័ង្ស៖} គ្មាន \en{/} លើ \en{$AD, BD, BE, AF$} និងគ្មានធ្នូ $\ang{A}$};
 \end{tikzpicture}\par
 \vspace{2pt}
 {\fontsize{10.5pt}{14pt}\selectfont\textbf{រូបទី ៣៖} ការជួសជុលកំហុស \en{1a--1c} ទំ.១៥៤ (ឆ្វេង) និងរូបគំរូកែលំហាត់គំរូ ទំ.១៥៥ (ស្ដាំ) \en{(Anwar et al., 2023; Tchonang Youkap et al., 2020)}។}
 \end{tcolorbox}
 
 % --- រូបទី ៤ ---
-\Needspace{7.4cm}
 \begin{tcolorbox}[enhanced, sharp corners, colback=white, colframe=black, boxrule=0.8pt, top=5pt, bottom=4pt, left=4pt, right=4pt, before skip=4pt, after skip=6pt]
 \centering
-\begin{tikzpicture}[x=0.94cm, y=0.94cm, every node/.style={font=\linespread{1.0}\fontsize{9.8pt}{13.5pt}\selectfont, text=black}]
+\begin{tikzpicture}[x=0.94cm, y=0.94cm, every node/.style={font=\linespread{1.0}\fontsize{10pt}{13.8pt}\selectfont, text=black}]
   \draw[line width=0.6pt, dashed, gray!70] (8.40, 0.05) -- (8.40, 5.62);
   \draw[line width=0.5pt, dotted, gray!70] (12.72, 0.10) -- (12.72, 4.95);
   \node[anchor=north, fill=headgray, draw=black, line width=0.5pt, inner sep=2.8pt] at (4.15, 5.60) {\textbf{ក. ប្រតិបត្តិ ទំ.១៥៦៖ បំបែក $\tri{MDB}, \tri{MEC}$}};
@@ -960,7 +966,7 @@
   \item \textbf{ឧបករណ៍តុក្រុម}៖ កន្ត្រៃ ១, បន្ទាត់ \en{mm} ១, រ៉ាព័រទ័រ និងដែកឈាន ១ ក្នុងមួយក្រុម (\en{3} នាក់)។ ចែកទំព័រ ១ ផ្កាប់ចុះក្រោមមុនម៉ោង (\en{00'}), ចែកទំព័រ ២ នៅនាទី ២៨', ចែកទំព័រ ៣ នៅនាទី ៣៨', លើកកាតទំព័រ ៥ នៅនាទី ៤៥', និងចែកទំព័រ ៦ នៅនាទី ៤៨'។
 \end{enumerate}
 
-\Needspace{5.0cm}
+\Needspace{2.0cm}
 \subsec{៦\enbf{.}២ ចម្លើយគំរូពេញលេញសម្រាប់គ្រប់សន្លឹកកិច្ចការ និងលំហាត់ \enbf{(Pages 1--6 \& HW)}}
 
 \begingroup
@@ -1008,9 +1014,9 @@
 \endgroup
 
 % ============================================================================
-% ផ្នែកទី ៧៖ បញ្ជីឯកសារយោង (References --- APA 7th Edition) & ហត្ថលេខា
+% ផ្នែកទី ៧៖ ឯកសារយោង (References --- APA 7th Edition) & ហត្ថលេខា
 % ============================================================================
-\secbanner{ផ្នែកទី ៧៖ បញ្ជីឯកសារយោង \enbf{(References --- APA 7th Edition)}}{Section 7: Verified Open-Access Reference List (100\% 1-to-1 Match with PDFs 01--14)}
+\refbanner{ឯកសារយោង}
 
 {\TimesEn\linespread{1.0}\selectfont\fontsize{10.8pt}{16.2pt}\selectfont
 \setlength{\parskip}{1.8pt}
@@ -1046,7 +1052,7 @@ Yigit Koyunkaya, M. (2018). An examination of a pre-service mathematics teacher'
 \par}
 
 \vspace{14pt}
-\Needspace{4.5cm}
+\Needspace{2.0cm}
 \hfill
 \begin{minipage}{9.8cm}
   {\centering

@@ -170,42 +170,56 @@
 
 % ក្បាលផ្នែកសំខាន់ៗ (Tier 2 — Two-Line Stacked Unwrapped \muol Banner)
 \newcommand{\secbanner}[2]{%
-  \needspace{2.8cm}%
-  \vspace{2pt}%
+  \needspace{2.0cm}%
+  \vspace{1pt}%
   \begin{tcolorbox}[
     enhanced, sharp corners, colback=stepgray, colframe=black,
     boxrule=1.1pt, borderline south={0.6pt}{1.8pt}{black},
-    top=5pt, bottom=5pt, left=9pt, right=9pt,
-    before skip=6pt, after skip=5pt
+    top=4pt, bottom=4pt, left=9pt, right=9pt,
+    before skip=3pt, after skip=3pt
   ]
     \sectitle{#1}\\[2pt]
     {\fontsize{10pt}{12.5pt}\selectfont\enit{#2}}%
   \end{tcolorbox}%
 }
 
+\newcommand{\refbanner}[1]{%
+  \needspace{2.2cm}%
+  \vspace{2pt}%
+  \begin{tcolorbox}[
+    enhanced, sharp corners, colback=panelgray, colframe=black,
+    boxrule=0.85pt, left=9pt, right=9pt, top=6pt, bottom=6pt,
+    before skip=6pt, after skip=5pt
+  ]
+    {\muol\fontsize{12pt}{19pt}\selectfont #1}%
+  \end{tcolorbox}%
+}
+
 % ចំណងជើងផ្នែករង (Tier 3 — Unwrapped \muol 11pt + Subtle Bottom Rule)
 \newcommand{\subsec}[1]{%
-  \needspace{3.2cm}%
+  \needspace{1.6cm}%
   \vspace{4pt}%
   \subsectitle{#1}\par
   \vspace{2pt}\hrule height 0.5pt\vspace{3pt}%
 }
 
-% ប្រអប់ដំណាក់កាល ៥០ នាទី (Box Title 11pt + Body 11.5pt/18.2pt)
-\newtcolorbox{phasebox}[3]{%
-  enhanced, breakable, sharp corners, colback=white, colframe=black,
-  boxrule=1.0pt, top=5pt, bottom=5pt, left=9pt, right=9pt,
-  toptitle=3.5pt, bottomtitle=3.5pt,
-  before skip=6pt, after skip=5pt,
-  colbacktitle=headgray, coltitle=black,
-  fonttitle=\fontsize{11pt}{14.5pt}\selectfont,
-  fontupper=\fontsize{11.5pt}{14.92pt}\selectfont,
-  title={%
+% ប្រអប់ដំណាក់កាល ៥០ នាទី (Header Banner + Breakable Body — គាំទ្រ scriptbox breakable)
+\newenvironment{phasebox}[3]{%
+  \par\needspace{2.4cm}%
+  \begin{tcolorbox}[
+    enhanced, sharp corners, colback=headgray, colframe=black,
+    boxrule=1.0pt, top=3.5pt, bottom=3.5pt, left=8pt, right=8pt,
+    before skip=5pt, after skip=3pt
+  ]
     \linespread{1.0}\selectfont\renewcommand{\arraystretch}{1.0}%
     \begin{tabular*}{\linewidth}{@{}>{\raggedright\arraybackslash}p{13.10cm}@{\extracolsep{\fill}}r@{}}
       {\muol\fontsize{11pt}{14.5pt}\selectfont #1} & {\fontsize{10.5pt}{13.5pt}\selectfont\en{#2 |} #3}%
     \end{tabular*}%
-  }
+  \end{tcolorbox}%
+  \begingroup\fontsize{11.5pt}{14.92pt}\selectfont
+}{%
+  \par\endgroup
+  \vspace{3pt}{\color{black}\hrule height 0.75pt}\vspace{5pt}%
 }
 
 % ប្រអប់ពាក្យសម្ដីគ្រូនិយាយផ្ទាល់ (Body 11.5pt/18.2pt)
@@ -236,10 +250,10 @@
 % រូបទី ១ (ផ្នែក ៥)៖ ផ្ទាំងកែង 90° + អ៊ីប៉ូតេនុស 5cm + 35° & ត្រីកោណបង្វិល-ឆ្លុះ ~135°
 \newcommand{\figGuidelineHAProofAndRotation}{%
 \linespread{1.0}\selectfont
-\begin{tikzpicture}[x=1cm, y=1cm, every node/.style={font=\fontsize{9.8pt}{13.5pt}\selectfont, text=black}]
+\begin{tikzpicture}[x=0.86cm, y=0.86cm, every node/.style={font=\fontsize{10pt}{13.8pt}\selectfont, text=black}]
   % --- ផ្នែកឆ្វេង៖ ផ្ទាំងកែង 90° + អ៊ីប៉ូតេនុស 5 cm មុំ 35° (x: 0.0..8.35) ---
   \begin{scope}[shift={(0.0, 0.0)}]
-    \node[draw=black, fill=headgray, line width=0.95pt, minimum width=8.25cm, minimum height=0.68cm, anchor=south, font=\fontsize{10pt}{13.8pt}\selectfont] at (4.12, 4.45) {\textbf{\en{E1 \& E2:} ផ្ទាំងកែង $90^\circ$ \en{+} អ៊ីប៉ូតេនុស $5\unit{cm}$ ($35^\circ$)}};
+    \node[draw=black, fill=headgray, line width=0.95pt, minimum width=7.10cm, minimum height=0.68cm, anchor=south, font=\fontsize{10pt}{13.8pt}\selectfont] at (4.12, 4.45) {\textbf{\en{E1 \& E2:} ផ្ទាំងកែង $90^\circ$ \en{+} អ៊ីប៉ូតេនុស $5\unit{cm}$ ($35^\circ$)}};
     % ផ្ទាំងកែង 90° ខ្នាត 1:1 ពីក្រោយ
     \coordinate (A) at (1.42, 0.90);
     \coordinate (B) at (1.42, 3.45);
@@ -265,11 +279,11 @@
   \end{scope}
 
   % បន្ទាត់បំបែកកណ្ដាល
-  \draw[black, dashed, line width=0.95pt] (8.62, -1.05) -- (8.62, 5.20);
+  \draw[black, dashed, line width=0.95pt] (8.62, -0.90) -- (8.62, 5.05);
 
   % --- ផ្នែកស្ដាំ៖ ត្រីកោណកែងបង្វិល-ឆ្លុះ ~135° (x: 8.90..17.65) ---
   \begin{scope}[shift={(8.90, 0.0)}]
-    \node[draw=black, fill=headgray, line width=0.95pt, minimum width=8.65cm, minimum height=0.68cm, anchor=south, font=\fontsize{10pt}{13.8pt}\selectfont] at (4.32, 4.45) {\textbf{\ding{51}\ បង្វិល\en{--}ឆ្លុះ $\approx 135^\circ$ \en{\&} ព្រួញប្រអប់ $90^\circ$}};
+    \node[draw=black, fill=headgray, line width=0.95pt, minimum width=7.44cm, minimum height=0.68cm, anchor=south, font=\fontsize{10pt}{13.8pt}\selectfont] at (4.32, 4.45) {\textbf{\ding{51}\ បង្វិល\en{--}ឆ្លុះ $\approx 135^\circ$ \en{\&} ព្រួញប្រអប់ $90^\circ$}};
     \coordinate (Ap) at (4.65, 3.45);
     \coordinate (Bp) at (6.50, 1.90);
     \coordinate (Cp) at (2.44, 0.80);
@@ -294,10 +308,10 @@
 % រូបទី ២ (ផ្នែក ៥)៖ អន្ទាក់ POE 2A (អ៊ីប៉ូតេនុស 5cm vs ជ្រុងកែង 5cm) & POE 2B (ចម្ងាយកែង vs ទ្រេត)
 \newcommand{\figGuidelineDualPOETraps}{%
 \linespread{1.0}\selectfont
-\begin{tikzpicture}[x=1cm, y=1cm, every node/.style={font=\fontsize{9.8pt}{13.5pt}\selectfont, text=black}]
+\begin{tikzpicture}[x=0.86cm, y=0.86cm, every node/.style={font=\fontsize{10pt}{13.8pt}\selectfont, text=black}]
   % --- ផ្នែកឆ្វេង៖ POE 2A អ៊ីប៉ូតេនុស 5cm vs ជ្រុងកែង 5cm (x: 0.0..8.50) ---
   \begin{scope}[shift={(0.0, 0.0)}]
-    \node[draw=black, fill=midgray, line width=0.95pt, minimum width=8.40cm, minimum height=0.68cm, anchor=south, font=\fontsize{10pt}{13.8pt}\selectfont] at (4.20, 4.48) {\textbf{\ding{55}\ \en{POE 2A:} អ៊ីប៉ូតេនុស $5\unit{cm}$ \en{vs} ជ្រុងកែង $5\unit{cm}$}};
+    \node[draw=black, fill=midgray, line width=0.95pt, minimum width=7.22cm, minimum height=0.68cm, anchor=south, font=\fontsize{10pt}{13.8pt}\selectfont] at (4.20, 4.48) {\textbf{\ding{55}\ \en{POE 2A:} អ៊ីប៉ូតេនុស $5\unit{cm}$ \en{vs} ជ្រុងកែង $5\unit{cm}$}};
     % ត្រីកោណ PQR (អ៊ីប៉ូតេនុស 5cm)
     \coordinate (P) at (0.42, 0.90);
     \coordinate (R) at (2.82, 0.90);
@@ -324,20 +338,20 @@
     \pic[draw=black, line width=0.9pt, angle radius=7.4mm]{angle=Qp--Rp--Pp};
     \node at ($(Rp)+(162:1.18)$) {$35^\circ$};
     \node[above right=2pt, fill=white, inner sep=1.2pt] at ($(Qp)!0.44!(Rp)$) {$\approx 6.1\unit{cm}$};
-    \node[below=4pt] at ($(Pp)!0.50!(Rp)$) {ជ្រុងកែង $5\unit{cm}$};
+    \node[below=2pt] at ($(Pp)!0.50!(Rp)$) {ជ្រុងកែង $5\unit{cm}$};
     \fill[black] (Pp) circle (1.9pt) node[below left=1pt] {$P'$};
     \fill[black] (Qp) circle (1.9pt) node[above=2pt] {$Q'$};
     \fill[black] (Rp) circle (1.9pt) node[below right=1pt] {$R'$};
 
-    \node[align=center] at (4.20, -0.48) {ប្រើជ្រុងកែង $5\unit{cm}$ ទល់អ៊ីប៉ូតេនុស $5\unit{cm}$ មិនប៉ុនគ្នាទេ\\(និងកាត \en{D:} មានតែ $90^\circ, 35^\circ$ គ្មានអ៊ីប៉ូតេនុស $\Rightarrow \ncg$)};
+    \node[align=center] at (4.20, -0.58) {ប្រើជ្រុងកែង $5\unit{cm}$ ទល់អ៊ីប៉ូតេនុស $5\unit{cm}$ មិនប៉ុនគ្នាទេ\\(និងកាត \en{D:} មានតែ $90^\circ, 35^\circ$ គ្មានអ៊ីប៉ូតេនុស $\Rightarrow \ncg$)};
   \end{scope}
 
   % បន្ទាត់បំបែកកណ្ដាល
-  \draw[black, dashed, line width=0.95pt] (8.75, -1.08) -- (8.75, 5.24);
+  \draw[black, dashed, line width=0.95pt] (8.75, -1.04) -- (8.75, 5.08);
 
   % --- ផ្នែកស្ដាំ៖ POE 2B ចម្ងាយកែង MA=MB vs ទ្រេត MD (x: 9.00..17.65) ---
   \begin{scope}[shift={(9.00, 0.0)}]
-    \node[draw=black, fill=midgray, line width=0.95pt, minimum width=8.60cm, minimum height=0.68cm, anchor=south, font=\fontsize{10pt}{13.8pt}\selectfont] at (4.30, 4.48) {\textbf{\ding{55}\ \en{POE 2B \&} កាត \en{C:} ចម្ងាយកែង \en{vs} ទ្រេត}};
+    \node[draw=black, fill=midgray, line width=0.95pt, minimum width=7.40cm, minimum height=0.68cm, anchor=south, font=\fontsize{10pt}{13.8pt}\selectfont] at (4.30, 4.48) {\textbf{\ding{55}\ \en{POE 2B \&} កាត \en{C:} ចម្ងាយកែង \en{vs} ទ្រេត}};
     \coordinate (O) at (0.60, 2.08);
     \coordinate (X) at ($(O)+(23:4.20)$);
     \coordinate (Y) at ($(O)+(-23:4.50)$);
@@ -376,7 +390,7 @@
 % រូបទី ៣ (ផ្នែក ៥)៖ កែកំហុសសៀវភៅគោលទំព័រ ១៥៣ (1a, 1b & 1c គ្មាន / លើ OA, OB)
 \newcommand{\figGuidelineErrataAndModel}{%
 \linespread{1.0}\selectfont
-\begin{tikzpicture}[x=1cm, y=1cm, every node/.style={font=\fontsize{9.8pt}{13.5pt}\selectfont, text=black}]
+\begin{tikzpicture}[x=1cm, y=1cm, every node/.style={font=\fontsize{10pt}{13.8pt}\selectfont, text=black}]
   % --- ផ្នែកឆ្វេង៖ កែ 1a សម្រាយទំព័រ 153 (∠A=∠A' -> ∠B=∠B') (x: 0.0..8.50) ---
   \begin{scope}[shift={(0.0, 0.0)}]
     \node[draw=black, fill=headgray, line width=0.95pt, minimum width=8.40cm, minimum height=0.68cm, anchor=south, font=\fontsize{10pt}{13.8pt}\selectfont] at (4.20, 4.45) {\textbf{កែទំព័រ ១៥៣ (\en{1a}): $\ang{A}=\ang{A'}\to\ang{B}=\ang{B'}$}};
@@ -463,7 +477,7 @@
 % រូបទី ៤ (ផ្នែក ៥)៖ ប្រតិបត្តិទំព័រ ១៥៤ បំបែកត្រីកោណត្រួតគ្នា & កិច្ចការផ្ទះ #6 vs #7
 \newcommand{\figGuidelinePracticeAndHW}{%
 \linespread{1.0}\selectfont
-\begin{tikzpicture}[x=1cm, y=1cm, every node/.style={font=\fontsize{9.8pt}{13.5pt}\selectfont, text=black}]
+\begin{tikzpicture}[x=0.99cm, y=0.99cm, every node/.style={font=\fontsize{10pt}{13.8pt}\selectfont, text=black}]
   % --- ផ្នែកឆ្វេង៖ ប្រតិបត្តិទំព័រ ១៥៤ (x: 0.0..8.82) ---
   \begin{scope}[shift={(0.0, 0.0)}]
     \node[draw=black, fill=headgray, line width=0.95pt, minimum width=8.82cm, minimum height=0.68cm, anchor=south, font=\fontsize{10pt}{13.8pt}\selectfont] at (4.41, 4.45) {\textbf{ប្រតិបត្តិ (ទំ.១៥៤ គ្មានរូប): បំបែក $\tri{ADB}, \tri{AEC}$}};
@@ -609,7 +623,7 @@
 % ប្រអប់ព័ត៌មានទូទៅនៃមេរៀន និងកញ្ចប់ឯកសារភ្ជាប់
 % ============================================================================
 \begin{tcolorbox}[
-  enhanced, sharp corners, colback=panelgray, colframe=black,
+  enhanced, sharp corners, breakable, colback=panelgray, colframe=black,
   colbacktitle=black!12, coltitle=black, titlerule=0.7pt,
   fonttitle=\fontsize{11pt}{14.5pt}\selectfont,
   fontupper=\fontsize{11.5pt}{14.92pt}\selectfont,
@@ -627,11 +641,11 @@
   \end{tabular}\\[4pt]
   \fontsize{11.5pt}{14.92pt}\selectfont\linespread{1.22}\selectfont
   \textbf{ឯកសារភ្ជាប់ក្នុងកញ្ចប់បង្រៀន (\en{NGS 5Es Lesson Package})៖}
-  (១) \en{LS\_\allowbreak Plan\_\allowbreak HA.pdf} (កិច្ចតែងការបង្រៀន ៤ ទំព័រ),
-  (២) \en{Teaching\_\allowbreak Scenario\_\allowbreak HA.pdf} (សេណារីយ៉ូ ៥០ នាទី ២ ទំព័រ),
+  (១) \en{LS\_\allowbreak Plan\_\allowbreak HA.pdf} (កិច្ចតែងការបង្រៀន \en{5Es} ៥០ នាទី),
+  (២) \en{Teaching\_\allowbreak Scenario\_\allowbreak HA.pdf} (សេណារីយ៉ូបង្រៀន ៥០ នាទី),
   (៣) \en{Printable\_\allowbreak Materials\_\allowbreak HA.pdf} (សម្ភារៈបោះពុម្ព ស-ខ្មៅ ខ្នាតពិត \en{1:1} ចំនួន ៦ ទំព័រ),
   (៤) \en{Teaching\_\allowbreak Guideline\_\allowbreak HA.pdf} (មគ្គុទ្ទេសក៍គរុកោសល្យគ្រូនេះ),
-  និង (៥) ថតភស្តុតាង ឯកសារ\allowbreak ស្រាវជ្រាវ\allowbreak យោង\_\allowbreak\en{PDF/} (\en{14 Open-Access PDFs} + \en{Evidence Index})។
+  និង (៥) ថតភស្តុតាង ឯកសារ\allowbreak ស្រាវជ្រាវ\allowbreak យោង\_\allowbreak\en{PDF/} (\en{Open-Access PDFs} + \en{Evidence Index})។
 \end{tcolorbox}
 
 % ============================================================================
@@ -662,11 +676,11 @@
 \end{itemize}
 
 % ============================================================================
-% ផ្នែកទី ២៖ ការសំយោគឯកសារស្រាវជ្រាវអន្តរជាតិ (14 Verified OA PDFs)
+% ផ្នែកទី ២៖ ការសំយោគឯកសារស្រាវជ្រាវអន្តរជាតិ (Verified OA PDFs)
 % ============================================================================
-\secbanner{ផ្នែកទី ២៖ ការសំយោគឯកសារស្រាវជ្រាវអន្តរជាតិ \enbf{(Mini-Literature Review)}}{Section 2: Research-to-Practice Rationale Grounded in 14 Verified Open-Access PDFs}
+\secbanner{ផ្នែកទី ២៖ ការសំយោគឯកសារស្រាវជ្រាវអន្តរជាតិ \enbf{(Mini-Literature Review)}}{Section 2: Research-to-Practice Rationale Grounded in Verified Open-Access Literature}
 
-រាល់សកម្មភាព សំណួរផ្អាក សម្ភារៈកាត់ខ្នាត \en{1:1} និងវិធានការកែតម្រូវសៀវភៅគោលក្នុងមេរៀន \en{HA} ៥០ នាទីនេះ ត្រូវបានសំយោគផ្ទាល់ពីអត្ថបទស្រាវជ្រាវអន្តរជាតិ \en{Open-Access} ចំនួន \textbf{១៤ អត្ថបទ} (ផ្ទៀងផ្ទាត់អត្ថបទពេញតាម \en{PyMuPDF} ក្នុងថត ឯកសារស្រាវជ្រាវយោង\_\en{PDF/}) តាមប្រធានបទសំខាន់ទាំង ៣ ខាងក្រោម៖
+រាល់សកម្មភាព សំណួរផ្អាក សម្ភារៈកាត់ខ្នាត \en{1:1} និងវិធានការកែតម្រូវសៀវភៅគោលក្នុងមេរៀន \en{HA} ៥០ នាទីនេះ ត្រូវបានសំយោគផ្ទាល់ពីអត្ថបទស្រាវជ្រាវអន្តរជាតិ \en{Open-Access} (ផ្ទៀងផ្ទាត់អត្ថបទពេញតាម \en{PyMuPDF} ក្នុងថត ឯកសារស្រាវជ្រាវយោង\_\en{PDF/}) តាមប្រធានបទសំខាន់ទាំង ៣ ខាងក្រោម៖
 
 \subsec{២\enbf{.}១ កម្ពស់ត្រីកោណកែង អ៊ីប៉ូតេនុស \enbf{vs} ជ្រុងកែង និងទិសដៅបង្វិល \enbf{(Right-Triangle Schema)}}
 
@@ -690,7 +704,7 @@
   \item \textbf{ម្រាមដៃ \en{[tracing]} ធនាគារ \cnum{1}--\cnum{5} និងការការពារអន្ទាក់ \enbf{/} លើ $OA, OB$៖} \en{Yeo \& Tzeng (2019)} ($N=72$) បង្ហាញថាការអូសម្រាមដៃ \en{[tracing]} លើឧទាហរណ៍គំរូបង្កើនពិន្ទុផ្ទេរចំណេះដឹង ($M=3.00$ ទល់ $2.31$, $F(1,68)=9.38, p=.003, \eta^2=.121$) ដោយស្មើភាពគ្នាគ្រប់កម្រិតចងចាំ ($p\ge .309$) និងជំនួសហ្វឺតពណ៌លើក្រដាស ស-ខ្មៅ។ \en{Miyazaki et al. (2019)} បង្ហាញថា ការដាក់លេខហេតុផល \cnum{1}--\cnum{5} ភ្ជាប់ជាមួយផែនការ \en{P1--P2} និងការពិនិត្យត្រឡប់ \en{EIA} ជួយសិស្សគ្រប់គ្រងរចនាសម្ព័ន្ធសម្រាយ។ ចុងក្រោយ \en{Shahbari \& Daher (2020)} ($N=30$, ការអនុវត្តផ្ទាល់ដៃកើន $M=15.9\to 88.6$, $t(29)=-17.14, p<.001$) ព្រមានពីកំហុសសិស្ស «\textbf{បន្ថែមសមភាពដែលមិនបានឱ្យក្នុងប្រធាន}» (ដូចអន្ទាក់គំនូស \tickone\ លើ $OA, OB$ ក្នុងរូបទំព័រ ១៥៣) និង «ភ្លេចបញ្ជាក់ឈ្មោះទ្រឹស្ដីបទ អ.ម»។
 \end{itemize}
 
-\subsec{២\enbf{.}៤ តារាងផ្ទៀងផ្គងឯកសារភស្តុតាង \enbf{PDF} ទាំង ១៤ \enbf{(Evidence Alignment Summary)}}
+\subsec{២\enbf{.}៤ តារាងផ្ទៀងផ្គងឯកសារភស្តុតាងស្រាវជ្រាវ \enbf{(Evidence Alignment Summary)}}
 
 \begingroup
 \linespread{1.0}\selectfont
@@ -960,7 +974,6 @@ $90^\circ{-}\ang{C}\to$ ម.ជ.ម; កែ $\ang{B}=\ang{B'}$ ទំ.១៥៣;
 \end{phasebox}
 
 % --- ជំហានទី ៣ (ខ) E3 Explain ---
-\needspace{7.8cm}
 \begin{phasebox}{ជំហានទី ៣ \enbf{(}ខ\enbf{) --- E3 Explain}៖ សម្រាយ \enbf{HA $\to$ ASA} កែទំ\enbf{.}១៥៣ \enbf{\&} ធនាគារ \cnum{1}\enbf{--}\cnum{5}}{22--28 min}{៦ នាទី}
   \begin{enumerate}[leftmargin=0.45cm, topsep=1.5pt, itemsep=2.2pt, parsep=0pt]
     \item \textbf{ពាក្យពេចន៍គ្រូ (ភាគ ក — សម្រាយ $90^\circ{-}\ang{C}\to$ ម.ជ.ម និងពំនោល អ.ម)៖}
@@ -984,7 +997,6 @@ $90^\circ{-}\ang{C}\to$ ម.ជ.ម; កែ $\ang{B}=\ang{B'}$ ទំ.១៥៣;
       \begin{scriptbox}
         {\muol\fontsize{10.8pt}{14.5pt}\selectfont \enbf{«}គ្រូនិយាយថា៖} ចែក\textbf{កាតសកម្មភាព \en{E4} (ទំព័រ ២)} លើលំហាត់គំរូទំព័រ ១៥៣ ($M$ លើពុះមុំ $\ang{XOY}$, $MA\perp OX, MB\perp OY$)! \textbf{ប្រកាសអន្ទាក់ធំ (\en{Figure Trap 1c})៖} មើលរូបក្នុងសៀវភៅទំព័រ ១៥៣៖ តើសៀវភៅគូសសញ្ញា \tickone\ លើ $OA, OB$ ឬអត់? (\textbf{គូស!}) តែក្នុងប្រធានមានឱ្យ $OA=OB$ ទេ? (\textbf{អត់ទេ!}) បើយើងទុក \tickone\ លើ $OA, OB$ នឹងធ្លាក់ចូលកំហុសបន្ថែមទិន្នន័យមិនពិតប្រើ ជ.ម.ជ! អ៊ីចឹងលើកាតយើង\textbf{គ្មាន \tickone\ លើ $OA, OB$} ទេ! ជំនួសមកវិញ ចង្អុលម្រាមដៃ \textbf{[tracing]} ពីប្រអប់កែង $90^\circ$ ត្រង់ $A$ និង $B$ រត់មក\textbf{អ៊ីប៉ូតេនុសរួម $OM$}!»
       \end{scriptbox}
-    \needspace{4.2cm}
     \item \textbf{ពាក្យពេចន៍គ្រូ (ភាគ ខ — កែ $OMA$ និង $OMB$, សម្រាយ, ពុះមុំផ្ទាល់-ច្រាស \& \en{EIA})៖}
       \begin{scriptbox}
         {\muol\fontsize{10.8pt}{14.5pt}\selectfont \enbf{«}គ្រូនិយាយថា៖} មើលចម្លើយសៀវភៅទំព័រ ១៥៣ (\textbf{\en{Erratum 1b}})៖ បន្ទាត់ទី ១ បោះច្រឡំថា «$OMA$ និង $OMA$» និងសរសេរ $\ang{AOB}$! សូមកែជា «\textbf{ក្នុង $\tri{OMA}$ និង $\tri{OMB}$}» ($\ang{XOY}$) រួចបំពេញជំហាន ២--៣ លើកាត៖ (១) $\ang{OAM}=\ang{OBM}=90^\circ$ (\cnum{1}), (២) $\ang{MOA}=\ang{MOB}$ (\cnum{2}), (៣) $OM$ អ៊ីប៉ូតេនុសរួម (\cnum{3}) $\Rightarrow \tri{OMA}\cg\tri{OMB}$ (\cnum{4} អ.ម) $\Rightarrow MA=MB$ (\cnum{5})!\par\vspace{2pt}
@@ -1028,92 +1040,74 @@ $90^\circ{-}\ang{C}\to$ ម.ជ.ម; កែ $\ang{B}=\ang{B'}$ ទំ.១៥៣;
 
 \subsec{៤\enbf{.}១ ប្លង់រៀបចំក្ដារខៀន ៣ ផ្នែក \enbf{(Blackboard Management Plan)}}
 
-\begin{center}
-\linespread{1.0}\selectfont
-\renewcommand{\arraystretch}{1.20}
+{\linespread{1.0}\selectfont
+\renewcommand{\arraystretch}{1.08}
 \setlength{\tabcolsep}{4pt}
 \fontsize{10.0pt}{14.2pt}\selectfont
-\begin{tabular}{|L{5.10cm}|L{6.90cm}|L{4.80cm}|}
+\begin{longtable}{|L{5.10cm}|L{6.90cm}|L{4.80cm}|}
 \hline
 \rowcolor{headgray}
 \multicolumn{1}{|C{5.10cm}|}{\tblhead{ផ្នែកឆ្វេង \enbf{(}រំលឹក \enbf{\& E1--E2)}}} &
 \multicolumn{1}{C{6.90cm}|}{\tblhead{ផ្នែកកណ្ដាល \enbf{(}ខ្លឹមសារ \enbf{\&} លំហាត់\enbf{)}}} &
 \multicolumn{1}{C{4.80cm}|}{\tblhead{ផ្នែកស្ដាំ \enbf{(}ផ្ទាំងយោង \enbf{\&} កិច្ចការ\enbf{)}}} \\ \hline
+\endfirsthead
+\hline
+\rowcolor{headgray}
+\multicolumn{1}{|C{5.10cm}|}{\tblhead{ផ្នែកឆ្វេង \enbf{(}រំលឹក \enbf{\& E1--E2)}}} &
+\multicolumn{1}{C{6.90cm}|}{\tblhead{ផ្នែកកណ្ដាល \enbf{(}ខ្លឹមសារ \enbf{\&} លំហាត់\enbf{)}}} &
+\multicolumn{1}{C{4.80cm}|}{\tblhead{ផ្នែកស្ដាំ \enbf{(}ផ្ទាំងយោង \enbf{\&} កិច្ចការ\enbf{)}}} \\ \hline
+\endhead
+\hline
+\endfoot
 \ditem មតិ \en{E1} (ជណ្ដើរ $5\unit{m}$ \& ទ្វារទឹក) &
 \textbf{មេរៀនទី១២៖} ១.៣.១ ករណី អ.ម (\en{HA}) \& លក្ខណៈពុះមុំ &
-\ditem បិទផ្ទាំង \textbf{ទំព័រ ៤} (ធនាគារ \cnum{1}--\cnum{5}) \\
+\ditem បិទផ្ទាំង \textbf{ទំព័រ ៤} (ធនាគារ \cnum{1}--\cnum{5}) \\[3pt]
 \ditem រំលឹក៖ $90^\circ\to$ អ៊ីប៉ូតេនុស, $90^\circ{-}\ang{C}$ &
 \ditem សម្រាយ $90^\circ{-}\ang{C}\to$ ម.ជ.ម (\textbf{កែ $\ang{B}=\ang{B'}$ ទំ.១៥៣}) &
-\ditem ក្បួន៖ $90^\circ \to$ ព្រួញឈមអ៊ីប៉ូតេនុស \\
+\ditem ក្បួន៖ $90^\circ \to$ ព្រួញឈមអ៊ីប៉ូតេនុស \\[3pt]
 \ditem រំលឹក៖ $MA\perp OX$ vs $MD$ ទ្រេត &
 \ditem រូប អ.ម បង្វិល $\sim 135^\circ$ + លំហាត់គំរូ \textbf{គ្មាន \tickone\ លើ $OA, OB$} &
-\ditem កែទំ.១៥៣៖ «$OMA$ និង $OMB$» ($\ang{XOY}$) \\
+\ditem កែទំ.១៥៣៖ «$OMA$ និង $OMB$» ($\ang{XOY}$) \\[3pt]
 \ditem សង្ខេប \en{POE 2A} ($\ncg$) \& \en{2B} ($MA=MB<MD$) &
 \ditem ប្រតិបត្តិទំ.១៥៤៖ បំបែក $\tri{ADB}\cg\tri{AEC}$ ($\tri{BDC}\cg\tri{CEB}$) &
 \ditem កិច្ចការផ្ទះ៖ \#6 (ម.ជ.ម) \& \#7 (ជ.ម.ជ / អ.ម) \\ \hline
-\end{tabular}
-\end{center}
+\end{longtable}}
 
 % ============================================================================
 % ផ្នែកទី ៥៖ កំហុសភ័ន្តច្រឡំ វិធានការជួសជុល និងដ្យាក្រាមបច្ចេកទេស ៤
 % ============================================================================
 \secbanner{ផ្នែកទី ៥៖ កំហុសភ័ន្តច្រឡំ វិធានការជួសជុល និងដ្យាក្រាមបច្ចេកទេស ៤}{Section 5: Empirical Misconceptions, Textbook Errata Fixes \& 4 Crisp B\&W TikZ Diagrams}
 
-ផ្នែកនេះបង្ហាញដ្យាក្រាម \en{TikZ} ស-ខ្មៅ សុទ្ធចំនួន \textbf{៤ ផ្ទាំង} (គ្រប់តួអក្សរ $\ge 9.8\unit{pt}$) ដើម្បីឱ្យគ្រូផ្ទៀងផ្ទាត់រូបភាពស្អាត គ្មានអន្ទាក់ \tickone\ និងពន្យល់សិស្សពីកំហុសបោះពុម្ពសៀវភៅគោលបានភ្លាមៗ៖
-
-\begin{center}
-  \figGuidelineHAProofAndRotation\\[4pt]
-  {\fontsize{10.5pt}{15pt}\selectfont {\muol\fontsize{10.5pt}{15pt}\selectfont រូបទី ១៖} ផ្ទាំងកែង $90^\circ$ \en{+} អ៊ីប៉ូតេនុស $5\unit{cm}$ ($35^\circ$) ភ្ជាប់មុំបំពេញ $55^\circ$ និងត្រីកោណបង្វិល $\approx 135^\circ$ (\en{E1--E3})។}
-\end{center}
-
-\vspace{4pt}
-\begin{center}
-  \figGuidelineDualPOETraps\\[4pt]
-  {\fontsize{10.5pt}{15pt}\selectfont {\muol\fontsize{10.5pt}{15pt}\selectfont រូបទី ២៖} អន្ទាក់ \en{POE 2A} អ៊ីប៉ូតេនុស $5\unit{cm}$ ទល់ជ្រុងកែង $5\unit{cm}$ ($\ncg$) និង \en{POE 2B} ចម្ងាយកែង $MA=MB$ ទល់ទ្រេត $MD$ (\en{E2}, កាត \en{B--D})។}
-\end{center}
-
-\vspace{4pt}
-\begin{center}
-  \figGuidelineErrataAndModel\\[4pt]
-  {\fontsize{10.5pt}{15pt}\selectfont {\muol\fontsize{10.5pt}{15pt}\selectfont រូបទី ៣៖} កំណែទំព័រ ១៥៣ (\en{1a}: $\ang{A}=\ang{A'}\to\ang{B}=\ang{B'}$; \en{1b}: $OMA$ និង $OMB$; \en{1c}: ដក \tickone\ ចេញពី $OA, OB$ ជាមួយ \en{[tracing]} $90^\circ\to OM$)។}
-\end{center}
-
-\vspace{4pt}
-\begin{center}
-  \figGuidelinePracticeAndHW\\[4pt]
-  {\fontsize{10.5pt}{15pt}\selectfont {\muol\fontsize{10.5pt}{15pt}\selectfont រូបទី ៤៖} ការបំបែកត្រីកោណត្រួតគ្នា $\tri{ADB}, \tri{AEC}$ លើប្រតិបត្តិគ្មានរូបទំព័រ ១៥៤ (\en{E5}) និងការញែកកិច្ចការផ្ទះ \#6 (\en{ASA}) vs \#7 (\en{SAS/HA})។}
-\end{center}
-
 \subsec{៥\enbf{.}១ វិភាគលម្អិតកំហុសសៀវភៅគោល ទំព័រ ១៥៣\enbf{--}១៥៤ និងវិធីប្រតិបត្តិពីរផ្លូវ}
 
-\begin{itemize}[leftmargin=0.55cm, topsep=1pt, itemsep=2.0pt, parsep=0pt]
+\begin{itemize}[leftmargin=0.55cm, topsep=1pt, itemsep=0.6pt, parsep=0pt]
   \item \textbf{កំហុសបោះពុម្ព ១a (សម្រាយទំព័រ ១៥៣)៖} បន្ទាប់ពីរកឃើញ $\ang{B}=90^\circ{-}\ang{C}=90^\circ{-}\ang{C'}=\ang{B'}$ ហើយ សៀវភៅបែរជាបោះពុម្ពដង្កៀប \en{ASA} ចុងក្រោយជា $\{\ang{A}=\ang{A'}=90^\circ,\; BC=B'C',\; \ang{C}=\ang{C'}\}$។ ដោយសារ $\ang{A}$ ស្ថិតនៅ\textbf{ឈម}នឹងអ៊ីប៉ូតេនុស $BC$ (មិនមែនជាប់ $BC$ ទេ) គ្រូត្រូវណែនាំសិស្សឱ្យកែជួរទី ១ ក្នុងដង្កៀបជា \textbf{$\ang{B}=\ang{B'}$} ទើបលក្ខខណ្ឌ ម.ជ.ម (\en{ASA}) ត្រឹមត្រូវតាមប្រព័ន្ធស័យវត្ថុ។
   \item \textbf{កំហុសបោះពុម្ព ១b \& អន្ទាក់រូបភាព ១c (លំហាត់គំរូទំព័រ ១៥៣)៖} បន្ទាត់ទី ១ នៃចម្លើយបោះពុម្ពច្រឡំថា «ត្រីកោណកែង $OMA$ និងត្រីកោណកែង $OMA$» និងសរសេរ $\ang{AOB}$ (ត្រូវកែជា «\textbf{$OMA$ និង $OMB$}» និង $\ang{XOY}$)។ ធ្ងន់ធ្ងរជាងនេះ រូបលំហាត់គំរូក្នុងសៀវភៅ\textbf{គូសសញ្ញា \tickone\ ទុកមុនលើ $OA$ និង $OB$} ទាំងដែលប្រធានមិនបានឱ្យ $OA=OB$ ឡើយ! បើរក្សាសញ្ញា \tickone\ នេះ សិស្សនឹងធ្លាក់ចូលកំហុស \en{Shahbari \& Daher (2020)} ដោយសរសេរ $OA=OB$ ប្រើ ជ.ម.ជ (\en{SAS}) ជំនួស អ.ម (\en{HA})! ហេតុនេះ គ្រប់រូបក្នុងកញ្ចប់ឯកសារទាំង ៤ \textbf{លុប \tickone\ ចេញពី $OA, OB$ ទាំងស្រុង}។
   \item \textbf{ហេតុអ្វីប្រតិបត្តិទំព័រ ១៥៤ ប្រើ $\tri{ADB}\cg\tri{AEC}$ (ទី១) និង $\tri{BDC}\cg\tri{CEB}$ (ទី២)?} ប្រធាន «ប្រតិបត្តិ» ទំព័រ ១៥៤ គ្មានរូបភាពទេ ដែលធ្វើឱ្យសិស្សងាយភ្លេចបម្រាប់ និងវង្វេងលើត្រីកោណត្រួតគ្នា \en{(Biber, 2020; Winer \& Battista, 2022)}។ ក្នុង\textbf{ចម្លើយទី ១ ($\tri{ADB}\cg\tri{AEC}$)} សិស្សគ្រាន់តែប្រើមុំស្រួចរួម $\ang{A}$ និងអ៊ីប៉ូតេនុស $AB=AC$ ដែលប្រាប់ស្រាប់ក្នុងប្រធាន ទើបងាយស្រួលជាងសម្រាប់តួនាទី ១--២ មុនទាញ $AD=AE$ (\cnum{5}) ដើម្បីដក $BE=AB-AE=AC-AD=CD$។ ចំណែក\textbf{ចម្លើយទី ២ ($\tri{BDC}\cg\tri{CEB}$)} ប្រើអ៊ីប៉ូតេនុសរួម $BC=CB$ និងមុំបាតស្មើ $\ang{DBC}=\ang{ECB}$ (ពីលក្ខណៈសមបាទ $AB=AC$) ដែលផ្ដល់ $BD=CE$ និង $BE=CD$ ភ្លាមៗក្នុង \cnum{5} — គ្រូត្រូវទទួលស្គាល់វិធីទាំងពីរស្មើគ្នា។
-  \item \textbf{ហេតុអ្វីលំហាត់ទី១០ ទំព័រ ១៦៥ ត្រូវលើកទៅចំណិតទី ៣ (អ.ជ / \en{HL})?} ក្នុងលំហាត់ទី១០ ($\tri{ABC}$ មានកម្ពស់ $BD, CE$ និងឱ្យ $BD=CE$ បង្ហាញថា $\ang{ABC}=\ang{ACB}$ — កំណត់ចំណាំសៀវភៅភ្លេចបោះពាក្យ «$AC$ និង $AB$» និងដាក់ \tickone\ លើកំណាត់ក្រោមនៃ $BD, CE$), ត្រីកោណកែង $\tri{BDC}$ និង $\tri{CEB}$ ស្គាល់\textbf{អ៊ីប៉ូតេនុសរួម $BC=CB$} និង\textbf{ជ្រុងកែង $BD=CE$} (គ្មានមុំស្រួចប្រាប់មុនទេ!)។ ដូច្នេះវាទាមទារករណី \textbf{អ.ជ (\en{HL})} នៅចំណិតទី ៣ (១.៣.២) ដូចគ្នានឹងសម្រាយទ្រឹស្ដីបទពុះមុំច្រាសលើទំព័រ ១៥៤ ដែរ។
+  \item \textbf{ហេតុអ្វីលំហាត់ទី១០ ទំព័រ ១៦៥ ត្រូវលើកទៅចំណិតទី ៣ (អ.ជ / \en{HL})?} ក្នុងលំហាត់ទី១០ ($\tri{ABC}$ មានកម្ពស់ $BD, CE$ និងឱ្យ $BD=CE$ បង្ហាញ $\ang{ABC}=\ang{ACB}$ — សៀវភៅភ្លេចពាក្យ «$AC, AB$» និងដាក់ \tickone\ លើកំណាត់ក្រោមនៃ $BD, CE$), $\tri{BDC}, \tri{CEB}$ ស្គាល់\textbf{អ៊ីប៉ូតេនុសរួម $BC=CB$} និង\textbf{ជ្រុងកែង $BD=CE$} (គ្មានមុំស្រួចប្រាប់មុនទេ!) ទើបត្រូវប្រើ \textbf{អ.ជ (\en{HL})} នៅចំណិតទី ៣ (១.៣.២) ដូចពុះមុំច្រាសទំព័រ ១៥៤ ដែរ។
 \end{itemize}
 
 \subsec{៥\enbf{.}២ តារាងវិនិច្ឆ័យកំហុសភ័ន្តច្រឡំ និងវិធានការជួសជុលបន្ទាន់}
 
 \begingroup
 \linespread{1.0}\selectfont
-\renewcommand{\arraystretch}{1.06}
+\renewcommand{\arraystretch}{1.00}
 \setlength{\tabcolsep}{3.0pt}
-\fontsize{10.2pt}{14.8pt}\selectfont
-\begin{longtable}{|L{4.50cm}|L{4.90cm}|L{7.20cm}|}
+\fontsize{10.0pt}{14.0pt}\selectfont
+\begin{longtable}{|L{4.55cm}|L{4.65cm}|L{7.40cm}|}
 \hline
 \rowcolor{headgray}
-\multicolumn{1}{|C{4.50cm}|}{\tblhead{កំហុសភ័ន្តច្រឡំ\par\vspace{2.5pt}របស់សិស្ស}} &
-\multicolumn{1}{C{4.90cm}|}{\tblhead{ភស្តុតាង \enbf{\&} មូលហេតុដើម}} &
-\multicolumn{1}{C{7.20cm}|}{\tblhead{វិធានការជួសជុលជាក់ស្ដែងក្នុងថ្នាក់}} \\
+\multicolumn{1}{|C{4.55cm}|}{\tblhead{កំហុសភ័ន្តច្រឡំរបស់សិស្ស}} &
+\multicolumn{1}{C{4.65cm}|}{\tblhead{ភស្តុតាង \enbf{\&} មូលហេតុដើម}} &
+\multicolumn{1}{C{7.40cm}|}{\tblhead{វិធានការជួសជុលជាក់ស្ដែងក្នុងថ្នាក់}} \\
 \hline
 \endfirsthead
 
 \hline
 \rowcolor{headgray}
-\multicolumn{1}{|C{4.50cm}|}{\tblhead{កំហុសភ័ន្តច្រឡំ\par\vspace{2.5pt}របស់សិស្ស}} &
-\multicolumn{1}{C{4.90cm}|}{\tblhead{ភស្តុតាង \enbf{\&} មូលហេតុដើម}} &
-\multicolumn{1}{C{7.20cm}|}{\tblhead{វិធានការជួសជុលជាក់ស្ដែងក្នុងថ្នាក់}} \\
+\multicolumn{1}{|C{4.55cm}|}{\tblhead{កំហុសភ័ន្តច្រឡំរបស់សិស្ស}} &
+\multicolumn{1}{C{4.65cm}|}{\tblhead{ភស្តុតាង \enbf{\&} មូលហេតុដើម}} &
+\multicolumn{1}{C{7.40cm}|}{\tblhead{វិធានការជួសជុលជាក់ស្ដែងក្នុងថ្នាក់}} \\
 \hline
 \endhead
 
@@ -1145,6 +1139,29 @@ $90^\circ{-}\ang{C}\to$ ម.ជ.ម; កែ $\ang{B}=\ang{B'}$ ទំ.១៥៣;
 \end{longtable}
 \endgroup
 
+\subsec{៥\enbf{.}៣ ដ្យាក្រាមបច្ចេកទេស ៤ \enbf{(TikZ} ស\enbf{-}ខ្មៅ ស្តង់ដារ \enbf{$\ge$ 10pt)}}
+
+ដ្យាក្រាម \en{TikZ} ស-ខ្មៅ សុទ្ធចំនួន \textbf{៤ ផ្ទាំង} ខាងក្រោម (គ្រប់តួអក្សរ $\ge 10\unit{pt}$) បង្ហាញរូបភាពស្អាត គ្មានអន្ទាក់ \tickone\ និងសម្រាប់ពន្យល់សិស្សពីកំហុសបោះពុម្ពសៀវភៅគោល៖
+
+{\centering
+  \figGuidelineHAProofAndRotation\\[2pt]
+  {\fontsize{10.0pt}{13.5pt}\selectfont {\muol\fontsize{10.0pt}{13.5pt}\selectfont រូបទី ១៖} ផ្ទាំងកែង $90^\circ$ \en{+} អ៊ីប៉ូតេនុស $5\unit{cm}$ ($35^\circ$) ភ្ជាប់មុំបំពេញ $55^\circ$ និងត្រីកោណបង្វិល $\approx 135^\circ$ (\en{E1--E3})។}\par}
+
+\vspace{3pt}
+{\centering
+  \figGuidelineDualPOETraps\\[2pt]
+  {\fontsize{10.0pt}{13.5pt}\selectfont {\muol\fontsize{10.0pt}{13.5pt}\selectfont រូបទី ២៖} អន្ទាក់ \en{POE 2A} អ៊ីប៉ូតេនុស $5\unit{cm}$ ទល់ជ្រុងកែង $5\unit{cm}$ ($\ncg$) និង \en{POE 2B} ចម្ងាយកែង $MA=MB$ ទល់ទ្រេត $MD$ (\en{E2}, កាត \en{B--D})។}\par}
+
+\vspace{4pt}
+{\centering
+  \figGuidelineErrataAndModel\\[2pt]
+  {\fontsize{10.0pt}{13.5pt}\selectfont {\muol\fontsize{10.0pt}{13.5pt}\selectfont រូបទី ៣៖} កំណែទំព័រ ១៥៣ (\en{1a}: $\ang{A}=\ang{A'}\to\ang{B}=\ang{B'}$; \en{1b}: $OMA$ និង $OMB$; \en{1c}: ដក \tickone\ ចេញពី $OA, OB$ ជាមួយ \en{[tracing]} $90^\circ\to OM$)។}\par}
+
+\vspace{4pt}
+{\centering
+  \figGuidelinePracticeAndHW\\[2pt]
+  {\fontsize{10.0pt}{13.5pt}\selectfont {\muol\fontsize{10.0pt}{13.5pt}\selectfont រូបទី ៤៖} ការបំបែកត្រីកោណត្រួតគ្នា $\tri{ADB}, \tri{AEC}$ លើប្រតិបត្តិគ្មានរូបទំព័រ ១៥៤ (\en{E5}) និងការញែកកិច្ចការផ្ទះ \#6 (\en{ASA}) vs \#7 (\en{SAS/HA})។}\par}
+
 % ============================================================================
 % ផ្នែកទី ៦៖ មគ្គុទ្ទេសក៍រៀបចំ និងប្រើប្រាស់សម្ភារៈបោះពុម្ព (Printable Materials Guide)
 % ============================================================================
@@ -1152,7 +1169,7 @@ $90^\circ{-}\ang{C}\to$ ម.ជ.ម; កែ $\ang{B}=\ang{B'}$ ទំ.១៥៣;
 
 សម្ភារៈក្នុង \en{Printable\_\allowbreak Materials\_\allowbreak HA.pdf} (៦ ទំព័រ ស-ខ្មៅ សុទ្ធ ១ ឈុតក្នុង ១ ទំព័រ \en{A4}) ត្រូវបានរចនាឱ្យងាយស្រួលព្រីន និងច្បាស់លាស់។ គ្រូត្រូវអនុវត្តតាមការណែនាំតាមទំព័រនីមួយៗដូចខាងក្រោម៖
 
-\begin{itemize}[leftmargin=0.55cm, topsep=1pt, itemsep=1.5pt, parsep=0pt]
+\begin{itemize}[leftmargin=0.55cm, topsep=1pt, itemsep=1.0pt, parsep=0pt]
   \item \textbf{ទំព័រទី ១ (\en{E2} ខ្នាតពិត \en{1:1} — ផ្ទាំងកែង, \en{POE 2A} \& បត់ \en{POE 2B})៖}
     \textbf{ច្បាប់ព្រីនដាច់ខាត៖} ត្រូវជ្រើស \textbf{\en{Scale: Actual Size 100\%}} (\textbf{ហាមជ្រើស \en{Fit to Page}}) ហើយវាស់\textbf{បន្ទះផ្ទៀង \en{5 cm}} នៅជ្រុងស្ដាំលើទំព័រ ១ ឱ្យបាន $5.0\unit{cm}$ គត់ ($141.73\unit{pt}$)។ សន្លឹកនេះផ្ទុក៖ (១) ផ្ទាំងមុំកែង $90^\circ$ គោល, បន្ទះអ៊ីប៉ូតេនុស $5\unit{cm}$, ស្នៀតមុំ $35^\circ$, និងត្រីកោណកែងតេស្តបង្វិល $\approx 135^\circ$; (២) កាត \en{2A-1} (អ៊ីប៉ូតេនុស $5\unit{cm}$) vs \en{2A-2} (ជ្រុងកែង $5\unit{cm}$, អ៊ីប៉ូតេនុស $\approx 6.1\unit{cm}$) + ប្រអប់ \en{POE 2A}; និង (៣) ផ្ទាំងបត់ក្រដាស $\ang{XOY}$ (បត់តាម $OM$ រក $MA=MB\approx 1.5\unit{cm} < MD\approx 2.0\unit{cm}$) + ប្រអប់ \en{POE 2B}។
   \item \textbf{ទំព័រទី ២ (\en{E4} កាតព្រួញឈម $90^\circ$ និងអ៊ីប៉ូតេនុសរួម $OM$ — ២ ប័ណ្ណ)៖}
@@ -1168,12 +1185,12 @@ $90^\circ{-}\ang{C}\to$ ម.ជ.ម; កែ $\ang{B}=\ang{B'}$ ទំ.១៥៣;
 \end{itemize}
 
 % ============================================================================
-% ផ្នែកទី ៧៖ បញ្ជីឯកសារយោង (APA 7th Reference List — 14/14) & ហត្ថលេខា
+% ផ្នែកទី ៧៖ ឯកសារយោង (APA 7th Reference List) & ហត្ថលេខា
 % ============================================================================
-\secbanner{ផ្នែកទី ៧៖ បញ្ជីឯកសារយោង \enbf{(References --- APA 7th Edition)}}{Section 7: Verified Open-Access Reference List (100\% 1-to-1 Match with PDFs 01--14)}
+\refbanner{ឯកសារយោង}
 
-{\TimesEn\linespread{1.0}\selectfont\fontsize{10.8pt}{16.2pt}\selectfont
-\setlength{\parskip}{1.8pt}
+{\TimesEn\linespread{1.0}\selectfont\fontsize{10.0pt}{14.4pt}\selectfont
+\setlength{\parskip}{1.2pt}
 \everypar={\hangindent=0.85cm \hangafter=1}
 
 Biber, A. \c{C}. (2020). Students' difficulties in similar triangle questions. \textit{Cypriot Journal of Educational Sciences}, \textit{15}(5), 1146--1159. \url{https://doi.org/10.18844/cjes.v15i5.5161}
@@ -1207,7 +1224,7 @@ Y\i ld\i z, C., G\"uven, B., \& Koparan, T. (2010). Use of Cabri 2D software in 
 \par}
 
 % -------------------- កាលបរិច្ឆេទ និងហត្ថលេខា (Verbatim Match to LS_Plan_HA.tex) --------------------
-\needspace{3.4cm}
+\needspace{2.0cm}
 \vspace{6pt}
 \hfill
 \begin{minipage}{10.2cm}

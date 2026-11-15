@@ -171,7 +171,7 @@
 
 % ក្បាលផ្នែកសំខាន់ៗ (Tier 2 — Two-Line Stacked Unwrapped \muol Banner)
 \newcommand{\secbanner}[2]{%
-  \needspace{2.8cm}%
+  \needspace{2.2cm}%
   \vspace{2pt}%
   \begin{tcolorbox}[
     enhanced, sharp corners, colback=stepgray, colframe=black,
@@ -184,29 +184,44 @@
   \end{tcolorbox}%
 }
 
+% ក្បាលឯកសារយោងសង្ខេប
+\newcommand{\refbanner}[1]{%
+  \needspace{2.2cm}%
+  \vspace{2pt}%
+  \begin{tcolorbox}[
+    enhanced, sharp corners, colback=stepgray, colframe=black,
+    boxrule=1.1pt, borderline south={0.6pt}{1.8pt}{black},
+    top=5pt, bottom=5pt, left=9pt, right=9pt,
+    before skip=6pt, after skip=5pt
+  ]
+    {\muol\fontsize{12pt}{19pt}\selectfont #1}%
+  \end{tcolorbox}%
+}
+
 % ចំណងជើងផ្នែករង (Tier 3 — Unwrapped \muol 11pt + Subtle Bottom Rule)
 \newcommand{\subsec}[1]{%
-  \needspace{3.4cm}%
+  \needspace{1.6cm}%
   \vspace{4pt}%
   \subsectitle{#1}\par
   \vspace{2pt}\hrule height 0.5pt\vspace{3pt}%
 }
 
-% ប្រអប់ដំណាក់កាល ៥០ នាទី (Box Title 11pt + Body 11.5pt/18.2pt)
-\newtcolorbox{phasebox}[3]{%
-  enhanced, breakable, sharp corners, colback=white, colframe=black,
-  boxrule=1.0pt, top=5pt, bottom=5pt, left=9pt, right=9pt,
-  toptitle=3.5pt, bottomtitle=3.5pt,
-  before skip=6pt, after skip=5pt,
-  colbacktitle=headgray, coltitle=black,
-  fonttitle=\fontsize{11pt}{14.5pt}\selectfont,
-  fontupper=\fontsize{11.5pt}{14.92pt}\selectfont,
-  title={%
+% ប្រអប់ដំណាក់កាល ៥០ នាទី (Top Header Bar + Breakable Body for Inner scriptbox)
+\newenvironment{phasebox}[3]{%
+  \needspace{2.2cm}%
+  \begin{tcolorbox}[
+    enhanced, sharp corners, colback=headgray, colframe=black,
+    boxrule=1.0pt, top=3.5pt, bottom=3.5pt, left=9pt, right=9pt,
+    before skip=6pt, after skip=3pt
+  ]%
     \linespread{1.0}\selectfont\renewcommand{\arraystretch}{1.0}%
     \begin{tabular*}{\linewidth}{@{}>{\raggedright\arraybackslash}p{13.10cm}@{\extracolsep{\fill}}r@{}}
       {\muol\fontsize{11pt}{14.5pt}\selectfont #1} & {\fontsize{10.5pt}{13.5pt}\selectfont\en{#2 |} #3}%
     \end{tabular*}%
-  }
+  \end{tcolorbox}%
+  \begingroup\fontsize{11.5pt}{14.92pt}\selectfont
+}{%
+  \par\endgroup\vspace{3pt}\hrule height 0.5pt\vspace{4pt}%
 }
 
 % ប្រអប់ពាក្យសម្ដីគ្រូនិយាយផ្ទាល់ (Body 11.5pt/18.2pt)
@@ -242,7 +257,7 @@
 % រូបទី ១ (ផ្នែក ៥.ក)៖ ស៊ុម ៤ របារទ្រេតដួល ទល់នឹង គ្រោងត្រីកោណ ៣ របារ & ប្រសព្វធ្នូដែកឈាន
 \newcommand{\figGuidelineSSSConstruction}{%
 \linespread{1.0}\selectfont
-\begin{tikzpicture}[x=1cm, y=1cm, every node/.style={font=\fontsize{9.8pt}{13.5pt}\selectfont, text=black}]
+\begin{tikzpicture}[x=0.98cm, y=0.86cm, every node/.style={font=\fontsize{9.8pt}{13.5pt}\selectfont, text=black}]
   % --- ផ្នែកឆ្វេង៖ ស៊ុម ៤ របារ (6, 5, 4, 3 cm) ទ្រេតដួល (x: 0.0..8.35) ---
   \begin{scope}[shift={(0.0, 0.0)}]
     \node[draw=black, fill=midgray, line width=0.95pt, minimum width=8.25cm, minimum height=0.68cm, anchor=south, font=\fontsize{10pt}{13.8pt}\selectfont] at (4.12, 4.45) {\textbf{\ding{55}\ ស៊ុម ៤ របារ (\en{6, 5, 4, 3 cm}) ៖ មុំប្រែទ្រេត}};
@@ -261,11 +276,11 @@
     }
     \draw[black, line width=1.15pt, -{Stealth[length=2.2mm]}] (0.85, 3.35) -- (2.55, 2.98);
     \node[anchor=south, fill=white, inner sep=1.5pt] at (1.45, 3.38) {កម្លាំងរុញ};
-    \node[align=center] at (4.12, -0.45) {ស្គាល់ ៤ ជ្រុងតែគ្មានអង្កត់ទ្រូងចាក់សោ\\$\Rightarrow$ មុំប្រែសេរី (ទ្វារ ឬគ្រោងដួល)};
+    \node[align=center] at (4.12, -0.52) {ស្គាល់ ៤ ជ្រុងតែគ្មានអង្កត់ទ្រូងចាក់សោ\\$\Rightarrow$ មុំប្រែសេរី (ទ្វារ ឬគ្រោងដួល)};
   \end{scope}
 
   % បន្ទាត់បំបែកកណ្ដាល
-  \draw[black, dashed, line width=0.95pt] (8.62, -1.05) -- (8.62, 5.20);
+  \draw[black, dashed, line width=0.95pt] (8.62, -1.10) -- (8.62, 5.20);
 
   % --- ផ្នែកស្ដាំ៖ ស៊ុម ៣ របារ (6, 5, 3 cm) & ប្រសព្វធ្នូដែកឈាន (x: 8.90..17.65) ---
   \begin{scope}[shift={(8.90, 0.0)}]
@@ -289,14 +304,14 @@
     \draw[black, line width=0.8pt, -{Stealth[length=1.8mm]}] (3.58, 3.68) -- (4.55, 3.40);
     \node[anchor=west, fill=white, inner sep=1pt] at (6.30, 3.62) {ធ្នូ $r_2=3\unit{cm}$};
     \draw[black, line width=0.8pt, -{Stealth[length=1.8mm]}] (6.26, 3.57) -- (6.00, 3.30);
-    \node[align=center] at (4.32, -0.45) {ធ្នូ $r_1, r_2$ កាត់គ្នាត្រង់ $C$ តែ \textbf{១ គត់}\\$\Rightarrow$ ចាក់សោមុំទាំង ៣ ($\tri{ABC}\cg\tri{A'B'C'}$)};
+    \node[align=center] at (4.32, -0.52) {ធ្នូ $r_1, r_2$ កាត់គ្នាត្រង់ $C$ តែ \textbf{១ គត់}\\$\Rightarrow$ ចាក់សោមុំទាំង ៣ ($\tri{ABC}\cg\tri{A'B'C'}$)};
   \end{scope}
 \end{tikzpicture}}
 
 % រូបទី ២ (ផ្នែក ៥.ខ)៖ អន្ទាក់ ម.ម.ម (AAA 60°) 4cm vs 6cm និងលក្ខខណ្ឌមិនកើត 2+2.5<6
 \newcommand{\figGuidelineAAAvsImpossible}{%
 \linespread{1.0}\selectfont
-\begin{tikzpicture}[x=1cm, y=1cm, every node/.style={font=\fontsize{9.8pt}{13.5pt}\selectfont, text=black}]
+\begin{tikzpicture}[x=0.98cm, y=0.86cm, every node/.style={font=\fontsize{9.8pt}{13.5pt}\selectfont, text=black}]
   % --- ផ្នែកឆ្វេង៖ អន្ទាក់ AAA 60° (4 cm vs 6 cm) ---
   \begin{scope}[shift={(0.0, 0.0)}]
     \node[draw=black, fill=midgray, line width=0.95pt, minimum width=8.35cm, minimum height=0.68cm, anchor=south, font=\fontsize{10pt}{13.8pt}\selectfont] at (4.18, 4.48) {\textbf{\ding{55}\ អន្ទាក់ ម.ម.ម (\en{AAA} $60^\circ$) ៖ ដូចគ្នា តែមិនប៉ុន}};
@@ -332,11 +347,11 @@
     \fill[black] (Qp) circle (1.8pt) node[below right=1pt] {$Q'$};
     \fill[black] (Rp) circle (1.8pt) node[above=3pt] {$R'$};
 
-    \node[align=center] at (4.18, -0.45) {មុំទាំង ៣ ស្មើ $60^\circ$ គ្រាន់តែរូប\textbf{ដូចគ្នា}\\$\Rightarrow \tri{PQR} \ncg \tri{P'Q'R'}$ (ជ្រុង $4 \neq 6$)};
+    \node[align=center] at (4.18, -0.52) {មុំទាំង ៣ ស្មើ $60^\circ$ គ្រាន់តែរូប\textbf{ដូចគ្នា}\\$\Rightarrow \tri{PQR} \ncg \tri{P'Q'R'}$ (ជ្រុង $4 \neq 6$)};
   \end{scope}
 
   % បន្ទាត់បំបែកកណ្ដាល
-  \draw[black, dashed, line width=0.95pt] (8.65, -1.05) -- (8.65, 5.24);
+  \draw[black, dashed, line width=0.95pt] (8.65, -1.10) -- (8.65, 5.24);
 
   % --- ផ្នែកស្ដាំ៖ បន្ទះមិនប្រសព្វ 2 + 2.5 < 6 cm ---
   \begin{scope}[shift={(8.92, 0.0)}]
@@ -357,49 +372,49 @@
     \draw[black, line width=1.05pt, {Stealth[length=2.0mm]}-{Stealth[length=2.0mm]}] (3.32, 1.55) -- (4.82, 1.55);
     \node[above=2pt, align=center, fill=white, inner sep=1.5pt] at (4.07, 1.62) {\textbf{ប្រហោង}\\\textbf{$1.5\unit{cm}$}};
 
-    \node[align=center] at (4.32, -0.45) {បូកជ្រុងខ្លីទាំងពីរ $2+2.5=4.5 < 6\unit{cm}$\\$\Rightarrow$ ធ្នូទាំងពីរមិនប្រសព្វ (គ្មានត្រីកោណ)};
+    \node[align=center] at (4.32, -0.52) {បូកជ្រុងខ្លីទាំងពីរ $2+2.5=4.5 < 6\unit{cm}$\\$\Rightarrow$ ធ្នូទាំងពីរមិនប្រសព្វ (គ្មានត្រីកោណ)};
   \end{scope}
 \end{tikzpicture}}
 
 % រូបទី ៣ (ផ្នែក ៥.គ)៖ កំពូលឈមជ្រុងស្មើលើរូបឆ្លុះ-បង្វិល ~135° & អន្ទាក់លំហាត់ទី៩
 \newcommand{\figGuidelineVertexAndTrap}{%
 \linespread{1.0}\selectfont
-\begin{tikzpicture}[x=1cm, y=1cm, every node/.style={font=\fontsize{9.8pt}{13.5pt}\selectfont, text=black}]
+\begin{tikzpicture}[x=0.98cm, y=0.86cm, every node/.style={font=\fontsize{9.8pt}{13.5pt}\selectfont, text=black}]
   % --- ផ្នែកឆ្វេង៖ រូបបង្វិល-ឆ្លុះ ~135° & កំពូលឈមជ្រុងស្មើ (x: 0.0..9.65) ---
   \begin{scope}[shift={(0.0, 0.0)}]
     \node[draw=black, fill=headgray, line width=0.95pt, minimum width=9.30cm, minimum height=0.68cm, anchor=south, font=\fontsize{10pt}{13.8pt}\selectfont] at (4.65, 3.85) {\textbf{គោលការណ៍កំពូលឈមជ្រុងស្មើ (បង្វិល\en{--}ឆ្លុះ $\approx 135^\circ$)}};
-    \coordinate (A) at (0.75, 0.92);
-    \coordinate (B) at (3.25, 0.92);
-    \coordinate (C) at (1.90, 2.78);
+    \coordinate (A) at (0.55, 0.92);
+    \coordinate (B) at (2.85, 0.92);
+    \coordinate (C) at (1.60, 2.78);
     \fill[panelgray] (A) -- (B) -- (C) -- cycle;
     \draw[black, line width=1.25pt, tk1] (A) -- (B);
     \draw[black, line width=1.25pt, tk2] (A) -- (C);
     \draw[black, line width=1.25pt, tk3] (B) -- (C);
     \fill[black] (A) circle (1.9pt) (B) circle (1.9pt) (C) circle (1.9pt);
-    \node[below=2pt, align=center] at (A) {$A$\\[-1pt](ឈម $|||$)};
-    \node[below=2pt, align=center] at (B) {$B$\\[-1pt](ឈម $||$)};
+    \node[below=2pt, align=center] at (A) {$A$\\(ឈម $|||$)};
+    \node[below=2pt, align=center] at (B) {$B$\\(ឈម $||$)};
     \node[above=3pt] at (C) {$C$ (ឈម $|$)};
 
-    \node[font=\fontsize{12pt}{14pt}\selectfont] at (4.35, 1.85) {$\cg$};
+    \node[font=\fontsize{12pt}{14pt}\selectfont] at (3.95, 1.85) {$\cg$};
 
     % ត្រីកោណទី២ ឆ្លុះ-បង្វិល ~135 deg
-    \coordinate (Ap) at (7.45, 2.85);
-    \coordinate (Bp) at (5.45, 1.05);
-    \coordinate (Cp) at (8.05, 0.65);
+    \coordinate (Ap) at (6.95, 2.85);
+    \coordinate (Bp) at (5.30, 1.15);
+    \coordinate (Cp) at (7.55, 0.72);
     \fill[panelgray] (Ap) -- (Bp) -- (Cp) -- cycle;
     \draw[black, line width=1.25pt, tk1] (Ap) -- (Bp);
     \draw[black, line width=1.25pt, tk2] (Ap) -- (Cp);
     \draw[black, line width=1.25pt, tk3] (Bp) -- (Cp);
     \fill[black] (Ap) circle (1.9pt) (Bp) circle (1.9pt) (Cp) circle (1.9pt);
     \node[above=3pt] at (Ap) {$A'$ (ឈម $|||$)};
-    \node[below=2pt, align=center] at (Bp) {$B'$\\[-1pt](ឈម $||$)};
-    \node[right=3pt, align=left] at (Cp) {$C'$\\[-1pt](ឈម $|$)};
+    \node[below=2pt, align=center] at (Bp) {$B'$\\(ឈម $||$)};
+    \node[right=3pt, align=left] at (Cp) {$C'$\\(ឈម $|$)};
 
-    \node[align=center] at (4.65, -0.58) {រកគំនូសស្មើ $\to$ ស្គាល់កំពូលឈម៖\\$A\leftrightarrow A'$ ($|||$), $B\leftrightarrow B'$ ($||$), $C\leftrightarrow C'$ ($|$)};
+    \node[align=center] at (4.65, -0.68) {រកគំនូសស្មើ $\to$ ស្គាល់កំពូលឈម៖\\$A\leftrightarrow A'$ ($|||$), $B\leftrightarrow B'$ ($||$), $C\leftrightarrow C'$ ($|$)};
   \end{scope}
 
   % បន្ទាត់បំបែកកណ្ដាល
-  \draw[black, dashed, line width=0.95pt] (9.65, -1.08) -- (9.65, 4.60);
+  \draw[black, dashed, line width=0.95pt] (9.65, -1.22) -- (9.65, 4.60);
 
   % --- ផ្នែកស្ដាំ៖ អន្ទាក់លំហាត់ទី៩ (ទំព័រ ១៦៥ — ΔABC ≅ ΔDCB) ---
   \begin{scope}[shift={(9.95, 0.0)}]
@@ -418,7 +433,7 @@
     \fill[black] (B) circle (1.9pt) node[below=3pt] {$B$};
     \fill[black] (C) circle (1.9pt) node[above=3pt] {$C$};
     \fill[black] (D) circle (1.9pt) node[right=3pt] {$D$};
-    \node[align=center] at (3.65, -0.50) {ជ្រុងរួម $BC=CB$ (\cnum{3})៖ \ding{55}\ $\tri{ABC}\cg\tri{BDC}$\\ត្រូវសរសេរ៖ \ding{51}\ $\tri{ABC}\cg\tri{DCB}$!};
+    \node[align=center] at (3.65, -0.60) {ជ្រុងរួម $BC=CB$ (\cnum{3})៖ \ding{55}\ $\tri{ABC}\cg\tri{BDC}$\\ត្រូវសរសេរ៖ \ding{51}\ $\tri{ABC}\cg\tri{DCB}$!};
   \end{scope}
 \end{tikzpicture}}
 
@@ -538,11 +553,11 @@
   \end{tabular}\\[4pt]
   \fontsize{11.5pt}{14.92pt}\selectfont\linespread{1.22}\selectfont
   \textbf{ឯកសារភ្ជាប់ក្នុងកញ្ចប់បង្រៀន (\en{NGS 5Es Lesson Package})៖}
-  (១) \en{LS\_\allowbreak Plan\_\allowbreak SSS.pdf} (កិច្ចតែងការបង្រៀន ៤ ទំព័រ),
+  (១) \en{LS\_\allowbreak Plan\_\allowbreak SSS.pdf} (កិច្ចតែងការបង្រៀន ៦ ទំព័រ),
   (២) \en{Teaching\_\allowbreak Scenario\_\allowbreak SSS.pdf} (សេណារីយ៉ូ ៥០ នាទី ២ ទំព័រ),
   (៣) \en{Printable\_\allowbreak Materials\_\allowbreak SSS.pdf} (សម្ភារៈបោះពុម្ព ស-ខ្មៅ ខ្នាតពិត \en{1:1} ចំនួន ៦ ទំព័រ),
   (៤) \en{Teaching\_\allowbreak Guideline\_\allowbreak SSS.pdf} (មគ្គុទ្ទេសក៍គរុកោសល្យគ្រូនេះ),
-  និង (៥) ថតភស្តុតាង ឯកសារ\allowbreak ស្រាវជ្រាវ\allowbreak យោង\_\allowbreak\en{PDF/} (\en{14 Open-Access PDFs} + \en{Evidence Index})។
+  និង (៥) ថតភស្តុតាង ឯកសារ\allowbreak ស្រាវជ្រាវ\allowbreak យោង\_\allowbreak\en{PDF/} (\en{Open-Access PDFs} + \en{Evidence Index})។
 \end{tcolorbox}
 
 \secbanner{ផ្នែកទី ១៖ បរិបទមេរៀន និងទិដ្ឋភាពទូទៅគរុកោសល្យ}{Section 1: Administrative Context, Grade 8 Kampong Svay Setting \& 50-Min Overview}
@@ -570,11 +585,11 @@
 \end{itemize}
 
 % ============================================================================
-% ផ្នែកទី ២៖ ការសំយោគឯកសារស្រាវជ្រាវអន្តរជាតិ (14 Verified OA PDFs)
+% ផ្នែកទី ២៖ ការសំយោគឯកសារស្រាវជ្រាវអន្តរជាតិ (Mini-Literature Review)
 % ============================================================================
-\secbanner{ផ្នែកទី ២៖ ការសំយោគឯកសារស្រាវជ្រាវអន្តរជាតិ \enbf{(Mini-Literature Review)}}{Section 2: Research-to-Practice Rationale Grounded in 14 Verified Open-Access PDFs}
+\secbanner{ផ្នែកទី ២៖ ការសំយោគឯកសារស្រាវជ្រាវអន្តរជាតិ \enbf{(Mini-Literature Review)}}{Section 2: Research-to-Practice Rationale Grounded in Verified Open-Access PDFs}
 
-រាល់សកម្មភាព សំណួរផ្អាក សម្ភារៈកាត់ និងបច្ចេកទេសបង្ការកំហុសក្នុងមេរៀន \en{SSS} ៥០ នាទីនេះ ត្រូវបានសំយោគផ្ទាល់ពីអត្ថបទស្រាវជ្រាវអន្តរជាតិ \en{Open-Access} ចំនួន \textbf{១៤ អត្ថបទ} (ផ្ទៀងផ្ទាត់អត្ថបទពេញតាម \en{PyMuPDF} ក្នុងថត ឯកសារស្រាវជ្រាវយោង\_\en{PDF/}) ដូចខាងក្រោម៖
+រាល់សកម្មភាព សំណួរផ្អាក សម្ភារៈកាត់ និងបច្ចេកទេសបង្ការកំហុសក្នុងមេរៀន \en{SSS} ៥០ នាទីនេះ ត្រូវបានសំយោគផ្ទាល់ពីអត្ថបទស្រាវជ្រាវអន្តរជាតិ \en{Open-Access} (ផ្ទៀងផ្ទាត់អត្ថបទពេញតាម \en{PyMuPDF} ក្នុងថត ឯកសារស្រាវជ្រាវយោង\_\en{PDF/}) ដូចខាងក្រោម៖
 
 \subsec{២\enbf{.}១ ភាពរឹងមាំគ្រោងត្រីកោណ \enbf{CRA} បទពិសោធន៍ផ្ទាល់ដៃ និងការសង់ដោយដែកឈាន}
 
@@ -599,7 +614,7 @@
   \item \textbf{ទម្រង់ \en{Flow-Chart} រួមជាមួយសំណេរ ៣ បន្ទាត់ + \en{EIA} + \en{[tracing]} ស-ខ្មៅ៖} \en{Miyazaki et al. (2014)} បង្ហាញលើសិស្សថ្នាក់ទី៨ (៩ ម៉ោង) ថាការប្រើដ្យាក្រាមលំហូរលើលំហាត់ \textbf{\en{SSS}} ($\tri{ABO}\cg\tri{ACO}$ តាម $AO=AO, AB=AC, BO=CO$) បណ្ដុះការគិតទៅមុខ-ត្រឡប់ក្រោយ និងជំរុញពិន្ទុខ្ពស់ជាងមធ្យមភាគជាតិ $+10\%$, ខណៈ \en{Miyazaki et al. (2019)} បង្កើតលំដាប់រៀបផែនការ \en{P1--P2}, ការសង់ \en{C1--C2}, និង \en{EIA Looking-Back}។ ស្របគ្នានេះ \en{Anwar et al. (2021)} ($N=125$: ក្រុមចម្រុះ $n=60$ ប្រើ \en{flow-chart} ភ្ជាប់ \en{two-column/paragraph} vs ក្រុមគ្រប់គ្រង $n=65$ ប្រើ \en{two-column} តែឯង) បង្ហាញថា \en{N-Gain} ក្រុមចម្រុះខ្ពស់ដល់ $0.733$ ($M=13.75, SD=1.781$) ធៀបនឹង $0.330$ ($M=10.80, SD=2.425$), \en{Mann-Whitney} $U(60,65)=547.5, p<.001$, ដោយ $61.7\%$ ធៀបនឹង $9.3\%$ ឈានផុតកម្រិត \en{Recognizing Elements} (និង $56.7\%$ vs $6.2\%$ ឈានដល់ \en{Beyond Chaining Elements})។ ជាចុងក្រោយ \en{Yeo \& Tzeng (2019)} ($N=72$, អាយុ $12.35$ ឆ្នាំ) បញ្ជាក់ថា\textbf{ការចង្អុលម្រាមដៃ \en{[tracing]}} លើឧទាហរណ៍គំរូបង្កើនភាពត្រឹមត្រូវបម្លែង ($M=3.00, SD=0.85$ vs $M=2.31, SD=1.01$; $F(1,68)=9.38, p=.003, \eta^2=.121$) និងកាត់បន្ថយបន្ទុកគិតស្មើភាពគ្នាគ្រប់កម្រិតចងចាំ ($p \ge .309$) — ជំនួសហ្វឺតពណ៌បាន ១០០\% លើក្រដាស ស-ខ្មៅ!
 \end{itemize}
 
-\subsec{២\enbf{.}៤ តារាងផ្ទៀងផ្គងឯកសារភស្តុតាង \enbf{PDF} ទាំង ១៤ \enbf{(Evidence Alignment Summary)}}
+\subsec{២\enbf{.}៤ តារាងផ្ទៀងផ្គងឯកសារភស្តុតាង \enbf{PDF (Evidence Alignment Summary)}}
 
 \begingroup
 \linespread{1.0}\selectfont
@@ -961,31 +976,6 @@ $N=72$៖ \en{[tracing]} កើន $M=3.00$ vs $2.31$ ($p=.003, \eta^2=.121$); �
 % ============================================================================
 \secbanner{ផ្នែកទី ៥៖ កំហុសភ័ន្តច្រឡំ វិធានការជួសជុល និងដ្យាក្រាមបច្ចេកទេស ៤}{Section 5: Empirical Misconceptions, Diagnostic Fixes \& 4 Crisp B\&W TikZ Diagrams}
 
-ផ្នែកនេះបង្ហាញរូបភាពគំនូសតាង \en{TikZ} ស-ខ្មៅ សុទ្ធចំនួន \textbf{៤ ផ្ទាំង} (គ្រប់តួអក្សរ $\ge 9.8\unit{pt}$) ដើម្បីឱ្យគ្រូមើលឃើញយន្តការគរុកោសល្យស្នូល និងបកស្រាយជូនសិស្សបានភ្លាមៗ៖
-
-\begin{center}
-  \figGuidelineSSSConstruction\\[4pt]
-  {\fontsize{10.5pt}{15pt}\selectfont {\muol\fontsize{10.5pt}{15pt}\selectfont រូបទី ១៖} ការប្រៀបធៀបស៊ុម ៤ របារទ្រេតដួល ទល់នឹងគ្រោងដំបូល ៣ របាររឹងថេរ និងប្រសព្វធ្នូដែកឈាន $r_1, r_2$ ត្រង់ $C$ (\en{E1--E2})។}
-\end{center}
-
-\vspace{4pt}
-\begin{center}
-  \figGuidelineAAAvsImpossible\\[4pt]
-  {\fontsize{10.5pt}{15pt}\selectfont {\muol\fontsize{10.5pt}{15pt}\selectfont រូបទី ២៖} អន្ទាក់ ម.ម.ម (\en{AAA} $60^\circ$) $4\unit{cm}$ ទល់នឹង $6\unit{cm}$ និងតេស្តលក្ខខណ្ឌមិនប៉ះគ្នា $2 + 2.5 = 4.5 < 6\unit{cm}$ (\en{E2 Act 2})។}
-\end{center}
-
-\vspace{4pt}
-\begin{center}
-  \figGuidelineVertexAndTrap\\[4pt]
-  {\fontsize{10.5pt}{15pt}\selectfont {\muol\fontsize{10.5pt}{15pt}\selectfont រូបទី ៣៖} គោលការណ៍កំពូលឈមជ្រុងស្មើលើរូបបង្វិល-ឆ្លុះ $\approx 135^\circ$ (\en{E3}) និងអន្ទាក់លំដាប់កំពូលក្នុងលំហាត់ទី៩ ទំព័រ ១៦៥ (\en{Step 5})។}
-\end{center}
-
-\vspace{4pt}
-\begin{center}
-  \figGuidelineSegmentBridge\\[4pt]
-  {\fontsize{10.5pt}{15pt}\selectfont {\muol\fontsize{10.5pt}{15pt}\selectfont រូបទី ៤៖} បច្ចេកទេសចង្អុលម្រាមដៃ \en{[tracing]} ស្ពានតភ្ជាប់អង្កត់រួមដេក $JG$ (ទំ.១៥២, \en{E4}) និងស្ពានឈរ $ST$ (ទំ.១៥៣, \en{E5})។}
-\end{center}
-
 \subsec{៥\enbf{.}១ តារាងវិនិច្ឆ័យកំហុសភ័ន្តច្រឡំ និងវិធានការជួសជុលបន្ទាន់}
 
 \begingroup
@@ -1038,6 +1028,33 @@ $N=72$៖ \en{[tracing]} កើន $M=3.00$ vs $2.31$ ($p=.003, \eta^2=.121$); �
 \end{longtable}
 \endgroup
 
+\subsec{៥\enbf{.}២ ដ្យាក្រាមគរុកោសល្យបច្ចេកទេស ៤ ផ្ទាំង \enbf{(Crisp B\&W TikZ Diagrams)}}
+
+ផ្នែកនេះបង្ហាញរូបភាពគំនូសតាង \en{TikZ} ស-ខ្មៅ សុទ្ធចំនួន \textbf{៤ ផ្ទាំង} (គ្រប់តួអក្សរ $\ge 9.8\unit{pt}$) ដើម្បីឱ្យគ្រូមើលឃើញយន្តការគរុកោសល្យស្នូល និងបកស្រាយជូនសិស្សបានភ្លាមៗ៖
+
+\begin{center}
+  \figGuidelineSSSConstruction\\[4pt]
+  {\fontsize{10.5pt}{15pt}\selectfont {\muol\fontsize{10.5pt}{15pt}\selectfont រូបទី ១៖} ការប្រៀបធៀបស៊ុម ៤ របារទ្រេតដួល ទល់នឹងគ្រោងដំបូល ៣ របាររឹងថេរ និងប្រសព្វធ្នូដែកឈាន $r_1, r_2$ ត្រង់ $C$ (\en{E1--E2})។}
+\end{center}
+
+\vspace{4pt}
+\begin{center}
+  \figGuidelineAAAvsImpossible\\[4pt]
+  {\fontsize{10.5pt}{15pt}\selectfont {\muol\fontsize{10.5pt}{15pt}\selectfont រូបទី ២៖} អន្ទាក់ ម.ម.ម (\en{AAA} $60^\circ$) $4\unit{cm}$ ទល់នឹង $6\unit{cm}$ និងតេស្តលក្ខខណ្ឌមិនប៉ះគ្នា $2 + 2.5 = 4.5 < 6\unit{cm}$ (\en{E2 Act 2})។}
+\end{center}
+
+\vspace{4pt}
+\begin{center}
+  \figGuidelineVertexAndTrap\\[4pt]
+  {\fontsize{10.5pt}{15pt}\selectfont {\muol\fontsize{10.5pt}{15pt}\selectfont រូបទី ៣៖} គោលការណ៍កំពូលឈមជ្រុងស្មើលើរូបបង្វិល-ឆ្លុះ $\approx 135^\circ$ (\en{E3}) និងអន្ទាក់លំដាប់កំពូលក្នុងលំហាត់ទី៩ ទំព័រ ១៦៥ (\en{Step 5})។}
+\end{center}
+
+\vspace{4pt}
+\begin{center}
+  \figGuidelineSegmentBridge\\[4pt]
+  {\fontsize{10.5pt}{15pt}\selectfont {\muol\fontsize{10.5pt}{15pt}\selectfont រូបទី ៤៖} បច្ចេកទេសចង្អុលម្រាមដៃ \en{[tracing]} ស្ពានតភ្ជាប់អង្កត់រួមដេក $JG$ (ទំ.១៥២, \en{E4}) និងស្ពានឈរ $ST$ (ទំ.១៥៣, \en{E5})។}
+\end{center}
+
 % ============================================================================
 % ផ្នែកទី ៦៖ មគ្គុទ្ទេសក៍រៀបចំ និងប្រើប្រាស់សម្ភារៈបោះពុម្ព (Printable Materials Guide)
 % ============================================================================
@@ -1061,12 +1078,12 @@ $N=72$៖ \en{[tracing]} កើន $M=3.00$ vs $2.31$ ($p=.003, \eta^2=.121$); �
 \end{itemize}
 
 % ============================================================================
-% ផ្នែកទី ៧៖ បញ្ជីឯកសារយោង (APA 7th Reference List — 14/14) & ហត្ថលេខា
+% ឯកសារយោង (APA 7th Edition) & ហត្ថលេខា
 % ============================================================================
-\secbanner{ផ្នែកទី ៧៖ បញ្ជីឯកសារយោង \enbf{(References --- APA 7th Edition)}}{Section 7: Verified Open-Access Reference List (100\% 1-to-1 Match with PDFs 01--14)}
+\refbanner{ឯកសារយោង}
 
-{\TimesEn\linespread{1.0}\selectfont\fontsize{10.8pt}{16.2pt}\selectfont
-\setlength{\parskip}{1.8pt}
+{\TimesEn\linespread{1.0}\selectfont\fontsize{11.5pt}{17.8pt}\selectfont
+\setlength{\parskip}{5.5pt}
 \everypar={\hangindent=0.85cm \hangafter=1}
 
 Anwar, L., Mali, A., \& Goedhart, M. J. (2021). The effect of proof format on reading comprehension of geometry proof: The case of Indonesian prospective mathematics teachers. \textit{EURASIA Journal of Mathematics, Science and Technology Education}, \textit{17}(4), em1952. \url{https://doi.org/10.29333/ejmste/10782}
@@ -1100,7 +1117,7 @@ Zhang, D. (2017). Effects of visual working memory training and direct instructi
 \par}
 
 % -------------------- កាលបរិច្ឆេទ និងហត្ថលេខា (Verbatim Match to LS_Plan_SSS.tex) --------------------
-\needspace{3.4cm}
+\needspace{2.0cm}
 \vspace{6pt}
 \hfill
 \begin{minipage}{10.2cm}

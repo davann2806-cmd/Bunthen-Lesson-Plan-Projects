@@ -159,7 +159,7 @@
 
 % ក្បាលផ្នែកសំខាន់ៗ (Tier 2 — Two-Line Stacked Unwrapped \muol Banner)
 \newcommand{\secbanner}[2]{%
-  \needspace{3.6cm}%
+  \needspace{2.2cm}%
   \vspace{4pt}%
   \begin{tcolorbox}[
     enhanced, sharp corners, colback=stepgray, colframe=black,
@@ -172,29 +172,44 @@
   \end{tcolorbox}%
 }
 
-% ចំណងជើងផ្នែករង (Tier 3 — Unwrapped \muol + Subtle Bottom Rule)
-\newcommand{\subsec}[1]{%
-  \needspace{2.5cm}%
-  \vspace{6pt}%
-  {\muol\fontsize{11.5pt}{18.5pt}\selectfont #1}\par
-  \vspace{2pt}\hrule height 0.5pt\vspace{4pt}%
+% ក្បាលឯកសារយោងសង្ខេប
+\newcommand{\refbanner}[1]{%
+  \needspace{2.2cm}%
+  \vspace{4pt}%
+  \begin{tcolorbox}[
+    enhanced, sharp corners, colback=stepgray, colframe=black,
+    boxrule=1.1pt, borderline south={0.6pt}{1.8pt}{black},
+    top=6pt, bottom=6pt, left=9pt, right=9pt,
+    before skip=10pt, after skip=8pt
+  ]
+    {\muol\fontsize{12pt}{19pt}\selectfont #1}%
+  \end{tcolorbox}%
 }
 
-% ប្រអប់ដំណាក់កាល ៥ នាទី-ទល់-នាទី (Tier 3 Title + Tier 4 Body 11.5pt/18.2pt)
-\newtcolorbox{phasebox}[3]{%
-  enhanced, breakable, sharp corners, colback=white, colframe=black,
-  boxrule=1.0pt, top=6pt, bottom=6pt, left=9pt, right=9pt,
-  toptitle=4pt, bottomtitle=4pt,
-  before skip=8pt, after skip=8pt,
-  colbacktitle=headgray, coltitle=black,
-  fonttitle=\fontsize{11pt}{17.5pt}\selectfont,
-  fontupper=\fontsize{11.5pt}{18.2pt}\selectfont,
-  title={%
+% ចំណងជើងផ្នែករង (Tier 3 — Unwrapped \muol + Subtle Bottom Rule)
+\newcommand{\subsec}[1]{%
+  \Needspace{1.3cm}%
+  \vspace{0pt}%
+  {\muol\fontsize{11.5pt}{18.5pt}\selectfont #1}\par
+  \vspace{1pt}\hrule height 0.5pt\vspace{2pt}%
+}
+
+% ប្រអប់ដំណាក់កាល ៥ នាទី-ទល់-នាទី (Top Header Bar + Breakable Body for Inner scriptbox)
+\newenvironment{phasebox}[3]{%
+  \needspace{2.2cm}%
+  \begin{tcolorbox}[
+    enhanced, sharp corners, colback=headgray, colframe=black,
+    boxrule=1.0pt, top=4pt, bottom=4pt, left=9pt, right=9pt,
+    before skip=7pt, after skip=3pt
+  ]%
     \renewcommand{\arraystretch}{1.0}%
     \begin{tabular*}{\linewidth}{@{}>{\raggedright\arraybackslash}p{13.60cm}@{\extracolsep{\fill}}r@{}}
-      {\muol #1} & {\fontsize{10.5pt}{15pt}\selectfont\en{#2 |} #3}%
+      {\muol\fontsize{11pt}{17.5pt}\selectfont #1} & {\fontsize{10.5pt}{15pt}\selectfont\en{#2 |} #3}%
     \end{tabular*}%
-  }
+  \end{tcolorbox}%
+  \begingroup\fontsize{11.5pt}{18.2pt}\selectfont
+}{%
+  \par\endgroup\vspace{3pt}\hrule height 0.5pt\vspace{5pt}%
 }
 
 % ប្រអប់ពាក្យសម្ដីគ្រូនិយាយផ្ទាល់ (Tier 4 Body 11.5pt/18.2pt)
@@ -387,7 +402,7 @@
 
 % រូបទី ៤៖ លំហូរការងារប្រលង Relay ៣ តួនាទី និងចំណុចផ្អាក Pause-Ask / Pause-Review (E5)
 \newcommand{\figGuidelineRelay}{%
-\begin{tikzpicture}[x=1cm, y=1cm, every node/.style={font=\fontsize{9.8pt}{14pt}\selectfont, text=black}]
+\begin{tikzpicture}[x=0.992cm, y=1cm, every node/.style={font=\fontsize{9.8pt}{14pt}\selectfont, text=black}]
   % តួនាទី ១ (x: 0.00..4.26)
   \node[draw=black, fill=white, line width=1.1pt, text width=4.05cm, align=center, inner sep=3pt] (r1) at (2.13, 0) {%
     {\setlength{\fboxsep}{1.8pt}\colorbox{headgray}{\fontsize{10pt}{14.5pt}\selectfont\textbf{តួនាទី ១៖ \en{Visual Marker}}}}\\[3pt]
@@ -466,17 +481,17 @@
 ]
   \renewcommand{\arraystretch}{1.22}
   \setlength{\tabcolsep}{2pt}
-  \begin{tabular}{@{}L{3.05cm} L{0.22cm} L{5.05cm} L{2.65cm} L{0.22cm} L{5.45cm}@{}}
+  \begin{tabular}{@{}L{3.05cm} L{0.22cm} L{4.95cm} L{2.65cm} L{0.22cm} L{5.30cm}@{}}
     - មុខវិជ្ជា & : & គណិតវិទ្យា ថ្នាក់ទី៨ & - រយៈពេល & : & ១ ម៉ោងសិក្សា (៥០ នាទី) \\
     - ចំណងជើងមេរៀន & : & មេរៀនទី១២ ការប្រៀបធៀបត្រីកោណ & - បង្រៀនដោយ & : & ហុក ប៊ុនថែន \\
     - ចំណងជើងរង & : & ១.២.២ ករណី \textbf{ជ.ម.ជ (\en{SAS})} & - កាលបរិច្ឆេទ & : & ថ្ងៃព្រហស្បតិ៍ ទី២៦ ខែវិច្ឆិកា ឆ្នាំ២០២៦ \\
   \end{tabular}\\[5pt]
   \textbf{ឯកសារភ្ជាប់ក្នុងកញ្ចប់បង្រៀន (\en{NGS 5Es Lesson Package})៖}
-  (១) \en{LS\_\allowbreak Plan\_\allowbreak SAS.pdf} (កិច្ចតែងការបង្រៀន ៤ ទំព័រ),
+  (១) \en{LS\_\allowbreak Plan\_\allowbreak SAS.pdf} (កិច្ចតែងការបង្រៀន ៦ ទំព័រ),
   (២) \en{Teaching\_\allowbreak Scenario\_\allowbreak SAS.pdf} (សេណារីយ៉ូ ៥០ នាទី ២ ទំព័រ),
   (៣) \en{Printable\_\allowbreak Materials\_\allowbreak SAS.pdf} (សម្ភារៈបោះពុម្ព ស-ខ្មៅ ខ្នាតពិត \en{1:1} ចំនួន ៦ ទំព័រ),
   (៤) \en{Teaching\_\allowbreak Guideline\_\allowbreak SAS.pdf} (ឯកសារមគ្គុទ្ទេសក៍នេះ),
-  និង (៥) ថតភស្តុតាង ឯកសារស្រាវជ្រាវយោង\_\allowbreak\en{PDF/} (\en{14 Open-Access PDFs} + \en{Evidence Index})។
+  និង (៥) ថតភស្តុតាង ឯកសារស្រាវជ្រាវយោង\_\allowbreak\en{PDF/} (\en{Open-Access PDFs} + \en{Evidence Index})។
 \end{tcolorbox}
 
 % ============================================================================
@@ -504,34 +519,34 @@
 \textbf{(គ) ការស៊ើបអង្កេត ប្រលង Relay និងបិទបេសកកម្ម (\en{28--50 min})៖} នៅ \en{E4} សិស្សប្រើ «កាតស៊ើបអង្កេតសញ្ញាគន្លឹះ ៣ ជំហាន ស-ខ្មៅ» (\en{Printable} ទំព័រទី ២, រូបទី ៣) អនុវត្តផែនការ \en{P2} និង \en{POE} ៣០ វិនាទី ពេល $M$ រំកិលលើ $OZ$។ នៅ \en{E5} ក្រុមទាំងអស់ប្រកួត \en{Relay Proof Race} ៣ តួនាទី (\en{Printable} ទំព័រទី ៣, រូបទី ៤) ដោយមានចំណុចផ្អាក \en{Pause-Ask / Pause-Review} ដើម្បីស្រាយភារកិច្ច \en{A} និងបិទបេសកកម្ម \en{E1} ទទឹងស្រះទឹក $AB = A'B' = 18\unit{m}$ រួចឆ្លងតេស្ត «មេដៃបញ្ឆោត» ៤ កាត \en{A/B/C/D} (\en{Printable} ទំព័រទី ៥) និងចែកប័ណ្ណកិច្ចការផ្ទះ ២ ផ្នែកតភ្ជាប់គ្នា (\en{Printable} ទំព័រទី ៦) នៅជំហានទី ៥។
 
 \begin{center}
-  \figGuidelinePond\\[4pt]
-  {\fontsize{10.5pt}{16.5pt}\selectfont {\muol រូបទី ១៖} គំរូវាស់ទទឹងស្រះទឹកប្រយោលនៅអនុវិទ្យាល័យព្រះក្រសាំង — ទាញអារម្មណ៍នៅ \en{E1 (08--11 min)} និងបិទបញ្ចប់បេសកកម្មនៅ \en{E5 Task B (38--48 min)}។}
+  \figGuidelinePond\\[3pt]
+  {\fontsize{10.5pt}{16pt}\selectfont {\muol រូបទី ១៖} គំរូវាស់ទទឹងស្រះទឹកប្រយោលនៅអនុវិទ្យាល័យព្រះក្រសាំង — ទាញអារម្មណ៍នៅ \en{E1 (08--11 min)} និងបិទបញ្ចប់បេសកកម្មនៅ \en{E5 Task B (38--48 min)}។}
 \end{center}
 
-\vspace{4pt}
+\vspace{0pt}
 \begin{center}
-  \figGuidelineHingeVsSSA\\[4pt]
-  {\fontsize{10.5pt}{16.5pt}\selectfont {\muol រូបទី ២៖} ការប្រៀបធៀបករណីពិត \en{SAS} ($\ang{A}=60^\circ$) ទល់នឹងអន្ទាក់ \en{SSA} ($\ang{A}=32^\circ$, កើតជា $C_1, C_2$) ក្នុងពិសោធន៍ \en{E2 POE (11--22 min)}។}
+  \figGuidelineHingeVsSSA\\[3pt]
+  {\fontsize{10.5pt}{16pt}\selectfont {\muol រូបទី ២៖} ការប្រៀបធៀបករណីពិត \en{SAS} ($\ang{A}=60^\circ$) ទល់នឹងអន្ទាក់ \en{SSA} ($\ang{A}=32^\circ$, កើតជា $C_1, C_2$) ក្នុងពិសោធន៍ \en{E2 POE (11--22 min)}។}
 \end{center}
 
-\vspace{4pt}
+\vspace{0pt}
 \begin{center}
-  \figGuidelineThreeStep\\[4pt]
-  {\fontsize{10.5pt}{16.5pt}\selectfont {\muol រូបទី ៣៖} បច្ចេកទេសចង្អុលម្រាមដៃ និងគូសសញ្ញា ស-ខ្មៅ ៣ ជំហានលើរូបត្រួតគ្នា (\en{E4} កាតទី ១, \en{Printable} ទំព័រទី ២)។}
+  \figGuidelineThreeStep\\[3pt]
+  {\fontsize{10.5pt}{16pt}\selectfont {\muol រូបទី ៣៖} បច្ចេកទេសចង្អុលម្រាមដៃ និងគូសសញ្ញា ស-ខ្មៅ ៣ ជំហានលើរូបត្រួតគ្នា (\en{E4} កាតទី ១, \en{Printable} ទំព័រទី ២)។}
 \end{center}
 
-\vspace{4pt}
+\vspace{0pt}
 \begin{center}
-  \figGuidelineRelay\\[4pt]
-  {\fontsize{10.5pt}{16.5pt}\selectfont {\muol រូបទី ៤៖} លំហូរការងារប្រលង \en{Relay Proof Race} ៣ តួនាទី និងចំណុចផ្អាកត្រួតពិនិត្យ \en{Pause-Ask / Pause-Review} (\en{E5}, \en{Printable} ទំព័រទី ៣)។}
+  \figGuidelineRelay\\[3pt]
+  {\fontsize{10.5pt}{16pt}\selectfont {\muol រូបទី ៤៖} លំហូរការងារប្រលង \en{Relay Proof Race} ៣ តួនាទី និងចំណុចផ្អាកត្រួតពិនិត្យ \en{Pause-Ask / Pause-Review} (\en{E5}, \en{Printable} ទំព័រទី ៣)។}
 \end{center}
 
 % ============================================================================
-% ផ្នែកទី ២៖ ការសំយោគឯកសារស្រាវជ្រាវសង្ខេប (Mini Literature Review — 14 PDFs)
+% ផ្នែកទី ២៖ ការសំយោគឯកសារស្រាវជ្រាវសង្ខេប (Mini Literature Review)
 % ============================================================================
-\secbanner{ផ្នែកទី ២៖ ការសំយោគឯកសារស្រាវជ្រាវសង្ខេប \enbf{(Mini Literature Review)}}{Section 2: APA 7th Synthesis (14 Verified OA Papers)}
+\secbanner{ផ្នែកទី ២៖ ការសំយោគឯកសារស្រាវជ្រាវសង្ខេប \enbf{(Mini Literature Review)}}{Section 2: APA 7th Research Synthesis}
 
-ការរចនាមេរៀន \en{SAS} ៥០ នាទីនេះផ្អែកលើការសំយោគអត្ថបទស្រាវជ្រាវអន្តរជាតិ \en{Open-Access} ចំនួន \textbf{១៤ អត្ថបទ} ដែលបានផ្ទៀងផ្ទាត់រួចរាល់ក្នុងថត ឯកសារស្រាវជ្រាវយោង\_\en{PDF/} តាមទស្សនៈស្នូលចំនួន ៤ ដូចខាងក្រោម៖
+ការរចនាមេរៀន \en{SAS} ៥០ នាទីនេះផ្អែកលើការសំយោគអត្ថបទស្រាវជ្រាវអន្តរជាតិ \en{Open-Access} ដែលបានផ្ទៀងផ្ទាត់រួចរាល់ក្នុងថត ឯកសារស្រាវជ្រាវយោង\_\en{PDF/} តាមទស្សនៈស្នូលចំនួន ៤ ដូចខាងក្រោម៖
 
 \subsec{២.១ ការយល់ច្រឡំ និងឧបសគ្គការគិតរបស់សិស្ស \enit{(Misconceptions \& Conceptual Barriers)}}
 
@@ -545,13 +560,13 @@
 \subsec{២.២ ពិសោធន៍ផ្ទាល់ដៃ កាយវិការឌីណាមិក ការវិភាគកំហុស និងបរិបទជាក់ស្ដែង \enit{(Hands-On, POE, Erroneous Examples \& RME)}}
 
 ដើម្បីដោះស្រាយបញ្ហាខាងលើ ការស្រាវជ្រាវបានផ្ដល់ភស្តុតាងរឹងមាំសម្រាប់ដំណាក់កាល \en{E1--E2}៖
-\begin{itemize}[leftmargin=0.50cm, topsep=3pt, itemsep=4pt, parsep=0pt]
+\begin{itemize}[leftmargin=0.50cm, topsep=1pt, itemsep=1.5pt, parsep=0pt]
   \item \textbf{ពិសោធន៍ផ្ទាល់ដៃ និងការត្រួតផ្ទៀង៖} ក្នុងការពិសោធន៍ \en{fNIRS} លើសិស្សអនុវិទ្យាល័យ ($40$ នាក់ជ្រើសរើស, $n = 38$ វិភាគ, អាយុមធ្យម $13.58$ ឆ្នាំ) \en{Shi et al. (2023)} បង្ហាញថាការបត់/បង្វិលសម្ភារៈផ្ទាល់ដៃជួយដោះស្រាយបញ្ហាធរណីមាត្រស្មុគស្មាញបានប្រសើរជាងការមើលវីដេអូអកម្មយ៉ាងមានន័យ ($F(1, 34) = 22.31$, $p < .001$, $\eta^2_p = 0.39$) ជាពិសេសជួយសិស្សរៀនយឺត (\en{Operation+L}: $M = 4.80$, $SD = 1.23$ ទល់ $2.56$) ដោយដាស់តំបន់ខួរក្បាលវិញ្ញាណ-ចលនា (\en{SAC}, $\eta^2_p = 0.23$; \en{left PMC}, $\eta^2_p = 0.29$) និងកាត់បន្ថយបន្ទុកលើ \en{left DLPFC} ដែលកើតក្នុងការមើលអកម្ម ($\eta^2_p = 0.23$)។ ស្របគ្នានេះ \en{Shahbari \& Daher (2020)} សិក្សាលើសិស្សរៀនយឺត $N = 30$ នាក់ តាមរយៈការកាត់និងត្រួតផ្ទៀងត្រីកោណប៉ុនគ្នាជាក់ស្ដែង បានបង្កើនពិន្ទុស្រាយបញ្ជាក់ពី $M = 15.9$ ($SD = 10.137$) ដល់ $M = 88.6$ ($SD = 11.57$), $t(29) = -17.14$, $p < .001$ ព្រមទាំងជួយសិស្សច្រានចោលលក្ខខណ្ឌមិនគ្រប់គ្រាន់ដូចជា \en{AAA} និង \en{SSA}។
   \item \textbf{កាយវិការឌីណាមិក និង \en{POE}៖} \en{Nathan et al. (2020)} វិភាគបទសម្ភាសន៍ $N = 90$ ($46$ អ្នកជំនាញ, $44$ មិនមែនអ្នកជំនាញ) រកឃើញថាកាយវិការនឹងថ្កល់ទស្សន៍ទាយត្រឹមសភាវគតិ ($OR = 2.30$) ខណៈកាយវិការឌីណាមិកបង្ហាញការប្រែប្រួលបន្តទស្សន៍ទាយការយល់ច្បាស់ ($OR = 2.11$) និងភស្តុតាងបំប្លែង ($OR = 12.94$) ហើយហក់ឡើងដល់ $OR = 210.61$ ($p < .001$) ពេលផ្សំជាមួយភាសាបំប្លែងផ្ដោតលើវត្ថុ។ \en{H\o jsted (2023)} បន្ថែមថា ការរៀបចំលំហាត់ទស្សន៍ទាយ--សង្កេត--ពន្យល់ (\en{POE}) ឱ្យសិស្សញែកអ្វីប្រែប្រួលនិងអ្វីនៅថេរ ភ្ជាប់ជាមួយ «ប្រអប់ឧបករណ៍ទ្រឹស្ដីបទ» ធ្វើឱ្យភស្តុតាងក្លាយជាការពន្យល់ «ហេតុអ្វី» ជាក់ស្ដែង។
   \item \textbf{ការវិភាគឧទាហរណ៍ខុស និងបរិបទ \en{RME}៖} ក្នុងការពិសោធន៍ចៃដន្យ ($N = 125$, $97\%$ ថ្នាក់ទី៨; \en{Control} $n=41$, \en{Correct} $n=44$, \en{Incorrect} $n=40$) \en{Barbieri \& Booth (2016)} បង្ហាញថាការឱ្យសិស្សពន្យល់មូលហេតុខុសលើឧទាហរណ៍ដែលគូសចំណុចខុសច្បាស់ បានបង្កើតអន្តរកម្មមានន័យរវាងចំណេះដឹងមុននិងក្រុម ($\beta = -0.182$, $p = .045$; $\beta = -0.199$, $p = .05$)៖ ពិន្ទុតេស្តមុនទស្សន៍ទាយតេស្តក្រោយក្នុងក្រុមធម្មតា ($\beta = .342$, $p = .003$) និងឧទាហរណ៍ត្រូវ ($\beta = .301$, $p = .023$) ប៉ុន្តែមិនទស្សន៍ទាយក្នុងក្រុមឧទាហរណ៍ខុសឡើយ ($\beta = .039$, $p = .793$) ដោយការពារអារម្មណ៍ចូលរួមថ្នាក់ ($p = .749$ ទល់នឹងការធ្លាក់ចុះក្នុងក្រុមធម្មតា $t(40) = 2.397$, $p = .021$, $d = .31$)។ ចំណែក \en{Fahrurozi et al. (2018)} តាមទ្រឹស្ដី \en{RME (PMRI)} រៀបចំគន្លងរៀន \en{LTBI} ៣ សកម្មភាព ពីវត្ថុពិតក្នុងសហគមន៍ ($\to$ ទទឹងស្រះទឹក \en{E1}) ឆ្លងកាត់ការបំប្លែងរឹងរំកិល/បង្វិលត្រួតផ្ទៀង ($\to$ \en{E2}) មុនឈានចូលការដោះស្រាយបញ្ហាញែកប៉ុនគ្នា-ដូចគ្នា។
 \end{itemize}
 
-\subsec{២.៣ ការជ្រោមជ្រែងសរសេរភស្តុតាង សញ្ញា ស\enbf{-}ខ្មៅ និងការវាយតម្លៃ \enit{(Tracing, Proof Planning \& Scaffolding)}}
+\subsec{២.៣ ការជ្រោមជ្រែងភស្តុតាង សញ្ញា ស\enbf{-}ខ្មៅ និងការវាយតម្លៃ \enit{(Tracing \& Scaffolding)}}
 
 សម្រាប់ដំណាក់កាល \en{E3--E5} អត្ថបទ ៤ បន្ថែមទៀតបង្ហាញពីរបៀបជួយសិស្សឆ្លងស្ពានទៅកាន់ភស្តុតាងជាផ្លូវការ៖
 \begin{itemize}[leftmargin=0.50cm, topsep=3pt, itemsep=4pt, parsep=0pt]
@@ -562,7 +577,7 @@
 \end{itemize}
 
 \begin{tcolorbox}[
-  enhanced, sharp corners, colback=panelgray, colframe=black,
+  enhanced, breakable, sharp corners, colback=panelgray, colframe=black,
   colbacktitle=black!12, coltitle=black, titlerule=0.7pt,
   fonttitle=\fontsize{11pt}{17pt}\selectfont,
   fontupper=\fontsize{11.5pt}{18.2pt}\selectfont,
@@ -589,7 +604,7 @@
   \begin{enumerate}[leftmargin=0.45cm, topsep=2pt, itemsep=4pt, parsep=0pt]
     \item \textbf{ហេតុផលស្រាវជ្រាវ៖} ការរៀបចំសម្ភារៈពិសោធន៍ផ្ទាល់ដៃទុកជាស្រេចមុនពេលបង្រៀនជួយកាត់បន្ថយបន្ទុកចងចាំដែលមិនពាក់ព័ន្ធមេរៀន និងការពារការរំខានពេលវេលាពិសោធន៍ជាក់ស្ដែង \en{(Shi et al., 2023; Masinading \& Gaylo, 2022)}។ ការដាក់ឈ្មោះ «ក្រុមវិស្វករ» ៣ នាក់ បង្កើតអារម្មណ៍ចូលរួមថ្នាក់ (\en{Sense of Belonging}) សម្រាប់ការងារ \en{RME} \en{(Barbieri \& Booth, 2016; Fahrurozi et al., 2018)}។
     \item \textbf{វត្ថុបំណងសកម្មភាព៖} ក្នុងរយៈពេល ២ នាទី សិស្សចូលក្រុម ៣ នាក់បានស្ងៀមស្ងាត់ រក្សាអនាម័យតុ និងទុកកញ្ចប់សម្ភារៈពិសោធន៍នៅលើតុដោយមិនទាន់បើកមុនបញ្ជាគ្រូ។
-    \item \textbf{សម្ភារៈ និងលេខទំព័រ៖} កញ្ចប់ស្រោមសំបុត្រក្រុម (ផ្ទុកបន្ទះកាត់ខ្នាតពិត \en{1:1} \& ផ្ទាំង \en{POE} ពី \en{Printable\_Materials\_SAS.pdf} \textbf{ទំព័រទី ១}), ម្ជុលខ្ទាស់/ប៊ូតុងគន្លឹះ, បន្ទះក្រដាសស្តើង, និងកាត \en{E4} (\textbf{ទំព័រទី ២}, ទុកក្នុងថតគ្រូ ឬចែកពេល \en{E4})។ ផ្ទាំងយោង \textbf{ទំព័រទី ៤} បិទជាប់ក្ដារខៀនផ្នែកចំហៀង។
+    \item \textbf{សម្ភារៈ និងលេខទំព័រ៖} កញ្ចប់ស្រោមសំបុត្រក្រុម (ផ្ទុកបន្ទះកាត់ខ្នាតពិត \en{1:1} \& ផ្ទាំង \en{POE} ពី \en{Printable\_\allowbreak Materials\_\allowbreak SAS.pdf} \textbf{ទំព័រទី ១}), ម្ជុលខ្ទាស់/ប៊ូតុងគន្លឹះ, បន្ទះក្រដាសស្តើង, និងកាត \en{E4} (\textbf{ទំព័រទី ២}, ទុកក្នុងថតគ្រូ ឬចែកពេល \en{E4})។ ផ្ទាំងយោង \textbf{ទំព័រទី ៤} បិទជាប់ក្ដារខៀនផ្នែកចំហៀង។
     \item \textbf{សេណារីយ៉ូ និងពាក្យសម្ដីគ្រូជាក់ស្ដែង៖}
       \begin{scriptbox}
         {\muol\fontsize{10.8pt}{17pt}\selectfont \enbf{«}គ្រូនិយាយថា៖} សួស្ដីប្អូនៗទាំងអស់គ្នា! មុនចាប់ផ្ដើម ប្រធានថ្នាក់សូមរាយការណ៍អវត្តមានរហ័ស ហើយសូមពិនិត្យក្រោមតុឱ្យស្អាត។ ថ្ងៃនេះប្អូនៗនឹងក្លាយជា \textbf{«ក្រុមវិស្វករ»} ៣ នាក់ក្នុង ១ ក្រុម! គ្រូដាក់កញ្ចប់សម្ភារៈវិស្វករនៅមុខតុរួចហើយ — ច្បាប់លេខ ១ គឺ \textbf{ហាមទាន់បើកស្រោមសំបុត្រ} រហូតដល់មានសញ្ញាបញ្ជាពីគ្រូ!»
@@ -726,10 +741,9 @@
 \end{phasebox}
 
 % ============================================================================
-% ផ្នែកទី ៤៖ តារាងផ្គូផ្គងឯកសារភស្តុតាង PDF ទាំង ១៤
+% ផ្នែកទី ៤៖ តារាងផ្គូផ្គងឯកសារភស្តុតាង PDF
 % ============================================================================
-\clearpage
-\secbanner{ផ្នែកទី ៤៖ តារាងផ្គូផ្គងឯកសារភស្តុតាង \enbf{PDF} ទាំង ១៤ \enbf{(}ឯកសារស្រាវជ្រាវយោង\enbf{\_PDF\textbackslash)}}{Section 4: Evidence-to-Lesson Alignment Matrix (14/14 PDFs)}
+\secbanner{ផ្នែកទី ៤៖ តារាងផ្គូផ្គងឯកសារភស្តុតាង \enbf{PDF (}ឯកសារស្រាវជ្រាវយោង\enbf{\_PDF\textbackslash)}}{Section 4: Evidence-to-Lesson Alignment Matrix}
 
 \begingroup
 \renewcommand{\arraystretch}{1.28}
@@ -822,9 +836,9 @@ $N=60$ ថ្នាក់ទី៨៖ បន្ថយមិនសម្រេច
 \endgroup
 
 % ============================================================================
-% ផ្នែកទី ៥៖ បញ្ជីឯកសារយោង (APA 7th Edition) & ហត្ថលេខារដ្ឋបាល
+% ឯកសារយោង (APA 7th Edition) & ហត្ថលេខារដ្ឋបាល
 % ============================================================================
-\secbanner{ផ្នែកទី ៥៖ បញ្ជីឯកសារយោង \enbf{(References --- APA 7th Edition)}}{Section 5: Verified Reference List (14/14)}
+\refbanner{ឯកសារយោង}
 
 {\TimesEn\fontsize{10.8pt}{16.2pt}\selectfont
 \setlength{\parskip}{4.5pt}
@@ -861,7 +875,7 @@ Yeo, L.-M., \& Tzeng, Y.-T. (2019). Tracing effect in the worked examples-based 
 \par}
 
 % -------------------- កាលបរិច្ឆេទ និងហត្ថលេខា (Verbatim Matching LS_Plan_SAS.tex) --------------------
-\needspace{3.8cm}
+\needspace{2.0cm}
 \vspace{10pt}
 \hfill
 \begin{minipage}{10.2cm}
