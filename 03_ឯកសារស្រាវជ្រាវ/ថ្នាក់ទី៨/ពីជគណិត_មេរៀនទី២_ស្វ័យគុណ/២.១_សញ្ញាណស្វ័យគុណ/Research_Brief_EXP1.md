@@ -13,11 +13,13 @@
 Visual inspection of rendered pages `book_p13.png` (`PDF p. 18`), `book_p14.png` (`PDF p. 19`), and `book_p25.png` (`PDF p. 30`) from `សៀវភៅសិក្សាគោល_គណិតវិទ្យា_ថ្នាក់ទី៨_MoEYS.pdf` establishes the verbatim textbook text and **4 mandatory pedagogical fixes / alignment alerts**:
 
 ### 1.1 Opening Example & Reading Powers (`Book p. 13` — `1. សញ្ញាណស្វ័យគុណ`)
-- **Lesson Objectives Printed on `Book p. 13`**:
-  - `• គណនាស្វ័យគុណនៃមួយចំនួន`
-  - `• គុណនិងចែកស្វ័យគុណដែលមានគោលដូចគ្នា`
-  - `• សរសេរមួយចំនួនក្នុងទម្រង់ស្វ័យគុណ ។`
-  *(Note: In this 1-hour / 50-minute slice `២.១`, instruction targets Bullet 1 & Bullet 3 for positive integer exponents $n \in \mathbb{Z}^+$, preparing the conceptual foundation for `២.២` multiplication/division on `pp. 15–16`.)*
+- **Verbatim 5 Lesson Objectives Box Printed on `Book p. 13` (`វត្ថុបំណង`)**:
+  - `□ កំណត់សញ្ញាណនិងនិយមន័យស្វ័យគុណ a^n`
+  - `□ ធ្វើប្រមាណវិធីគុណនិងចែកស្វ័យគុណដែលមាននិទស្សន្តជាចំនួនគត់រ៉ឺឡាទីប`
+  - `□ កំណត់លក្ខណៈនៃស្វ័យគុណ`
+  - `□ កំណត់ទម្រង់ស្តង់ដានៃស្វ័យគុណ A × 10^n ដែល 1 ≤ A < 10 ជាចំនួនគត់រ៉ឺឡាទីប`
+  - `□ កំណត់ឫសការេនិងឫសគូប ។`
+  *(Note: In this 1-hour / 50-minute slice `២.១`, instruction targets Objective 1 for positive integer exponents $n \in \mathbb{Z}^+$ ($n \ge 1$), building directly on Grade 7 `ការេ/គូប` and preparing the conceptual foundation for `២.២–២.៤.៦` on `pp. 15–24`.)*
 - **Verbatim Introductory Example (`Book p. 13`)**:
   - `ឧទាហរណ៍ ៖ សហរដ្ឋអាមេរិចមានអាកាសយានដ្ឋានឯកជនរហូតដល់ជាង 10 000 កន្លែង ។ ចំនួននេះអាចសរសេរបានក្នុងទម្រង់ 10 000 = 10 × 10 × 10 × 10 ឬ 10^4 ។`
   - `10 000 = 10 × 10 × 10 × 10 = 10^4 ដែល ៖`
@@ -38,7 +40,7 @@ Visual inspection of rendered pages `book_p13.png` (`PDF p. 18`), `book_p14.png`
   > `និយមន័យ ៖ បើ a ជាចំនួនសនិទាននិង n ជាចំនួនគត់រ៉ឺឡាទីបខុសពីសូន្យ នោះគេបាន`
   > $$\underbrace{a \times a \times a \times \dots \times a}_{n\text{ កត្តា}} = a^n \text{ ។}$$
 - **ERRATUM #2 — Mathematical Domain Overreach for $n$**:
-  - In Khmer MoEYS terminology, `ចំនួនគត់រ៉ឺឡាទីបខុសពីសូន្យ` denotes $\mathbb{Z}^* = \{\dots, -3, -2, -1, 1, 2, 3, \dots\}$. However, a repeated product of **"$n$ factors" (`n កត្តា`)** is mathematically defined **only for positive integers $n \in \mathbb{Z}^+$ ($n \ge 1$)** (`Sureda & Otero, 2019, pp. 611–612`); one cannot write "$-3$ factors of $a$", and for $n < 0$ the base $a$ must also satisfy $a \neq 0$ ($a^{-n} = \frac{1}{a^n}$, which the textbook itself introduces separately later on `Book pp. 17–19` alongside $a^0 = 1$!).
+  - In Khmer MoEYS terminology, `ចំនួនគត់រ៉ឺឡាទីបខុសពីសូន្យ` denotes $\mathbb{Z}^* = \{\dots, -3, -2, -1, 1, 2, 3, \dots\}$. However, a repeated product of **"$n$ factors" (`n កត្តា`)** is mathematically defined **only for positive integers $n \in \mathbb{Z}^+$ ($n \ge 1$)** (`Sureda & Otero, 2019, pp. 611–612`); one cannot write "$-3$ factors of $a$", and for $n < 0$ the base $a$ must also satisfy $a \neq 0$ ($a^{-n} = \frac{1}{a^n}$, which the textbook itself introduces separately later on **`Book p. 16`** under `3. វិធីចែកស្វ័យគុណ` alongside $a^0 = 1$, and applies to powers of 10 on `Book p. 19`!).
   - **Mandatory E3 Fix**: Have students annotate `Book p. 14`'s definition box to specify **`n ជាចំនួនគត់វិជ្ជមាន (n ≥ 1)`** for the $n$-factor product definition (with $1$ factor convention $a^1 = a$), while previewing that $n = 0$ and $n < 0$ ($a \neq 0$) will be extended via division patterns in later hours of Lesson 2.
 
 ### 1.3 Worked Examples, `សម្គាល់` & `ប្រតិបត្តិ` (`Book p. 14` — ERRATUM #3)
@@ -75,6 +77,25 @@ Visual inspection of rendered pages `book_p13.png` (`PDF p. 18`), `book_p14.png`
   - **Mandatory Pedagogical Solution**:
     1. Teach the **Lock-Box Contrast** `(-a)^n` vs. `-a^n` / `(-a^n)` explicitly in **E2 (`POE 2`)**, **E3 (`Warrant ③`)**, **E4 (Worked Comparison Box)**, and **E5 (Diagnostic Card C)**.
     2. Assign curated, conceptually rich, hand-calculable homework from `Book p. 25`: **`#1(ក–ឃ)`, `#3(ក, ខ, ឃ)`** *(with explicit reminder on `#3ក`: `(-3^2) = -(3^2) = -9` vs `#3ខ`: `(-5)^2 = +25`)*, and **`#4`** ($b=3 \implies P=72$, integrating operator precedence `Powers before +/-`).
+
+### 1.5 Textbook Pedagogical Strengths & Vertical Curriculum Continuity (`Second_Brain_MoEYS_Textbook/`)
+- **5 Core Strengths of MoEYS Grade 8 Textbook (`Book pp. 13–14, 25`)**:
+  1. Concrete real-world anchor (`10 000` airports $\to 10^4$) + 3-way component diagram (`គោល`, `និទស្សន្ត`, `ស្វ័យគុណ`) + geometric reading terms (`ការេ` $5^2$, `គូប` $9^3$).
+  2. Bidirectional exercises (`ផលគុណ → ស្វ័យគុណ` vs. `ស្វ័យគុណ → ផលគុណ → តម្លៃ`) using large symbolic exponents ($a^{2010}, y^{2013}$) that compel structural generalization over counting.
+  3. Systematic base variation across $\mathbb{Q}$ (positive integers, positive fractions, odd/even negative integers, negative fractions, negative decimals, algebraic ratios) + parity synthesis `សម្គាល់ (-1)^n = ±1`.
+  4. Horizontal factor-counting underbraces (`n កត្តា`) serving directly as the visual proof spine for `២.២–២.៤` laws (`Book pp. 15–18`).
+  5. Cross-strand integration with algebra (`·` notation, variable substitution `#5`), operator precedence (`#3ខ,ឃ`), and geometry (`#4`).
+- **Prior Knowledge (`ថ្នាក់ទី៧` & `ថ្នាក់ទី៨ មេរៀនទី១`)**:
+  - `G7 L1` (`pp. 7–12`): `5.2` multiplication properties (associativity & identity $a\cdot 1=a$, alongside commutativity/repeated-addition interference traps), `6.` operator precedence `()/[] → ×/÷ → +/-` (missing exponents before Grade 8), and `8.1–8.2` `ការេនិងគូប` ($5^2=25\unit{cm}^2, 5^3=125\unit{cm}^3$, $\sqrt{10^2}, \sqrt[3]{3^3}$).
+  - `G7 L2` (`pp. 20–21`): prime factorization in exponent notation ($180 = 2^2\times 3^2\times 5$, `PGCD/PPCM`).
+  - `G7 L3–L4` (`pp. 34, 48`): integer sign rules, juxtaposition multiplication `(4)(3) = 4×3` (origin of `(4^3)(-3^2)` on G8 `p. 25`), multi-factor products `(-2)(-5)(-4)`, and fraction multiplication.
+  - `G7 L8` (`pp. 81–82`): algebraic expressions containing powers ($4n^2-7n+1, (m+n)^2$) and substitution.
+  - `G8 L1` (`pp. 9, 11–12`): full $\mathbb{Q}$ base system, center-dot multiplication `·`, and denominator powers ($\frac{3}{2^4}$).
+- **Future Knowledge (`ថ្នាក់ទី៨ បន្ត`, `ថ្នាក់ទី៩`, `ទី១០–១២ & STEM`)**:
+  - `G8 L2` (`pp. 15–24`): product/quotient laws, $a^0=1, a^{-n}=1/a^n$ (**`Book p. 16`**), power properties (`pp. 17–18`), powers of 10 & scientific notation $A\times 10^n$ (`pp. 19–22`), and square/cube roots `4.6` (`pp. 22–24`, relying on $(+4)^2=(-4)^2=16$ vs. $x^2=-9$ having no integer root).
+  - `G8 L5` (`p. 51`): monomials (`ឯកធាតុ`: $4a^2, 8a^3, 8=8x^0$), polynomials & factoring.
+  - `G9` (`pp. 1, 27, 135`): irrational numbers ($(\pm\frac{5}{2})^2=\frac{25}{4}$), algebraic identities ($(a\pm b)^2, a^2-b^2, a^3\pm b^3$), and Pythagorean theorem ($c^2=a^2+b^2$).
+  - `G10–12 & STEM`: quadratic discriminant $\Delta = b^2 - 4ac$ (Lock-Box $(-b)^2$), exponential/logarithmic functions ($y=a^x, \log_a x$), geometric sequences, scientific constants ($6.02\times 10^{23}, r^{-2}, \text{pH}$), and binary computing ($2^n$).
 
 ---
 
