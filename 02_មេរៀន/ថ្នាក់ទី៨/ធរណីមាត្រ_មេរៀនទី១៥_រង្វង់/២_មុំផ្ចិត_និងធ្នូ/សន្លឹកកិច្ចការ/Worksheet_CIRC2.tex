@@ -1,0 +1,386 @@
+% !TeX program = xelatex
+\documentclass[a4paper,10pt]{article}
+
+% ============================================================================
+% សន្លឹកកិច្ចការសិស្ស ស-ខ្មៅ (Student Guided-Inquiry Worksheet - Grade 8 15.2 CIRC2)
+% បរិបទ៖ ថ្នាក់រៀនគ្មានស្លាយ LCD – រុករកមុំផ្ចិត រង្វាស់ដឺក្រេធ្នូ និងប្រវែងធ្នូ ២ ទំព័រ A4
+% ============================================================================
+\usepackage[a4paper, left=0.90cm, right=0.90cm, top=0.75cm, bottom=0.85cm, footskip=0.45cm]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{unicode-math}
+\usepackage{fontspec}
+\usepackage{array, colortbl}
+\usepackage[table]{xcolor}
+\usepackage{enumitem}
+\usepackage{pifont}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{tikz}
+\usepackage[most]{tcolorbox}
+\usetikzlibrary{calc, arrows.meta, angles, quotes, decorations.markings, positioning, babel}
+
+\makeatletter
+\let\@expl@@@mark@update@singlecol@structures@@\relax
+\makeatother
+
+\providecommand{\NGSFindFonts}{%
+  \IfFileExists{C:/Windows/Fonts/cambria.ttc}{%
+    \def\NGSSysPath{C:/Windows/Fonts/}%
+    \def\NGSUserPath{C:/Users/KIT/AppData/Local/Microsoft/Windows/Fonts/}%
+  }{%
+    \IfFileExists{./fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{./fonts/}\def\NGSUserPath{./fonts/}}{%
+    \IfFileExists{../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../fonts/}\def\NGSUserPath{../fonts/}}{%
+    \IfFileExists{../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../fonts/}\def\NGSUserPath{../../fonts/}}{%
+    \IfFileExists{../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../fonts/}\def\NGSUserPath{../../../fonts/}}{%
+    \IfFileExists{../../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../../fonts/}\def\NGSUserPath{../../../../fonts/}}{%
+    \IfFileExists{../../../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../../../fonts/}\def\NGSUserPath{../../../../../fonts/}}{%
+    \IfFileExists{../../../../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../../../../fonts/}\def\NGSUserPath{../../../../../../fonts/}}{%
+      \def\NGSSysPath{../../../../../../../fonts/}\def\NGSUserPath{../../../../../../../fonts/}%
+    }}}}}}}%
+  }%
+}
+\NGSFindFonts
+
+\setmathfont[Path={\NGSSysPath}, FontIndex=1, Scale=1.02]{cambria.ttc}
+\defaultfontfeatures{Ligatures=TeX}
+
+\setmainfont[
+  Path={\NGSUserPath},
+  Extension=.ttf,
+  Script=Khmer,
+  BoldFont={KhmerOSsiemreap},
+  BoldFeatures={FakeBold=1.8},
+  ItalicFont={KhmerOSsiemreap},
+  ItalicFeatures={FakeSlant=0.25},
+  BoldItalicFont={KhmerOSsiemreap},
+  BoldItalicFeatures={FakeBold=1.8, FakeSlant=0.25}
+]{KhmerOSsiemreap}
+
+\newfontfamily\muol[Path={\NGSUserPath}, Extension=.ttf, Script=Khmer]{KhmerOSmuollight}
+\newfontfamily\TimesEn[Path={\NGSSysPath}, Extension=.ttf, BoldFont={timesbd}, ItalicFont={timesi}, BoldItalicFont={timesbi}]{times}
+
+\XeTeXlinebreaklocale "km"
+\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
+
+\definecolor{panelgray}{gray}{0.94}
+\definecolor{headgray}{gray}{0.86}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\fontsize{8pt}{10pt}\selectfont អនុវិទ្យាល័យព្រះក្រសាំង \en{|} គណិតវិទ្យា ថ្នាក់ទី៨ \en{|} មេរៀនទី១៥ (២. មុំផ្ចិត និងធ្នូ)}
+\fancyfoot[R]{\fontsize{8.2pt}{10pt}\selectfont ទំព័រ \en{\thepage\ / \pageref{LastPage}}}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\tabcolsep}{4pt}
+
+\newcommand{\en}[1]{{\TimesEn #1}}
+\newcommand{\enbf}[1]{{\TimesEn\textbf{#1}}}
+\newcommand{\unit}[1]{\,\text{\en{#1}}}
+\newcommand{\cnum}[1]{{\fontsize{10pt}{12pt}\selectfont\ding{\numexpr171+#1\relax}}}
+\newcommand{\chk}{\tikz[baseline=-0.15ex]\draw[black, line width=0.8pt] (0,0) rectangle (0.25cm,0.25cm);}
+\newcommand{\tri}[1]{\ensuremath{\triangle #1}}
+\newcommand{\ang}[1]{\ensuremath{\angle #1}}
+\newcommand{\arc}[1]{\ensuremath{\widehat{#1}}}
+\newcommand{\dotline}[1]{\makebox[#1]{\dotfill}}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
+\newcommand{\secbar}[2]{%
+  \vspace{3pt}
+  \noindent\colorbox{headgray}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{%
+    \vspace{1.5pt}{\muol\fontsize{9.5pt}{13.5pt}\selectfont #1}\hfill{\fontsize{8.5pt}{12pt}\selectfont\textbf{#2}}\vspace{1.5pt}%
+  }}\par\vspace{3pt}
+}
+
+\begin{document}
+\fontsize{9.5pt}{14.3pt}\selectfont
+
+% ============================================================================
+% ទំព័រទី១៖ ក្បាលសន្លឹកកិច្ចការ + E1 + E2 (រង្វង់ខ្នាតពិត 1:1) + E3
+% ============================================================================
+\begin{tcolorbox}[enhanced, sharp corners, colback=white, colframe=black, boxrule=1.0pt, top=4pt, bottom=4pt, left=6pt, right=6pt]
+  \begin{center}
+    {\muol\fontsize{10.5pt}{15pt}\selectfont សន្លឹកកិច្ចការសិស្ស — មេរៀនទី១៥៖ រង្វង់ \enbf{(}២. មុំផ្ចិត និងធ្នូ\enbf{)}}\\[2pt]
+    {\footnotesize សៀវភៅសិក្សាគោលថ្នាក់ទី៨ ទំព័រ ១៩៩--២០០ និង ២០៤ \en{|} រុករកដោយរ៉ាប់ព័រទ័រ និងបន្ទាត់ក្រិត (គ្មានស្លាយ \en{LCD})}
+  \end{center}
+  \vspace{2pt}
+  \hrule height 0.5pt
+  \vspace{4pt}
+  ឈ្មោះសិស្ស៖ \dotline{5.3cm} ថ្នាក់៖ \dotline{2.0cm} ដៃគូទី៖ \dotline{2.0cm} កាលបរិច្ឆេទ៖ \dotline{3.3cm}
+\end{tcolorbox}
+
+% -------------------- ផ្នែកទី១៖ E1 ENGAGE --------------------
+\secbar{ផ្នែកទី១ ៖ បេសកកម្មភ្ជាប់បញ្ហា \enbf{(E1 — Engage)} — ផ្លូវរត់កោងរួមផ្ចិតពីរគន្លង}{\en{3} នាទី (ទស្សន៍ទាយមុនរៀន)}
+
+\begin{tcolorbox}[enhanced, sharp corners, colback=panelgray, colframe=black, boxrule=0.8pt, top=3pt, bottom=3pt, left=6pt, right=6pt]
+  \begin{minipage}[c]{13.1cm}
+    នៅទីលានអត្តពលកម្ម កីឡាករពីរនាក់រត់តាមផ្លូវកោងរួមផ្ចិត $O$ ក្នុងមុំបត់កែង $\ang{xOy} = 90^\circ$ ដូចគ្នា៖ កីឡាករទី១ រត់លើគន្លងក្នុងកាំ $r_1 = 10\unit{m}$ (ធ្នូ $\arc{A_1B_1}$) និងកីឡាករទី២ រត់លើគន្លងក្រៅកាំ $r_2 = 20\unit{m}$ (ធ្នូ $\arc{A_2B_2}$) ។ តើការសន្និដ្ឋានណាត្រឹមត្រូវ?\\[2pt]
+    $\bullet$ \textbf{ការទស្សន៍ទាយដំបូងរបស់ប្អូន៖}\quad
+    \chk\ មតិទី១៖ មុំផ្ចិត $90^\circ$ ដូចគ្នា ដូច្នេះប្រវែងផ្លូវកោងគិតជាម៉ែត្រស្មើគ្នា\\[1.5pt]
+    \hspace*{4.55cm}\chk\ មតិទី២៖ រង្វាស់ដឺក្រេធ្នូស្មើគ្នា ($90^\circ$) តែប្រវែងគន្លងក្រៅវែងជាង $2$ ដង \quad \chk\ មិនទាន់ប្រាកដ
+  \end{minipage}\hfill
+  \begin{minipage}[c]{5.2cm}
+    \centering
+    \begin{tikzpicture}[scale=0.68, every node/.style={font=\footnotesize, text=black}]
+      \coordinate (O) at (0.3,0.1);
+      \fill[white] (O) -- ++(0:2.35) arc (0:90:2.35) -- cycle;
+      \draw[black, line width=0.95pt] (O) -- (2.90,0.1) node[right=1pt] {$x$};
+      \draw[black, line width=0.95pt] (O) -- (0.3,2.70) node[above=1pt] {$y$};
+      \draw[black, line width=1.05pt] ($(O)+(0:1.18)$) arc (0:90:1.18);
+      \draw[black, line width=1.15pt] ($(O)+(0:2.35)$) arc (0:90:2.35);
+      \draw[black, line width=0.7pt] (O) rectangle ++(0.24,0.24);
+      \fill[black] (O) circle (1.5pt) node[below left=1pt] {$O$};
+      \node[below=1pt] at ($(O)+(0:1.18)$) {$A_1$};
+      \node[below=1pt] at ($(O)+(0:2.35)$) {$A_2$};
+      \node[left=1pt] at ($(O)+(90:1.18)$) {$B_1$};
+      \node[left=1pt] at ($(O)+(90:2.35)$) {$B_2$};
+    \end{tikzpicture}
+  \end{minipage}
+\end{tcolorbox}
+
+% -------------------- ផ្នែកទី២៖ E2 EXPLORE --------------------
+\secbar{ផ្នែកទី២ ៖ រុករកមុំផ្ចិត និងរង្វង់រួមផ្ចិតខ្នាតពិត \enbf{1:1} \enbf{(E2 — Explore)}}{\en{11} នាទី (ពិភាក្សាដៃគូ)}
+
+\begin{tcolorbox}[enhanced, sharp corners, colback=white, colframe=black, boxrule=0.85pt, top=4pt, bottom=4pt, left=6pt, right=6pt]
+  \begin{minipage}[c]{9.0cm}
+    \centering
+    \begin{tikzpicture}[x=1cm, y=1cm, every node/.style={font=\footnotesize, text=black}]
+      % រូប ក៖ រង្វង់ C(O, 1.45 cm) ខ្នាតពិត 1:1 (មុំ 60° ពីរ និងកាដ្រង់ 90°)
+      \coordinate (O) at (1.70,1.95);
+      \draw[black, line width=0.95pt] (O) circle (1.45);
+      \coordinate (A) at ($(O)+(0:1.45)$);
+      \coordinate (B) at ($(O)+(60:1.45)$);
+      \coordinate (C) at ($(O)+(90:1.45)$);
+      \coordinate (D) at ($(O)+(180:1.45)$);
+      \coordinate (E) at ($(O)+(240:1.45)$);
+      \draw[black, line width=0.90pt] (D)--(A) (O)--(C) (O)--(B) (O)--(E);
+      \draw[black, line width=1.35pt] (A) arc (0:60:1.45);
+      \draw[black, line width=1.35pt] (D) arc (180:240:1.45);
+      \draw[black, line width=0.70pt] (O) ++(-0.20,0) rectangle ++(0.20,0.20);
+      \fill[black] (O) circle (1.4pt) node[below right=1pt] {$O$};
+      \node[right=1pt] at (A) {$A$};
+      \node[above right=0.5pt] at (B) {$B$};
+      \node[above=1pt] at (C) {$C$};
+      \node[left=1pt] at (D) {$D$};
+      \node[below left=0.5pt] at (E) {$E$};
+      \node[anchor=north] at (1.70,0.32) {\textbf{រូប ក} ($r=1.45\unit{cm}$)};
+
+      % រូប ខ៖ រង្វង់រួមផ្ចិតពីរខ្នាតពិត 1:1 (r1 = 1.0 cm, r2 = 2.0 cm, មុំកែង 90°)
+      \begin{scope}[shift={(4.15,0)}]
+        \coordinate (O2) at (2.10,2.15);
+        \draw[black, line width=0.90pt] (O2) circle (1.00);
+        \draw[black, line width=0.95pt] (O2) circle (2.00);
+        \draw[black, line width=0.95pt] (O2) -- ++(0:2.10);
+        \draw[black, line width=0.95pt] (O2) -- ++(90:2.10);
+        \draw[black, line width=1.35pt] ($(O2)+(0:1.00)$) arc (0:90:1.00);
+        \draw[black, line width=1.40pt] ($(O2)+(0:2.00)$) arc (0:90:2.00);
+        \draw[black, line width=0.70pt] (O2) rectangle ++(0.20,0.20);
+        \fill[black] (O2) circle (1.4pt) node[below left=1.5pt] {$O$};
+        \fill[black] ($(O2)+(0:1.00)$) circle (1.2pt) node[below left=1pt] {$A_1$};
+        \fill[black] ($(O2)+(0:2.00)$) circle (1.2pt) node[below right=1pt] {$A_2$};
+        \fill[black] ($(O2)+(90:1.00)$) circle (1.2pt) node[below left=1pt] {$B_1$};
+        \fill[black] ($(O2)+(90:2.00)$) circle (1.2pt) node[above left=1pt] {$B_2$};
+        \node[anchor=north] at (2.10,0.02) {\textbf{រូប ខ} ($r_1=1\unit{cm}, r_2=2\unit{cm}$)};
+      \end{scope}
+
+      % បន្ទះក្រិតខ្នាតពិត 3 cm (Print 100%)
+      \draw[black, line width=0.9pt] (1.15,-0.68) -- (4.15,-0.68);
+      \foreach \x/\lbl in {1.15/0, 2.15/1, 3.15/2, 4.15/3} {
+        \draw[black, line width=0.8pt] (\x,-0.78) -- (\x,-0.58);
+        \node[below=2pt] at (\x,-0.74) {\en{\lbl}};
+      }
+      \node[right=4pt] at (4.15,-0.68) {\footnotesize ខ្នាតពិត $\en{3\unit{cm}}$ (\en{Print 100\%})};
+    \end{tikzpicture}
+  \end{minipage}\hfill
+  \begin{minipage}[c]{9.2cm}
+    \textbf{១. ពិនិត្យរូប ក (មុំផ្ចិត ធ្នូស្កាត់ និងកាដ្រង់ ទំ.១៩៩)៖}\\[1.5pt]
+    $\bullet$ មុំដែលមានកំពូលត្រង់ផ្ចិត $O$ ហៅថា \dotline{1.9cm} (មុំតូចជាង $180^\circ$ ហៅថា \textbf{មុំលយ} ឯមុំធំជាង $180^\circ$ ហៅថា \textbf{មុំឆក}) ។\\[1.5pt]
+    $\bullet$ ប្រើរ៉ាប់ព័រទ័រវាស់៖ $\ang{AOB} =$ \dotline{1.0cm}$^\circ$ និង $\ang{DOE} =$ \dotline{1.0cm}$^\circ \Rightarrow$ ធ្នូ $\arc{AB}$ និង $\arc{DE}$ \dotline{1.7cm} គ្នា ។\\[1.5pt]
+    $\bullet$ មុំកែង $\ang{DOC} = 90^\circ$ ស្កាត់ធ្នូ $\arc{DC}$ ស្មើនឹង $\frac{1}{4}$ នៃរង្វង់ ហៅថា \dotline{2.0cm} ។\\[3pt]
+    \textbf{២. ពិនិត្យរូប ខ (អន្ទាក់ដឺក្រេធ្នូ $n^\circ$ ទល់នឹងប្រវែងធ្នូ $\ell$)៖}\\[1.5pt]
+    $\bullet$ វាស់កាំពិត៖ $OA_1 = r_1 =$ \dotline{0.9cm}$\unit{cm}$, $OA_2 = r_2 =$ \dotline{0.9cm}$\unit{cm}$ ។\\[1.5pt]
+    $\bullet$ មុំផ្ចិត $\ang{A_1OB_1} = \ang{A_2OB_2} = 90^\circ = \dfrac{90^\circ}{360^\circ} =$ \dotline{0.9cm} នៃរង្វង់ $\Rightarrow$ រង្វាស់ដឺក្រេធ្នូទាំងពីរស្មើគ្នាគឺ \dotline{1.1cm}$^\circ$ ។\\[1.5pt]
+    $\bullet$ គណនាប្រវែងធ្នូ ($\pi \approx 3.14$)៖\\
+    \hspace*{0.3cm}-- គន្លងក្នុង៖ $\ell_1 = \frac{1}{4}(2\pi r_1) = \frac{1}{4}(6.28) =$ \dotline{1.2cm}$\unit{cm}$ ។\\
+    \hspace*{0.3cm}-- គន្លងក្រៅ៖ $\ell_2 = \frac{1}{4}(2\pi r_2) = \frac{1}{4}(12.56) =$ \dotline{1.2cm}$\unit{cm}$ ។\\[1.5pt]
+    $\bullet$ សម្រាប់មុំផ្ចិត $n^\circ$ ណាមួយ៖ ប្រវែងធ្នូ $\ell = 2\pi r \times \dfrac{\dotline{1.0cm}}{360^\circ}$ ។
+  \end{minipage}
+\end{tcolorbox}
+
+% -------------------- ផ្នែកទី៣៖ E3 EXPLAIN --------------------
+\secbar{ផ្នែកទី៣ ៖ សំយោគបញ្ញត្តិ រូបមន្តប្រវែងធ្នូ និងធនាគារហេតុផល \enbf{(E3 — Explain)}}{\en{6} នាទី (ទំ.១៩៩--២០០)}
+
+\begin{tcolorbox}[enhanced, sharp corners, colback=white, colframe=black, boxrule=0.95pt, top=3.5pt, bottom=3.5pt, left=6pt, right=6pt]
+  $\bullet$ \textbf{ជាទូទៅ (ទំ.១៩៩)៖} ក្នុងរង្វង់មួយ ឬរង្វង់ពីរប៉ុនគ្នា ធ្នូពីរប៉ុនគ្នាស្កាត់ដោយ \dotline{2.8cm} ហើយច្រាសមកវិញ មុំផ្ចិតពីរប៉ុនគ្នាស្កាត់ធ្នូទាំងពីរ \dotline{1.8cm} ។ \textbf{សម្គាល់៖} ធ្នូ $1^\circ$ ស្កាត់ដោយមុំផ្ចិត \dotline{1.0cm}$^\circ$ ។\\[2pt]
+  $\bullet$ \textbf{រូបមន្តប្រវែងធ្នូ (ទំ.២០០)៖} លើរង្វង់កាំ $r$ (បរិមាត្រ $P = 2\pi r$) ធ្នូស្កាត់ដោយមុំផ្ចិត $n^\circ$ មានប្រវែង $\ell =$ \dotline{3.2cm} ។\\[3pt]
+  {\fontsize{8.9pt}{12.5pt}\selectfont
+  \begin{tabular}{|L{3.55cm}|L{3.50cm}|L{3.35cm}|C{2.75cm}|L{3.85cm}|}
+    \hline
+    \cellcolor{headgray}\centering\textbf{\cnum{1} រង្វាស់ដឺក្រេធ្នូ} &
+    \cellcolor{headgray}\centering\textbf{\cnum{2} ធ្នូស្មើគ្នា} &
+    \cellcolor{headgray}\centering\textbf{\cnum{3} វិសមភាពធ្នូ} &
+    \cellcolor{headgray}\centering\textbf{\cnum{4} បរិមាត្ររង្វង់} &
+    \cellcolor{headgray}\centering\arraybackslash\textbf{\cnum{5} រូបមន្តប្រវែងធ្នូ} \\[2pt]
+    \hline
+    $\text{ដឺក្រេ }\arc{AB} = \ang{AOB} = n^\circ$\par រង្វង់ពេញ $360^\circ$, កាដ្រង់ $90^\circ$ &
+    ក្នុងរង្វង់តែមួយ (ឬប៉ុនគ្នា)៖\par $\arc{AB}=\arc{DE} \iff \ang{AOB}=\ang{DOE}$ &
+    ក្នុងរង្វង់តែមួយ៖\par $\arc{AB}<\arc{CD} \iff \ang{AOB}<\ang{COD}$ &
+    $P = 2\pi r = \pi d$\par ($\pi \approx 3.14$) &
+    $\ell = \dfrac{P \times n^\circ}{360^\circ} = \dfrac{2\pi r \times n^\circ}{360^\circ}$\par $= \dfrac{\pi r n^\circ}{180^\circ}$ \\[2pt]
+    \hline
+  \end{tabular}}
+\end{tcolorbox}
+
+\newpage
+
+% ============================================================================
+% ទំព័រទី២៖ E4 លំហាត់គំរូបំពេញចន្លោះ + E5 ប្រតិបត្តិ & Exit Check + កិច្ចការផ្ទះ
+% ============================================================================
+\secbar{ផ្នែកទី៤ ៖ លំហាត់គំរូតាមជំហាន \enbf{(E4 — Faded Worked Examples)}}{\en{10} នាទី (ទំ.១៩៩--២០០)}
+
+\begin{tcolorbox}[enhanced, sharp corners, colback=white, colframe=black, boxrule=0.90pt, top=4pt, bottom=4pt, left=6pt, right=6pt, after skip=5pt]
+  \begin{minipage}[c]{12.7cm}
+    \textbf{គំរូទី១ (លំហាត់គំរូទី១ ទំ.១៩៩--២០០ — គណនាប្រវែងធ្នូពីកាំ និងមុំផ្ចិត)៖}\\
+    នៅលើរង្វង់មានកាំ $r = 10\unit{dm}$ តើធ្នូដែលស្កាត់ដោយមុំផ្ចិត $n = 36^\circ$ មានប្រវែងប៉ុន្មាន $\text{\en{dm}}$?\\[2pt]
+    $\bullet$ គណនាបរិមាត្ររង្វង់ ($\pi \approx 3.14$, តាមហេតុផល \cnum{4})៖\\
+    \hspace*{0.4cm}$P = 2\pi r = 2 \times 3.14 \times$ \dotline{1.2cm} $=$ \dotline{1.6cm}$\unit{dm}$ ។\\[2pt]
+    $\bullet$ គណនាប្រវែងធ្នូស្កាត់ដោយមុំផ្ចិត $n = 36^\circ$ (តាមហេតុផល \dotline{0.9cm})៖\\
+    \hspace*{0.4cm}$\ell = \dfrac{P \times 36^\circ}{360^\circ} = \dfrac{\dotline{1.6cm} \times 36^\circ}{360^\circ} = \dfrac{\dotline{1.5cm}}{10} =$ \dotline{1.6cm}$\unit{dm}$ ។\\[1.5pt]
+    \hspace*{0.4cm}{\footnotesize (\textit{សម្គាល់៖ បើយក $\pi \approx 3.1416$ ដូចក្នុងសៀវភៅគោល ទំ.២០០ បាន $P = 62.832\unit{dm} \Rightarrow \ell = 6.2832\unit{dm}$})}
+  \end{minipage}\hfill
+  \begin{minipage}[c]{5.5cm}
+    \centering
+    \begin{tikzpicture}[scale=0.76, every node/.style={font=\footnotesize, text=black}]
+      \coordinate (O) at (1.7,1.45);
+      \fill[gray!14] (O) -- ($(O)+(0:1.40)$) arc (0:36:1.40) -- cycle;
+      \draw[black, line width=0.95pt] (O) circle (1.40);
+      \draw[black, line width=0.95pt] (O) -- ($(O)+(0:1.40)$) node[midway, below=1pt] {$10\unit{dm}$};
+      \draw[black, line width=0.95pt] (O) -- ($(O)+(36:1.40)$);
+      \draw[black, line width=1.45pt] ($(O)+(0:1.40)$) arc (0:36:1.40);
+      \fill[black] (O) circle (1.4pt) node[left=2pt] {$O$};
+      \node[right=1pt] at ($(O)+(0:1.40)$) {$A$};
+      \node[above right=1pt] at ($(O)+(36:1.40)$) {$B$};
+      \node[above right=-1pt] at ($(O)+(18:0.55)$) {$36^\circ$};
+    \end{tikzpicture}
+  \end{minipage}
+\end{tcolorbox}
+
+\begin{tcolorbox}[enhanced, sharp corners, colback=panelgray, colframe=black, boxrule=0.90pt, top=4pt, bottom=4pt, left=6pt, right=6pt, after skip=5pt]
+  \begin{minipage}[c]{12.7cm}
+    \textbf{គំរូទី២ (លំហាត់គំរូទី២ ទំ.២០០ — ប្រភាគមិនមែនទសភាគគត់)៖}\\
+    នៅលើរង្វង់មានកាំ $r = 15\unit{cm}$ តើធ្នូ $80^\circ$ នៅលើរង្វង់នេះមានរង្វាស់ប្រវែងប៉ុន្មាន $\text{\en{cm}}$? ($\pi = 3.14$)\\[2pt]
+    $\bullet$ គណនាបរិមាត្ររង្វង់៖ $P = 2\pi r = 2 \times 3.14 \times 15 =$ \dotline{1.8cm}$\unit{cm}$ ។\\[2pt]
+    $\bullet$ សម្រួលប្រភាគមុំផ្ចិត៖ $\dfrac{80^\circ}{360^\circ} = \dfrac{\dotline{0.9cm}}{9}$ ។\\[2pt]
+    $\bullet$ ប្រវែងធ្នូ $80^\circ$៖ $\ell = \dfrac{P \times 80^\circ}{360^\circ} = \dfrac{\dotline{1.6cm}\unit{cm} \times 2}{9} = \dfrac{\dotline{1.5cm}}{3} \approx$ \dotline{1.8cm}$\unit{cm}$ ។
+  \end{minipage}\hfill
+  \begin{minipage}[c]{5.5cm}
+    \centering
+    \begin{tikzpicture}[scale=0.76, every node/.style={font=\footnotesize, text=black}]
+      \coordinate (O) at (1.7,1.45);
+      \fill[white] (O) -- ($(O)+(10:1.40)$) arc (10:90:1.40) -- cycle;
+      \draw[black, line width=0.95pt] (O) circle (1.40);
+      \draw[black, line width=0.95pt] (O) -- ($(O)+(10:1.40)$) node[midway, below=1pt] {$15\unit{cm}$};
+      \draw[black, line width=0.95pt] (O) -- ($(O)+(90:1.40)$);
+      \draw[black, line width=1.45pt] ($(O)+(10:1.40)$) arc (10:90:1.40);
+      \draw[black, line width=0.75pt] ($(O)+(10:0.45)$) arc (10:90:0.45);
+      \fill[black] (O) circle (1.4pt) node[below left=1pt] {$O$};
+      \node[right=1pt] at ($(O)+(10:1.40)$) {$M$};
+      \node[above=1pt] at ($(O)+(90:1.40)$) {$N$};
+      \node at ($(O)+(50:0.75)$) {$80^\circ$};
+    \end{tikzpicture}
+  \end{minipage}
+\end{tcolorbox}
+
+% -------------------- ផ្នែកទី៥៖ E5 EVALUATE --------------------
+\secbar{ផ្នែកទី៥ ៖ លំហាត់ប្រតិបត្តិ លំហាត់ច្រាស និងតេស្តវាយតម្លៃរហ័ស \enbf{(E5 — Evaluate)}}{\en{10} នាទី (ទំ.២០០)}
+
+\noindent
+\begin{minipage}[t]{11.3cm}
+  \begin{tcolorbox}[enhanced, sharp corners, colback=white, colframe=black, boxrule=0.90pt, top=4pt, bottom=4pt, left=5pt, right=5pt, equal height group=e5c2]
+    \textbf{១. ប្រតិបត្តិ (ទំ.២០០)៖} រង្វង់ផ្ចិត $O$ ខាងស្ដាំមានធ្នូពីរមិនប៉ុនគ្នា $\arc{AB} < \arc{CD}$ ។\\[2pt]
+    \begin{minipage}[c]{6.4cm}
+      $\bullet$ ប្រើរ៉ាប់ព័រទ័រវាស់មុំផ្ចិតលើរូប៖\\
+      \hspace*{0.25cm}$\ang{AOB} =$ \dotline{1.2cm}$^\circ$ \quad និង \quad $\ang{COD} =$ \dotline{1.2cm}$^\circ$ ។\\[2pt]
+      $\bullet$ ប្រៀបធៀប៖ $\ang{AOB}$ \dotline{0.8cm} $\ang{COD}$ ($<$ ឬ $>$) ។\\[2pt]
+      $\bullet$ \textbf{សន្និដ្ឋាន៖} ក្នុងរង្វង់តែមួយ ធ្នូកាន់តែធំ ស្កាត់ដោយមុំផ្ចិតកាន់តែ \dotline{1.8cm} ។
+    \end{minipage}\hfill
+    \begin{minipage}[c]{4.1cm}
+      \centering
+      \begin{tikzpicture}[x=1cm, y=1cm, every node/.style={font=\footnotesize, text=black}]
+        \coordinate (O) at (1.65,1.45);
+        \draw[black, line width=0.95pt] (O) circle (1.30);
+        \coordinate (A) at ($(O)+(145:1.30)$);
+        \coordinate (B) at ($(O)+(95:1.30)$);
+        \coordinate (C) at ($(O)+(35:1.30)$);
+        \coordinate (D) at ($(O)+(-65:1.30)$);
+        \draw[black, line width=0.90pt] (A)--(O)--(B) (C)--(O)--(D);
+        \draw[black, line width=1.40pt] (B) arc (95:145:1.30);
+        \draw[black, line width=1.40pt] (D) arc (-65:35:1.30);
+        \fill[black] (O) circle (1.4pt) node[below left=1pt] {$O$};
+        \node[above left=0.5pt] at (A) {$A$};
+        \node[above=1pt] at (B) {$B$};
+        \node[above right=0.5pt] at (C) {$C$};
+        \node[below right=0.5pt] at (D) {$D$};
+      \end{tikzpicture}
+    \end{minipage}\\[4pt]
+    \hrule height 0.4pt\vspace{4pt}
+    \textbf{២. លំហាត់ច្រាស (រកមុំផ្ចិតពីប្រវែងធ្នូ)៖} រង្វង់កាំ $r = 9\unit{cm}$ មានធ្នូ $\arc{MN}$ ប្រវែង $\ell = 3\pi\unit{cm}$ ។ គណនាបរិមាត្រ $P$ និងមុំផ្ចិត $\ang{MON}$៖\\[2pt]
+    $\bullet$ $P = 2\pi r = 2\pi(9) =$ \dotline{1.4cm}$\unit{cm}$ $\implies n^\circ = \dfrac{\ell}{P}\times 360^\circ = \dfrac{3\pi}{\dotline{1.2cm}}\times 360^\circ =$ \dotline{1.2cm}$^\circ$ ។\\[4pt]
+    \hrule height 0.4pt\vspace{4pt}
+    {\fontsize{8.7pt}{12.2pt}\selectfont
+    \begin{tabular}{|L{3.55cm}|C{2.95cm}|C{3.15cm}|}
+      \hline
+      \cellcolor{headgray}\textbf{ប្រភេទធ្នូលើរង្វង់កាំ $r$} & \cellcolor{headgray}\textbf{រង្វាស់ដឺក្រេ ($^\circ$)} & \cellcolor{headgray}\textbf{ប្រវែងធ្នូ ($\ell$)} \\[2pt]
+      \hline
+      កន្លះរង្វង់ ($\frac{1}{2}$ រង្វង់) & \dotline{1.6cm}$^\circ$ & \dotline{2.0cm} \\[2.5pt]
+      \hline
+      កាដ្រង់ ($\frac{1}{4}$ រង្វង់) & \dotline{1.6cm}$^\circ$ & \dotline{2.0cm} \\[2.5pt]
+      \hline
+    \end{tabular}}
+  \end{tcolorbox}
+\end{minipage}\hfill
+\begin{minipage}[t]{7.4cm}
+  \begin{tcolorbox}[enhanced, sharp corners, colback=white, colframe=black, boxrule=0.90pt, top=4pt, bottom=4pt, left=5pt, right=5pt, equal height group=e5c2]
+    \textbf{៣. បិទបេសកកម្ម E1 (ផ្លូវរត់កោង)៖}\\
+    គន្លងក្នុង ($r_1=10\unit{m}$)៖ $\ell_1 =$ \dotline{1.4cm}$\unit{m}$\\[1.5pt]
+    គន្លងក្រៅ ($r_2=20\unit{m}$)៖ $\ell_2 =$ \dotline{1.4cm}$\unit{m}$\\[4pt]
+    \textbf{៤. តេស្តរហ័ស (\en{Exit Check})៖}\\
+    រង្វង់ពីរមានកាំ $r_1 = 5\unit{cm}$ និង $r_2 = 10\unit{cm}$ មានមុំផ្ចិតស្មើគ្នា $n = 72^\circ$ ។ តើអំណះអំណាងណាត្រឹមត្រូវ?\\[3pt]
+    \chk\ \textbf{A.} ប្រវែងធ្នូទាំងពីរស្មើគ្នា ($\ell_1 = \ell_2$)\\[2.5pt]
+    \chk\ \textbf{B.} ដឺក្រេធ្នូស្មើគ្នា ($72^\circ$) តែ $\ell_2 = 2\ell_1$\\[2.5pt]
+    \chk\ \textbf{C.} ដឺក្រេធ្នូទី២ ស្មើនឹង $144^\circ$\\[2.5pt]
+    \chk\ \textbf{D.} ប្រវែងធ្នូទី១ វែងជាងធ្នូទី២\\[4pt]
+    \textbf{ផ្ទៀងផ្ទាត់ ($\pi\approx 3.14$)៖}\\
+    $\ell_1 =$ \dotline{1.4cm}$\unit{cm}$, $\ell_2 =$ \dotline{1.4cm}$\unit{cm}$\\[2pt]
+    ហេតុផល៖ \dotline{4.5cm}
+  \end{tcolorbox}
+\end{minipage}
+
+% -------------------- ផ្នែកទី៦៖ កិច្ចការផ្ទះ --------------------
+\vspace{6pt}
+\begin{tcolorbox}[enhanced, sharp corners, colback=panelgray, colframe=black, boxrule=0.95pt, top=4.5pt, bottom=4.5pt, left=6pt, right=6pt]
+  \begin{minipage}[c]{14.2cm}
+    {\muol\fontsize{9.0pt}{13.5pt}\selectfont ផ្នែកទី៦ ៖ កិច្ចការផ្ទះ និងបណ្ដាំផ្ញើ (សៀវភៅសិក្សាគោល ទំព័រ ២០៤ — ធ្វើក្នុងសៀវភៅលំហាត់)}\\[2.5pt]
+    $\bullet$ \textbf{លំហាត់ទី១ (ទំ.២០៤)៖} គេឱ្យរង្វង់ $C(O, r)$ មានមុំផ្ចិត $\ang{AOB} = 25^\circ$៖ \textbf{(ក)} គណនារង្វាស់គិតជាដឺក្រេនៃធ្នូតូច $\arc{AB}$ និងធ្នូធំ $\arc{ACB}$ ។ \textbf{(ខ)} បើកាំ $r = 18\unit{cm}$ ($\pi \approx 3.14$) គណនាប្រវែងធ្នូតូច $\arc{AB}$ គិតជា $\text{\en{cm}}$ ។\\[2.5pt]
+    $\bullet$ \textbf{លំហាត់អនុវត្តនាឡិកា៖} ទ្រនិចនាទីនៃនាឡិកាជញ្ជាំងមួយមានប្រវែង $r = 12\unit{cm}$ ។ រកមុំផ្ចិត ($20\text{ នាទី} = \frac{20}{60}$ នៃ $360^\circ$) និងប្រវែងធ្នូដែលចុងទ្រនិចនាទីដើរបានក្នុងរយៈពេល $20$ នាទី ($\pi \approx 3.14$) ព្រមទាំងអានមុនចំណុច \textbf{២.១ ធ្នូ និងអង្កត់ធ្នូ} (ទំ.២០០--២០១) ។
+  \end{minipage}\hfill
+  \begin{minipage}[c]{4.1cm}
+    \centering
+    \begin{tikzpicture}[scale=0.68, every node/.style={font=\footnotesize, text=black}]
+      \coordinate (O) at (1.5,1.5);
+      \fill[white] (O) -- ($(O)+(90:1.25)$) arc (90:-30:1.25) -- cycle;
+      \draw[black, line width=0.95pt] (O) circle (1.25);
+      \draw[black, line width=1.0pt, -Stealth] (O) -- ($(O)+(90:1.15)$);
+      \draw[black, line width=1.0pt, -Stealth] (O) -- ($(O)+(-30:1.15)$);
+      \draw[black, line width=1.4pt] ($(O)+(90:1.25)$) arc (90:-30:1.25);
+      \node[above=0.5pt] at ($(O)+(90:1.25)$) {\en{12}};
+      \node[below right=0.5pt] at ($(O)+(-30:1.25)$) {\en{4}};
+      \node at ($(O)+(30:0.55)$) {$120^\circ$};
+    \end{tikzpicture}
+  \end{minipage}
+\end{tcolorbox}
+
+\end{document}
