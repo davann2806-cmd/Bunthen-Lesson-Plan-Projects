@@ -1,0 +1,532 @@
+% !TEX program = xelatex
+\documentclass[a4paper,10pt]{article}
+
+\makeatletter
+\let\@expl@@@mark@update@singlecol@structures@@\relax
+\makeatother
+
+\usepackage[a4paper, left=0.95cm, right=0.95cm, top=0.85cm, bottom=0.92cm, footskip=0.52cm]{geometry}
+\usepackage{fontspec}
+\usepackage{amsmath, amssymb}
+\usepackage{longtable, array, colortbl}
+\usepackage[table]{xcolor}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usetikzlibrary{calc, angles, quotes, arrows.meta, decorations.markings}
+
+% Cross-platform font discovery
+\makeatletter
+\newcommand{\NGSFindFonts}{%
+  \IfFileExists{../../../fonts/KhmerOSsiemreap.ttf}{%
+    \def\NGSUserPath{../../../fonts/}\def\NGSSysPath{../../../fonts/}%
+  }{%
+    \IfFileExists{../../../../fonts/KhmerOSsiemreap.ttf}{%
+      \def\NGSUserPath{../../../../fonts/}\def\NGSSysPath{../../../../fonts/}%
+    }{%
+      \IfFileExists{fonts/KhmerOSsiemreap.ttf}{%
+        \def\NGSUserPath{fonts/}\def\NGSSysPath{fonts/}%
+      }{%
+        \def\NGSUserPath{C:/Users/user/AppData/Local/Microsoft/Windows/Fonts/}%
+        \def\NGSSysPath{C:/Windows/Fonts/}%
+      }%
+    }%
+  }%
+}
+\NGSFindFonts
+\makeatother
+
+\XeTeXlinebreaklocale "km"
+\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
+
+\setmainfont[
+  Path = {\NGSUserPath},
+  Extension = .ttf,
+  UprightFont = KhmerOSsiemreap,
+  BoldFont = KhmerOSsiemreap,
+  BoldFeatures = {FakeBold=1.8},
+  ItalicFont = KhmerOSsiemreap,
+  ItalicFeatures = {FakeSlant=0.25}
+]{KhmerOSsiemreap}
+
+\newfontfamily\muol[Path={\NGSUserPath}]{KhmerOSmuollight.ttf}
+\newfontfamily\Tacteing[Path={\NGSUserPath}]{TACTENG.TTF}
+\newfontfamily\enfont[Path={\NGSSysPath}, Scale=1.0]{times.ttf}
+\newfontfamily\enbold[Path={\NGSSysPath}, Scale=1.0]{timesbd.ttf}
+\newfontfamily\enital[Path={\NGSSysPath}, Scale=1.0]{timesi.ttf}
+\newfontfamily\calibrifont[Path={\NGSSysPath}, Scale=0.95]{calibri.ttf}
+\newfontfamily\symfont[Path={\NGSSysPath}, Scale=0.95]{cour.ttf}
+
+\DeclareTextFontCommand{\en}{\enfont}
+\newcommand{\enbf}[1]{{\enbold #1}}
+\newcommand{\enit}[1]{{\enital #1}}
+\newcommand{\khmflourish}{{\Tacteing\fontsize{17pt}{17pt}\selectfont 3}}
+\newcommand{\wcirc}{{\symfont\char"25CB}}
+\newcommand{\chkbox}{\tikz[baseline=0.2ex]\draw[black, line width=0.65pt] (0,0) rectangle (1.45ex,1.45ex);}
+
+\definecolor{headgray}{HTML}{E6E6E6}
+\definecolor{stepgray}{HTML}{D4D4D4}
+\definecolor{fiveecolor}{HTML}{8B0000}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyfoot[R]{{\calibrifont\fontsize{9.5pt}{11pt}\selectfont\thepage}}
+
+\setlength{\parindent}{0pt}
+\setlength{\LTpre}{2pt}
+\setlength{\LTpost}{2pt}
+\setlength{\tabcolsep}{4.5pt}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+\newcommand{\fiveE}[2]{{\color{fiveecolor}\enbf{#1} \enit{(#2)}}}
+\newcommand{\timenote}[1]{{\color{fiveecolor}\textit{#1}}}
+\newcommand{\stepheader}[1]{%
+  \rowcolor{stepgray}%
+  \multicolumn{3}{|c|}{\rule[-4pt]{0pt}{15pt}{\muol\fontsize{10pt}{14pt}\selectfont #1}} \\*%
+  \hline
+}
+\newcommand{\cfig}[1]{\begin{center}\vspace{-2pt}#1\vspace{-3pt}\end{center}}
+
+\newcommand{\tri}[1]{\triangle #1}
+\newcommand{\unit}[1]{\,\text{\en{#1}}}
+\newcommand{\cnum}[1]{\tikz[baseline=-0.58ex]\node[circle, fill=black, text=white, inner sep=0.85pt, minimum size=1.95ex, font=\enbold\scriptsize]{#1};}
+
+\newcommand{\rightbox}[4][0.20cm]{%
+  \coordinate (rbA) at ($(#3)!#1!(#2)$);
+  \coordinate (rbB) at ($(#3)!#1!(#4)$);
+  \coordinate (rbC) at ($(rbA)+(#3)!#1!(#4)-(#3)$);
+  \draw[black, line width=0.65pt] (rbA) -- (rbC) -- (rbB);
+}
+
+% ============================================================================
+% ម៉ាក្រូរូបភាព TikZ ស-ខ្មៅ សមាមាត្រច្បាស់ (3.8 cm – 7.2 cm, អក្សរខ្មៅ 100%)
+% ============================================================================
+
+% ១. រូបបេសកកម្ម E1៖ ជ្រុងអគារកញ្ចក់រាងចតុកោណព្នាយ (លំហាត់ទី 10 ទំ.១៩៦)
+\newcommand{\figEngageAREAFour}{%
+\begin{tikzpicture}[scale=0.46, every node/.style={font=\footnotesize, text=black}]
+  \coordinate (D) at (0,0);
+  \coordinate (C) at (8.0,0);
+  \coordinate (B) at (5.5,4.5);
+  \coordinate (A) at (2.5,4.5);
+  \coordinate (H) at (2.5,0);
+  \fill[gray!20] (D)--(C)--(B)--(A)--cycle;
+  \draw[black, line width=1.1pt] (D)--(C)--(B)--(A)--cycle;
+  \draw[black, line width=0.85pt, densely dashed] (A)--(H);
+  % បន្ទាត់ក្រឡាកញ្ចក់ស្រាលៗ
+  \foreach \y in {1.125,2.25,3.375} {
+    \pgfmathsetmacro{\xl}{2.5*(\y/4.5)}
+    \pgfmathsetmacro{\xr}{8.0 - 2.5*(\y/4.5)}
+    \draw[black!45, line width=0.45pt] (\xl,\y)--(\xr,\y);
+  }
+  \rightbox[0.20cm]{A}{H}{C}
+  \node[above=2pt] at (4.0,4.5) {ដំបូល $b' = 150\unit{m}$};
+  \node[below=2pt] at (4.0,0) {បាតអគារ $b = 400\unit{m}$};
+  \node[right=1.5pt] at (2.5,2.25) {$h = 500\unit{m}$};
+  \node at (4.0,-1.35) {កញ្ចក់ $1$ ផ្ទាំង $= 1\unit{m}^2$ — តើត្រូវប្រើកញ្ចក់អស់ប៉ុន្មានផ្ទាំង?};
+\end{tikzpicture}}
+
+% ២. រូប E2៖ លំហាត់ទី 5 (ទំ.១៩៤) ស៊ុមចតុកោណកែងដកត្រីកោណកែង 4 ជ្រុង + លំហាត់ទី 6 រូបព្រួញផត
+\newcommand{\figExploreSubAREAFour}{%
+\begin{tikzpicture}[scale=0.39, every node/.style={font=\footnotesize, text=black}]
+  % លំហាត់ទី 5 ទំ.១៩៤
+  \begin{scope}[shift={(0,0)}]
+    \coordinate (B) at (0,0);
+    \coordinate (C) at (7.5,0);
+    \coordinate (D) at (7.5,5.1);
+    \coordinate (A) at (0,5.1);
+    \coordinate (P) at (2.4,5.1);
+    \coordinate (Q) at (0,1.5);
+    \coordinate (R) at (3.3,0);
+    \coordinate (S) at (7.5,1.05);
+    \fill[gray!28] (P)--(Q)--(R)--(S)--cycle;
+    \draw[black, line width=1.05pt] (A)--(B)--(C)--(D)--cycle;
+    \draw[black, line width=1.0pt] (P)--(Q)--(R)--(S)--cycle;
+    \rightbox[0.19cm]{P}{A}{Q}
+    \rightbox[0.19cm]{Q}{B}{R}
+    \rightbox[0.19cm]{R}{C}{S}
+    \rightbox[0.19cm]{S}{D}{P}
+    \node[above left=1pt] at (A) {$A$};
+    \node[below left=1pt] at (B) {$B$};
+    \node[below right=1pt] at (C) {$C$};
+    \node[above right=1pt] at (D) {$D$};
+    \node[above=1pt] at (P) {$P$};
+    \node[left=1pt] at (Q) {$Q$};
+    \node[below=1pt] at (R) {$R$};
+    \node[above right=0.5pt] at (S) {$S$};
+    \node[above=1pt] at (1.2,5.1) {$8$};
+    \node[above=1pt] at (5.0,5.1) {$17$};
+    \node[left=1pt] at (0,3.3) {$12$};
+    \node[left=1pt] at (0,0.75) {$5$};
+    \node[below=1pt] at (1.65,0) {$11$};
+    \node[below=1pt] at (5.4,0) {$14$};
+    \node[right=1pt] at (7.5,0.42) {$3$};
+    \node[right=1pt] at (7.5,3.15) {$14$};
+    \node[align=center] at (3.75,-2.15) {លំហាត់ទី៥\\($S = 209.5\unit{cm}^2$)};
+  \end{scope}
+  % លំហាត់ទី 6 រូបព្រួញផត ទំ.១៩៥
+  \begin{scope}[shift={(10.2,0.2)}]
+    \coordinate (L) at (0,0);
+    \coordinate (R2) at (5.4,0);
+    \coordinate (T) at (2.7,4.7);
+    \coordinate (M) at (2.7,1.9);
+    \coordinate (H) at (2.7,0);
+    \fill[gray!28] (L)--(T)--(R2)--(M)--cycle;
+    \draw[black, line width=1.05pt] (L)--(T)--(R2)--(M)--cycle;
+    \draw[black, line width=0.9pt] (L)--(R2) (M)--(H);
+    \draw[black, line width=0.75pt, <->] (6.1,0)--(6.1,4.7);
+    \rightbox[0.19cm]{M}{H}{R2}
+    \node[right=1pt] at (6.1,2.35) {$15$};
+    \node[right=1pt] at (2.7,0.9) {$7$};
+    \node[below=1.5pt] at (2.7,0) {$19\unit{cm}$};
+    \node[align=center] at (2.8,-2.35) {លំហាត់ទី៦(៣)\\($S = 76\unit{cm}^2$)};
+  \end{scope}
+\end{tikzpicture}}
+
+% ៣. រូប E4៖ ចំការកៅស៊ូ (លំហាត់ទី 8) និងសួនផ្កាកុលាប (លំហាត់ទី 9) ទំ.១៩៦
+\newcommand{\figModelWordAREAFour}{%
+\begin{tikzpicture}[scale=0.40, every node/.style={font=\footnotesize, text=black}]
+  \begin{scope}[shift={(0,0.3)}]
+    \fill[gray!18] (0,0) rectangle (6.2,3.1);
+    \draw[black, line width=1.05pt] (0,0) rectangle (6.2,3.1);
+    \rightbox[0.19cm]{0,3.1}{0,0}{6.2,0}
+    \node[below=1.5pt] at (3.1,0) {$5\unit{km}$};
+    \node[left=1.5pt] at (0,1.55) {$2.3\unit{km}$};
+    \node[align=center] at (3.1,1.55) {$S = 11.5\unit{km}^2$\\$= 1\,150\unit{ha}$};
+    \node[align=center] at (3.1,-1.85) {លំហាត់ទី៨៖ ចំការកៅស៊ូ};
+  \end{scope}
+  \begin{scope}[shift={(8.4,0.3)}]
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (5.6,0);
+    \coordinate (C) at (2.4,3.2);
+    \coordinate (H) at (2.4,0);
+    \fill[gray!22] (A)--(B)--(C)--cycle;
+    \draw[black, line width=1.05pt] (A)--(B)--(C)--cycle;
+    \draw[black, line width=0.85pt, densely dashed] (C)--(H);
+    \rightbox[0.19cm]{C}{H}{B}
+    \node[below=1.5pt] at (2.8,0) {$5\unit{m}$};
+    \node[right=1.5pt] at (2.4,1.4) {$3\unit{m}$};
+    \node[align=center] at (2.8,-2.05) {លំហាត់ទី៩៖ សួនកុលាប\\($15$ ដើម)};
+  \end{scope}
+\end{tikzpicture}}
+
+% ៤. រូប E5៖ លំហាត់ទី 6(១) ចតុកោណព្នាយដកត្រីកោណស និងលំហាត់ទី 6(៤) អដ្ឋកោណក្នុងការេ 9x9 (ទំ.១៩៥)
+\newcommand{\figPracticeEvalAREAFour}{%
+\begin{tikzpicture}[scale=0.40, every node/.style={font=\footnotesize, text=black}]
+  % លំហាត់ទី 6(១) ទំ.១៩៥
+  \begin{scope}[shift={(0,0)}]
+    \coordinate (T1) at (0,4.2);
+    \coordinate (T2) at (4.8,4.2);
+    \coordinate (B2) at (4.8,0);
+    \coordinate (B1) at (0,1.2);
+    \coordinate (M1) at (0,2.7);
+    \fill[gray!28] (T1)--(T2)--(M1)--cycle;
+    \fill[gray!28] (M1)--(B2)--(B1)--cycle;
+    \draw[black, line width=1.05pt] (T1)--(T2)--(B2)--(B1)--cycle;
+    \draw[black, line width=0.95pt] (T2)--(M1)--(B2);
+    \rightbox[0.19cm]{B1}{T1}{T2}
+    \rightbox[0.19cm]{T1}{T2}{B2}
+    \node[above=1.5pt] at (2.4,4.2) {$12\unit{cm}$};
+    \node[left=1.5pt] at (0,2.7) {$10\unit{cm}$};
+    \node[right=1.5pt] at (4.8,2.1) {$14\unit{cm}$};
+    \node[align=center] at (2.4,-1.55) {លំហាត់ទី៦(១)\\($144 - 84 = 60\unit{cm}^2$)};
+  \end{scope}
+  % លំហាត់ទី 6(៤) អដ្ឋកោណកាត់ជ្រុង 3x3 ក្នុងការេ 9x9
+  \begin{scope}[shift={(8.8,0)}]
+    \fill[white] (0,0) rectangle (4.5,4.5);
+    \fill[gray!28] (1.5,0)--(3.0,0)--(4.5,1.5)--(4.5,3.0)--(3.0,4.5)--(1.5,4.5)--(0,3.0)--(0,1.5)--cycle;
+    \draw[black, line width=0.9pt] (0,0) rectangle (4.5,4.5);
+    \draw[black, line width=1.05pt] (1.5,0)--(3.0,0)--(4.5,1.5)--(4.5,3.0)--(3.0,4.5)--(1.5,4.5)--(0,3.0)--(0,1.5)--cycle;
+    \rightbox[0.18cm]{0,1.5}{0,0}{1.5,0}
+    \rightbox[0.18cm]{3.0,0}{4.5,0}{4.5,1.5}
+    \rightbox[0.18cm]{4.5,3.0}{4.5,4.5}{3.0,4.5}
+    \rightbox[0.18cm]{1.5,4.5}{0,4.5}{0,3.0}
+    \node[above=1pt] at (0.75,4.5) {$3$};
+    \node[above=1pt] at (2.25,4.5) {$3$};
+    \node[above=1pt] at (3.75,4.5) {$3$};
+    \node[left=1pt] at (0,3.75) {$3$};
+    \node[left=1pt] at (0,2.25) {$3$};
+    \node[left=1pt] at (0,0.75) {$3$};
+    \node[align=center] at (2.25,-1.55) {លំហាត់ទី៦(៤)\\($81 - 18 = 63\unit{cm}^2$)};
+  \end{scope}
+\end{tikzpicture}}
+
+\begin{document}
+\fontsize{10pt}{15.0pt}\selectfont
+
+% ==================== ក្បាលរដ្ឋបាលផ្លូវការ ====================
+{\centering
+  {\muol\fontsize{11pt}{16pt}\selectfont ព្រះរាជាណាចក្រកម្ពុជា}\\[2pt]
+  {\muol\fontsize{11pt}{16pt}\selectfont ជាតិ សាសនា ព្រះមហាក្សត្រ}\\[-2pt]
+  \khmflourish\par
+}
+\vspace{-4pt}
+{\muol\fontsize{10pt}{15.2pt}\selectfont
+មន្ទីរអប់រំ យុវជន និងកីឡា ខេត្តកំពង់ធំ\\
+ការិយាល័យអប់រំ យុវជន និងកីឡា ស្រុកកំពង់ស្វាយ\\
+អនុវិទ្យាល័យព្រះក្រសាំង\par}
+
+\vspace{2pt}
+{\centering{\muol\fontsize{12pt}{18pt}\selectfont កិច្ចតែងការបង្រៀន}\par}
+\vspace{2pt}
+
+{\fontsize{10pt}{15.0pt}\selectfont
+\hspace*{3.7cm}%
+\begin{tabular}{@{}l l l l@{}}
+  - & មុខវិជ្ជា & : & គណិតវិទ្យា ថ្នាក់ទី៨ \\
+  - & ចំណងជើងមេរៀន & : & មេរៀនទី១៤ ផ្ទៃក្រឡាពហុកោណ \\
+  - & ចំណងជើងរង & : & ៤. លំហាត់អនុវត្ត និងចំណោទសំយោគផ្ទៃក្រឡាពហុកោណ (ទំព័រ ១៩៤--១៩៦) \\
+  - & រយៈពេល & : & ១ ម៉ោងសិក្សា (៥០ នាទី) \\
+  - & បង្រៀនដោយ & : & ហុក ប៊ុនថែន \\
+  - & កាលបរិច្ឆេទ & : & ថ្ងៃព្រហស្បតិ៍ ទី១៧ ខែធ្នូ ឆ្នាំ២០២៦ \\
+\end{tabular}
+
+\vspace{1pt}
+
+% -------------------- I. វត្ថុបំណង --------------------
+\textbf{I.} {\muol វត្ថុបំណង}\\[1pt]
+\hspace*{0.55cm}%
+\begin{tabular}{@{}l l L{14.2cm}@{}}
+  \wcirc \hspace{0.25cm} វិជ្ជាសម្បទា & : & សិស្សប្រាប់រូបមន្តសំយោគផ្ទៃក្រឡាពហុកោណទាំង ៤ ប្រភេទ យុទ្ធវិធីស៊ុមដកផ្នែកស និងទំនាក់ទំនងខ្នាតដីកសិកម្ម ($1\unit{km}^2 = 100\unit{ha}$) បានត្រឹមត្រូវ ។ \\
+  \wcirc \hspace{0.25cm} បំណិនសម្បទា & : & សិស្សជ្រើសរើសយុទ្ធវិធីពុះបូក ឬស៊ុមដកផ្នែកសដើម្បីគណនាផ្ទៃក្រឡាផ្នែកប្រផេះ និងដោះស្រាយចំណោទជីវភាពពិតតាមជំហាន \en{Polya} លើសន្លឹកកិច្ចការបានត្រឹមត្រូវ ។ \\
+  \wcirc \hspace{0.25cm} ចរិយាសម្បទា & : & សិស្សមានទម្លាប់ពិនិត្យឯកតាផ្ទៃក្រឡា ផ្ទៀងផ្ទាត់ភាពសមហេតុផលនៃចម្លើយចំណោទ និងតម្លៃនៃការអនុវត្តធរណីមាត្រក្នុងវិស្វកម្មនិងកសិកម្ម ។ \\
+\end{tabular}
+
+\vspace{1pt}
+
+% -------------------- II. សម្ភារៈឧបទេស --------------------
+\textbf{II.} {\muol សម្ភារៈឧបទេស}\\[1pt]
+\hspace*{0.55cm}\parbox[t]{18.2cm}{$\bullet$ \hspace{0.25cm} សម្រាប់គ្រូ៖ សៀវភៅសិក្សាគោលគណិតវិទ្យាថ្នាក់ទី៨ (ទំ.១៩៤--១៩៦) ក្ដារខៀន ដីស បន្ទាត់វែង និងសន្លឹកកិច្ចការគំរូ (គ្មានស្លាយ \en{LCD}) ។\\
+$\bullet$ \hspace{0.25cm} សម្រាប់សិស្ស៖ សន្លឹកកិច្ចការសិស្ស ស-ខ្មៅ (\en{Worksheet\_AREA4} ២ ទំព័រពេញ) សៀវភៅសិក្សាគោល សៀវភៅសរសេរ បន្ទាត់ក្រិត និងប៊ិច/ខ្មៅដៃ ។}
+
+\vspace{1pt}
+
+% -------------------- III. វិធីសាស្រ្តបង្រៀន --------------------
+\textbf{III.} {\muol វិធីសាស្រ្តបង្រៀន}\\[1pt]
+\hspace*{0.45cm}%
+\begin{tabular}{@{}l l L{14.85cm}@{}}
+  $\bullet$ \hspace{0.25cm} គោលវិធី & : & សិស្សមជ្ឈមណ្ឌល (បង្រៀនដោយមិនប្រើស្លាយ \en{LCD} យកសន្លឹកកិច្ចការបំពេញចន្លោះជាគោល) \\
+  $\bullet$ \hspace{0.25cm} យុទ្ធវិធីបង្រៀន & : & ស្ថាបនានិយម គំរូ \en{5Es} រួមផ្សំការប្រៀបធៀបយុទ្ធវិធីពុះបូកទល់នឹងស៊ុមដកផ្នែកស (\en{Additive vs.\ Subtractive Framing}) និងក្របខ័ណ្ឌដោះស្រាយចំណោទ ៤ ជំហាន \en{Polya} \\
+\end{tabular}
+}
+
+\vspace{1pt}
+
+% -------------------- IV. ដំណើរការបង្រៀន --------------------
+\textbf{IV.} {\muol ដំណើរការបង្រៀន}
+
+\vspace{1pt}
+
+\renewcommand{\arraystretch}{1.15}
+\begin{longtable}{|L{5.50cm}|L{7.90cm}|L{4.80cm}|}
+\hline
+\rowcolor{headgray}
+\multicolumn{1}{|c|}{\muol សកម្មភាពគ្រូ} &
+\multicolumn{1}{c|}{\muol ខ្លឹមសារមេរៀន} &
+\multicolumn{1}{c|}{\muol សកម្មភាពសិស្ស} \\
+\hline
+\endfirsthead
+
+\hline
+\rowcolor{headgray}
+\multicolumn{1}{|c|}{\muol សកម្មភាពគ្រូ} &
+\multicolumn{1}{c|}{\muol ខ្លឹមសារមេរៀន} &
+\multicolumn{1}{c|}{\muol សកម្មភាពសិស្ស} \\
+\hline
+\endhead
+
+\hline
+\endfoot
+
+\hline
+\endlastfoot
+
+% ==================== ជំហានទី១ (2min) ====================
+\stepheader{ជំហានទី១ ៖ រដ្ឋបាលថ្នាក់ (២ នាទី)}
+$\bullet$ ពិនិត្យអវត្តមាន សណ្ដាប់ធ្នាប់ និងអនាម័យថ្នាក់រៀន\par\vspace{1pt}
+$\bullet$ ចែកសន្លឹកកិច្ចការ \en{Worksheet\_AREA4} (១ សន្លឹកសងខាង) ដល់សិស្សគ្រប់គ្នា
+&
+$\bullet$ ពិនិត្យវត្តមាន និងការត្រៀមសម្ភារៈសិក្សា (សន្លឹកកិច្ចការ សៀវភៅសិក្សាគោល និងបន្ទាត់ក្រិត)
+&
+$\circ$ ប្រធានថ្នាក់រាយការណ៍អវត្តមាន\par\vspace{1pt}
+$\circ$ ទទួលសន្លឹកកិច្ចការ និងសរសេរឈ្មោះ \\[3pt]
+\hline
+
+% ==================== ជំហានទី២ (9min: ≤3 + 3 + E1 3) ====================
+\stepheader{ជំហានទី២ ៖ កែកិច្ចការផ្ទះ រំលឹកមេរៀនចាស់ និងភ្ជាប់មេរៀនថ្មី (៩ នាទី)}
+\timenote{(កែកិច្ចការផ្ទះ $\le 3\unit{min}$)}\par\vspace{1pt}
+$\bullet$ ហៅសិស្ស ២ នាក់ឡើងសរសេរចម្លើយលំហាត់ទី៣ និងទី៤ (ទំ.១៩៤) លើក្ដារខៀន
+&
+\textbf{កំណែកិច្ចការផ្ទះ (ទំ.១៩៤)៖}\par\vspace{1pt}
+១. \textbf{លំហាត់ទី៣៖} (ក) $S = 54\unit{cm}^2$ ; (ខ) $b = 10\unit{cm}$ ; (គ) $b = 13\unit{cm}$ ។\par\vspace{1pt}
+២. \textbf{លំហាត់ទី២(រូបទី២)៖} $y = \frac{1\,668}{66} = \frac{278}{11} \approx 25.27\unit{cm}$ ; \textbf{ទី៤៖} $AC = 2\unit{cm},\; S_{ABCD} = 10\unit{cm}^2$ ។
+&
+$\circ$ ឡើងកែលើក្ដារខៀន និងផ្ទៀងផ្ទាត់ចម្លើយក្នុងសៀវភៅ \\[3pt]
+
+\timenote{(រំលឹកមេរៀនទាក់ទង $3\unit{min}$)} $\bullet$ សួររំលឹករហ័សរូបមន្តផ្ទៃក្រឡាពហុកោណទាំង ៤ ដែលបានរៀនក្នុងម៉ោងទី១--ទី៣
+&
+\textbf{រំលឹករូបមន្តគោលទាំង ៤៖} ១. ប្រលេឡូក្រាម $S = bh$ ; ២. ត្រីកោណ $S = \frac{1}{2}bh$ ; ៣. ចតុកោណស្មើ $S = \frac{1}{2}dd'$ ; ៤. ចតុកោណព្នាយ $S = \frac{1}{2}(b+b')h$ ។
+&
+$\circ$ ឆ្លើយរំលឹករូបមន្តទាំង ៤ និងលក្ខខណ្ឌកែង \\[3pt]
+
+-- សំណួរទី២៖ «តើ $1\text{ ហិចតា } (\unit{ha})$ ស្មើប៉ុន្មានម៉ែត្រការ៉េ? ហើយ $1\unit{km}^2$ ស្មើប៉ុន្មានហិចតា?»
+&
+$\bullet$ ទំនាក់ទំនងខ្នាតដី៖ $1\unit{ha} = 10\,000\unit{m}^2$ និង $1\unit{km}^2 = 1\,000\,000\unit{m}^2 = 100\unit{ha}$ ។
+&
+$\circ$ ឆ្លើយ៖ «$1\unit{ha} = 10\,000\unit{m}^2$ និង $1\unit{km}^2 = 100\unit{ha}$» \\[3pt]
+
+\fiveE{E1 - Engage}{3 min}\par\vspace{1pt}
+$\bullet$ ឱ្យសិស្សអាន \textbf{បេសកកម្មផ្នែកទី១} លើសន្លឹកកិច្ចការ (\textbf{លំហាត់ទី ១០ ទំ.១៩៦}៖ គម្រោងដាក់ផ្ទាំងកញ្ចក់ជ្រុងអគាររាងចតុកោណព្នាយ)
+&
+\textbf{បេសកកម្ម E1៖ ផ្ទាំងកញ្ចក់ជ្រុងអគារធំ (លំហាត់ទី១០ ទំ.១៩៦)}\par\vspace{1pt}
+$\bullet$ បាតអគារ $b = 400\unit{m}$, ដំបូល $b' = 150\unit{m}$, កម្ពស់អគារ $h = 500\unit{m}$ ។\par\vspace{1pt}
+$\bullet$ កញ្ចក់ ១ ផ្ទាំងមានផ្ទៃ $1\unit{m}^2$ ។ តើត្រូវប្រើកញ្ចក់អស់ប៉ុន្មានផ្ទាំង? (ទុកផ្ទៀងនៅ E5)
+&
+$\circ$ អានចំណោទ និងប៉ាន់ស្មានចំនួនផ្ទាំងកញ្ចក់លើសន្លឹកកិច្ចការ \\[3pt]
+
+&
+\cfig{\figEngageAREAFour}
+& \\[3pt]
+\hline
+
+% ==================== ជំហានទី៣ (17min: E2 11 + E3 6) ====================
+\stepheader{ជំហានទី៣ ៖ ការរុករកយុទ្ធវិធីសំយោគ និងក្បួនដោះស្រាយចំណោទ (១៧ នាទី)}
+\fiveE{E2 - Explore}{11 min}\par\vspace{1pt}
+$\bullet$ ណែនាំដៃគូសិស្សពិនិត្យ \textbf{ផ្នែកទី២ (ក) — លំហាត់ទី ៥ (ទំ.១៩៤)}៖ ចតុកោណប្រផេះទ្រេត $PQRS$ ក្នុងចតុកោណកែង $ABCD$ ($17\unit{cm} \times 25\unit{cm}$)
+&
+\textbf{សកម្មភាពទី១៖ យុទ្ធវិធីស៊ុមដកផ្នែកស (លំហាត់ទី៥ ទំ.១៩៤)}\par\vspace{1pt}
+$\bullet$ ចតុកោណ $PQRS$ គ្មានជ្រុងស្របអ័ក្សទេ ដូច្នេះប្រើ \textbf{ផ្ទៃស៊ុមដកត្រីកោណកែងទាំង ៤ ជ្រុង}៖\par
+-- ផ្ទៃស៊ុម $S_{ABCD} = 17 \times 25 = 425\unit{cm}^2$ ។
+&
+$\circ$ ពិភាក្សាដៃគូរកប្រវែងជ្រុងនៅសល់៖ $AQ=12, PD=17, BR=11, DS=14$ \\[3pt]
+
+$\bullet$ ឱ្យដៃគូគណនាផ្ទៃត្រីកោណកែងសទាំង ៤ ជ្រុង រួចដកចេញពី $425\unit{cm}^2$ និងបន្តធ្វើ \textbf{លំហាត់ទី ៦ រូបព្រួញផត (ទំ.១៩៥)}
+&
+-- ត្រីកោណសទាំង ៤៖ $S_{\tri{APQ}}=\frac{1}{2}(8)(12)=48$ ; $S_{\tri{BQR}}=\frac{1}{2}(5)(11)=27.5$ ; $S_{\tri{CRS}}=\frac{1}{2}(14)(3)=21$ ; $S_{\tri{DPS}}=\frac{1}{2}(17)(14)=119$ (សរុប $215.5\unit{cm}^2$) ។\par
+-- ដូចនេះ $S_{PQRS} = 425 - 215.5 = \mathbf{209.5\unit{cm}^2}$ ។\par\vspace{1pt}
+$\bullet$ \textbf{លំហាត់ទី៦(៣) រូបព្រួញផត៖} $S = \frac{1}{2}(19)(15) - \frac{1}{2}(19)(7) = 142.5 - 66.5 = \mathbf{76\unit{cm}^2}$ ។
+&
+$\circ$ បូកផ្ទៃសទាំង ៤ ឃើញ $215.5\unit{cm}^2$ រួចដកឃើញ $209.5\unit{cm}^2$\par\vspace{1pt}
+$\circ$ ដកត្រីកោណតូចពីត្រីកោណធំឃើញ $76\unit{cm}^2$ \\[3pt]
+
+&
+\cfig{\figExploreSubAREAFour}
+& \\[3pt]
+
+\fiveE{E3 - Explain}{6 min}\par\vspace{1pt}
+$\bullet$ សំយោគតារាងរូបមន្តផ្ទៃក្រឡា និងរូបមន្តច្រាសនៃពហុកោណទាំង ៤ ប្រភេទលើក្ដារខៀន
+&
+\textbf{តារាងសំយោគរូបមន្តផ្ទៃក្រឡាពហុកោណទាំង ៤ ប្រភេទ៖}\par\vspace{2pt}
+{\fontsize{9pt}{12.5pt}\selectfont\renewcommand{\arraystretch}{1.18}
+\begin{tabular}{|L{2.20cm}|L{2.25cm}|L{2.35cm}|}
+\hline
+\cellcolor{headgray}\centering\textbf{ប្រភេទរូប} &
+\cellcolor{headgray}\centering\textbf{រូបមន្តផ្ទៃក្រឡា} &
+\cellcolor{headgray}\centering\arraybackslash\textbf{រូបមន្តច្រាស} \\[2pt]
+\hline
+១. ប្រលេឡូក្រាម & $S = b \times h$ & $h = \dfrac{S}{b}$ \\[2pt]
+\hline
+២. ត្រីកោណ & $S = \dfrac{1}{2} b \times h$ & $h = \dfrac{2S}{b}$ \\[2pt]
+\hline
+៣. ចតុកោណស្មើ & $S = \dfrac{1}{2} d \times d'$ & $d' = \dfrac{2S}{d}$ \\[2pt]
+\hline
+៤. ចតុកោណព្នាយ & $S = \dfrac{(b+b')h}{2}$ & $h = \dfrac{2S}{b+b'}$ \\[2pt]
+\hline
+\end{tabular}}
+&
+$\circ$ បំពេញតារាងសំយោគរូបមន្តផ្ទៃក្រឡា និងរូបមន្តច្រាសក្នុង \textbf{ផ្នែកទី៣} នៃសន្លឹកកិច្ចការ \\[3pt]
+
+$\bullet$ សំយោគក្បួនជ្រើសរើសយុទ្ធវិធីគណនាផ្ទៃក្រឡារូបសមាសទាំង ២ និងក្របខ័ណ្ឌដោះស្រាយចំណោទ \en{Polya} ៤ ជំហាន
+&
+\textbf{ក្បួនជ្រើសរើសយុទ្ធវិធីសំយោគ៖}\par\vspace{1pt}
+$\bullet$ \cnum{1} \textbf{វិធីពុះបូក (\en{Additive})៖} ប្រើពេលរូបផ្គុំពីប្លុកធរណីមាត្រស្របអ័ក្ស ($S = S_1 + S_2$, ឧ. រូបមុខផ្ទះទំ.១៩៦) ។\par\vspace{1pt}
+$\bullet$ \cnum{2} \textbf{វិធីស៊ុមដកផ្នែកស (\en{Subtractive})៖} ប្រើពេលរូបទ្រេត កាត់ជ្រុង ឬផតក្នុង ($S = S_{\text{ស៊ុម}} - S_{\text{ស}}$) ។\par\vspace{1pt}
+$\bullet$ \cnum{3} \textbf{ចំណោទជីវភាព៖} គណនាផ្ទៃសរុប $\rightarrow$ បម្លែងខ្នាតឱ្យដូចគ្នា ($1\unit{km}^2 = 100\unit{ha}$) $\rightarrow$ គុណ ឬចែករកបរិមាណ ($N = S_{\text{សរុប}} \div S_{\text{១ឯកតា}}$) ។
+&
+$\circ$ កត់ចំណាំលក្ខណៈសម្គាល់រវាងវិធីពុះបូក \cnum{1} និងវិធីស៊ុមដកផ្នែកស \cnum{2} \\[3pt]
+\hline
+
+% ==================== ជំហានទី៤ (20min: E4 10 + E5 10) ====================
+\stepheader{ជំហានទី៤ ៖ ពង្រឹងចំណេះដឹងតាមចំណោទជីវភាព និងវាយតម្លៃ (២០ នាទី)}
+\fiveE{E4 - Elaborate}{10 min}\par\vspace{1pt}
+$\bullet$ ឱ្យសិស្សអនុវត្តប្រៀបធៀប \textbf{វិធីពុះបូក \cnum{1}} លើ \textbf{លំហាត់ទី ៧ រូបទី១ (ទំ.១៩៦ — រូបមុខផ្ទះ)} មុនចូលចំណោទអត្ថបទ
+&
+\textbf{គំរូប្រៀបធៀបវិធីពុះបូក (លំហាត់ទី៧ រូបទី១ ទំ.១៩៦)៖}\par\vspace{1pt}
+-- រូបមុខផ្ទះផ្គុំពីចតុកោណកែង ($10 \times 6$) បន្តុបត្រីកោណដំបូល ($b = 10,\; h = 4$)៖\par
+$S = (10 \times 6) + \left(\frac{1}{2} \times 10 \times 4\right) = 60 + 20 = \mathbf{80}$ (ឯកតាផ្ទៃ) ។
+&
+$\circ$ ជ្រើសរើសវិធីពុះបូក \cnum{1} និងគណនាឃើញ $S = 80$ \\[3pt]
+
+$\bullet$ ដឹកនាំសិស្សដោះស្រាយ \textbf{លំហាត់ទី ៨ (ទំ.១៩៦ — ចំការកៅស៊ូ)} ក្នុង \textbf{ផ្នែកទី៤} ដោយប្រយ័ត្នការបម្លែងខ្នាតពី $\unit{km}^2$ ទៅហិចតា ($\unit{ha}$)
+&
+\textbf{លំហាត់ទី ៨ (ទំ.១៩៦ — ចំការកៅស៊ូ)៖}\par\vspace{1pt}
+-- ចំការកៅស៊ូរាងចតុកោណកែង ($b = 5\unit{km},\; h = 2.3\unit{km}$)៖\par
+$S = 5 \times 2.3 = 11.5\unit{km}^2$ ។\par\vspace{1pt}
+-- ដោយ $1\unit{km}^2 = 100\unit{ha} \Rightarrow S = 11.5 \times 100 = \mathbf{1\,150\text{ ហិចតា } (\unit{ha})}$ ។
+&
+$\circ$ គណនាផ្ទៃគិតជា $\unit{km}^2$ រួចគុណនឹង $100$ បម្លែងជាហិចតា \\[3pt]
+
+$\bullet$ ឱ្យសិស្សបន្តដោះស្រាយ \textbf{លំហាត់ទី ៩ (ទំ.១៩៦ — សួនផ្កាកុលាប)} តាមជំហានរកផ្ទៃសរុប រួចចែកនឹងផ្ទៃសម្រាប់ផ្កា ១ ដើម
+&
+\textbf{លំហាត់ទី ៩ (ទំ.១៩៦ — សួនច្បារផ្កាកុលាប)៖}\par\vspace{1pt}
+-- ផ្ទៃសួនរាងត្រីកោណ ($b = 5\unit{m},\; h = 3\unit{m}$)៖ $S = \dfrac{1}{2} \times 5 \times 3 = 7.5\unit{m}^2$ ។\par\vspace{1pt}
+-- ចំនួនដើមផ្កាកុលាប ($0.5\unit{m}^2$ ក្នុង ១ ដើម)៖ $N = 7.5 \div 0.5 = \mathbf{15\text{ ដើម}}$ ។
+&
+$\circ$ គណនាឃើញ $7.5\unit{m}^2$ រួចចែកនឹង $0.5$ ឃើញ $15$ ដើម \\[3pt]
+
+&
+\cfig{\figModelWordAREAFour}
+& \\[3pt]
+
+\fiveE{E5 - Evaluate}{10 min}\par\vspace{1pt}
+$\bullet$ ឱ្យសិស្សធ្វើ \textbf{ផ្នែកទី៥} ដោយខ្លួនឯង (៥ នាទី) រួចផ្ទៀងដៃគូ (៣ នាទី)៖ \textbf{លំហាត់ទី ៦ រូបទី១ និងរូបទី៤ (ទំ.១៩៥)} ព្រមទាំងដោះស្រាយបិទបញ្ចប់ \textbf{លំហាត់ទី ១០ (បេសកកម្ម E1)}
+&
+\textbf{វាយតម្លៃសំយោគ (ទំ.១៩៥--១៩៦)៖}\par\vspace{1pt}
+$\bullet$ \textbf{ក. លំហាត់ទី៦(១)៖} ចតុកោណព្នាយ ($10, 14, h=12$) ដកត្រីកោណស ($b=14, h=12$)៖\par
+$S = \frac{(10+14)\times 12}{2} - \frac{14\times 12}{2} = 144 - 84 = \mathbf{60\unit{cm}^2}$ ។\par\vspace{1pt}
+$\bullet$ \textbf{ខ. លំហាត់ទី៦(៤)៖} អដ្ឋកោណក្នុងការេ $9\times 9$ កាត់កែង $3\times 3$ បួនជ្រុង៖\par
+$S = 9^2 - 4\times\left(\frac{1}{2}\times 3\times 3\right) = 81 - 18 = \mathbf{63\unit{cm}^2}$ ។
+&
+$\circ$ អនុវត្តវិធីស៊ុមដកផ្នែកសដោយខ្លួនឯង រួចប្ដូរសន្លឹកកិច្ចការផ្ទៀងផ្ទាត់ជាមួយដៃគូ \\[3pt]
+
+&
+\cfig{\figPracticeEvalAREAFour}
+& \\[3pt]
+
+$\bullet$ ពិនិត្យចម្លើយបិទបេសកកម្ម E1 (\textbf{លំហាត់ទី ១០}) និងតេស្តរហ័ស ៦០ វិនាទីជ្រើសរើសរូបមន្តត្រឹមត្រូវ
+&
+$\bullet$ \textbf{គ. បិទបេសកកម្ម E1 (លំហាត់ទី១០ ទំ.១៩៦)៖}\par
+$S = \dfrac{(400 + 150)\times 500}{2} = 550 \times 250 = 137\,500\unit{m}^2 \Rightarrow \mathbf{137\,500\text{ ផ្ទាំង}}$ ។\par\vspace{1pt}
+$\bullet$ \textbf{Exit Check៖} ផ្ទៃការេ $10\times 10$ កាត់ត្រីកោណកែង $2\times 2$ ចំនួន ៤ ជ្រុង ស្មើ៖ A. $96$ $\;\vert\;$ \textbf{B. $92$ (ត្រូវ៖ $100 - 8$)} $\;\vert\;$ C. $84$ $\;\vert\;$ D. $98$ ។
+&
+$\circ$ ផ្ទៀងចម្លើយ $137\,500$ ផ្ទាំង និងលើកម្រាមដៃទី២ ជ្រើសចម្លើយ \textbf{B ($92$)} \\[3pt]
+\hline
+
+% ==================== ជំហានទី៥ (≤2min) ====================
+\stepheader{ជំហានទី៥ ៖ កិច្ចការផ្ទះ និងបណ្ដាំផ្ញើ ($\le$ ២ នាទី)}
+\timenote{(ចំណាយពេល $\le 2\unit{min}$)}\par\vspace{1pt}
+$\bullet$ ដាក់កិច្ចការផ្ទះបញ្ចប់មេរៀនទី១៤ (ទំ.១៩៥--១៩៦)\par\vspace{1pt}
+$\bullet$ ផ្ដាំផ្ញើឱ្យត្រៀមដែកឈាន និងបន្ទាត់ក្រិតសម្រាប់ \textbf{មេរៀនទី១៥ ៖ រង្វង់} (ទំ.១៩៧)
+&
+\textbf{កិច្ចការផ្ទះ (សៀវភៅសិក្សាគោល ទំព័រ ១៩៥--១៩៦)៖}\par\vspace{1pt}
+១. \textbf{លំហាត់ទី ៦ (រូបទី២ និងរូបទី៥ ទំ.១៩៥)៖} រូបអក្សរ \en{L} កាត់ត្រីកោណកែង ($14\times 26$) និងអដ្ឋកោណក្នុងចតុកោណកែង $42\times 21$ (មាត់កាត់ $6\times 6$ បួនជ្រុង) ។\par\vspace{1pt}
+២. \textbf{លំហាត់ទី ៧ (ទំ.១៩៦)៖} គណនាបរិមាត្ររូបផ្ទះ និងផ្ទៃក្រឡាព្រមទាំងបរិមាត្រចតុកោណព្នាយ ($b'=15, b=30, h=15$) ។
+&
+$\circ$ កត់ត្រាកិច្ចការផ្ទះ និងត្រៀមដែកឈានសម្រាប់មេរៀនទី១៥\par\vspace{1pt}
+$\circ$ ទទួលបណ្ដាំផ្ញើ និងជម្រាបលាគ្រូ \\[3pt]
+\end{longtable}
+
+% -------------------- កាលបរិច្ឆេទ និងហត្ថលេខា --------------------
+\vspace{12pt}
+\hfill
+\begin{minipage}{9.8cm}
+  {\centering
+    ថ្ងៃព្រហស្បតិ៍ ៨កើត ខែមិគសិរ ឆ្នាំមមី អដ្ឋស័ក ពុទ្ធសករាជ ២៥៧០\\[2pt]
+    ព្រះក្រសាំង, ថ្ងៃទី១៧ ខែធ្នូ ឆ្នាំ២០២៦\\[3pt]
+    {\muol គ្រូបង្រៀន}\par}
+  \vspace{30pt}
+  \hfill{\muol ហុក ប៊ុនថែន}\hspace*{1.4cm}
+\end{minipage}
+
+\end{document}
