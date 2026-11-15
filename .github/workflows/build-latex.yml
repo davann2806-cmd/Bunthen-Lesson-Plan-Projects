@@ -1,13 +1,6 @@
-name: Build NGS Khmer XeLaTeX PDFs
+name: Build Bunthen Lesson Plan PDFs (Manual)
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "**/*.tex"
-      - "fonts/**"
-      - "scripts/**"
-      - ".github/workflows/build-latex.yml"
   workflow_dispatch:
     inputs:
       target_path:
@@ -50,24 +43,15 @@ jobs:
       - name: Install bundled Khmer & Math fonts
         run: bash scripts/setup_cloud.sh
 
-      - name: Compile targeted or modified XeLaTeX documents
+      - name: Compile targeted XeLaTeX documents
         env:
-          EVENT_NAME: ${{ github.event_name }}
-          BEFORE_SHA: ${{ github.event.before }}
-          HEAD_SHA: ${{ github.sha }}
           INPUT_TARGET: ${{ inputs.target_path }}
           INPUT_COMMIT: ${{ inputs.commit_pdfs }}
         run: |
-          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
-            if [ "$INPUT_COMMIT" = "true" ]; then
-              python3 scripts/compile_latex.py --target "$INPUT_TARGET" --in-place
-            else
-              python3 scripts/compile_latex.py --target "$INPUT_TARGET"
-            fi
-          elif [ "$BEFORE_SHA" = "0000000000000000000000000000000000000000" ] || [ -z "$BEFORE_SHA" ]; then
-            python3 scripts/compile_latex.py --changed "$BEFORE_SHA" "$HEAD_SHA"
+          if [ "$INPUT_COMMIT" = "true" ]; then
+            python3 scripts/compile_latex.py --target "$INPUT_TARGET" --in-place
           else
-            python3 scripts/compile_latex.py --changed "$BEFORE_SHA" "$HEAD_SHA" --in-place
+            python3 scripts/compile_latex.py --target "$INPUT_TARGET"
           fi
 
       - name: Upload compiled PDFs as downloadable artifact
@@ -79,7 +63,7 @@ jobs:
           retention-days: 30
 
       - name: Commit updated PDFs back to repository
-        if: (github.event_name == 'push' && github.event.before != '0000000000000000000000000000000000000000') || (github.event_name == 'workflow_dispatch' && inputs.commit_pdfs == true)
+        if: inputs.commit_pdfs == true
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

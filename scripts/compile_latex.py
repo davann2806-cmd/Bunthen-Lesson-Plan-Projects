@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compile NGS Khmer/Math XeLaTeX documents into verified PDFs with zero missing characters."""
+"""Compile Bunthen Lesson Plan Projects Khmer/Math XeLaTeX documents into verified PDFs."""
 
 from __future__ import annotations
 
@@ -204,7 +204,7 @@ def compile_single_tex(
 def main() -> int:
     """Parse CLI arguments, compile requested .tex targets, and write dist_pdfs manifest."""
     parser = argparse.ArgumentParser(
-        description="Compile NGS Khmer/Math XeLaTeX documents with 0-error verification."
+        description="Compile Bunthen Lesson Plan Projects Khmer/Math XeLaTeX documents with 0-error verification."
     )
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument(

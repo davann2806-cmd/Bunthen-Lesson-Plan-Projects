@@ -1,4 +1,4 @@
-# NGS Lesson Plan Workspace Rules & Memory (`អនុវិទ្យាល័យព្រះក្រសាំង`)
+# Bunthen Lesson Plan Projects — Workspace Rules & Memory (`អនុវិទ្យាល័យព្រះក្រសាំង`)
 
 គោលការណ៍ទាំងនេះត្រូវអនុវត្តជាស្វ័យប្រវត្តិសម្រាប់គ្រប់កញ្ចប់ឯកសារបង្រៀន (គណិតវិទ្យា និងមុខវិជ្ជាពាក់ព័ន្ធ) នៅក្នុង Workspace នេះ ដើម្បីរក្សាស្ដង់ដារ **កញ្ចប់ឯកសារបង្រៀន ៤ ឯកសារ + ថតភស្តុតាងស្រាវជ្រាវភ្ជាប់ (4-Document Lesson Package + Attached Evidence Folder)** សម្រាប់ម៉ោងសិក្សា ៥០ នាទី គំរូ 5Es និងរចនាប័ទ្ម `ls_plan.tex` ឱ្យដូចគ្នាទាំងស្រុងសម្រាប់មេរៀនបន្តបន្ទាប់។
 
@@ -78,3 +78,15 @@ Workspace បែងចែកជា **៣ ថតធំ** តាមផ្លូវ
 1. **`01_កិច្ចតែងការបង្រៀន\`**៖ ផ្ទុកកញ្ចប់ ៥ ផ្នែក (`LS_Plan_<Topic>.tex/.pdf`, `Teaching_Scenario_<Topic>.tex/.pdf`, `Teaching_Guideline_<Topic>.tex/.pdf`, `Printable_Materials_<Topic>.tex/.pdf`, និងថត `ឯកសារស្រាវជ្រាវយោង_PDF\`)។ ក្រោយ compile ត្រូវផ្លាស់ទី **តែ** `<JobName>.aux`, `<JobName>.log`, `<JobName>.out` (**ហាមប្រើ `*.*`**) ទៅ `01_កិច្ចតែងការបង្រៀន\_Build_Logs_and_Duplicates\` ដោយរក្សាទុកតែឯកសារ `.tex/.pdf` ទាំង ៤ គូ និង `ឯកសារស្រាវជ្រាវយោង_PDF\` ប៉ុណ្ណោះក្នុងថតមេរៀន។
 2. **`02_មេរៀន\`**៖ ផ្ទុកឯកសារមេរៀនសិស្ស សន្លឹកកិច្ចការ និងសៀវភៅសិក្សាគោល។
 3. **`03_ឯកសារស្រាវជ្រាវ\`**៖ ផ្ទុក Open-Access PDFs ដែលបានផ្ទៀងផ្ទាត់រួចនៅក្នុង `papers\` និង `Research_Brief_<Topic>.md`។
+
+---
+
+## ៨. គោលការណ៍ដំណើរការលើ Antigravity Cloud និង GitHub (`Bunthen-Lesson-Plan-Projects`)
+- **Repository ផ្លូវការ (`Public`)**៖ `https://github.com/davann2806-cmd/Bunthen-Lesson-Plan-Projects` (Branch `main`)។
+- **លំដាប់ការងារពេលបើក Session លើ Antigravity Cloud / Linux VM**៖
+  1. ដំឡើងបរិស្ថាន Cloud មុនគេដោយរត់ `bash scripts/setup_cloud.sh` (ស្គ្រីបនឹងដំឡើង TeX Live XeLaTeX, PyMuPDF និងចម្លងពុម្ពអក្សរខ្មែរ-គណិតទាំង ២០ ពី `fonts/` ដោយស្វ័យប្រវត្តិ)។
+  2. បន្ទាប់ពីនិពន្ធឯកសារ `.tex` ទាំង ៤ ក្នុងថតមេរៀនរួច ត្រូវ **Compile ដោយផ្ទាល់នៅលើ Antigravity Cloud** តាមពាក្យបញ្ជា៖
+     `python3 scripts/compile_latex.py --target "<lesson_folder>" --in-place`
+     (ធានាថា Compile `xelatex` ២ ដង, `0` LaTeX errors និង `0 Missing character: There is no`)។
+  3. បម្លែងទំព័រ PDF ជា PNG តាម `fitz` ដើម្បីត្រួតពិនិត្យដោយ `read_file` និងរក្សាទុកតែ `.tex/.pdf` + `ឯកសារស្រាវជ្រាវយោង_PDF\` ក្នុងថតមេរៀន (សម្អាត `.aux`, `.log`, `.out` ចូល `01_កិច្ចតែងការបង្រៀន\_Build_Logs_and_Duplicates\` ឬទុកឱ្យ `compile_latex.py` រត់ក្នុង tmp dir)។
+  4. **បញ្ជូនទាំង Source Code (`.tex`) និង PDF (`.pdf`) ចូល GitHub**៖ រាល់ពេលបញ្ចប់មេរៀនមួយ ត្រូវ `git -c core.quotePath=false add` ទាំង `.tex`, `.pdf`, និង `ឯកសារស្រាវជ្រាវយោង_PDF/` រួច `git commit` និង `git push origin main` ដើម្បីឱ្យលោកគ្រូអាចទាញយក PDF រួចរាល់ពី Public GitHub លើទូរស័ព្ទបានភ្លាមៗដោយមិនពឹង GitHub Actions។
