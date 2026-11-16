@@ -1,0 +1,313 @@
+% !TeX program = xelatex
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[a4paper, left=1.0cm, right=1.0cm, top=0.75cm, bottom=1.00cm, footskip=0.52cm]{geometry}
+\usepackage{amsmath}
+\usepackage{unicode-math}
+\usepackage{fontspec}
+\usepackage{array, colortbl}
+\usepackage[table]{xcolor}
+\usepackage{enumitem}
+\usepackage{pifont}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{tikz}
+\usepackage[most]{tcolorbox}
+\usetikzlibrary{calc, arrows.meta, decorations.pathreplacing, positioning, babel}
+
+\makeatletter
+\let\@expl@@@mark@update@singlecol@structures@@\relax
+\makeatother
+
+\providecommand{\NGSFindFonts}{%
+  \IfFileExists{C:/Windows/Fonts/cambria.ttc}{%
+    \def\NGSSysPath{C:/Windows/Fonts/}%
+    \def\NGSUserPath{C:/Users/KIT/AppData/Local/Microsoft/Windows/Fonts/}%
+  }{%
+    \IfFileExists{./fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{./fonts/}\def\NGSUserPath{./fonts/}}{%
+    \IfFileExists{../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../fonts/}\def\NGSUserPath{../fonts/}}{%
+    \IfFileExists{../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../fonts/}\def\NGSUserPath{../../fonts/}}{%
+    \IfFileExists{../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../fonts/}\def\NGSUserPath{../../../fonts/}}{%
+    \IfFileExists{../../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../../fonts/}\def\NGSUserPath{../../../../fonts/}}{%
+    \IfFileExists{../../../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../../../fonts/}\def\NGSUserPath{../../../../../fonts/}}{%
+    \IfFileExists{../../../../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../../../../fonts/}\def\NGSUserPath{../../../../../../fonts/}}{%
+      \def\NGSSysPath{../../../../../../../fonts/}\def\NGSUserPath{../../../../../../../fonts/}%
+    }}}}}}}%
+  }%
+}
+\NGSFindFonts
+
+\setmathfont[Path={\NGSSysPath}, FontIndex=1, Scale=1.02]{cambria.ttc}
+\defaultfontfeatures{Ligatures=TeX}
+
+\setmainfont[
+  Path={\NGSUserPath}, Extension=.ttf, Script=Khmer,
+  BoldFont={KhmerOSsiemreap}, BoldFeatures={FakeBold=1.8},
+  ItalicFont={KhmerOSsiemreap}, ItalicFeatures={FakeSlant=0.25},
+  BoldItalicFont={KhmerOSsiemreap}, BoldItalicFeatures={FakeBold=1.8, FakeSlant=0.25}
+]{KhmerOSsiemreap}
+
+\newfontfamily\muol[Path={\NGSUserPath}, Extension=.ttf, Script=Khmer]{KhmerOSmuollight}
+\newfontfamily\TimesEn[Path={\NGSSysPath}, Extension=.ttf, BoldFont={timesbd}, ItalicFont={timesi}, BoldItalicFont={timesbi}]{times}
+\newfontfamily\CalibriFont[Path={\NGSSysPath}, Extension=.ttf]{calibri}
+
+\XeTeXlinebreaklocale "km"
+\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
+
+\definecolor{panelgray}{gray}{0.94}
+\definecolor{headgray}{gray}{0.85}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\fontsize{7.4pt}{9.5pt}\selectfont អនុវិទ្យាល័យព្រះក្រសាំង \en{|} គ្រូ៖ ហុក ប៊ុនថែន \en{|} មេរៀនទី៦ (៦) ទម្រង់ប្រភាគលើប្រភាគ \en{|} ថ្ងៃសៅរ៍ ទី១៩ ខែធ្នូ ឆ្នាំ២០២៦}
+\fancyfoot[R]{\fontsize{7.8pt}{10pt}\selectfont ទំព័រ \en{\thepage\ / \pageref{LastPage}}}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\tabcolsep}{4pt}
+
+\newcommand{\en}[1]{{\TimesEn #1}}
+\newcommand{\enbf}[1]{{\TimesEn\bfseries #1}}
+\newcommand{\unit}[1]{\,\text{\en{#1}}}
+\newcommand{\riel}{\,\text{៛}}
+\newcommand{\cnum}[1]{\mbox{\fontsize{10pt}{12pt}\selectfont\ding{\numexpr181+#1\relax}}}
+\newcommand{\chkbox}{\tikz[baseline=-0.15ex]\draw[black, line width=0.85pt, fill=white] (0,0) rectangle (0.24cm,0.24cm);}
+\newcommand{\ansbox}[1][2.0cm]{\,\tikz[baseline=-0.65ex]\draw[black, line width=0.65pt, fill=white] (0,0) rectangle (#1, 0.44cm);\,}
+\newcommand{\dotline}[1][2.2cm]{\makebox[#1]{\dotfill}}
+
+\newcommand{\pagebanner}[2]{%
+  \begin{tcolorbox}[
+    enhanced, sharp corners, colback=headgray, colframe=black,
+    boxrule=1.05pt, boxsep=1pt, top=2.5pt, bottom=2.5pt, left=6pt, right=6pt,
+    after skip=3.5pt
+  ]
+    {\muol\fontsize{9.0pt}{13.2pt}\selectfont #1}\hfill{\fontsize{8.0pt}{11.2pt}\selectfont\textbf{#2}}
+  \end{tcolorbox}%
+}
+
+\newcommand{\secstrip}[2]{%
+  \vspace{3pt}%
+  \begin{tcolorbox}[
+    enhanced, sharp corners, colback=panelgray, colframe=black,
+    boxrule=0.8pt, boxsep=0.8pt, top=2pt, bottom=2pt, left=5pt, right=5pt,
+    after skip=3pt
+  ]
+    {\muol\fontsize{8.5pt}{12.2pt}\selectfont #1}\hfill{\fontsize{7.8pt}{10.8pt}\selectfont\textit{#2}}
+  \end{tcolorbox}%
+}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
+\begin{document}
+\fontsize{9.5pt}{14.5pt}\selectfont
+
+% ============================================================================
+% ទំព័រទី ១៖ សន្លឹកកិច្ចការសិស្ស (ផ្នែកមុខ៖ E1 -> E2 -> E3)
+% ============================================================================
+\pagebanner{សន្លឹកកិច្ចការសិស្ស \enbf{(}៦\enbf{.}៦ ទម្រង់ប្រភាគលើប្រភាគ\enbf{)} \enbf{--} ផ្នែកមុខ}{ថ្នាក់ទី៨ \en{|} ទំ.៨៣--៨៤}
+
+\begin{tcolorbox}[
+  enhanced, sharp corners, colback=white, colframe=black,
+  boxrule=0.8pt, boxsep=1.5pt, top=3.5pt, bottom=3.5pt, left=5pt, right=5pt,
+  after skip=4pt
+]
+  \fontsize{9.0pt}{13.0pt}\selectfont
+  \textbf{ឈ្មោះសិស្ស៖} \dotline[4.3cm] \quad
+  \textbf{សមាជិកក្រុម៖} \dotline[4.3cm] \quad
+  \textbf{ថ្នាក់ទី៖} ៨\dotline[0.9cm] \quad
+  \textbf{ក្រុមទី៖} \dotline[1.0cm]
+\end{tcolorbox}
+
+% --- E1 Engage ---
+\secstrip{ផ្នែកទី ១ \enbf{(E1 - Engage)} ៖ បេសកកម្មអត្រាបង្ហូរទឹករួមនៃបំពង់ពីរ}{រយៈពេល ៣ នាទី (គូស \ding{51} ក្នុង \chkbox)}
+
+\begin{tcolorbox}[
+  enhanced, sharp corners, colback=white, colframe=black,
+  boxrule=0.8pt, boxsep=2.5pt, top=4pt, bottom=4pt, left=6pt, right=6pt
+]
+  បំពង់ទី១ បង្ហូរទឹកពេញអាងក្នុង $5\unit{h}$ ឯបំពង់ទី២ ពេញអាងដដែលក្នុង $20\unit{h}$ (ទំ.៨៤)។ បើបើកទាំងពីររួមគ្នា តើសិស្សរូបណាគិតត្រូវ?\\[3pt]
+  \chkbox\ \textbf{សិស្ស ក៖} $\dfrac{5 + 20}{2} = 12.5\unit{h}$ (យកម៉ោងបូកគ្នាចែកជាពីរ) \qquad
+  \chkbox\ \textbf{សិស្ស ខ៖} $\dfrac{1}{\frac{1}{5} + \frac{1}{20}} = \dfrac{1}{\frac{5}{20}} = 4\unit{h}$ (ប្រភាគលើប្រភាគ)\\[3pt]
+  $\bullet$ \textbf{ពិចារណា៖} បើបំពង់ទី១ តែឯងប្រើពេលតែ $5\unit{h}$ តើបើក ២ បំពង់ជួយគ្នាអាចយូរជាង $5\unit{h}$ បានឬទេ? \dotline[4.8cm]
+\end{tcolorbox}
+
+\vspace{2pt}
+
+% --- E2 Explore ---
+\secstrip{ផ្នែកទី ២ \enbf{(E2 - Explore)} ៖ ការបង្រួមលើ-ក្រោម និងគុណនឹងចម្រាស (ទំ.៨៣--៨៤)}{រយៈពេល ១១ នាទី}
+
+\textbf{សកម្មភាព ១ (\en{E2-A} — ៥ នាទី)៖ ពីប្រភាគលេខទៅកន្សោមសនិទាន (ទំ.៨៣–៨៤)}
+
+\begin{tcolorbox}[
+  enhanced, sharp corners, colback=white, colframe=black,
+  boxrule=0.8pt, boxsep=2.5pt, top=4.5pt, bottom=4.5pt, left=6pt, right=6pt
+]
+  $\bullet$ \textbf{១) ប្រតិបត្តិ ក (ទំ.៨៤)៖} សម្រួល $\dfrac{1 - \frac{1}{3}}{\frac{1}{2} - \frac{1}{6}} = \dfrac{\;\dotline[1.1cm]\;}{\dotline[1.1cm]} = \dfrac{2}{3} \times \dfrac{\dotline[0.9cm]}{\dotline[0.9cm]} =$ \ansbox[2.0cm]\\[6pt]
+  $\bullet$ \textbf{២) ឧទាហរណ៍ (ទំ.៨៣)៖} សម្រួល $\dfrac{\frac{1}{a} + \frac{1}{b}}{\frac{b}{2a} - \frac{a}{2b}} = \dfrac{\;\frac{a + b}{ab}\;}{\frac{b^2 - a^2}{2ab}} = \dfrac{a + b}{ab} \times \dfrac{2ab}{(b + a)(\dotline[1.4cm])} =$ \ansbox[2.6cm]
+\end{tcolorbox}
+
+\vspace{3pt}
+\textbf{សកម្មភាព ២ (\en{E2-B} — ៦ នាទី)៖ ករណីភាគបែងធំជាពហុធា (ទំ.៨៣–៨៤ លំហាត់គំរូ ១)}
+
+\begin{tcolorbox}[
+  enhanced, sharp corners, colback=white, colframe=black,
+  boxrule=0.8pt, boxsep=2.5pt, top=4.5pt, bottom=4.5pt, left=6pt, right=6pt
+]
+  សម្រួលកន្សោមប្រភាគលើប្រភាគ៖ $\dfrac{x - \frac{x + 5}{x - 3}}{x + 1}$ តាមតារាង ៤ ជំហានខាងក្រោម៖\\[4pt]
+  $\bullet$ \textbf{ជំហានទី ១ (បង្រួមភាគយកធំ)៖} $x - \dfrac{x + 5}{x - 3} = \dfrac{x(x - 3) - (x + 5)}{x - 3} = \dfrac{\dotline[2.6cm]}{x - 3}$\\[4pt]
+  $\bullet$ \textbf{ជំហានទី ២ (សរសេរភាគបែងធំជាប្រភាគ)៖} $x + 1 = \dfrac{x + 1}{\dotline[0.9cm]}$ \quad $\Longrightarrow$ \quad ចម្រាសនៃភាគបែងធំគឺ \ansbox[2.2cm]\\[4pt]
+  $\bullet$ \textbf{ជំហានទី ៣ (ប្ដូរជាផលគុណចម្រាស)៖} $\dfrac{x^2 - 4x - 5}{x - 3} \times \dfrac{1}{x + 1}$\\[4pt]
+  $\bullet$ \textbf{ជំហានទី ៤ (ដាក់ភាគយកជាកត្តា និងសម្រួល)៖} $\dfrac{(x + 1)(\dotline[1.4cm])}{x - 3} \times \dfrac{1}{x + 1} =$ \ansbox[2.8cm]
+\end{tcolorbox}
+
+\vspace{2pt}
+
+% --- E3 Explain ---
+\secstrip{ផ្នែកទី ៣ \enbf{(E3 - Explain)} ៖ វិធានប្រភាគលើប្រភាគ និងធនាគារហេតុផល \cnum{1}--\cnum{4}}{រយៈពេល ៦ នាទី}
+
+\begin{tcolorbox}[
+  enhanced, sharp corners, colback=panelgray, colframe=black,
+  boxrule=0.95pt, boxsep=2.5pt, top=4pt, bottom=4pt, left=6pt, right=6pt
+]
+  \textbf{វិធានសម្រួលប្រភាគលើប្រភាគ (ទំ.៨៣)៖} $\dfrac{\;\frac{A}{B}\;}{\frac{C}{D}} = \dfrac{A}{B} \times \dfrac{\dotline[0.9cm]}{\dotline[0.9cm]} =$ \ansbox[2.4cm] \quad ($B, C, D \neq 0$)\\[3pt]
+  \cnum{1} \textbf{សម្គាល់របារប្រភាគធំ (មេ)៖} បែងចែកឱ្យច្បាស់រវាងភាគយកធំ និងភាគបែងធំ។\\[2pt]
+  \cnum{2} \textbf{បង្រួមលើ-ក្រោមសិន៖} តម្រូវភាគបែងឱ្យភាគយកធំជាប្រភាគមួយ និងភាគបែងធំជាប្រភាគមួយសិន។\\[2pt]
+  \cnum{3} \textbf{ករណីពហុធា $P$៖} សរសេរពហុធា $P$ ជាប្រភាគ $\dfrac{P}{1}$ ដើម្បីងាយត្រឡប់ចម្រាសជា $\dfrac{1}{P}$។\\[2pt]
+  \cnum{4} \textbf{គុណនឹងចម្រាសប្រភាគក្រោម៖} គុណប្រភាគលើនឹងចម្រាសប្រភាគក្រោម រួចដាក់ជាកត្តាសម្រួលកត្តារួម។\\[3pt]
+  $\bullet$ \textbf{ចំណាំផ្ទាល់ខ្លួន៖} ហេតុអ្វីត្រូវសរសេរពហុធា $x + 1$ ជា $\dfrac{x + 1}{1}$ សិនមុនត្រឡប់ចម្រាស? \dotline[6.8cm]
+\end{tcolorbox}
+
+% ============================================================================
+% ទំព័រទី ២៖ សន្លឹកកិច្ចការសិស្ស (ផ្នែកខ្នង៖ E4 -> E5 -> កិច្ចការផ្ទះ)
+% ============================================================================
+\clearpage
+\pagebanner{សន្លឹកកិច្ចការសិស្ស \enbf{(}៦\enbf{.}៦ ទម្រង់ប្រភាគលើប្រភាគ\enbf{)} \enbf{--} ផ្នែកខ្នង}{ថ្នាក់ទី៨ \en{|} ទំ.៨៤, ៨៧}
+
+% --- E4 Elaborate ---
+\secstrip{ផ្នែកទី ៤ \enbf{(E4 - Elaborate)} ៖ ចំណោទបំពង់ទឹកទាំងពីរ និងប្រតិបត្តិ ខ (ទំ.៨៤)}{រយៈពេល ១០ នាទី}
+
+\begin{tcolorbox}[
+  enhanced, sharp corners, colback=white, colframe=black,
+  boxrule=0.8pt, boxsep=2.5pt, top=4.5pt, bottom=4.5pt, left=6pt, right=6pt
+]
+  $\bullet$ \textbf{១) លំហាត់គំរូទី ២ (បំពង់ទឹកទាំងពីរ ទំ.៨៤)៖} តាង $c$ ជាចំណុះអាង។ ក្នុង $1\unit{h}$ បំពង់ទាំងពីរបង្ហូររួមគ្នាបាន $c\left(\dfrac{1}{t_1} + \dfrac{1}{t_2}\right)$ ។\\[3pt]
+  \hspace*{0.4em}រយៈពេលបង្ហូរពេញអាងរួមគ្នា៖ $t = \dfrac{c}{c\left(\frac{1}{t_1} + \frac{1}{t_2}\right)} = \dfrac{1}{\frac{t_2 + t_1}{t_1 t_2}} =$ \ansbox[2.4cm] ; ចំពោះ $t_1 = 5\unit{h}, t_2 = 20\unit{h} \Rightarrow t =$ \ansbox[1.8cm]\\[5pt]
+  $\bullet$ \textbf{២) ប្រតិបត្តិ ខ (ទំ.៨៤)៖} សម្រួល $\dfrac{\frac{5}{n + 1} - \frac{1}{n - 1}}{\frac{1}{n + 1} - \frac{2}{n - 1}} = \dfrac{\;\frac{5(n - 1) - (n + 1)}{(n + 1)(n - 1)}\;}{\frac{(n - 1) - 2(n + 1)}{(n + 1)(n - 1)}} = \dfrac{\dotline[2.0cm]}{\dotline[2.0cm]} =$ \ansbox[2.8cm]\\[4pt]
+  $\bullet$ \textbf{សំណួរឆ្លុះបញ្ចាំង (\en{EIA Looking-Back})៖} ហេតុអ្វីកត្តាភាគបែងតូច $(n+1)(n-1)$ ទាំងលើទាំងក្រោមអាចសម្រួលអស់ភ្លាម?\\[3pt]
+  \hspace*{0.4em}ចម្លើយ៖ ព្រោះពេលគុណនឹងចម្រាសប្រភាគក្រោម កត្តា $(n+1)(n-1)$ \dotline[7.4cm] ។
+\end{tcolorbox}
+
+% --- E5 Evaluate ---
+\secstrip{ផ្នែកទី ៥ \enbf{(E5 - Evaluate)} ៖ ហ្វឹកហាត់ក្រុម ល្បឿនវិនិច្ឆ័យ \enbf{A--D} និងប័ណ្ណចាកចេញ}{រយៈពេល ១០ នាទី}
+
+\textbf{១) ហ្វឹកហាត់ក្រុមតូច (៥ នាទី — សៀវភៅគោល ទំ.៨៧ លេខ ៩ ក, គ, ឃ, ង)៖}
+
+\vspace{3pt}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{|L{9.1cm}|L{9.1cm}|}
+\hline
+\cellcolor{panelgray}\textbf{ក) ទំ.៨៧ \en{\#9} ក៖} $\dfrac{\frac{1}{6} + \frac{1}{3}}{\frac{1}{5} + \frac{1}{5}}$ &
+\cellcolor{panelgray}\textbf{ខ) ទំ.៨៧ \en{\#9} គ៖} $\dfrac{\frac{5}{6} - \frac{5}{7}}{\frac{5}{6} + \frac{5}{7}}$ \\
+\hline
+បង្រួមលើ-ក្រោម៖ $\dfrac{\;\dotline[1.1cm]\;}{\dotline[1.1cm]}$ \par
+ចម្លើយចុងក្រោយ $=$ \ansbox[2.8cm] &
+បង្រួមលើ-ក្រោម (ភាគបែង $42$)៖ $\dfrac{\;\dotline[1.2cm]\;}{\dotline[1.2cm]}$ \par
+ចម្លើយចុងក្រោយ $=$ \ansbox[2.8cm] \\[3pt]
+\hline
+\cellcolor{panelgray}\textbf{គ) ទំ.៨៧ \en{\#9} ឃ៖} $\dfrac{\;\frac{3}{x}\;}{\frac{1}{x} - \frac{1}{3x}}$ &
+\cellcolor{panelgray}\textbf{ឃ) ទំ.៨៧ \en{\#9} ង៖} $\dfrac{\frac{2x}{3} + 2}{\frac{5x}{3} - \frac{15}{x}}$ \\
+\hline
+ភាគបែងធំ $= \dfrac{2}{3x} \;\Rightarrow\; \dfrac{3}{x} \times \dfrac{3x}{2}$ \par
+ចម្លើយចុងក្រោយ $=$ \ansbox[2.8cm] &
+$= \dfrac{2(x + 3)}{3} \times \dfrac{3x}{5(x - 3)(x + 3)}$ \par
+ចម្លើយចុងក្រោយ $=$ \ansbox[2.8cm] \\[3pt]
+\hline
+\end{tabular}
+
+\vspace{5pt}
+\begin{tcolorbox}[
+  enhanced, sharp corners, colback=white, colframe=black,
+  boxrule=0.85pt, boxsep=2.5pt, top=4pt, bottom=4pt, left=6pt, right=6pt
+]
+  \textbf{២) សំណួរវិនិច្ឆ័យរហ័ស \en{A--D} (\en{60} វិនាទី)៖} តើកន្សោមប្រភាគលើប្រភាគ $\dfrac{\;\frac{2}{x}\;}{1 + \frac{1}{x}}$ សម្រួលទៅស្មើជម្រើសណា?\\[4pt]
+  \chkbox\ \textbf{\en{A.}} $\dfrac{2}{x^2 + x}$ \qquad\quad
+  \chkbox\ \textbf{\en{B.}} $\dfrac{2}{x + 1}$ \qquad\quad
+  \chkbox\ \textbf{\en{C.}} $\dfrac{x + 1}{2}$ \qquad\quad
+  \chkbox\ \textbf{\en{D.}} $2x + 2$
+\end{tcolorbox}
+
+\vspace{4pt}
+\begin{tcolorbox}[
+  enhanced, sharp corners, colback=panelgray, colframe=black,
+  boxrule=1.0pt, boxsep=2.5pt, top=4.5pt, bottom=4.5pt, left=6pt, right=6pt
+]
+  \textbf{៣) ប័ណ្ណចាកចេញបុគ្គល (\en{Exit Ticket} — ២ នាទី — ទំ.៨៧ \en{\#9} ច)៖} ធ្វើដោយខ្លួនឯងមុនប្រគល់សន្លឹកកិច្ចការ!\\[4pt]
+  សម្រួល៖ $\dfrac{k + \frac{k - 3}{k + 1}}{k - \frac{2}{k + 1}} = \dfrac{k^2 + 2k - 3}{k^2 + k - 2} = \dfrac{(k + 3)(\dotline[1.3cm])}{(k + 2)(\dotline[1.3cm])} =$ \ansbox[2.8cm] \quad (ហេតុផល៖ \ansbox[1.1cm])
+\end{tcolorbox}
+
+% --- Homework ---
+\secstrip{ផ្នែកទី ៦ ៖ កិច្ចការផ្ទះបញ្ចប់មេរៀនទី៦ (សៀវភៅគោល ទំ.៨៧ លេខ ៩ និង លេខ ១៣)}{ធ្វើក្នុងសៀវភៅកិច្ចការផ្ទះ}
+
+\begin{tcolorbox}[
+  enhanced, sharp corners, colback=white, colframe=black,
+  boxrule=0.8pt, boxsep=2.5pt, top=4pt, bottom=4pt, left=6pt, right=6pt
+]
+  $\bullet$ \textbf{១) ទំ.៨៧ លេខ ៩ (ខ, ដ, ថ)៖} សម្រួល $\dfrac{6 - \frac{5}{2} + \frac{3}{8}}{3 - \frac{5}{2} - \frac{7}{4}}$ , $\dfrac{a - \frac{a - b}{1 + ab}}{1 + \frac{a(a - b)}{1 + ab}}$ និង $\dfrac{1 - 2b}{1 + \frac{1}{2b}} \div \dfrac{1 + 2b}{1 - \frac{1}{2b}}$ ។\\[3pt]
+  $\bullet$ \textbf{២) ទំ.៨៧ លេខ ១៣ (ក, ខ)៖} កម្មករ ៣ នាក់ធ្វើការតែឯងហើយក្នុង $d_1, d_2, d_3$ ថ្ងៃ ($20, 15, 12$ ថ្ងៃ)។ រករយៈពេលធ្វើរួមគ្នា!\\[3pt]
+  $\bullet$ \textbf{បណ្ដាំផ្ញើ៖} រំលឹកសង្ខេបរូបមន្តសំខាន់ៗទាំងអស់នៃមេរៀនទី៦ \textbf{កន្សោមសនិទាន} (ទំព័រ ៧៥–៨៨) ។
+\end{tcolorbox}
+
+% ============================================================================
+% ទំព័រទី ៣៖ ប្លង់ក្ដារខៀន ៣ ផ្នែក និងចម្លើយសង្ខេបសម្រាប់គ្រូ (Teacher Board Plan & Key)
+% ============================================================================
+\clearpage
+\pagebanner{ប្លង់ក្ដារខៀន ៣ ផ្នែក និងចម្លើយសង្ខេបសម្រាប់គ្រូ \enbf{(}គ្មានស្លាយ \enbf{LCD}\enbf{)}}{មេរៀនទី៦ (៦) \en{|} ៥០ នាទី}
+
+\secstrip{១. ប្លង់គ្រប់គ្រងក្ដារខៀន ៣ ផ្នែក (Chalkboard 3-Zone Layout)}{រក្សាធនាគារហេតុផល \cnum{1}--\cnum{4} នៅកណ្ដាលពេញម៉ោង}
+
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{|L{5.8cm}|L{6.4cm}|L{5.8cm}|}
+\hline
+\cellcolor{headgray}\textbf{ផ្នែកទី ១ (ឆ្វេង)៖ កំណែ + \en{E1}} &
+\cellcolor{headgray}\textbf{ផ្នែកទី ២ (កណ្ដាល)៖ វិធាន និង \cnum{1}--\cnum{4}} &
+\cellcolor{headgray}\textbf{ផ្នែកទី ៣ (ស្ដាំ)៖ \en{E4} + ហ្វឹកហាត់ \en{E5}} \\
+\hline
+$\bullet$ \textbf{កំណែ \en{\#8}៖} ខ) $\tfrac{3x+7y}{6}$ ; ឆ) $0$ \par
+ឈ) $\tfrac{5a+4}{6(a-4)}$ ; \en{\#14} គ) $a{=}18, b{=}19$ \par\vspace{2pt}
+$\bullet$ \textbf{បេសកកម្ម \en{E1} (បំពង់ $5\unit{h}, 20\unit{h}$)៖} \par
+សិស្ស ក $12.5\unit{h}$ (\ding{55}) $\neq$ សិស្ស ខ $\mathbf{4\unit{h}}$ (\ding{51})
+&
+\textbf{៦. ទម្រង់ប្រភាគលើប្រភាគ} \par
+$\dfrac{\;A/B\;}{C/D} = \dfrac{A}{B} \times \dfrac{D}{C} = \dfrac{A \cdot D}{B \cdot C}$ \par
+\cnum{1} សម្គាល់របារប្រភាគធំ (មេ) \par
+\cnum{2} បង្រួមលើ-ក្រោមជាប្រភាគមួយៗ \par
+\cnum{3} ពហុធា $P = \tfrac{P}{1}$ \quad \cnum{4} គុណចម្រាស
+&
+$\bullet$ \textbf{គំរូ ១៖} $\tfrac{x^2-4x-5}{x-3} \times \tfrac{1}{x+1} = \tfrac{x-5}{x-3}$ \par
+$\bullet$ \textbf{គំរូ ២ (បំពង់ទឹក)៖} $t = \dfrac{t_1 t_2}{t_1 + t_2} = 4\unit{h}$ \par
+$\bullet$ \textbf{ប្រតិបត្តិ ខ៖} $-\dfrac{2(2n - 3)}{n + 3}$ \par
+$\bullet$ \textbf{វិនិច្ឆ័យ \en{A--D}៖} ជម្រើស \textbf{\en{B}} $\dfrac{2}{x + 1}$ \\
+\hline
+\end{tabular}
+
+\vspace{4pt}
+\secstrip{២. ចម្លើយសង្ខេបនៃសន្លឹកកិច្ចការសិស្ស និងកិច្ចការផ្ទះ (Answer Key)}{សម្រាប់គ្រូផ្ទៀងផ្ទាត់រហ័ស}
+
+\begin{tcolorbox}[
+  enhanced, sharp corners, colback=white, colframe=black,
+  boxrule=0.85pt, boxsep=3pt, top=5pt, bottom=5pt, left=6pt, right=6pt
+]
+  $\bullet$ \textbf{ផ្នែក \en{E1}៖} \textbf{សិស្ស ខ} ត្រឹមត្រូវ ($4\unit{h}$); បើក ២ បំពង់ជួយគ្នាត្រូវតែលឿនជាង $5\unit{h}$ (មិនអាច $12.5\unit{h}$ ទេ) ។\\[3pt]
+  $\bullet$ \textbf{ផ្នែក \en{E2-A}៖} ១) ប្រតិបត្តិ ក៖ $\dfrac{2/3}{1/3} = \dfrac{2}{3}\times\dfrac{3}{1} = \mathbf{2}$ \quad ; \quad ២) ឧទាហរណ៍ទំ.៨៣៖ $\dfrac{a+b}{ab}\times\dfrac{2ab}{(b+a)(b-a)} = \mathbf{\dfrac{2}{b - a}}$ ។\\[3pt]
+  $\bullet$ \textbf{ផ្នែក \en{E2-B} (គំរូ ១)៖} ភាគយក $x^2 - 4x - 5 = (x+1)(x-5)$ ; ចម្រាស $\dfrac{1}{x+1} \implies$ ចម្លើយ $\mathbf{\dfrac{x - 5}{x - 3}}$ ។\\[3pt]
+  $\bullet$ \textbf{ផ្នែក \en{E4}៖} ១) គំរូ ២៖ $t = \mathbf{\dfrac{t_1 t_2}{t_1 + t_2}} \Rightarrow \dfrac{5 \times 20}{5 + 20} = \mathbf{4\unit{h}}$ \quad ; \quad ២) ប្រតិបត្តិ ខ៖ $\dfrac{4n - 6}{-n - 3} = \mathbf{-\dfrac{2(2n - 3)}{n + 3}}$ ។\\[3pt]
+  $\bullet$ \textbf{ផ្នែក \en{E5} (ក្រុម)៖} \en{\#9} ក) $\mathbf{\dfrac{5}{4}}$ ; គ) $\dfrac{5/42}{65/42} = \mathbf{\dfrac{1}{13}}$ ; ឃ) $\mathbf{\dfrac{9}{2}}$ ; ង) $\mathbf{\dfrac{2x}{5(x - 3)}}$ ។\\[3pt]
+  $\bullet$ \textbf{វិនិច្ឆ័យ \en{A--D}៖} \textbf{ជម្រើស \en{B}} $\dfrac{2}{x + 1}$ ។ \quad $\bullet$ \textbf{ប័ណ្ណចាកចេញ (\en{\#9} ច)៖} $\dfrac{(k+3)(k-1)}{(k+2)(k-1)} = \mathbf{\dfrac{k + 3}{k + 2}}$ (\cnum{2}, \cnum{4}) ។\\[3pt]
+  $\bullet$ \textbf{ចម្លើយកិច្ចការផ្ទះបញ្ចប់មេរៀនទី៦ (ទំ.៨៧ \en{\#9} និង \en{\#13})៖}\\[2pt]
+  \hspace*{0.4em}– \en{\#9} ខ) $\dfrac{31/8}{-5/4} = \mathbf{-\dfrac{31}{10}}$ \quad ; \quad \en{\#9} ដ) $\dfrac{b(a^2+1)}{a^2+1} = \mathbf{b}$ \quad ; \quad \en{\#9} ថ) $\dfrac{2b(1-2b)}{2b+1}\times\dfrac{2b-1}{2b(1+2b)} = \mathbf{-\dfrac{(2b - 1)^2}{(2b + 1)^2}}$\\[2pt]
+  \hspace*{0.4em}– \en{\#13} ក) $\dfrac{1}{\frac{1}{d_1} + \frac{1}{d_2} + \frac{1}{d_3}} = \mathbf{\dfrac{d_1 d_2 d_3}{d_1 d_2 + d_2 d_3 + d_1 d_3}}$ \quad ; \quad ខ) $\dfrac{1}{\frac{1}{20} + \frac{1}{15} + \frac{1}{12}} = \dfrac{1}{\frac{12}{60}} = \mathbf{5\text{ ថ្ងៃ}}$ ។
+\end{tcolorbox}
+
+\end{document}

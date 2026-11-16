@@ -1,0 +1,322 @@
+% !TeX program = xelatex
+\documentclass[a4paper,10pt]{article}
+
+% ============================================================================
+% សន្លឹកកិច្ចការសិស្សបំពេញចន្លោះ ស-ខ្មៅ និងប្លង់ក្ដារខៀន/ចម្លើយគ្រូ (គ្មាន LCD / គ្មានកន្ត្រៃ)
+% មេរៀនទី៦ (៥.២)៖ វិធីបូកនិងវិធីដកកន្សោមសនិទានមានភាគបែងមិនដូចគ្នា — ត្រូវគ្នានឹង LS_Plan_RAT65.tex
+% ============================================================================
+\usepackage[a4paper, left=1.0cm, right=1.0cm, top=0.75cm, bottom=1.00cm, footskip=0.52cm]{geometry}
+\usepackage{amsmath}
+\usepackage{unicode-math}
+\usepackage{fontspec}
+\usepackage{array, colortbl}
+\usepackage[table]{xcolor}
+\usepackage{enumitem}
+\usepackage{pifont}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{tikz}
+\usepackage[most]{tcolorbox}
+\usetikzlibrary{calc, arrows.meta, decorations.pathreplacing, positioning, babel}
+
+\makeatletter
+\let\@expl@@@mark@update@singlecol@structures@@\relax
+\makeatother
+
+\providecommand{\NGSFindFonts}{%
+  \IfFileExists{C:/Windows/Fonts/cambria.ttc}{%
+    \def\NGSSysPath{C:/Windows/Fonts/}%
+    \def\NGSUserPath{C:/Users/KIT/AppData/Local/Microsoft/Windows/Fonts/}%
+  }{%
+    \IfFileExists{./fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{./fonts/}\def\NGSUserPath{./fonts/}}{%
+    \IfFileExists{../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../fonts/}\def\NGSUserPath{../fonts/}}{%
+    \IfFileExists{../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../fonts/}\def\NGSUserPath{../../fonts/}}{%
+    \IfFileExists{../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../fonts/}\def\NGSUserPath{../../../fonts/}}{%
+    \IfFileExists{../../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../../fonts/}\def\NGSUserPath{../../../../fonts/}}{%
+    \IfFileExists{../../../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../../../fonts/}\def\NGSUserPath{../../../../../fonts/}}{%
+    \IfFileExists{../../../../../../fonts/KhmerOSsiemreap.ttf}{\def\NGSSysPath{../../../../../../fonts/}\def\NGSUserPath{../../../../../../fonts/}}{%
+      \def\NGSSysPath{../../../../../../../fonts/}\def\NGSUserPath{../../../../../../../fonts/}%
+    }}}}}}}%
+  }%
+}
+\NGSFindFonts
+
+\setmathfont[Path={\NGSSysPath}, FontIndex=1, Scale=1.02]{cambria.ttc}
+\defaultfontfeatures{Ligatures=TeX}
+
+\setmainfont[
+  Path={\NGSUserPath}, Extension=.ttf, Script=Khmer,
+  BoldFont={KhmerOSsiemreap}, BoldFeatures={FakeBold=1.8},
+  ItalicFont={KhmerOSsiemreap}, ItalicFeatures={FakeSlant=0.25},
+  BoldItalicFont={KhmerOSsiemreap}, BoldItalicFeatures={FakeBold=1.8, FakeSlant=0.25}
+]{KhmerOSsiemreap}
+
+\newfontfamily\muol[Path={\NGSUserPath}, Extension=.ttf, Script=Khmer]{KhmerOSmuollight}
+\newfontfamily\TimesEn[Path={\NGSSysPath}, Extension=.ttf, BoldFont={timesbd}, ItalicFont={timesi}, BoldItalicFont={timesbi}]{times}
+\newfontfamily\CalibriFont[Path={\NGSSysPath}, Extension=.ttf]{calibri}
+
+\XeTeXlinebreaklocale "km"
+\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
+
+\definecolor{panelgray}{gray}{0.94}
+\definecolor{headgray}{gray}{0.85}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\fontsize{7.4pt}{9.5pt}\selectfont អនុវិទ្យាល័យព្រះក្រសាំង \en{|} គ្រូ៖ ហុក ប៊ុនថែន \en{|} មេរៀនទី៦ (៥.២) បូក-ដកភាគបែងមិនដូចគ្នា \en{|} ថ្ងៃសុក្រ ទី១៨ ខែធ្នូ ឆ្នាំ២០២៦}
+\fancyfoot[R]{\fontsize{7.8pt}{10pt}\selectfont ទំព័រ \en{\thepage\ / \pageref{LastPage}}}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\tabcolsep}{4pt}
+
+\newcommand{\en}[1]{{\TimesEn #1}}
+\newcommand{\enbf}[1]{{\TimesEn\bfseries #1}}
+\newcommand{\unit}[1]{\,\text{\en{#1}}}
+\newcommand{\riel}{\,\text{៛}}
+\newcommand{\cnum}[1]{\mbox{\fontsize{10pt}{12pt}\selectfont\ding{\numexpr181+#1\relax}}}
+\newcommand{\chkbox}{\tikz[baseline=-0.15ex]\draw[black, line width=0.85pt, fill=white] (0,0) rectangle (0.24cm,0.24cm);}
+\newcommand{\ansbox}[1][2.0cm]{\,\tikz[baseline=-0.65ex]\draw[black, line width=0.65pt, fill=white] (0,0) rectangle (#1, 0.42cm);\,}
+\newcommand{\dotline}[1][2.2cm]{\makebox[#1]{\dotfill}}
+
+\newcommand{\pagebanner}[2]{%
+  \begin{tcolorbox}[
+    enhanced, sharp corners, colback=headgray, colframe=black,
+    boxrule=1.05pt, boxsep=1pt, top=2.5pt, bottom=2.5pt, left=6pt, right=6pt,
+    after skip=3.5pt
+  ]
+    {\muol\fontsize{9.0pt}{13.2pt}\selectfont #1}\hfill{\fontsize{8.0pt}{11.2pt}\selectfont\textbf{#2}}
+  \end{tcolorbox}%
+}
+
+\newcommand{\secstrip}[2]{%
+  \vspace{3pt}%
+  \begin{tcolorbox}[
+    enhanced, sharp corners, colback=panelgray, colframe=black,
+    boxrule=0.8pt, boxsep=0.8pt, top=2pt, bottom=2pt, left=5pt, right=5pt,
+    after skip=3pt
+  ]
+    {\muol\fontsize{8.5pt}{12.2pt}\selectfont #1}\hfill{\fontsize{7.8pt}{10.8pt}\selectfont\textit{#2}}
+  \end{tcolorbox}%
+}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
+\begin{document}
+\fontsize{9.5pt}{14.5pt}\selectfont
+
+% ============================================================================
+% ទំព័រទី ១៖ សន្លឹកកិច្ចការសិស្ស (ផ្នែកមុខ៖ E1 -> E2 -> E3)
+% ============================================================================
+\pagebanner{សន្លឹកកិច្ចការសិស្ស \enbf{(}៦\enbf{.}៥\enbf{.}២ បូក-ដកមានភាគបែងមិនដូចគ្នា\enbf{)} \enbf{--} ផ្នែកមុខ}{ថ្នាក់ទី៨ \en{|} ទំ.៨១--៨២}
+
+\begin{tcolorbox}[
+  enhanced, sharp corners, colback=white, colframe=black,
+  boxrule=0.8pt, boxsep=1.5pt, top=3.5pt, bottom=3.5pt, left=5pt, right=5pt,
+  after skip=4pt
+]
+  \fontsize{9.0pt}{13.0pt}\selectfont
+  \textbf{ឈ្មោះសិស្ស៖} \dotline[4.3cm] \quad
+  \textbf{សមាជិកក្រុម៖} \dotline[4.3cm] \quad
+  \textbf{ថ្នាក់ទី៖} ៨\dotline[0.9cm] \quad
+  \textbf{ក្រុមទី៖} \dotline[1.0cm]
+\end{tcolorbox}
+
+% --- E1 Engage ---
+\secstrip{ផ្នែកទី ១ \enbf{(E1 - Engage)} ៖ បេសកកម្មចាប់កំហុសបូកភាគបែងត្រង់ៗ}{រយៈពេល ៣ នាទី (គូស \ding{51} ក្នុង \chkbox)}
+
+\begin{tcolorbox}[
+  enhanced, sharp corners, colback=white, colframe=black,
+  boxrule=0.8pt, boxsep=2.5pt, top=4pt, bottom=4pt, left=6pt, right=6pt
+]
+  គេចង់គណនាផលបូក $\dfrac{y}{2x} + \dfrac{x}{3y}$ (ទំ.៨១) ។ តើសិស្សរូបណាគណនាបានត្រឹមត្រូវ?\\[3pt]
+  \chkbox\ \textbf{សិស្ស ក៖} $\dfrac{y + x}{2x + 3y}$ (បូកភាគយកនិងភាគបែងត្រង់ៗ) \qquad
+  \chkbox\ \textbf{សិស្ស ខ៖} $\dfrac{3y^2 + 2x^2}{6xy}$ (តម្រូវភាគបែងរួម $6xy$)\\[3pt]
+  $\bullet$ \textbf{តេស្តដោយជំនួស $x = 1, y = 1$៖} កន្សោមដើមស្មើ $\dfrac{1}{2} + \dfrac{1}{3} = \dfrac{5}{6}$; \ ចម្លើយសិស្ស ក ស្មើ \ansbox[1.6cm]; \ សិស្ស ខ ស្មើ \ansbox[1.6cm] ។
+\end{tcolorbox}
+
+\vspace{2pt}
+
+% --- E2 Explore ---
+\secstrip{ផ្នែកទី ២ \enbf{(E2 - Explore)} ៖ ការតម្រូវភាគបែងរួមតូចបំផុត \enbf{LCD} (ទំ.៨១--៨២)}{រយៈពេល ១១ នាទី}
+
+\textbf{សកម្មភាព ១ (\en{E2-A} — ៥ នាទី)៖ ភាគបែងឯកធា និងទ្វេធា (ទំ.៨១–៨២ ឧទាហរណ៍ ក, ខ)}
+
+\begin{tcolorbox}[
+  enhanced, sharp corners, colback=white, colframe=black,
+  boxrule=0.8pt, boxsep=2.5pt, top=4pt, bottom=4pt, left=6pt, right=6pt
+]
+  $\bullet$ \textbf{១) ឧទាហរណ៍ ក៖} $\dfrac{y}{2x} + \dfrac{x}{3y}$ \quad (ភាគបែងរួមតូចបំផុត $\text{\en{LCD}} =$ \ansbox[1.8cm])\\[3pt]
+  \hspace*{0.4em}គុណបំពេញលើ-ក្រោម៖ $\dfrac{y \cdot (\dotline[1.0cm])}{2x \cdot 3y} + \dfrac{x \cdot (\dotline[1.0cm])}{3y \cdot 2x} = \dfrac{\dotline[1.3cm]}{6xy} + \dfrac{\dotline[1.3cm]}{6xy} =$ \ansbox[2.8cm]\\[5pt]
+  $\bullet$ \textbf{២) ឧទាហរណ៍ ខ៖} $\dfrac{4}{n} - \dfrac{2}{n + 1}$ \quad (ភាគបែងរួមតូចបំផុត $\text{\en{LCD}} =$ \ansbox[2.4cm])\\[3pt]
+  \hspace*{0.4em}គណនាផលដក៖ $\dfrac{4(n + 1) - 2n}{n(n + 1)} = \dfrac{4n + 4 - 2n}{n(n + 1)} = \dfrac{\dotline[1.8cm]}{n(n + 1)} =$ \ansbox[2.8cm] \quad (ទាញកត្តារួម $2$)
+\end{tcolorbox}
+
+\vspace{3pt}
+\textbf{សកម្មភាព ២ (\en{E2-B} — ៦ នាទី)៖ ដាក់ភាគបែងពហុធាជាកត្តាជាមុនសិន (ទំ.៨២ លំហាត់គំរូ ១)}
+
+\begin{tcolorbox}[
+  enhanced, sharp corners, colback=white, colframe=black,
+  boxrule=0.8pt, boxsep=2.5pt, top=4.5pt, bottom=4.5pt, left=6pt, right=6pt
+]
+  គណនាផលបូក៖ $\dfrac{t + 1}{t^2 + 5t} + \dfrac{8}{t^2 - 25}$ តាមតារាង ៤ ជំហានខាងក្រោម៖\\[4pt]
+  $\bullet$ \textbf{ជំហានទី ១ (ដាក់ភាគបែងជាកត្តា)៖} $t^2 + 5t =$ \ansbox[2.3cm] \quad និង \quad $t^2 - 25 =$ \ansbox[2.8cm]\\[4pt]
+  $\bullet$ \textbf{ជំហានទី ២ (រកភាគបែងរួម \en{LCD})៖} $\text{\en{LCD}} =$ \ansbox[3.5cm] \quad (យកគ្រប់កត្តាខុសគ្នាទាំងអស់)\\[4pt]
+  $\bullet$ \textbf{ជំហានទី ៣ (គុណបំពេញលើ-ក្រោម និងបូកភាគយក)៖} $\dfrac{(t + 1)(t - 5) + 8t}{t(t + 5)(t - 5)} = \dfrac{\dotline[2.6cm]}{t(t + 5)(t - 5)}$\\[4pt]
+  $\bullet$ \textbf{ជំហានទី ៤ (ដាក់ភាគយកជាកត្តា និងសម្រួល)៖} $\dfrac{(t + 5)(\dotline[1.4cm])}{t(t + 5)(t - 5)} =$ \ansbox[2.8cm]
+\end{tcolorbox}
+
+\vspace{2pt}
+
+% --- E3 Explain ---
+\secstrip{ផ្នែកទី ៣ \enbf{(E3 - Explain)} ៖ វិធានបូក-ដកភាគបែងខុសគ្នា និងធនាគារហេតុផល \cnum{1}--\cnum{4}}{រយៈពេល ៦ នាទី}
+
+\begin{tcolorbox}[
+  enhanced, sharp corners, colback=panelgray, colframe=black,
+  boxrule=0.95pt, boxsep=2.5pt, top=4pt, bottom=4pt, left=6pt, right=6pt
+]
+  \textbf{វិធាន ៤ ជំហាន (ទំ.៨២)៖} ដើម្បីបូក ឬដកកន្សោមសនិទានដែលមានភាគបែងមិនដូចគ្នា យើងត្រូវ៖\\[2pt]
+  \cnum{1} \textbf{ដាក់ភាគបែងជាកត្តាសិន៖} ដាក់ភាគបែងពហុធាជាផលគុណកត្តា ដើម្បីកំណត់ភាគបែងរួមតូចបំផុត ($\text{\en{LCD}} =$ \dotline[2.4cm])។\\[2pt]
+  \cnum{2} \textbf{គុណបំពេញលើ-ក្រោម៖} គុណភាគយក និងភាគបែងនៃប្រភាគនីមួយៗនឹងកត្តាដែលខ្វះក្នុង \en{LCD}។\\[2pt]
+  \cnum{3} \textbf{ហាមលុបភាគបែងរួមចោល៖} បូក ឬដកភាគយកលើភាគបែងរួម \en{LCD} \textbf{រក្សាទុកដដែល} រួចសម្រួលកត្តារួម (បើអាច)។\\[3pt]
+  \cnum{4} \textbf{លំនាំបំបែកប្រភាគតៗគ្នា៖} $\dfrac{1}{n} - \dfrac{1}{n + 1} =$ \ansbox[2.4cm] \quad (សម្រាប់គណនាផលបូកប្រភាគតៗគ្នាដោយរហ័ស)។\\[4pt]
+  $\bullet$ \textbf{ចំណាំផ្ទាល់ខ្លួន៖} ហេតុអ្វីមិនអាចលុបភាគបែងរួម \en{LCD} ចោលបាន? \dotline[9.5cm]
+\end{tcolorbox}
+
+% ============================================================================
+% ទំព័រទី ២៖ សន្លឹកកិច្ចការសិស្ស (ផ្នែកខ្នង៖ E4 -> E5 -> កិច្ចការផ្ទះ)
+% ============================================================================
+\clearpage
+\pagebanner{សន្លឹកកិច្ចការសិស្ស \enbf{(}៦\enbf{.}៥\enbf{.}២ បូក-ដកមានភាគបែងមិនដូចគ្នា\enbf{)} \enbf{--} ផ្នែកខ្នង}{ថ្នាក់ទី៨ \en{|} ទំ.៨២--៨៨}
+
+% --- E4 Elaborate ---
+\secstrip{ផ្នែកទី ៤ \enbf{(E4 - Elaborate)} ៖ លំនាំសម្រួលតៗគ្នា និងប្រតិបត្តិ គ (ទំ.៨២--៨៣)}{រយៈពេល ១០ នាទី}
+
+\begin{tcolorbox}[
+  enhanced, sharp corners, colback=white, colframe=black,
+  boxrule=0.8pt, boxsep=2.5pt, top=4.5pt, bottom=4.5pt, left=6pt, right=6pt
+]
+  $\bullet$ \textbf{១) លំហាត់គំរូទី ២ (ទំ.៨២–៨៣)៖} ក) គណនាផលដក $\dfrac{1}{n} - \dfrac{1}{n + 1} = \dfrac{(n + 1) - n}{n(n + 1)} =$ \ansbox[2.4cm]\\[4pt]
+  \hspace*{0.4em}ខ) អនុវត្តលទ្ធផល ក) គណនា៖ $S = \dfrac{1}{1 \cdot 2} + \dfrac{1}{2 \cdot 3} + \dfrac{1}{3 \cdot 4} + \dfrac{1}{4 \cdot 5}$\\[3pt]
+  \hspace*{0.8em}$S = \left(1 - \dfrac{1}{2}\right) + \left(\dfrac{1}{2} - \dfrac{1}{3}\right) + \left(\dfrac{1}{3} - \dfrac{1}{4}\right) + \left(\dfrac{1}{4} - \dfrac{1}{5}\right) = 1 - \dotline[1.1cm] =$ \ansbox[2.0cm]\\[5pt]
+  $\bullet$ \textbf{២) ប្រតិបត្តិ គ (ទំ.៨៣)៖} គណនា $\dfrac{a^2 - 1}{a^2 - 2a - 15} - \dfrac{a + 2}{a + 3}$ \quad (ដាក់កត្តា៖ $a^2 - 2a - 15 = (a - 5)(a + 3)$)\\[3pt]
+  \hspace*{0.4em}$= \dfrac{(a^2 - 1) - (a + 2)(\dotline[1.3cm])}{(a - 5)(a + 3)} = \dfrac{a^2 - 1 - (a^2 - 3a - 10)}{(a - 5)(a + 3)} = \dfrac{\dotline[2.0cm]}{(a - 5)(a + 3)} =$ \ansbox[2.5cm]\\[4pt]
+  $\bullet$ \textbf{សំណួរឆ្លុះបញ្ចាំង (\en{EIA Looking-Back})៖} ហេតុអ្វីលំនាំបំបែក $\dfrac{1}{n(n+1)}$ លឿនជាងការតម្រូវភាគបែងលេខធម្មតា?\\[3pt]
+  \hspace*{0.4em}ចម្លើយ៖ ព្រោះតួកណ្ដាលផ្ទុយសញ្ញា \dotline[9.6cm] ។
+\end{tcolorbox}
+
+% --- E5 Evaluate ---
+\secstrip{ផ្នែកទី ៥ \enbf{(E5 - Evaluate)} ៖ ហ្វឹកហាត់ក្រុម ល្បឿនវិនិច្ឆ័យ \enbf{A--D} និងប័ណ្ណចាកចេញ}{រយៈពេល ១០ នាទី}
+
+\textbf{១) ហ្វឹកហាត់ក្រុមតូច (៥ នាទី — ទំ.៨៦ \en{\#8} ក, គ, ង និង ទំ.៨៨ \en{\#14} ខ)៖}
+
+\vspace{3pt}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{|L{9.1cm}|L{9.1cm}|}
+\hline
+\cellcolor{panelgray}\textbf{ក) ទំ.៨៦ \en{\#8} ក៖} $\dfrac{5x}{2} - \dfrac{2x + 3y}{4}$ &
+\cellcolor{panelgray}\textbf{ខ) ទំ.៨៦ \en{\#8} គ៖} $\dfrac{5}{xy} + \dfrac{6}{yz}$ \\
+\hline
+ជំហានពន្លាត៖ $\dfrac{10x - (\dotline[2.2cm])}{4}$ \par
+ចម្លើយចុងក្រោយ $=$ \ansbox[3.0cm] &
+ភាគបែងរួម $\text{\en{LCD}} = xyz$ ; ភាគយក $= \dotline[2.4cm]$ \par
+ចម្លើយចុងក្រោយ $=$ \ansbox[3.0cm] \\[3pt]
+\hline
+\cellcolor{panelgray}\textbf{គ) ទំ.៨៦ \en{\#8} ង៖} $\dfrac{4a}{2a + 6} + \dfrac{3}{a + 3}$ &
+\cellcolor{panelgray}\textbf{ឃ) ទំ.៨៨ \en{\#14} ខ៖} គណនា $\dfrac{1}{50} - \dfrac{1}{51}$ \\
+\hline
+សម្រួល $\dfrac{4a}{2(a+3)} = \dfrac{2a}{a+3} + \dfrac{3}{a+3}$ \par
+ចម្លើយចុងក្រោយ $=$ \ansbox[3.0cm] &
+អនុវត្តលំនាំ \cnum{4}៖ $\dfrac{51 - 50}{50 \times 51}$ \par
+ចម្លើយចុងក្រោយ $=$ \ansbox[3.0cm] \\[3pt]
+\hline
+\end{tabular}
+
+\vspace{5pt}
+\begin{tcolorbox}[
+  enhanced, sharp corners, colback=white, colframe=black,
+  boxrule=0.85pt, boxsep=2.5pt, top=4pt, bottom=4pt, left=6pt, right=6pt
+]
+  \textbf{២) សំណួរវិនិច្ឆ័យរហ័ស \en{A--D} (\en{60} វិនាទី)៖} តើភាគបែងរួមតូចបំផុត (\en{LCD}) នៃ $\dfrac{3}{x^2 - 4} - \dfrac{1}{x^2 + 2x}$ គឺជម្រើសណា?\\[4pt]
+  \chkbox\ \textbf{\en{A.}} $(x - 2)(x + 2)$ \qquad
+  \chkbox\ \textbf{\en{B.}} $x(x - 2)(x + 2)$ \qquad
+  \chkbox\ \textbf{\en{C.}} $(x^2 - 4)(x^2 + 2x)$ \qquad
+  \chkbox\ \textbf{\en{D.}} $2x^2 + 2x - 4$
+\end{tcolorbox}
+
+\vspace{4pt}
+\begin{tcolorbox}[
+  enhanced, sharp corners, colback=panelgray, colframe=black,
+  boxrule=1.0pt, boxsep=2.5pt, top=4.5pt, bottom=4.5pt, left=6pt, right=6pt
+]
+  \textbf{៣) ប័ណ្ណចាកចេញបុគ្គល (\en{Exit Ticket} — ២ នាទី — ទំ.៨៦ \en{\#8} ឃ)៖} ធ្វើដោយខ្លួនឯងមុនប្រគល់សន្លឹកកិច្ចការ!\\[4pt]
+  គណនាផលដក៖ $\dfrac{3c}{2ab} - \dfrac{a}{4bc} = \dfrac{3c \cdot (\dotline[1.1cm]) - a \cdot (\dotline[1.1cm])}{4abc} =$ \ansbox[3.2cm] \quad (លេខហេតុផល៖ \ansbox[1.2cm])
+\end{tcolorbox}
+
+% --- Homework ---
+\secstrip{ផ្នែកទី ៦ ៖ កិច្ចការផ្ទះ និងបណ្ដាំផ្ញើ (សៀវភៅគោល ទំ.៨៦ លេខ ៨ និង ទំ.៨៨ លេខ ១៤)}{ធ្វើក្នុងសៀវភៅកិច្ចការផ្ទះ}
+
+\begin{tcolorbox}[
+  enhanced, sharp corners, colback=white, colframe=black,
+  boxrule=0.8pt, boxsep=2.5pt, top=4pt, bottom=4pt, left=6pt, right=6pt
+]
+  $\bullet$ \textbf{១) ទំ.៨៦ លេខ ៨ (ខ, ឆ, ឈ)៖} គណនា $\dfrac{2x + y}{3} - \dfrac{x - 5y}{6}$ , $\dfrac{b^2}{b^2 - 4b} - \dfrac{b}{b - 4}$ និង $\dfrac{a + 2}{2a - 8} + \dfrac{a - 1}{3a - 12}$ ។\\[3pt]
+  $\bullet$ \textbf{២) ទំ.៨៨ លេខ ១៤ (ក, គ)៖} បង្ហាញថា $\dfrac{1}{8 \times 9} = \dfrac{1}{8} - \dfrac{1}{9}$ និងរកចំនួនគត់ $a, b$ ដើម្បីឱ្យ $\dfrac{1}{a} - \dfrac{1}{b} = \dfrac{1}{18 \times 19}$ ។\\[3pt]
+  $\bullet$ \textbf{បណ្ដាំផ្ញើ៖} អានមុនចំណុចទី \textbf{៦. កន្សោមសនិទានដែលមានទម្រង់ប្រភាគលើប្រភាគ} (ទំព័រ ៨៣–៨៤) ។
+\end{tcolorbox}
+
+% ============================================================================
+% ទំព័រទី ៣៖ ប្លង់ក្ដារខៀន ៣ ផ្នែក និងចម្លើយសង្ខេបសម្រាប់គ្រូ (Teacher Board Plan & Key)
+% ============================================================================
+\clearpage
+\pagebanner{ប្លង់ក្ដារខៀន ៣ ផ្នែក និងចម្លើយសង្ខេបសម្រាប់គ្រូ \enbf{(}គ្មានស្លាយ \enbf{LCD}\enbf{)}}{មេរៀនទី៦ (៥.២) \en{|} ៥០ នាទី}
+
+\secstrip{១. ប្លង់គ្រប់គ្រងក្ដារខៀន ៣ ផ្នែក (Chalkboard 3-Zone Layout)}{រក្សាធនាគារហេតុផល \cnum{1}--\cnum{4} នៅកណ្ដាលពេញម៉ោង}
+
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{|L{5.8cm}|L{6.4cm}|L{5.8cm}|}
+\hline
+\cellcolor{headgray}\textbf{ផ្នែកទី ១ (ឆ្វេង)៖ កំណែ + \en{E1}} &
+\cellcolor{headgray}\textbf{ផ្នែកទី ២ (កណ្ដាល)៖ វិធាន និង \cnum{1}--\cnum{4}} &
+\cellcolor{headgray}\textbf{ផ្នែកទី ៣ (ស្ដាំ)៖ \en{E4} + ហ្វឹកហាត់ \en{E5}} \\
+\hline
+$\bullet$ \textbf{កំណែ \en{\#7}៖} ខ) $-\tfrac{y}{7}$ ; ឃ) $\tfrac{3y}{b+6}$ \par
+ច) $\tfrac{2(a+b)}{x-3}$ ; ឈ) $\tfrac{x+1}{x-1}$ \par\vspace{2pt}
+$\bullet$ \textbf{បេសកកម្ម \en{E1}៖} $\tfrac{y}{2x} + \tfrac{x}{3y}$ \par
+សិស្ស ក $\tfrac{y+x}{2x+3y}$ (\ding{55}) $\neq$ សិស្ស ខ $\tfrac{3y^2+2x^2}{6xy}$ (\ding{51})
+&
+\textbf{៥.២ បូក-ដកភាគបែងមិនដូចគ្នា} \par
+\cnum{1} ដាក់ភាគបែងជាកត្តា រក \en{LCD} \par
+\cnum{2} គុណបំពេញលើ-ក្រោមស្មើភាពគ្នា \par
+\cnum{3} បូក-ដកភាគយក រក្សា \en{LCD} (ហាមលុប!) \par
+\cnum{4} $\dfrac{1}{n} - \dfrac{1}{n+1} = \dfrac{1}{n(n+1)}$
+&
+$\bullet$ \textbf{គំរូ ១៖} $\dfrac{t+1}{t(t+5)} + \dfrac{8}{(t+5)(t-5)} = \dfrac{t-1}{t(t-5)}$ \par
+$\bullet$ \textbf{គំរូ ២៖} $S = 1 - \dfrac{1}{5} = \dfrac{4}{5}$ \par
+$\bullet$ \textbf{ប្រតិបត្តិ គ៖} $\dfrac{3(a+3)}{(a-5)(a+3)} = \dfrac{3}{a-5}$ \par
+$\bullet$ \textbf{វិនិច្ឆ័យ \en{A--D}៖} ជម្រើស \textbf{\en{B}} $x(x-2)(x+2)$ \\
+\hline
+\end{tabular}
+
+\vspace{4pt}
+\secstrip{២. ចម្លើយសង្ខេបនៃសន្លឹកកិច្ចការសិស្ស និងកិច្ចការផ្ទះ (Answer Key)}{សម្រាប់គ្រូផ្ទៀងផ្ទាត់រហ័ស}
+
+\begin{tcolorbox}[
+  enhanced, sharp corners, colback=white, colframe=black,
+  boxrule=0.85pt, boxsep=3pt, top=5pt, bottom=5pt, left=6pt, right=6pt
+]
+  $\bullet$ \textbf{ផ្នែក \en{E1}៖} \textbf{សិស្ស ខ} ត្រឹមត្រូវ; ជំនួស $x = 1, y = 1$៖ សិស្ស ក បាន $\dfrac{2}{5}$ (ខុស), សិស្ស ខ បាន $\dfrac{5}{6}$ (ត្រូវ) ។\\[3pt]
+  $\bullet$ \textbf{ផ្នែក \en{E2-A}៖} ក) $\text{\en{LCD}} = 6xy \implies \dfrac{3y^2 + 2x^2}{6xy}$ \quad ; \quad ខ) $\text{\en{LCD}} = n(n+1) \implies \dfrac{2n + 4}{n(n+1)} = \dfrac{2(n + 2)}{n(n + 1)}$ ។\\[3pt]
+  $\bullet$ \textbf{ផ្នែក \en{E2-B} (គំរូ ១)៖} $t(t+5)$ និង $(t+5)(t-5)$ ; $\text{\en{LCD}} = t(t+5)(t-5)$ ; ភាគយក $t^2 + 4t - 5 = (t+5)(t-1) \implies \mathbf{\dfrac{t - 1}{t(t - 5)}}$ ។\\[3pt]
+  $\bullet$ \textbf{ផ្នែក \en{E4}៖} ១) ក) $\dfrac{1}{n(n+1)}$ ; ខ) $S = 1 - \dfrac{1}{5} = \mathbf{\dfrac{4}{5}}$ \quad ; \quad ២) ប្រតិបត្តិ គ៖ ភាគយក $3a + 9 = 3(a+3) \implies \mathbf{\dfrac{3}{a - 5}}$ ។\\[3pt]
+  $\bullet$ \textbf{ផ្នែក \en{E5} (ក្រុម)៖} \en{\#8} ក) $\mathbf{\dfrac{8x - 3y}{4}}$ ; គ) $\mathbf{\dfrac{5z + 6x}{xyz}}$ ; ង) $\mathbf{\dfrac{2a + 3}{a + 3}}$ ; \en{\#14} ខ) $\mathbf{\dfrac{1}{2550}}$ ។\\[3pt]
+  $\bullet$ \textbf{វិនិច្ឆ័យ \en{A--D}៖} \textbf{ជម្រើស \en{B}} $x(x - 2)(x + 2)$ ។ \quad $\bullet$ \textbf{ប័ណ្ណចាកចេញ (\en{\#8} ឃ)៖} $\dfrac{3c(2c) - a(a)}{4abc} = \mathbf{\dfrac{6c^2 - a^2}{4abc}}$ (\cnum{2}, \cnum{3}) ។\\[3pt]
+  $\bullet$ \textbf{ចម្លើយកិច្ចការផ្ទះ (សម្រាប់កែនៅម៉ោងទី៦ \en{RAT66})៖}\\[2pt]
+  \hspace*{0.4em}– \en{\#8} ខ) $\dfrac{2(2x+y) - (x-5y)}{6} = \mathbf{\dfrac{3x + 7y}{6}}$ \quad ; \quad \en{\#8} ឆ) $\dfrac{b^2}{b(b-4)} - \dfrac{b}{b-4} = \dfrac{b}{b-4} - \dfrac{b}{b-4} = \mathbf{0}$\\[2pt]
+  \hspace*{0.4em}– \en{\#8} ឈ) $\dfrac{a+2}{2(a-4)} + \dfrac{a-1}{3(a-4)} = \dfrac{3(a+2) + 2(a-1)}{6(a-4)} = \mathbf{\dfrac{5a + 4}{6(a - 4)}}$\\[2pt]
+  \hspace*{0.4em}– \en{\#14} ក) $\dfrac{1}{8} - \dfrac{1}{9} = \dfrac{9 - 8}{8 \times 9} = \mathbf{\dfrac{1}{8 \times 9}}$ \quad ; \quad \en{\#14} គ) $\dfrac{1}{18} - \dfrac{1}{19} = \dfrac{1}{18 \times 19} \implies \mathbf{a = 18,\; b = 19}$ ។
+\end{tcolorbox}
+
+\end{document}
